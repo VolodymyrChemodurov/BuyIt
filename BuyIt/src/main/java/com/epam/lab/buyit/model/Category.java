@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.epam.lab.buyit.model.SubCategory;
 
-public class Categorie {
+public class Category {
 
 	private int idCategory;
 	private String name;
@@ -14,7 +14,7 @@ public class Categorie {
 		return idCategory;
 	}
 
-	public Categorie setIdCategory(int idCategory) {
+	public Category setIdCategory(int idCategory) {
 		this.idCategory = idCategory;
 		return this;
 	}
@@ -23,7 +23,7 @@ public class Categorie {
 		return name;
 	}
 
-	public Categorie setName(String name) {
+	public Category setName(String name) {
 		this.name = name;
 		return this;
 	}

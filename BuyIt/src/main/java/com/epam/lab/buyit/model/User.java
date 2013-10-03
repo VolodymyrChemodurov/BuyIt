@@ -1,5 +1,7 @@
 package com.epam.lab.buyit.model;
 
+import java.util.List;
+
 public class User {
 
 	private int idUser;
@@ -9,6 +11,8 @@ public class User {
 	private String login;
 	private String password;
 	private Contact contact;
+	private List<Product> productList;
+	private List<Bid> bidList;
 
 	public int getIdUser() {
 		return idUser;
@@ -70,6 +74,32 @@ public class User {
 
 	public User setContacts(Contact contact) {
 		this.contact = contact;
+		return this;
+	}
+
+	public Contact getContact() {
+		return contact;
+	}
+
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
+
+	public List<Product> getProductList() {
+		return productList;
+	}
+
+	public User setProductList(List<Product> productList) {
+		this.productList = productList;
+		return this;
+	}
+
+	public List<Bid> getBidList() {
+		return bidList;
+	}
+
+	public User setBidList(List<Bid> bidList) {
+		this.bidList = bidList;
 		return this;
 	}
 
