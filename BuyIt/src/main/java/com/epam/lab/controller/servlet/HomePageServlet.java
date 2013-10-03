@@ -2,6 +2,7 @@ package com.epam.lab.controller.servlet;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +22,7 @@ public class HomePageServlet extends HttpServlet {
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//TODO change List of String to list of Products 
-		List<String> productList = Mook.getProducts();
+		Map<String,List<String>> productList = Mook.getProducts();
 		List<String> cauroselImagesList = Mook.getImagesUrl();
 		HttpSession session = request.getSession(true);
 		session.setAttribute("products", productList);

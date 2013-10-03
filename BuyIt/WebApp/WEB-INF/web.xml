@@ -16,6 +16,15 @@
 		<servlet-name>HomePageServlet</servlet-name>
 		<url-pattern>/homePageServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.epam.lab.controller.servlet.LoginServlet</servlet-class>	
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/loginServlet</url-pattern>
+	</servlet-mapping>
 
 
 	<servlet>

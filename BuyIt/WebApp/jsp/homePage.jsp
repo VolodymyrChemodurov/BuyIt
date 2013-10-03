@@ -74,7 +74,7 @@
 						<input id="srchFld" class="srchTxt" type="text"> <select
 							class="srchTxt">
 							<c:forEach var="product" items="${products}">
-								<option>${product}</option>
+								<option>${product.key}</option>
 							</c:forEach>
 						</select>
 						<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
@@ -91,16 +91,16 @@
 									<h3>Login Block</h3>
 								</div>
 								<div class="modal-body">
-									<form class="form-horizontal loginFrm" method="post" action="/loginServlet">
+									<form class="form-horizontal loginFrm" method="post"
+										action="/loginServlet">
 										<div class="control-group">
 											<input type="text" id="login" placeholder="Login">
 										</div>
 										<div class="control-group">
-											<input type="password" id="password"
-												placeholder="Password">
+											<input type="password" id="password" placeholder="Password">
 										</div>
-									</form>
 									<button type="submit" class="btn btn-success">Sign in</button>
+									</form>
 									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 								</div>
 							</div></li>
@@ -113,20 +113,25 @@
 	<div id="carouselBlk">
 		<div id="myCarousel" class="carousel slide">
 			<div class="carousel-inner">
-			<c:forEach var="image" items="${carouselImages}">
-				<div class="item">
-					<div class="container">
-						<a href="register.html"><img style="width: 100%"
-							src="${image}"  alt="special offers"></a>
-						<div class="carousel-caption">
-							<h4>Second Thumbnail label</h4>
-							<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-								quam. Donec id elit non mi porta gravida at eget metus. Nullam
-								id dolor id nibh ultricies vehicula ut id elit.</p>
+				<c:forEach var="image" items="${carouselImages}" varStatus="status">
+					<c:if test ="${status.first}">
+						<div class="item active">
+							<div class="container">
+								<a href="register.html"><img style="width: 100%"
+									src="${image}" alt="special offers"></a>
+							</div>
 						</div>
-					</div>
-				</div>
-			</c:forEach>	
+					</c:if>
+					<c:if test ="${!status.first}">
+						<div class="item">
+							<div class="container">
+								<a href="register.html"><img style="width: 100%"
+									src="${image}" alt="special offers"></a>
+							</div>
+						</div>
+					</c:if>		
+						
+				</c:forEach>
 			</div>
 			<a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
 			<a class="right carousel-control" href="#myCarousel"
@@ -144,19 +149,35 @@
 							cart <span class="badge badge-warning pull-right">$155.00</span></a>
 					</div>
 					<ul id="sideManu" class="nav nav-tabs nav-stacked">
-						<li class="subMenu open"><a> ELECTRONICS [230]</a>
-							<ul>
-								<li><a class="active" href="products.html"><i
-										class="icon-chevron-right"></i>Cameras (100) </a></li>
-								<li><a href="products.html"><i
-										class="icon-chevron-right"></i>Computers, Tablets &amp; laptop
-										(30)</a></li>
-								<li><a href="products.html"><i
-										class="icon-chevron-right"></i>Mobile Phone (80)</a></li>
-								<li><a href="products.html"><i
-										class="icon-chevron-right"></i>Sound &amp; Vision (15)</a></li>
-							</ul></li>
-						<li class="subMenu"><a> CLOTHES [840] </a>
+						<c:forEach var="product" items="${products}"
+							varStatus="statusOuter">
+							<c:if test="${statusOuter.first}">
+								<li class="subMenu open"><a>${product.key}</a>
+									<ul>
+										<c:forEach var="sub" items="${product.value}" varStatus="statusInner">
+											<c:if test="${statusInner.first}">
+												<li><a class="active" href="products.html"><i
+														class="icon-chevron-right"></i>${sub}</a></li>
+											</c:if>
+											<c:if test="${!statusInner.first}">
+												<li><a href="products.html"><i
+														class="icon-chevron-right"></i>${sub}</a></li>
+											</c:if>
+											
+										</c:forEach>
+									</ul></li>
+							</c:if>
+							<c:if test="${!statusOuter.first}">
+								<li class="subMenu"><a>${product.key}</a>
+									<ul style="display: none">
+										<c:forEach var="sub" items="${product.value}">
+											<li><a href="products.html"><i
+													class="icon-chevron-right"></i>${sub}</a></li>
+										</c:forEach>
+									</ul></li>
+							</c:if>
+						</c:forEach>
+						<!--<li class="subMenu"><a> CLOTHES [840] </a>
 							<ul style="display: none">
 								<li><a href="products.html"><i
 										class="icon-chevron-right"></i>Women's Clothing (45)</a></li>
@@ -195,7 +216,7 @@
 						<li><a href="products.html">HEALTH &amp; BEAUTY [18]</a></li>
 						<li><a href="products.html">SPORTS &amp; LEISURE [58]</a></li>
 						<li><a href="products.html">BOOKS &amp; ENTERTAINMENTS
-								[14]</a></li>
+								[14]</a></li>-->
 					</ul>
 					<br>
 					<div class="thumbnail">
