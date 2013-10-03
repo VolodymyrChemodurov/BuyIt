@@ -1,6 +1,6 @@
 package com.epam.lab.buyit.model;
 
-public class SubCategories {
+public class SubCategory {
 
 	private int idSubCategory;
 	private String name;
@@ -10,7 +10,7 @@ public class SubCategories {
 		return idSubCategory;
 	}
 
-	public SubCategories setIdSubCategory(int idSubCategory) {
+	public SubCategory setIdSubCategory(int idSubCategory) {
 		this.idSubCategory = idSubCategory;
 		return this;
 	}
@@ -19,7 +19,7 @@ public class SubCategories {
 		return name;
 	}
 
-	public SubCategories setName(String name) {
+	public SubCategory setName(String name) {
 		this.name = name;
 		return this;
 	}
@@ -28,7 +28,7 @@ public class SubCategories {
 		return categoryId;
 	}
 
-	public SubCategories setCategoryId(int categoryId) {
+	public SubCategory setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 		return this;
 	}

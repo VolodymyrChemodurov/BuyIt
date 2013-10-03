@@ -2,7 +2,7 @@ package com.epam.lab.buyit.model;
 
 import java.sql.Time;
 
-public class Bids {
+public class Bid {
 
 	private int idBid;
 	private Time time;
@@ -13,7 +13,7 @@ public class Bids {
 		return idBid;
 	}
 
-	public Bids setIdBid(int idBid) {
+	public Bid setIdBid(int idBid) {
 		this.idBid = idBid;
 		return this;
 	}
@@ -22,7 +22,7 @@ public class Bids {
 		return time;
 	}
 
-	public Bids setTime(Time time) {
+	public Bid setTime(Time time) {
 		this.time = time;
 		return this;
 	}
@@ -31,7 +31,7 @@ public class Bids {
 		return auctionId;
 	}
 
-	public Bids setAuctionId(int auctionId) {
+	public Bid setAuctionId(int auctionId) {
 		this.auctionId = auctionId;
 		return this;
 	}
@@ -40,7 +40,7 @@ public class Bids {
 		return userId;
 	}
 
-	public Bids setUserId(int userId) {
+	public Bid setUserId(int userId) {
 		this.userId = userId;
 		return this;
 	}

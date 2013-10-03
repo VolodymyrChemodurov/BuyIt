@@ -1,6 +1,6 @@
 package com.epam.lab.buyit.model;
 
-public class Images {
+public class Image {
 
 	private int idImage;
 	private int descriptionId;
@@ -10,7 +10,7 @@ public class Images {
 		return idImage;
 	}
 
-	public Images setIdImage(int idImage) {
+	public Image setIdImage(int idImage) {
 		this.idImage = idImage;
 		return this;
 	}
@@ -19,7 +19,7 @@ public class Images {
 		return descriptionId;
 	}
 
-	public Images setDescriptionId(int descriptionId) {
+	public Image setDescriptionId(int descriptionId) {
 		this.descriptionId = descriptionId;
 		return this;
 	}
@@ -28,7 +28,7 @@ public class Images {
 		return path;
 	}
 
-	public Images setPath(String path) {
+	public Image setPath(String path) {
 		this.path = path;
 		return this;
 	}

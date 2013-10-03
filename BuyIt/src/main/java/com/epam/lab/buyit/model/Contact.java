@@ -1,18 +1,18 @@
 package com.epam.lab.buyit.model;
 
-public class Contacts {
+public class Contact {
 
 	private int idContacts;
 	private int userId;
 	private String email;
 	private String phone;
-	private int addressId;
+	private Address address;
 
 	public int getIdContacts() {
 		return idContacts;
 	}
 
-	public Contacts setIdContacts(int idContacts) {
+	public Contact setIdContacts(int idContacts) {
 		this.idContacts = idContacts;
 		return this;
 	}
@@ -21,7 +21,7 @@ public class Contacts {
 		return userId;
 	}
 
-	public Contacts setUserId(int userId) {
+	public Contact setUserId(int userId) {
 		this.userId = userId;
 		return this;
 	}
@@ -30,7 +30,7 @@ public class Contacts {
 		return email;
 	}
 
-	public Contacts setEmail(String email) {
+	public Contact setEmail(String email) {
 		this.email = email;
 		return this;
 	}
@@ -39,17 +39,17 @@ public class Contacts {
 		return phone;
 	}
 
-	public Contacts setPhone(String phone) {
+	public Contact setPhone(String phone) {
 		this.phone = phone;
 		return this;
 	}
 
-	public int getAddressId() {
-		return addressId;
+	public Address getAddress() {
+		return address;
 	}
 
-	public Contacts setAddressId(int addressId) {
-		this.addressId = addressId;
+	public Contact setAddress(Address address) {
+		this.address = address;
 		return this;
 	}
 

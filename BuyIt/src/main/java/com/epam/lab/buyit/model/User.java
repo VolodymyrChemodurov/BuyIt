@@ -1,28 +1,29 @@
 package com.epam.lab.buyit.model;
 
-public class Users {
+public class User {
 
 	private int idUser;
-	private String status;
+	private boolean status;
 	private String firstName;
 	private String lastName;
 	private String login;
 	private String password;
+	private Contact contact;
 
 	public int getIdUser() {
 		return idUser;
 	}
 
-	public Users setIdUser(int idUser) {
+	public User setIdUser(int idUser) {
 		this.idUser = idUser;
 		return this;
 	}
 
-	public String getStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 
-	public Users setStatus(String status) {
+	public User setStatus(boolean status) {
 		this.status = status;
 		return this;
 	}
@@ -31,7 +32,7 @@ public class Users {
 		return firstName;
 	}
 
-	public Users setFirstName(String firstName) {
+	public User setFirstName(String firstName) {
 		this.firstName = firstName;
 		return this;
 	}
@@ -40,7 +41,7 @@ public class Users {
 		return lastName;
 	}
 
-	public Users setLastName(String lastName) {
+	public User setLastName(String lastName) {
 		this.lastName = lastName;
 		return this;
 	}
@@ -49,7 +50,7 @@ public class Users {
 		return login;
 	}
 
-	public Users setLogin(String login) {
+	public User setLogin(String login) {
 		this.login = login;
 		return this;
 	}
@@ -58,8 +59,17 @@ public class Users {
 		return password;
 	}
 
-	public Users setPassword(String password) {
+	public User setPassword(String password) {
 		this.password = password;
+		return this;
+	}
+
+	public Contact getContacts() {
+		return contact;
+	}
+
+	public User setContacts(Contact contact) {
+		this.contact = contact;
 		return this;
 	}
 

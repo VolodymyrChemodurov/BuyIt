@@ -1,19 +1,19 @@
 package com.epam.lab.buyit.model;
 
-public class Goods {
+public class Product {
 
 	private int idGood;
 	private String name;
 	private int auctionId;
 	private int subCategoryId;
 	private int userId;
-	private int descriptionId;
+	private Description description;
 
 	public int getIdGood() {
 		return idGood;
 	}
 
-	public Goods setIdGood(int idGood) {
+	public Product setIdGood(int idGood) {
 		this.idGood = idGood;
 		return this;
 	}
@@ -22,7 +22,7 @@ public class Goods {
 		return name;
 	}
 
-	public Goods setName(String name) {
+	public Product setName(String name) {
 		this.name = name;
 		return this;
 	}
@@ -31,7 +31,7 @@ public class Goods {
 		return auctionId;
 	}
 
-	public Goods setAuctionId(int auctionId) {
+	public Product setAuctionId(int auctionId) {
 		this.auctionId = auctionId;
 		return this;
 	}
@@ -40,7 +40,7 @@ public class Goods {
 		return subCategoryId;
 	}
 
-	public Goods setSubCategoryId(int subCategoryId) {
+	public Product setSubCategoryId(int subCategoryId) {
 		this.subCategoryId = subCategoryId;
 		return this;
 	}
@@ -49,17 +49,17 @@ public class Goods {
 		return userId;
 	}
 
-	public Goods setUserId(int userId) {
+	public Product setUserId(int userId) {
 		this.userId = userId;
 		return this;
 	}
 
-	public int getDescriptionId() {
-		return descriptionId;
+	public Description getDescription() {
+		return description;
 	}
 
-	public Goods setDescriptionId(int descriptionId) {
-		this.descriptionId = descriptionId;
+	public Product setDescription(Description description) {
+		this.description = description;
 		return this;
 	}
 
