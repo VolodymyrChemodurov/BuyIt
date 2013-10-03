@@ -1,11 +1,13 @@
 package com.epam.lab.controller.dao;
 
 public interface GenericDAO<T> {
-	T getById(int id);
 
-	void insert(T object);
+	public T createElement(T elem);
 
-	void update(T object);
+	public T readElementById(int id);
 
-	void remove(T object);
+	public T updateElement(T elem);
+
+	public void deleteElementById(int id);
+
 }
