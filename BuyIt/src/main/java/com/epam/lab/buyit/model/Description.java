@@ -5,9 +5,9 @@ import java.util.List;
 public class Description {
 
 	private int idDescription;
-	private List<Image> itemPhotos;
 	private String features;
 	private String descText;
+	private List<Image> itemPhotos;
 
 	public int getIdDescription() {
 		return idDescription;
@@ -16,19 +16,6 @@ public class Description {
 	public Description setIdDescription(int idDescription) {
 		this.idDescription = idDescription;
 		return this;
-	}
-
-	public List<Image> getItemPhotos() {
-		return itemPhotos;
-	}
-
-	public Description setItemPhotos(List<Image> itemPhotos) {
-		this.itemPhotos = itemPhotos;
-		return this;
-	}
-
-	public void setItemPhoto(Image image) {
-		getItemPhotos().add(image);
 	}
 
 	public String getFeatures() {
@@ -47,6 +34,19 @@ public class Description {
 	public Description setDescText(String descText) {
 		this.descText = descText;
 		return this;
+	}
+
+	public List<Image> getItemPhotos() {
+		return itemPhotos;
+	}
+
+	public Description setItemPhotos(List<Image> itemPhotos) {
+		this.itemPhotos = itemPhotos;
+		return this;
+	}
+
+	public void setItemPhoto(Image image) {
+		getItemPhotos().add(image);
 	}
 
 }

@@ -68,21 +68,13 @@ public class User {
 		return this;
 	}
 
-	public Contact getContacts() {
-		return contact;
-	}
-
-	public User setContacts(Contact contact) {
-		this.contact = contact;
-		return this;
-	}
-
 	public Contact getContact() {
 		return contact;
 	}
 
-	public void setContact(Contact contact) {
+	public User setContact(Contact contact) {
 		this.contact = contact;
+		return this;
 	}
 
 	public List<Product> getProductList() {

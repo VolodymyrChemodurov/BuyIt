@@ -15,7 +15,7 @@ public class UserTransformer implements TransformerInterface<User> {
 	private static final Logger LOGGER = Logger
 			.getLogger(UserTransformer.class);
 	private static final String CREATE_STATEMENT = "INSERT INTO users"
-			+ "(status, firstName, lastName, login, password) VALUES(?, ?, ?, ?, ?)";
+			+ "(status, first_name, last_name, login, password) VALUES(?, ?, ?, ?, ?)";
 	private static final String UPDATE_STATEMENT = "UPDATE users SET "
 			+ "status=?, first_name=?, last_name=?, login=?, password=? WHERE id_user=?";
 
