@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.controller.dao.user;
+package com.epam.lab.buyit.controller.dao.address;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,17 +9,20 @@ import org.apache.log4j.Logger;
 
 import com.epam.lab.buyit.controller.dao.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.DAOUtils;
-import com.epam.lab.buyit.controller.dao.utils.transformers.UserTransformer;
-import com.epam.lab.buyit.model.User;
+import com.epam.lab.buyit.controller.dao.utils.transformers.AddressTransformer;
+import com.epam.lab.buyit.model.Address;
 
-public class UserDAO implements UserDAOInterface {
+public class AddressDAO implements AddressDAOInterface {
+	private static final Logger LOGGER = Logger.getLogger(AddressDAO.class);
+	private final static String GET_BY_ID = "SELECT * FROM address WHERE id_address = ?";
+	private AddressTransformer transformer;
 
-	private final static String GET_BY_ID = "SELECT * FROM users WHERE id_user = ?";
-	private static final Logger LOGGER = Logger.getLogger(UserDAO.class);
-	private UserTransformer transformer = new UserTransformer();
+	public AddressDAO() {
+		transformer = new AddressTransformer();
+	}
 
 	@Override
-	public int createElement(User elem) {
+	public int createElement(Address elem) {
 		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
 		ResultSet generatedKeys = null;
@@ -29,20 +32,22 @@ public class UserDAO implements UserDAOInterface {
 				statement.executeUpdate();
 				generatedKeys = statement.getGeneratedKeys();
 				generatedKeys.next();
+
 				return generatedKeys.getInt(1);
 			}
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-			DAOUtils.close(generatedKeys, statement, connection);
+		DAOUtils.close(generatedKeys, statement, connection);
 		}
 		return 0;
 	}
 
 	@Override
-	public User readElementById(int id) {
-		User user = null;
-		Connection connection = ConnectionManager.getConnection();
+	public Address readElementById(int id) {
+		Address currentAddress = null;
+		Connection connection = com.epam.lab.buyit.controller.dao.connection.ConnectionManager
+				.getConnection();
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		try {
@@ -50,19 +55,19 @@ public class UserDAO implements UserDAOInterface {
 			statement.setInt(1, id);
 			result = statement.executeQuery();
 			if (result.next()) {
-				user = transformer.fromRStoObject(result);
-				return user;
+				currentAddress = transformer.fromRStoObject(result);
+				return currentAddress;
 			}
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-			DAOUtils.close(result, statement, connection);
+		 DAOUtils.close(result, statement, connection);
 		}
-		return user;
+		return currentAddress;
 	}
 
 	@Override
-	public void updateElement(User elem) {
+	public void updateElement(Address elem) {
 		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
 		try {
@@ -75,11 +80,15 @@ public class UserDAO implements UserDAOInterface {
 		} finally {
 			DAOUtils.close(statement, connection);
 		}
+		
 	}
 
 	@Override
 	public void deleteElementById(int id) {
 		throw new UnsupportedOperationException();
+
 	}
+
+	
 
 }

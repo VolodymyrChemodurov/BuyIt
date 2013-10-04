@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.controller.dao.user;
+package com.epam.lab.buyit.controller.dao.contact;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,19 +7,25 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
+import com.epam.lab.buyit.controller.dao.address.AddressDAO;
 import com.epam.lab.buyit.controller.dao.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.DAOUtils;
-import com.epam.lab.buyit.controller.dao.utils.transformers.UserTransformer;
-import com.epam.lab.buyit.model.User;
+import com.epam.lab.buyit.controller.dao.utils.transformers.AddressTransformer;
+import com.epam.lab.buyit.controller.dao.utils.transformers.ContactTransformer;
+import com.epam.lab.buyit.model.Address;
+import com.epam.lab.buyit.model.Contact;
 
-public class UserDAO implements UserDAOInterface {
+public class ContactDAO implements ContactDAOInterface {
+	private static final Logger LOGGER = Logger.getLogger(ContactDAO.class);
+	private final static String GET_BY_ID = "SELECT * FROM contacts WHERE id_contact = ?";
+	private ContactTransformer transformer;
 
-	private final static String GET_BY_ID = "SELECT * FROM users WHERE id_user = ?";
-	private static final Logger LOGGER = Logger.getLogger(UserDAO.class);
-	private UserTransformer transformer = new UserTransformer();
+	public ContactDAO() {
+		transformer = new ContactTransformer();
+	}
 
 	@Override
-	public int createElement(User elem) {
+	public int createElement(Contact elem) {
 		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
 		ResultSet generatedKeys = null;
@@ -29,20 +35,22 @@ public class UserDAO implements UserDAOInterface {
 				statement.executeUpdate();
 				generatedKeys = statement.getGeneratedKeys();
 				generatedKeys.next();
+
 				return generatedKeys.getInt(1);
 			}
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-			DAOUtils.close(generatedKeys, statement, connection);
+			 DAOUtils.close(generatedKeys, statement, connection);
 		}
 		return 0;
 	}
 
 	@Override
-	public User readElementById(int id) {
-		User user = null;
-		Connection connection = ConnectionManager.getConnection();
+	public Contact readElementById(int id) {
+		Contact currentContact = null;
+		Connection connection = com.epam.lab.buyit.controller.dao.connection.ConnectionManager
+				.getConnection();
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		try {
@@ -50,19 +58,19 @@ public class UserDAO implements UserDAOInterface {
 			statement.setInt(1, id);
 			result = statement.executeQuery();
 			if (result.next()) {
-				user = transformer.fromRStoObject(result);
-				return user;
+				currentContact = transformer.fromRStoObject(result);
+				return currentContact;
 			}
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-			DAOUtils.close(result, statement, connection);
+			 DAOUtils.close(result, statement, connection);
 		}
-		return user;
+		return currentContact;
 	}
 
 	@Override
-	public void updateElement(User elem) {
+	public void updateElement(Contact elem) {
 		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
 		try {
@@ -75,11 +83,13 @@ public class UserDAO implements UserDAOInterface {
 		} finally {
 			DAOUtils.close(statement, connection);
 		}
+
 	}
 
 	@Override
 	public void deleteElementById(int id) {
 		throw new UnsupportedOperationException();
+
 	}
 
 }

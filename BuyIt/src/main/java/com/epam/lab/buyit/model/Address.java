@@ -3,7 +3,6 @@ package com.epam.lab.buyit.model;
 public class Address {
 
 	private int idAddress;
-	private int contactId;
 	private String region;
 	private String city;
 	private String street;
@@ -16,15 +15,6 @@ public class Address {
 
 	public Address setIdAddress(int idAddress) {
 		this.idAddress = idAddress;
-		return this;
-	}
-
-	public int getContactId() {
-		return contactId;
-	}
-
-	public Address setContactId(int contactId) {
-		this.contactId = contactId;
 		return this;
 	}
 

@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
+import com.epam.lab.buyit.controller.dao.contact.ContactDAO;
 import com.epam.lab.buyit.model.User;
 
 public class UserTransformer implements TransformerInterface<User> {
@@ -15,9 +16,9 @@ public class UserTransformer implements TransformerInterface<User> {
 	private static final Logger LOGGER = Logger
 			.getLogger(UserTransformer.class);
 	private static final String CREATE_STATEMENT = "INSERT INTO users"
-			+ "(status, first_name, last_name, login, password) VALUES(?, ?, ?, ?, ?)";
+			+ "(role, first_name, last_name, login, password, contacts_id) VALUES(?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STATEMENT = "UPDATE users SET "
-			+ "status=?, first_name=?, last_name=?, login=?, password=? WHERE id_user=?";
+			+ "role=?, first_name=?, last_name=?, login=?, password=?, contacts_id=? WHERE id_user=?";
 
 	@Override
 	public PreparedStatement fromObjectToCreatePS(User elem,
@@ -26,11 +27,12 @@ public class UserTransformer implements TransformerInterface<User> {
 		try {
 			statement = connection.prepareStatement(CREATE_STATEMENT,
 					Statement.RETURN_GENERATED_KEYS);
-			statement.setBoolean(1, elem.getStatus());
+			statement.setBoolean(1, elem.getRole());
 			statement.setString(2, elem.getFirstName());
 			statement.setString(3, elem.getLastName());
 			statement.setString(4, elem.getLogin());
 			statement.setString(5, elem.getPassword());
+			statement.setInt(6, elem.getContactsId());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
@@ -44,12 +46,13 @@ public class UserTransformer implements TransformerInterface<User> {
 		try {
 			statement = connection.prepareStatement(UPDATE_STATEMENT,
 					Statement.RETURN_GENERATED_KEYS);
-			statement.setBoolean(1, elem.getStatus());
+			statement.setBoolean(1, elem.getRole());
 			statement.setString(2, elem.getFirstName());
 			statement.setString(3, elem.getLastName());
 			statement.setString(4, elem.getLogin());
 			statement.setString(5, elem.getPassword());
-			statement.setInt(6, elem.getIdUser());
+			statement.setInt(6, elem.getContactsId());
+			statement.setInt(7, elem.getIdUser());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
@@ -59,13 +62,16 @@ public class UserTransformer implements TransformerInterface<User> {
 	@Override
 	public User fromRStoObject(ResultSet resultSet) {
 		User user = new User();
+		ContactDAO contactDAO = new ContactDAO();
 		try {
 			user.setIdUser(resultSet.getInt("id_user"));
-			user.setStatus(resultSet.getBoolean("status"));
+			user.setRole(resultSet.getBoolean("role"));
 			user.setFirstName(resultSet.getString("first_name"));
 			user.setLastName(resultSet.getString("last_name"));
 			user.setLogin(resultSet.getString("login"));
 			user.setPassword(resultSet.getString("password"));
+			user.setContactsId(resultSet.getInt("contacts_id"));
+			user.setContact(contactDAO.readElementById(user.getContactsId()));
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}

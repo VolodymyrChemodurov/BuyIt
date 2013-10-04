@@ -3,10 +3,21 @@ package com.epam.lab.buyit.model;
 public class Contact {
 
 	private int idContacts;
-	private int userId;
 	private String email;
 	private String phone;
+	private int addressId;
 	private Address address;
+	
+	
+	public int getAddressId() {
+		return addressId;
+	}
+
+	public Contact setAddressId(int addressId) {
+		this.addressId = addressId;
+		return this;
+	}
+
 
 	public int getIdContacts() {
 		return idContacts;
@@ -17,14 +28,7 @@ public class Contact {
 		return this;
 	}
 
-	public int getUserId() {
-		return userId;
-	}
 
-	public Contact setUserId(int userId) {
-		this.userId = userId;
-		return this;
-	}
 
 	public String getEmail() {
 		return email;
