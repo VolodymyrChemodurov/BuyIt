@@ -13,6 +13,20 @@ import com.epam.lab.buyit.model.User;
 
 public class UserTransformer implements TransformerInterface<User> {
 
+	private enum Values {
+		ROLE(1), FIRST_NAME(2), LAST_NAME(3), LOGIN(4), PASSWORD(5), CONTACTS_ID(
+				6), ID_USER(7);
+		private int value;
+
+		private Values(int value) {
+			this.value = value;
+		}
+
+		public int getValue() {
+			return value;
+		}
+	}
+
 	private static final Logger LOGGER = Logger
 			.getLogger(UserTransformer.class);
 	private static final String CREATE_STATEMENT = "INSERT INTO users"
@@ -27,12 +41,15 @@ public class UserTransformer implements TransformerInterface<User> {
 		try {
 			statement = connection.prepareStatement(CREATE_STATEMENT,
 					Statement.RETURN_GENERATED_KEYS);
-			statement.setBoolean(1, elem.getRole());
-			statement.setString(2, elem.getFirstName());
-			statement.setString(3, elem.getLastName());
-			statement.setString(4, elem.getLogin());
-			statement.setString(5, elem.getPassword());
-			statement.setInt(6, elem.getContactsId());
+			statement.setBoolean(Values.ROLE.getValue(), elem.getRole());
+			statement.setString(Values.FIRST_NAME.getValue(),
+					elem.getFirstName());
+			statement
+					.setString(Values.LAST_NAME.getValue(), elem.getLastName());
+			statement.setString(Values.LOGIN.getValue(), elem.getLogin());
+			statement.setString(Values.PASSWORD.getValue(), elem.getPassword());
+			statement.setInt(Values.CONTACTS_ID.getValue(),
+					elem.getContactsId());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
@@ -46,13 +63,16 @@ public class UserTransformer implements TransformerInterface<User> {
 		try {
 			statement = connection.prepareStatement(UPDATE_STATEMENT,
 					Statement.RETURN_GENERATED_KEYS);
-			statement.setBoolean(1, elem.getRole());
-			statement.setString(2, elem.getFirstName());
-			statement.setString(3, elem.getLastName());
-			statement.setString(4, elem.getLogin());
-			statement.setString(5, elem.getPassword());
-			statement.setInt(6, elem.getContactsId());
-			statement.setInt(7, elem.getIdUser());
+			statement.setBoolean(Values.ROLE.getValue(), elem.getRole());
+			statement.setString(Values.FIRST_NAME.getValue(),
+					elem.getFirstName());
+			statement
+					.setString(Values.LAST_NAME.getValue(), elem.getLastName());
+			statement.setString(Values.LOGIN.getValue(), elem.getLogin());
+			statement.setString(Values.PASSWORD.getValue(), elem.getPassword());
+			statement.setInt(Values.CONTACTS_ID.getValue(),
+					elem.getContactsId());
+			statement.setInt(Values.ID_USER.getValue(), elem.getIdUser());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}

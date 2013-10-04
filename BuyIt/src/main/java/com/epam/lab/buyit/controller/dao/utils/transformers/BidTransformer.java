@@ -8,7 +8,6 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
-import com.epam.lab.buyit.model.Address;
 import com.epam.lab.buyit.model.Bid;
 
 public class BidTransformer implements TransformerInterface<Bid>{

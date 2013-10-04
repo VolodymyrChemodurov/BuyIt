@@ -16,7 +16,7 @@ public class ProductDAO implements ProductDAOInterface {
 
 	private final static String GET_BY_ID = "SELECT * FROM products WHERE id_product = ?";
 	private static final Logger LOGGER = Logger.getLogger(ProductDAO.class);
-	private ProductTransformer transformer;
+	private ProductTransformer transformer = new ProductTransformer();
 
 	@Override
 	public int createElement(Product elem) {

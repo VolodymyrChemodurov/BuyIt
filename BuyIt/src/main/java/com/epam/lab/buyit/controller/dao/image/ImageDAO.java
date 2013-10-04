@@ -14,9 +14,9 @@ import com.epam.lab.buyit.model.Image;
 
 public class ImageDAO implements ImageDAOInterface {
 
-	private final static String GET_BY_ID = "SELECT * FROM images WHERE id_mage = ?";
+	private final static String GET_BY_ID = "SELECT * FROM images WHERE id_image = ?";
 	private static final Logger LOGGER = Logger.getLogger(ImageDAO.class);
-	private ImageTransformer transformer;
+	private ImageTransformer transformer = new ImageTransformer();
 
 	@Override
 	public int createElement(Image elem) {

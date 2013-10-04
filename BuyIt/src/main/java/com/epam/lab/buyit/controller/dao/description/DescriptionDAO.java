@@ -16,7 +16,7 @@ public class DescriptionDAO implements DescriptionDAOInterface {
 
 	private final static String GET_BY_ID = "SELECT * FROM descriptions WHERE id_description = ?";
 	private static final Logger LOGGER = Logger.getLogger(DescriptionDAO.class);
-	private DescriptionTransformer transformer;
+	private DescriptionTransformer transformer = new DescriptionTransformer();
 
 	@Override
 	public int createElement(Description elem) {
