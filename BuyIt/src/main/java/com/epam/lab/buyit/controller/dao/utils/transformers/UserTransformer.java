@@ -32,7 +32,7 @@ public class UserTransformer implements TransformerInterface<User> {
 			statement.setString(3, elem.getLastName());
 			statement.setString(4, elem.getLogin());
 			statement.setString(5, elem.getPassword());
-			statement.setInt(6, elem.getContactsId());
+//			statement.setInt(6, elem.getContactsId());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
@@ -51,7 +51,7 @@ public class UserTransformer implements TransformerInterface<User> {
 			statement.setString(3, elem.getLastName());
 			statement.setString(4, elem.getLogin());
 			statement.setString(5, elem.getPassword());
-			statement.setInt(6, elem.getContactsId());
+//			statement.setInt(6, elem.getContactsId());
 			statement.setInt(7, elem.getIdUser());
 		} catch (SQLException e) {
 			LOGGER.error(e);
@@ -70,8 +70,8 @@ public class UserTransformer implements TransformerInterface<User> {
 			user.setLastName(resultSet.getString("last_name"));
 			user.setLogin(resultSet.getString("login"));
 			user.setPassword(resultSet.getString("password"));
-			user.setContactsId(resultSet.getInt("contacts_id"));
-			user.setContact(contactDAO.readElementById(user.getContactsId()));
+//			user.setContactsId(resultSet.getInt("contacts_id"));
+//			user.setContact(contactDAO.readElementById(user.getContactsId()));
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}

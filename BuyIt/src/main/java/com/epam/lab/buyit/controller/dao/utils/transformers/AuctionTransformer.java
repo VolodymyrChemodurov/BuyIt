@@ -8,16 +8,16 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
-import com.epam.lab.buyit.model.Auctions;
+import com.epam.lab.buyit.model.Auction;
 
-public class AuctionTransformer implements TransformerInterface<Auctions> {
+public class AuctionTransformer implements TransformerInterface<Auction> {
 	private static final Logger LOGGER = Logger
 			.getLogger(AddressTransformer.class);
 	private static final String CREATE_STATEMENT = "INSERT INTO auctions(start_price, start_time, end_time, status, buy_it_now, count, product_id, current_price) VALUES(? , ? , ? , ? , ? , ?, ?, ?)";
 	//private final static String UPDATE_ALL_FIELDS = "UPDATE address SET start_price = ?, start_time = ?, end_time= ?, status= ?, buy_it_now= ?, count= ?, product_id= ?, current_price= ? WHERE id_auction = ?";
 
 	@Override
-	public PreparedStatement fromObjectToCreatePS(Auctions elem,
+	public PreparedStatement fromObjectToCreatePS(Auction elem,
 			Connection connection) {
 		PreparedStatement statement = null;
 		try {
@@ -29,7 +29,7 @@ public class AuctionTransformer implements TransformerInterface<Auctions> {
 			statement.setString(4, elem.getStatus());
 			statement.setDouble(5, elem.getBuyItNow());
 			statement.setInt(6, elem.getCount());
-			statement.setInt(7, elem.getProductId());
+//			statement.setInt(7, elem.getProductId());
 			statement.setDouble(8, elem.getCurrentPrice());
 
 		} catch (SQLException e) {
@@ -40,15 +40,15 @@ public class AuctionTransformer implements TransformerInterface<Auctions> {
 	}
 
 	@Override
-	public PreparedStatement fromObjectToUpdatePS(Auctions elem,
+	public PreparedStatement fromObjectToUpdatePS(Auction elem,
 			Connection connection) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Auctions fromRStoObject(ResultSet resultSet) {
-		Auctions currentAuctions = new Auctions();
+	public Auction fromRStoObject(ResultSet resultSet) {
+		Auction currentAuctions = new Auction();
 		try {
 			currentAuctions.setIdAuction(resultSet.getInt("id_auction"));
 			currentAuctions.setStartPrice(resultSet.getDouble("start_price"));
@@ -57,7 +57,7 @@ public class AuctionTransformer implements TransformerInterface<Auctions> {
 			currentAuctions.setStatus(resultSet.getString("status"));
 			currentAuctions.setBuyItNow(resultSet.getDouble("buy_it_now"));
 			currentAuctions.setCount(resultSet.getInt("count"));
-			currentAuctions.setProductId(resultSet.getInt("product_id"));
+//			currentAuctions.setProductId(resultSet.getInt("product_id"));
 			currentAuctions.setCurrentPrice(resultSet.getDouble("current_price"));
 
 		} catch (SQLException e) {

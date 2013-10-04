@@ -12,7 +12,7 @@ import com.epam.lab.buyit.controller.dao.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.transformers.AddressTransformer;
 import com.epam.lab.buyit.controller.dao.utils.transformers.AuctionTransformer;
 import com.epam.lab.buyit.model.Address;
-import com.epam.lab.buyit.model.Auctions;
+import com.epam.lab.buyit.model.Auction;
 
 public class AuctionDAO implements AuctionDAOInterface{
 	private static final Logger LOGGER = Logger.getLogger(AuctionDAO.class);
@@ -23,7 +23,7 @@ public class AuctionDAO implements AuctionDAOInterface{
 		transformer = new AuctionTransformer();
 	}
 	@Override
-	public int createElement(Auctions elem) {
+	public int createElement(Auction elem) {
 		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
 		ResultSet generatedKeys = null;
@@ -45,8 +45,8 @@ public class AuctionDAO implements AuctionDAOInterface{
 	}
 
 	@Override
-	public Auctions readElementById(int id) {
-		Auctions currentAuctions = null;
+	public Auction readElementById(int id) {
+		Auction currentAuctions = null;
 		Connection connection = com.epam.lab.buyit.controller.dao.connection.ConnectionManager
 				.getConnection();
 		PreparedStatement statement = null;
@@ -68,7 +68,7 @@ public class AuctionDAO implements AuctionDAOInterface{
 	}
 
 	@Override
-	public void updateElement(Auctions elem) {
+	public void updateElement(Auction elem) {
 		throw new UnsupportedOperationException();
 		
 	}

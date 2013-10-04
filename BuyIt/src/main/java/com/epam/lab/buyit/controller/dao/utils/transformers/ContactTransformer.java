@@ -32,7 +32,7 @@ public class ContactTransformer implements TransformerInterface<Contact> {
 					Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, elem.getEmail());
 			statement.setString(2, elem.getPhone());
-			statement.setInt(3, elem.getAddressId());
+//			statement.setInt(3, elem.getAddressId());
 
 		} catch (SQLException e) {
 			LOGGER.error(e);
@@ -49,7 +49,7 @@ public class ContactTransformer implements TransformerInterface<Contact> {
 			statement = connection.prepareStatement(UPDATE_ALL_FIELDS);
 			statement.setString(1, elem.getEmail());
 			statement.setString(2, elem.getPhone());
-			statement.setInt(3, elem.getAddressId());
+//			statement.setInt(3, elem.getAddressId());
 			statement.setInt(4, elem.getIdContacts());
 
 		} catch (SQLException e) {
@@ -68,7 +68,7 @@ public class ContactTransformer implements TransformerInterface<Contact> {
 			currentContact.setIdContacts(resultSet.getInt("id_contact"));
 			currentContact.setEmail(resultSet.getString("email"));
 			currentContact.setPhone(resultSet.getString("phone"));
-			currentContact.setAddressId(resultSet.getInt("address_id"));
+//			currentContact.setAddressId(resultSet.getInt("address_id"));
 			
 			
 			currentAddress = addressDAO.readElementById(resultSet.getInt("address_id"));

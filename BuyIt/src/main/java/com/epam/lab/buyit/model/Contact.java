@@ -5,19 +5,7 @@ public class Contact {
 	private int idContacts;
 	private String email;
 	private String phone;
-	private int addressId;
 	private Address address;
-	
-	
-	public int getAddressId() {
-		return addressId;
-	}
-
-	public Contact setAddressId(int addressId) {
-		this.addressId = addressId;
-		return this;
-	}
-
 
 	public int getIdContacts() {
 		return idContacts;
@@ -55,4 +43,11 @@ public class Contact {
 		return this;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder string = new StringBuilder();
+		string.append(idContacts).append(" email: ").append(email)
+				.append(" phone: ").append(phone);
+		return string.toString();
+	}
 }

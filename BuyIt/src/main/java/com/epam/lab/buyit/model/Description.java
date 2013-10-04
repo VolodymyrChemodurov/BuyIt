@@ -49,4 +49,11 @@ public class Description {
 		getItemPhotos().add(image);
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder string = new StringBuilder();
+		string.append(idDescription).append(" features: ").append(features)
+				.append(" description: ").append(descText);
+		return string.toString();
+	}
 }

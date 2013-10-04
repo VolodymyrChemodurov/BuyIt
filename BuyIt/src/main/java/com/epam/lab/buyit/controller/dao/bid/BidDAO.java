@@ -9,9 +9,8 @@ import org.apache.log4j.Logger;
 
 import com.epam.lab.buyit.controller.dao.address.AddressDAO;
 import com.epam.lab.buyit.controller.dao.connection.ConnectionManager;
-import com.epam.lab.buyit.controller.dao.utils.transformers.AddressTransformer;
+import com.epam.lab.buyit.controller.dao.utils.DAOUtils;
 import com.epam.lab.buyit.controller.dao.utils.transformers.BidTransformer;
-import com.epam.lab.buyit.model.Address;
 import com.epam.lab.buyit.model.Bid;
 
 public class BidDAO implements BidDAOInterface{
@@ -29,7 +28,7 @@ public class BidDAO implements BidDAOInterface{
 		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
 		ResultSet generatedKeys = null;
-		try {
+		try {	
 			statement = transformer.fromObjectToCreatePS(elem, connection);
 			if (statement != null) {
 				statement.executeUpdate();
@@ -41,7 +40,7 @@ public class BidDAO implements BidDAOInterface{
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-			//DAOUtils.close(generatedKeys, statement, connection);
+			DAOUtils.close(generatedKeys, statement, connection);
 		}
 		return 0;
 	}
@@ -64,7 +63,7 @@ public class BidDAO implements BidDAOInterface{
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-			// DAOUtils.close(result, statement, connection);
+			DAOUtils.close(result, statement, connection);
 		}
 		return currentBid;
 	}

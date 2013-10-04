@@ -43,4 +43,11 @@ public class Category {
 	public void setSubCategory(SubCategory subCategory) {
 		getListSubCategories().add(subCategory);
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder string = new StringBuilder();
+		string.append(idCategory).append(" name: ").append(name);
+		return string.toString();
+	}
 }

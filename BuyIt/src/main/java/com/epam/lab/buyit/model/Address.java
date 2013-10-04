@@ -63,4 +63,13 @@ public class Address {
 		return this;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder string = new StringBuilder();
+		string.append(idAddress).append(" region: ").append(region)
+				.append(" city: ").append(city).append(" street: ")
+				.append(street).append(" house: ").append(house)
+				.append(" zip code: ").append(zipCode);
+		return string.toString();
+	}
 }

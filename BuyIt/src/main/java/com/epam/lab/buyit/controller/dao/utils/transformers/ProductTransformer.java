@@ -26,9 +26,9 @@ public class ProductTransformer implements TransformerInterface<Product> {
 			statement = connection.prepareStatement(CREATE_STATEMENT,
 					Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, elem.getName());
-			statement.setInt(2, elem.getAuctionId());
-			statement.setInt(3, elem.getSubCategoryId());
-			statement.setInt(4, elem.getUserId());
+	//		statement.setInt(2, elem.getAuctionId());
+	//		statement.setInt(3, elem.getSubCategoryId());
+	//		statement.setInt(4, elem.getUserId());
 			statement.setInt(5, elem.getDescription().getIdDescription());
 		} catch (SQLException e) {
 			LOGGER.error(e);
@@ -50,9 +50,9 @@ public class ProductTransformer implements TransformerInterface<Product> {
 		try {
 			product.setIdProduct(resultSet.getInt("id_product"));
 			product.setName(resultSet.getString("name"));
-			product.setAuctionId(resultSet.getInt("auction_id"));
-			product.setSubCategoryId(resultSet.getInt("sub_category_id"));
-			product.setUserId(resultSet.getInt("user_id"));
+//			product.setAuctionId(resultSet.getInt("auction_id"));
+//			product.setSubCategoryId(resultSet.getInt("sub_category_id"));
+//			product.setUserId(resultSet.getInt("user_id"));
 			product.setDescription(descriptionDAO.readElementById(resultSet
 					.getInt("description_id")));
 		} catch (SQLException e) {

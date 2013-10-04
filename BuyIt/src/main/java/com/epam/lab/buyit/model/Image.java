@@ -3,7 +3,6 @@ package com.epam.lab.buyit.model;
 public class Image {
 
 	private int idImage;
-	private int descriptionId;
 	private String path;
 
 	public int getIdImage() {
@@ -12,15 +11,6 @@ public class Image {
 
 	public Image setIdImage(int idImage) {
 		this.idImage = idImage;
-		return this;
-	}
-
-	public int getDescriptionId() {
-		return descriptionId;
-	}
-
-	public Image setDescriptionId(int descriptionId) {
-		this.descriptionId = descriptionId;
 		return this;
 	}
 
@@ -33,4 +23,10 @@ public class Image {
 		return this;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder string = new StringBuilder();
+		string.append(idImage).append(" path: ").append(path);
+		return string.toString();
+	}
 }
