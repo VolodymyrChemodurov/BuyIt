@@ -2,19 +2,19 @@ package com.epam.lab.buyit.model;
 
 public class Product {
 
-	private int idGood;
+	private int idProduct;
 	private String name;
 	private int auctionId;
 	private int subCategoryId;
 	private int userId;
 	private Description description;
 
-	public int getIdGood() {
-		return idGood;
+	public int getIdProduct() {
+		return idProduct;
 	}
 
-	public Product setIdGood(int idGood) {
-		this.idGood = idGood;
+	public Product setIdProduct(int idGood) {
+		this.idProduct = idGood;
 		return this;
 	}
 
