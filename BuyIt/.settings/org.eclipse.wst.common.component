@@ -2,6 +2,7 @@
     <wb-module deploy-name="BuyIt">
         <wb-resource deploy-path="/" source-path="/WebApp"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/test"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <property name="context-root" value="BuyIt"/>
         <property name="java-output-path" value="/BuyIt/build/classes"/>
     </wb-module>
