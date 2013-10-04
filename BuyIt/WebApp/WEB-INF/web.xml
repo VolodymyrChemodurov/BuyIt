@@ -7,26 +7,38 @@
 	<welcome-file-list>
 		<welcome-file>homePageServlet</welcome-file>
 	</welcome-file-list>
+	
+	<!-- Servlet URL -->
 
 	<servlet>
 		<servlet-name>HomePageServlet</servlet-name>
-		<servlet-class>com.epam.lab.controller.servlet.HomePageServlet</servlet-class>	
+		<servlet-class>com.epam.lab.controller.web.servlet.HomePageServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>HomePageServlet</servlet-name>
 		<url-pattern>/homePageServlet</url-pattern>
 	</servlet-mapping>
-	
 	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
-		<servlet-class>com.epam.lab.controller.servlet.LoginServlet</servlet-class>	
+		<servlet-class>com.epam.lab.controller.web.servlet.LoginServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
 		<url-pattern>/loginServlet</url-pattern>
 	</servlet-mapping>
-
-
+	<servlet>
+		<servlet-name>RegistrationServlet</servlet-name>
+		<servlet-class>com.epam.lab.controller.web.servlet.RegistrationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegistrationServlet</servlet-name>
+		<url-pattern>/registrationServlet</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<!-- JSP URL -->
+	
 	<servlet>
 		<servlet-name>HomePage</servlet-name>
 		<jsp-file>/jsp/homePage.jsp</jsp-file>
@@ -35,7 +47,44 @@
 		<servlet-name>HomePage</servlet-name>
 		<url-pattern>/homePage</url-pattern>
 	</servlet-mapping>
-
-
-
+	<servlet>
+		<servlet-name>NavbarLogin</servlet-name>
+		<jsp-file>/jsp/navbarLogin.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NavbarLogin</servlet-name>
+		<url-pattern>/navbarLogin</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Navbar</servlet-name>
+		<jsp-file>/jsp/navbar.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Navbar</servlet-name>
+		<url-pattern>/navbar</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>NavbarLogout</servlet-name>
+		<jsp-file>/jsp/navbarLogout.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NavbarLogout</servlet-name>
+		<url-pattern>/navbarLogout</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>SidebarMenu</servlet-name>
+		<jsp-file>/jsp/sidebarMenu.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SidebarMenu</servlet-name>
+		<url-pattern>/sidebarMenu</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Registration</servlet-name>
+		<jsp-file>/jsp/registration.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Registration</servlet-name>
+		<url-pattern>/registration</url-pattern>
+	</servlet-mapping>
 </web-app>
