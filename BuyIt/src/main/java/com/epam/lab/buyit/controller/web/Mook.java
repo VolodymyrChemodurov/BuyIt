@@ -1,4 +1,4 @@
-package com.epam.lab.controller;
+package com.epam.lab.buyit.controller.web;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

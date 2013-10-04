@@ -1,4 +1,4 @@
-package com.epam.lab.controller.web.servlet;
+package com.epam.lab.buyit.controller.web.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

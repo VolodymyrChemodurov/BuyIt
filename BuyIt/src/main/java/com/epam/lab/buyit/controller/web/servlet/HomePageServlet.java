@@ -1,4 +1,4 @@
-package com.epam.lab.controller.web.servlet;
+package com.epam.lab.buyit.controller.web.servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.epam.lab.controller.Mook;
+import com.epam.lab.buyit.controller.web.Mook;
 
 /**
  * Servlet implementation class homePageServlet
