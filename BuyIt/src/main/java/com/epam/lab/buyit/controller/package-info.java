@@ -5,4 +5,4 @@
  * @author Chemo
  *
  */
-package com.epam.lab.controller;
+package com.epam.lab.buyit.controller;
