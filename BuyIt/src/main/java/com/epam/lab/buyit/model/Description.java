@@ -1,14 +1,19 @@
 package com.epam.lab.buyit.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Description {
-
+	private int productId;
 	private int idDescription;
-	private List<Image> itemPhotos;
 	private String features;
 	private String descText;
+	private List<Image> itemPhotos;
 
+	public Description() {
+		itemPhotos = new ArrayList<Image>();
+	}
+	
 	public int getIdDescription() {
 		return idDescription;
 	}
@@ -16,19 +21,6 @@ public class Description {
 	public Description setIdDescription(int idDescription) {
 		this.idDescription = idDescription;
 		return this;
-	}
-
-	public List<Image> getItemPhotos() {
-		return itemPhotos;
-	}
-
-	public Description setItemPhotos(List<Image> itemPhotos) {
-		this.itemPhotos = itemPhotos;
-		return this;
-	}
-
-	public void setItemPhoto(Image image) {
-		getItemPhotos().add(image);
 	}
 
 	public String getFeatures() {
@@ -47,6 +39,39 @@ public class Description {
 	public Description setDescText(String descText) {
 		this.descText = descText;
 		return this;
+	}
+
+	public List<Image> getItemPhotos() {
+		return itemPhotos;
+	}
+
+	public Description setItemPhotos(List<Image> itemPhotos) {
+		this.itemPhotos = itemPhotos;
+		return this;
+	}
+
+	public void setItemPhoto(Image image) {
+		itemPhotos.add(image);
+	}
+
+	public Image getItemPhoto(int number) {
+		return itemPhotos.get(number);
+	}
+	
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder string = new StringBuilder();
+		string.append(idDescription).append(" features: ").append(features)
+				.append(" description: ").append(descText).append(itemPhotos);
+		return string.toString();
 	}
 
 }

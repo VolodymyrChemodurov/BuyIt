@@ -5,7 +5,7 @@ import java.util.List;
 public class User {
 
 	private int idUser;
-	private boolean status;
+	private boolean role;
 	private String firstName;
 	private String lastName;
 	private String login;
@@ -14,6 +14,10 @@ public class User {
 	private List<Product> productList;
 	private List<Bid> bidList;
 
+	public User() {
+		contact = new Contact();
+	}
+	
 	public int getIdUser() {
 		return idUser;
 	}
@@ -23,12 +27,12 @@ public class User {
 		return this;
 	}
 
-	public boolean getStatus() {
-		return status;
+	public boolean getRole() {
+		return role;
 	}
 
-	public User setStatus(boolean status) {
-		this.status = status;
+	public User setRole(boolean role) {
+		this.role = role;
 		return this;
 	}
 
@@ -68,21 +72,13 @@ public class User {
 		return this;
 	}
 
-	public Contact getContacts() {
-		return contact;
-	}
-
-	public User setContacts(Contact contact) {
-		this.contact = contact;
-		return this;
-	}
-
 	public Contact getContact() {
 		return contact;
 	}
 
-	public void setContact(Contact contact) {
+	public User setContact(Contact contact) {
 		this.contact = contact;
+		return this;
 	}
 
 	public List<Product> getProductList() {
@@ -101,6 +97,17 @@ public class User {
 	public User setBidList(List<Bid> bidList) {
 		this.bidList = bidList;
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder string = new StringBuilder();
+		string.append(idUser).append(" role: ")
+				.append(role ? " Admin" : " User").append(" first name: ")
+				.append(firstName).append(" last name: ").append(lastName)
+				.append(" login: ").append(login).append(" password: ")
+				.append(password);
+		return string.toString();
 	}
 
 }

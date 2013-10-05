@@ -5,9 +5,9 @@ import java.sql.Time;
 public class Bid {
 
 	private int idBid;
-	private Time time;
 	private int auctionId;
 	private int userId;
+	private Time time;
 
 	public int getIdBid() {
 		return idBid;
@@ -43,6 +43,15 @@ public class Bid {
 	public Bid setUserId(int userId) {
 		this.userId = userId;
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder string = new StringBuilder();
+		string.append(idBid).append(" time: ").append(time)
+				.append(" auction id: ").append(auctionId).append(" user id: ")
+				.append(userId);
+		return string.toString();
 	}
 
 }
