@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import com.epam.lab.buyit.controller.dao.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.DAOUtils;
+import com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.transformers.AddressTransformer;
 import com.epam.lab.buyit.model.Address;
 

@@ -7,11 +7,9 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import com.epam.lab.buyit.controller.dao.address.AddressDAO;
-import com.epam.lab.buyit.controller.dao.connection.ConnectionManager;
-import com.epam.lab.buyit.controller.dao.utils.transformers.AddressTransformer;
+import com.epam.lab.buyit.controller.dao.utils.DAOUtils;
+import com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.transformers.AuctionTransformer;
-import com.epam.lab.buyit.model.Address;
 import com.epam.lab.buyit.model.Auction;
 
 public class AuctionDAO implements AuctionDAOInterface{
@@ -39,7 +37,7 @@ public class AuctionDAO implements AuctionDAOInterface{
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-			//DAOUtils.close(generatedKeys, statement, connection);
+			DAOUtils.close(generatedKeys, statement, connection);
 		}
 		return 0;
 	}
@@ -47,7 +45,7 @@ public class AuctionDAO implements AuctionDAOInterface{
 	@Override
 	public Auction getElementById(int id) {
 		Auction currentAuctions = null;
-		Connection connection = com.epam.lab.buyit.controller.dao.connection.ConnectionManager
+		Connection connection = com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager
 				.getConnection();
 		PreparedStatement statement = null;
 		ResultSet result = null;
@@ -62,7 +60,7 @@ public class AuctionDAO implements AuctionDAOInterface{
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-			// DAOUtils.close(result, statement, connection);
+			DAOUtils.close(result, statement, connection);
 		}
 		return currentAuctions;
 	}

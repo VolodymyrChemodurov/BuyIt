@@ -1,5 +1,6 @@
 package com.epam.lab.buyit.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Description {
@@ -9,6 +10,10 @@ public class Description {
 	private String descText;
 	private List<Image> itemPhotos;
 
+	public Description() {
+		itemPhotos = new ArrayList<Image>();
+	}
+	
 	public int getIdDescription() {
 		return idDescription;
 	}
@@ -46,9 +51,13 @@ public class Description {
 	}
 
 	public void setItemPhoto(Image image) {
-		getItemPhotos().add(image);
+		itemPhotos.add(image);
 	}
 
+	public Image getItemPhoto(int number) {
+		return itemPhotos.get(number);
+	}
+	
 	public int getProductId() {
 		return productId;
 	}

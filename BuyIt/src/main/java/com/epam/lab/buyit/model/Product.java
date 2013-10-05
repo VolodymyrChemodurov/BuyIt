@@ -8,6 +8,10 @@ public class Product {
 	private String name;
 	private Description description;
 
+	public Product() {
+		description = new Description();
+	}
+	
 	public int getIdProduct() {
 		return idProduct;
 	}

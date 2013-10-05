@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.controller.dao.connection;
+package com.epam.lab.buyit.controller.dao.utils.connection;
 
 import java.sql.Connection;
 import java.sql.SQLException;

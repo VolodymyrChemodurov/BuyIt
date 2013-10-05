@@ -8,6 +8,10 @@ public class Contact {
 	private String phone;
 	private Address address;
 
+	public Contact() {
+		address = new Address();
+	}
+	
 	public int getIdContact() {
 		return idContact;
 	}
@@ -47,8 +51,8 @@ public class Contact {
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
-		string.append(idContact).append(" email: ").append(email)
-				.append(" phone: ").append(phone).append(address);
+		string.append(userId).append(" email: ").append(email)
+				.append(" phone: ").append(phone);
 		return string.toString();
 	}
 

@@ -14,6 +14,10 @@ public class User {
 	private List<Product> productList;
 	private List<Bid> bidList;
 
+	public User() {
+		contact = new Contact();
+	}
+	
 	public int getIdUser() {
 		return idUser;
 	}

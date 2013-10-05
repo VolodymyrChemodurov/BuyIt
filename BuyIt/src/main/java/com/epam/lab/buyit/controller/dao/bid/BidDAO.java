@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 
 import com.epam.lab.buyit.controller.dao.address.AddressDAO;
-import com.epam.lab.buyit.controller.dao.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.DAOUtils;
+import com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.transformers.BidTransformer;
 import com.epam.lab.buyit.model.Bid;
 
@@ -48,7 +48,7 @@ public class BidDAO implements BidDAOInterface{
 	@Override
 	public Bid getElementById(int id) {
 		Bid currentBid = null;
-		Connection connection = com.epam.lab.buyit.controller.dao.connection.ConnectionManager
+		Connection connection = com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager
 				.getConnection();
 		PreparedStatement statement = null;
 		ResultSet result = null;

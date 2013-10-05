@@ -1,5 +1,6 @@
 package com.epam.lab.buyit.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubCategory {
@@ -7,6 +8,10 @@ public class SubCategory {
 	private int idSubCategory;
 	private String name;
 	private List<Product> products;
+	
+	public SubCategory() {
+		products = new ArrayList<Product>();
+	}
 	
 	public int getIdSubCategory() {
 		return idSubCategory;
@@ -34,6 +39,14 @@ public class SubCategory {
 		this.products = products;
 	}
 
+	public void addProduct(Product product) {
+		products.add(product);
+	}
+	
+	public Product getProduct(int number) {
+		return products.get(number);
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
