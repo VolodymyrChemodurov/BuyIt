@@ -41,7 +41,7 @@ public class SubCategoryTransformer implements
 	}
 
 	@Override
-	public SubCategory fromRStoObject(ResultSet resultSet) {
+	public SubCategory fromRSToObject(ResultSet resultSet) {
 		SubCategory subCategory = new SubCategory();
 		try {
 			subCategory.setIdSubCategory(resultSet.getInt("id_sub_category"));

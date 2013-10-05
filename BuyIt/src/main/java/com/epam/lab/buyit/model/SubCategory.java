@@ -8,7 +8,6 @@ public class SubCategory {
 	private String name;
 	private List<Product> products;
 	
-
 	public int getIdSubCategory() {
 		return idSubCategory;
 	}

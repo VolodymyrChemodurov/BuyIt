@@ -13,11 +13,14 @@ import com.epam.lab.buyit.controller.dao.utils.transformers.DescriptionTransform
 import com.epam.lab.buyit.model.Description;
 
 public class DescriptionDAO implements DescriptionDAOInterface {
-
-	private final static String GET_BY_ID = "SELECT * FROM descriptions WHERE id_description = ?";
 	private static final Logger LOGGER = Logger.getLogger(DescriptionDAO.class);
+	private final static String GET_BY_ID = "SELECT * FROM descriptions WHERE products_id = ?";
 	private DescriptionTransformer transformer;
 
+	public DescriptionDAO() {
+		transformer = new DescriptionTransformer();
+	}
+	
 	@Override
 	public int createElement(Description elem) {
 		Connection connection = ConnectionManager.getConnection();
@@ -40,7 +43,7 @@ public class DescriptionDAO implements DescriptionDAOInterface {
 	}
 
 	@Override
-	public Description readElementById(int id) {
+	public Description getElementById(int id) {
 		Description description = null;
 		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
@@ -50,7 +53,7 @@ public class DescriptionDAO implements DescriptionDAOInterface {
 			statement.setInt(1, id);
 			result = statement.executeQuery();
 			if (result.next()) {
-				description = transformer.fromRStoObject(result);
+				description = transformer.fromRSToObject(result);
 				return description;
 			}
 		} catch (SQLException e) {

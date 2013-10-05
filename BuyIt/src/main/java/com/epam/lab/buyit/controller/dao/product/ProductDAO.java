@@ -17,6 +17,10 @@ public class ProductDAO implements ProductDAOInterface {
 	private final static String GET_BY_ID = "SELECT * FROM products WHERE id_product = ?";
 	private static final Logger LOGGER = Logger.getLogger(ProductDAO.class);
 	private ProductTransformer transformer;
+	
+	public ProductDAO() {
+		transformer = new ProductTransformer();
+	}
 
 	@Override
 	public int createElement(Product elem) {
@@ -40,7 +44,7 @@ public class ProductDAO implements ProductDAOInterface {
 	}
 
 	@Override
-	public Product readElementById(int id) {
+	public Product getElementById(int id) {
 		Product product = null;
 		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
@@ -50,7 +54,7 @@ public class ProductDAO implements ProductDAOInterface {
 			statement.setInt(1, id);
 			result = statement.executeQuery();
 			if (result.next()) {
-				product = transformer.fromRStoObject(result);
+				product = transformer.fromRSToObject(result);
 				return product;
 			}
 		} catch (SQLException e) {

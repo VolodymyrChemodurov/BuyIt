@@ -3,9 +3,8 @@ package com.epam.lab.buyit.model;
 public class Product {
 
 	private int idProduct;
-	//private int auctionId;
-	// private int subCategoryId;
-	// private int userId;
+	private int subCategoryId;
+	private int userId;
 	private String name;
 	private Description description;
 
@@ -27,32 +26,23 @@ public class Product {
 		return this;
 	}
 
-//	public int getAuctionId() {
-//		return auctionId;
-//	}
-//
-//	public Product setAuctionId(int auctionId) {
-//		this.auctionId = auctionId;
-//		return this;
-//	}
+	 public int getSubCategoryId() {
+	 return subCategoryId;
+	 }
+	
+	 public Product setSubCategoryId(int subCategoryId) {
+	 this.subCategoryId = subCategoryId;
+	 return this;
+	 }
 
-	// public int getSubCategoryId() {
-	// return subCategoryId;
-	// }
-	//
-	// public Product setSubCategoryId(int subCategoryId) {
-	// this.subCategoryId = subCategoryId;
-	// return this;
-	// }
-
-	// public int getUserId() {
-	// return userId;
-	// }
-	//
-	// public Product setUserId(int userId) {
-	// this.userId = userId;
-	// return this;
-	// }
+	 public int getUserId() {
+	 return userId;
+	 }
+	
+	 public Product setUserId(int userId) {
+	 this.userId = userId;
+	 return this;
+	 }
 
 	public Description getDescription() {
 		return description;

@@ -39,7 +39,7 @@ public class BidTransformer implements TransformerInterface<Bid>{
 	}
 
 	@Override
-	public Bid fromRStoObject(ResultSet resultSet) {
+	public Bid fromRSToObject(ResultSet resultSet) {
 		Bid currentBid = new Bid();
 		try {
 			currentBid.setIdBid(resultSet.getInt("id_bid"));

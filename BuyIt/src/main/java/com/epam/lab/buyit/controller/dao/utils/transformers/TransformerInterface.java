@@ -10,6 +10,6 @@ public interface TransformerInterface<T> {
 
 	PreparedStatement fromObjectToUpdatePS(T elem, Connection connection);
 
-	T fromRStoObject(ResultSet resultSet);
+	T fromRSToObject(ResultSet resultSet);
 
 }

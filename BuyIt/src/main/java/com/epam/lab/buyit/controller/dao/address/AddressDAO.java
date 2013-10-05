@@ -14,7 +14,8 @@ import com.epam.lab.buyit.model.Address;
 
 public class AddressDAO implements AddressDAOInterface {
 	private static final Logger LOGGER = Logger.getLogger(AddressDAO.class);
-	private final static String GET_BY_ID = "SELECT * FROM address WHERE id_address = ?";
+	private final static String GET_BY_ID = "SELECT * FROM address WHERE contacts_id = ?";
+	private final static String DELETE_STATEMENT = "DELETE FROM address WHERE id_address = ?";
 	private AddressTransformer transformer;
 
 	public AddressDAO() {
@@ -32,22 +33,20 @@ public class AddressDAO implements AddressDAOInterface {
 				statement.executeUpdate();
 				generatedKeys = statement.getGeneratedKeys();
 				generatedKeys.next();
-
 				return generatedKeys.getInt(1);
 			}
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-		DAOUtils.close(generatedKeys, statement, connection);
+			DAOUtils.close(generatedKeys, statement, connection);
 		}
 		return 0;
 	}
 
 	@Override
-	public Address readElementById(int id) {
+	public Address getElementById(int id) {
 		Address currentAddress = null;
-		Connection connection = com.epam.lab.buyit.controller.dao.connection.ConnectionManager
-				.getConnection();
+		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		try {
@@ -55,13 +54,13 @@ public class AddressDAO implements AddressDAOInterface {
 			statement.setInt(1, id);
 			result = statement.executeQuery();
 			if (result.next()) {
-				currentAddress = transformer.fromRStoObject(result);
+				currentAddress = transformer.fromRSToObject(result);
 				return currentAddress;
 			}
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-		 DAOUtils.close(result, statement, connection);
+			DAOUtils.close(result, statement, connection);
 		}
 		return currentAddress;
 	}
@@ -80,15 +79,22 @@ public class AddressDAO implements AddressDAOInterface {
 		} finally {
 			DAOUtils.close(statement, connection);
 		}
-		
+
 	}
 
 	@Override
 	public void deleteElementById(int id) {
-		throw new UnsupportedOperationException();
-
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(DELETE_STATEMENT);
+			statement.setInt(1, id);
+			statement.executeUpdate();
+		} catch(SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
 	}
-
-	
 
 }

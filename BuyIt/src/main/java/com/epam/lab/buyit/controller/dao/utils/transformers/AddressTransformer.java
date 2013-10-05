@@ -12,21 +12,22 @@ import com.epam.lab.buyit.model.Address;
 public class AddressTransformer implements TransformerInterface<Address> {
 	private static final Logger LOGGER = Logger
 			.getLogger(AddressTransformer.class);
-	private static final String CREATE_STATEMENT = "INSERT INTO address(region, city, street, house, zip_code) VALUES(? , ? , ? , ? , ? )";
-	private final static String UPDATE_ALL_FIELDS = "UPDATE address SET  region = ?, city = ?, street =? , house = ? , zip_code = ? WHERE id_address = ?";
-	
-	private enum Values{
-		REGION(1), CITY(2), STREET(3), HOUSE(4),ZIP_CODE(5), ID_ADDRESS(6);
+	private static final String CREATE_STATEMENT = "INSERT INTO address(region, city, street, house, zip_code, contacts_id) VALUES(? , ? , ? , ? , ?, ?)";
+	private final static String UPDATE_ALL_FIELDS = "UPDATE address SET  region = ?, city = ?, street =? , house = ? , zip_code = ? WHERE contacts_id = ?";
+
+	private enum Values {
+		REGION(1), CITY(2), STREET(3), HOUSE(4), ZIP_CODE(5), CONTACT_ID(6);
 		private int value;
-		
-		private Values(int value){
+
+		private Values(int value) {
 			this.value = value;
 		}
-		public int getValue(){
+
+		public int getValue() {
 			return value;
 		}
-		
 	}
+
 	@Override
 	public PreparedStatement fromObjectToCreatePS(Address elem,
 			java.sql.Connection connection) {
@@ -39,25 +40,23 @@ public class AddressTransformer implements TransformerInterface<Address> {
 			statement.setString(Values.STREET.getValue(), elem.getStreet());
 			statement.setString(Values.HOUSE.getValue(), elem.getHouse());
 			statement.setString(Values.ZIP_CODE.getValue(), elem.getZipCode());
-
+			statement.setInt(Values.CONTACT_ID.getValue(), elem.getContactId());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
-
 		return statement;
 	}
 
 	@Override
-	public Address fromRStoObject(ResultSet resultSet) {
+	public Address fromRSToObject(ResultSet resultSet) {
 		Address currentAddress = new Address();
 		try {
-			currentAddress.setIdAddress(resultSet.getInt("id_address"));
+			currentAddress.setContactId(resultSet.getInt("contacts_id"));
 			currentAddress.setRegion(resultSet.getString("region"));
 			currentAddress.setCity(resultSet.getString("city"));
 			currentAddress.setStreet(resultSet.getString("street"));
 			currentAddress.setHouse(resultSet.getString("house"));
 			currentAddress.setZipCode(resultSet.getString("zip_code"));
-
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
@@ -75,13 +74,10 @@ public class AddressTransformer implements TransformerInterface<Address> {
 			statement.setString(Values.STREET.getValue(), elem.getStreet());
 			statement.setString(Values.HOUSE.getValue(), elem.getHouse());
 			statement.setString(Values.ZIP_CODE.getValue(), elem.getZipCode());
-
-			statement.setInt(Values.ID_ADDRESS.getValue(), elem.getIdAddress());
-
+			statement.setInt(Values.CONTACT_ID.getValue(), elem.getContactId());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
-
 		return statement;
 	}
 

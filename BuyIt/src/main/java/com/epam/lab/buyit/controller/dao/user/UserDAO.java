@@ -40,7 +40,7 @@ public class UserDAO implements UserDAOInterface {
 	}
 
 	@Override
-	public User readElementById(int id) {
+	public User getElementById(int id) {
 		User user = null;
 		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
@@ -50,7 +50,7 @@ public class UserDAO implements UserDAOInterface {
 			statement.setInt(1, id);
 			result = statement.executeQuery();
 			if (result.next()) {
-				user = transformer.fromRStoObject(result);
+				user = transformer.fromRSToObject(result);
 				return user;
 			}
 		} catch (SQLException e) {

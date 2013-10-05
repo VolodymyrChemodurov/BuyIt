@@ -3,7 +3,7 @@ package com.epam.lab.buyit.model;
 import java.util.List;
 
 public class Description {
-
+	private int productId;
 	private int idDescription;
 	private String features;
 	private String descText;
@@ -49,11 +49,20 @@ public class Description {
 		getItemPhotos().add(image);
 	}
 
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
 		string.append(idDescription).append(" features: ").append(features)
-				.append(" description: ").append(descText);
+				.append(" description: ").append(descText).append(itemPhotos);
 		return string.toString();
 	}
+
 }

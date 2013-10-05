@@ -45,7 +45,7 @@ public class AuctionDAO implements AuctionDAOInterface{
 	}
 
 	@Override
-	public Auction readElementById(int id) {
+	public Auction getElementById(int id) {
 		Auction currentAuctions = null;
 		Connection connection = com.epam.lab.buyit.controller.dao.connection.ConnectionManager
 				.getConnection();
@@ -56,7 +56,7 @@ public class AuctionDAO implements AuctionDAOInterface{
 			statement.setInt(1, id);
 			result = statement.executeQuery();
 			if (result.next()) {
-				currentAuctions = transformer.fromRStoObject(result);
+				currentAuctions = transformer.fromRSToObject(result);
 				return currentAuctions;
 			}
 		} catch (SQLException e) {

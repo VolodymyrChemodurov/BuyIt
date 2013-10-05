@@ -24,7 +24,7 @@ public class ImageTransformer implements TransformerInterface<Image> {
 		try {
 			statement = connection.prepareStatement(CREATE_STATEMENT,
 					Statement.RETURN_GENERATED_KEYS);
-//			statement.setInt(1, elem.getDescriptionId());
+			statement.setInt(1, elem.getDescriptionId());
 			statement.setString(2, elem.getPath());
 		} catch (SQLException e) {
 			LOGGER.error(e);
@@ -40,11 +40,10 @@ public class ImageTransformer implements TransformerInterface<Image> {
 	}
 
 	@Override
-	public Image fromRStoObject(ResultSet resultSet) {
+	public Image fromRSToObject(ResultSet resultSet) {
 		Image image = new Image();
 		try {
-			image.setIdImage(resultSet.getInt("id_image"));
-//			image.setDescriptionId(resultSet.getInt("description_id"));
+			image.setDescriptionId(resultSet.getInt("description_id"));
 			image.setPath(resultSet.getString("path"));
 		} catch (SQLException e) {
 			LOGGER.error(e);

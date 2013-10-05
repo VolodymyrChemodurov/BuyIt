@@ -5,6 +5,7 @@ import java.sql.Time;
 public class Auction {
 
 	private int idAuction;
+	private int productId;
 	private double startPrice;
 	private double buyItNow;
 	private int count;
@@ -12,7 +13,6 @@ public class Auction {
 	private String status;
 	private Time startTime;
 	private Time endTime;
-	private Product product;
 
 	public int getIdAuction() {
 		return idAuction;
@@ -85,13 +85,13 @@ public class Auction {
 		this.currentPrice = currentPrice;
 		return this;
 	}
-
-	public Product getProduct() {
-		return product;
+	
+	public int getProductId() {
+		return productId;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
 	@Override

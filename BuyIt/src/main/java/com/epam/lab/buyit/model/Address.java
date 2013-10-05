@@ -2,19 +2,19 @@ package com.epam.lab.buyit.model;
 
 public class Address {
 
-	private int idAddress;
+	private int contactId;
 	private String region;
 	private String city;
 	private String street;
 	private String house;
 	private String zipCode;
 
-	public int getIdAddress() {
-		return idAddress;
+	public int getContactId() {
+		return contactId;
 	}
 
-	public Address setIdAddress(int idAddress) {
-		this.idAddress = idAddress;
+	public Address setContactId(int contactId) {
+		this.contactId = contactId;
 		return this;
 	}
 
@@ -66,7 +66,7 @@ public class Address {
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
-		string.append(idAddress).append(" region: ").append(region)
+		string.append(contactId).append(" region: ").append(region)
 				.append(" city: ").append(city).append(" street: ")
 				.append(street).append(" house: ").append(house)
 				.append(" zip code: ").append(zipCode);

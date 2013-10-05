@@ -46,7 +46,7 @@ public class BidDAO implements BidDAOInterface{
 	}
 
 	@Override
-	public Bid readElementById(int id) {
+	public Bid getElementById(int id) {
 		Bid currentBid = null;
 		Connection connection = com.epam.lab.buyit.controller.dao.connection.ConnectionManager
 				.getConnection();
@@ -57,7 +57,7 @@ public class BidDAO implements BidDAOInterface{
 			statement.setInt(1, id);
 			result = statement.executeQuery();
 			if (result.next()) {
-				currentBid = transformer.fromRStoObject(result);
+				currentBid = transformer.fromRSToObject(result);
 				return currentBid;
 			}
 		} catch (SQLException e) {
