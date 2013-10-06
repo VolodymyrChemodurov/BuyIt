@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -13,9 +15,9 @@ import com.epam.lab.buyit.controller.dao.utils.transformers.UserTransformer;
 import com.epam.lab.buyit.model.User;
 
 public class UserDAO implements UserDAOInterface {
-
-	private final static String GET_BY_ID = "SELECT * FROM users WHERE id_user = ?";
 	private static final Logger LOGGER = Logger.getLogger(UserDAO.class);
+	private final static String GET_BY_ID = "SELECT * FROM users WHERE id_user = ?";
+	private final static String GET_ALL_USERS = "SELECT * FROM users";
 	private UserTransformer transformer = new UserTransformer();
 
 	@Override
@@ -80,6 +82,27 @@ public class UserDAO implements UserDAOInterface {
 	@Override
 	public void deleteElementById(int id) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		List<User> users = new ArrayList<User>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_ALL_USERS);
+			result = statement.executeQuery();
+			while(result.next()) {
+				User currentUser = transformer.fromRSToObject(result);
+				users.add(currentUser);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return users;
 	}
 
 }

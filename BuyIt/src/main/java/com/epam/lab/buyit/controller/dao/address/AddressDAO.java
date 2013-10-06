@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -15,6 +17,7 @@ import com.epam.lab.buyit.model.Address;
 public class AddressDAO implements AddressDAOInterface {
 	private static final Logger LOGGER = Logger.getLogger(AddressDAO.class);
 	private final static String GET_BY_ID = "SELECT * FROM address WHERE contacts_id = ?";
+	private final static String GET_ALL_ADDRESS = "SELECT * FROM address";
 	private final static String DELETE_STATEMENT = "DELETE FROM address WHERE id_address = ?";
 	private AddressTransformer transformer;
 
@@ -95,6 +98,27 @@ public class AddressDAO implements AddressDAOInterface {
 		} finally {
 			DAOUtils.close(statement, connection);
 		}
+	}
+
+	@Override
+	public List<Address> getAllAddress() {
+		List<Address> address = new ArrayList<Address>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_ALL_ADDRESS);
+			result = statement.executeQuery();
+			while(result.next()) {
+				Address currentAddress = transformer.fromRSToObject(result);
+				address.add(currentAddress);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return address;
 	}
 
 }
