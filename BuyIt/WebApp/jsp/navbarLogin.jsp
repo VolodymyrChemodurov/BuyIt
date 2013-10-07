@@ -1,5 +1,7 @@
 <ul id="topMenu" class="nav pull-right">
-	<li class=""><a href="registration" role="button" style="padding-right: 0"><button class="btn btn-large btn-warning" type="submit">Registartion</button></a>
+	<li class=""><a href="registration" role="button"
+		style="padding-right: 0"><button class="btn btn-large btn-warning"
+				type="submit">Registartion</button></a>
 	<li class=""><a href="#login" role="button" data-toggle="modal"
 		style="padding-right: 0"><span class="btn btn-large btn-success">Login</span></a>
 		<div id="login" class="modal hide fade in" tabindex="-1" role="dialog"
@@ -11,17 +13,18 @@
 			</div>
 			<div class="modal-body">
 				<form class="form-horizontal loginFrm" method="post"
-					action="/loginServlet">
+					action="loginServlet">
 					<div class="control-group">
-						<input type="text" id="login" placeholder="Login">
+						<input type="text" id="login" name="login" placeholder="Login">
 					</div>
 					<div class="control-group">
-						<input type="password" id="password" placeholder="Password">
+						<input type="password" id="password" name="password" placeholder="Password">
 					</div>
 					<div></div>
+					<br>
+					<button type="submit" class="btn btn-success">Sign in</button>
+					<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 				</form>
-					<button type="submit"  class="btn btn-success">Sign in</button>
-				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 			</div>
 		</div></li>
 </ul>

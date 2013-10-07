@@ -18,6 +18,8 @@ public class UserDAO implements UserDAOInterface {
 	private static final Logger LOGGER = Logger.getLogger(UserDAO.class);
 	private final static String GET_BY_ID = "SELECT * FROM users WHERE id_user = ?";
 	private final static String GET_ALL_USERS = "SELECT * FROM users";
+	private final static String GET_USER_BY_LOGIN = "SELECT * FROM users WHERE login = ?";
+	private final static String GET_USER = "SELECT * FROM users WHERE login = ? AND password = ?";
 	private UserTransformer transformer = new UserTransformer();
 
 	@Override
@@ -103,6 +105,49 @@ public class UserDAO implements UserDAOInterface {
 			DAOUtils.close(result, statement, connection);
 		}
 		return users;
+	}
+
+	@Override
+	public boolean checkLogin(String login) {
+		boolean checkResult = false;
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_USER_BY_LOGIN);
+			statement.setString(1, login);
+			result = statement.executeQuery();
+			if(result.next())
+				checkResult = true;
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return checkResult;
+	}
+
+	@Override
+	public User getUser(String login, String password) {
+		User user = null;
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_USER);
+			statement.setString(1, login);
+			statement.setString(2, password);
+			result = statement.executeQuery();
+			if (result.next()) {
+				user = transformer.fromRSToObject(result);
+				return user;
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return user;
 	}
 
 }

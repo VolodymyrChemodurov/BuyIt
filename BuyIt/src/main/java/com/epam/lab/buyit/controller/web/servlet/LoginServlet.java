@@ -1,13 +1,17 @@
 package com.epam.lab.buyit.controller.web.servlet;
 
 import java.io.IOException;
+import java.nio.channels.SeekableByteChannel;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.epam.lab.buyit.controller.web.Mook;
+import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
+import com.epam.lab.buyit.model.User;
 
 /**
  * Servlet implementation class Login
@@ -19,32 +23,26 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		UserServiceImpl userServise = new UserServiceImpl();
 		String login = request.getParameter("login").trim();
 		String password = request.getParameter("password").trim();
-		boolean loginFlag = true;
-		loginFlag = Mook.authentication(login, password);
+		User user = userServise.getUser(login, password);
 		
-		if(loginFlag){
-//			Account temp = user.getAccount();
-//			request.getSession().setAttribute("currentUser", temp);
-			response.sendRedirect("homePageServlet");
-			
-			
-			
-//			if (temp.getRole().equals("user")){
-//				request.getSession().setAttribute("cards", card.getCardListByClientId(temp.getClient().getId()));
-//				request.getSession().setAttribute("client", client.getClientById(temp.getClient().getId()));
-//				RequestDispatcher dispatcher = request
-//						.getRequestDispatcher("userMain");
-//				dispatcher.forward(request, response);
-//				
-//			} else if(temp.getRole().equals("admin")){
-//				request.getSession().setAttribute("users", user.getAll());
-//				RequestDispatcher dispatcher = request
-//						.getRequestDispatcher("adminMain");
-//				dispatcher.forward(request, response);
-//			}
+		if(user != null){
+			HttpSession session = request.getSession();
+			session.setAttribute("currentUser", user);
+			if (user.getRole()){
+				RequestDispatcher dispatcher = request
+						.getRequestDispatcher("userProfile");
+				dispatcher.forward(request, response);
+				
+			} else {
+				RequestDispatcher dispatcher = request
+						.getRequestDispatcher("adminMain");
+				dispatcher.forward(request, response);
+			}
 		} else {
+			response.sendRedirect("homePageServlet");
 			
 		}
 	}

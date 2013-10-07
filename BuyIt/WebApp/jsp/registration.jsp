@@ -42,11 +42,6 @@
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
 
-<script src="bootstrap/js/registration.js" type="text/javascript"></script>
-<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-
-
-
 </head>
 <body>
 	<jsp:include page="navbar"></jsp:include>
@@ -79,12 +74,12 @@
 	 </div> -->
 						<form class="form-horizontal" method="post"
 							action="registrationServlet">
-							<fieldset>
 							<h4>Your personal information</h4>
 							<div class="control-group">
-								<label class="control-label" for="login">Login </label>
+								<label class="control-label" for="alogin">Login </label>
 								<div class="controls">
-									<input type="text" id="login" name="login" placeholder="Login" value="aleg">
+									<input type="text" id="alogin" name="login" placeholder="Login" value="aleg">
+									<div id="logindiv"></div>
 								</div>
 							</div>
 							<div class="control-group">
@@ -137,7 +132,7 @@
 								<label class="control-label" for="region">State</label>
 								<div class="controls">
 									<select id="region" name="region" >
-										<option value="">Test</option>
+										<option value="">-</option>
 										<option value="1">Vinnucka</option>
 										<option value="2">Volunska</option>
 										<option value="3">Dnipropetrovska</option>
@@ -173,7 +168,7 @@
 									<input type="text" id="city" name="city" placeholder="City" value="Lviv">
 								</div>
 							</div>
-
+							
 							<div class="control-group">
 								<label class="control-label" for="street">Street</label>
 								<div class="controls">
@@ -202,7 +197,7 @@
 							<div class="control-group">
 								<div class="controls">
 									<button class="btn btn-large btn-success"
-										type="submit">Register</button>
+										type="submit" id="register">Register</button>
 								</div>
 							</div>
 							</fieldset>
@@ -255,8 +250,9 @@
 	<script src="themes/js/jquery.js" type="text/javascript"></script>
 	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
-
+	<script src="bootstrap/js/login-check.js" type="text/javascript"></script>
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
+	<script src="bootstrap/js/tooltip.js" type="text/javascript"></script>
 </body>
 </html>
