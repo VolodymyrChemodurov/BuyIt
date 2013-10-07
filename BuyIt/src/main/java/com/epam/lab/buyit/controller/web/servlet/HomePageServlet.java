@@ -21,7 +21,7 @@ public class HomePageServlet extends HttpServlet {
        
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//TODO change List of String to list of Products 
+		
 		Map<String,List<String>> productList = Mook.getProducts();
 		List<String> cauroselImagesList = Mook.getImagesUrl();
 		HttpSession session = request.getSession(true);
