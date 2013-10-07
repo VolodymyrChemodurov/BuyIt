@@ -1,25 +1,3 @@
-
-                         <script>
-  
-  function changeSourceCodeView(node_link, sc_id  ) {
-   
-     var node_sc = document.getElementById( sc_id );
-	 
-	 if( node_sc ) 
-	   if( node_sc.style.display == "none" ) {
-	      node_sc.style.display = "block";
-		  node_link.innerHTML = node_link.innerHTML.replace(/Show/, "Hide");
-	   } else {
-	      node_sc.style.display = "none";	 
-		  node_link.innerHTML = node_link.innerHTML.replace(/Hide/, "Show");
-	   } // endif
-     else 
-	   alert("Id not found");
-  }
-  
-  </script>
-
-                         <script>
 var KEY_ESC = 27;
 
 $(document).ready(function() {
@@ -244,5 +222,3 @@ tooltip.prototype.handleBlur = function($id, e) {
 	return false;
 
 } // end handleBlur()
-
-  </script>

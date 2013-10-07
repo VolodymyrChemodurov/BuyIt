@@ -42,9 +42,6 @@
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
 
-<script src="bootstrap/js/registration.js" type="text/javascript"></script>
-
-
 </head>
 <body>
 	<jsp:include page="navbar"></jsp:include>
@@ -53,7 +50,7 @@
 		<div class="container">
 			<div class="row">
 				<!-- Sidebar ================================================== -->
-					<jsp:include page="sidebarMenu"></jsp:include>
+				<jsp:include page="sidebarMenu"></jsp:include>
 				<!-- Sidebar end=============================================== -->
 				<div class="span9">
 					<ul class="breadcrumb">
@@ -75,13 +72,14 @@
 		<button type="button" class="close" data-dismiss="alert">×</button>
 		<strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
 	 </div> -->
-						<form class="form-horizontal" method="post" action="registrationServlet">
+						<form class="form-horizontal" method="post"
+							action="registrationServlet">
 							<h4>Your personal information</h4>
 							<div class="control-group">
-								<label class="control-label" for="inputLogin">Login
-								</label>
+								<label class="control-label" for="inputLogin">Login </label>
 								<div class="controls">
 									<input type="text" id="inputLogin" placeholder="Login">
+									<div id="logindiv"></div>
 								</div>
 							</div>
 							<div class="control-group">
@@ -92,7 +90,8 @@
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputLname">Last name </label>
+								<label class="control-label" for="inputLname">Last name
+								</label>
 								<div class="controls">
 									<input type="text" id="inputLname" placeholder="Last Name">
 								</div>
@@ -117,16 +116,16 @@
 										placeholder="Password">
 								</div>
 							</div>
-							
+
 							<div class="control-group">
-								<label class="control-label" for="confirmPassword">Confirm Password
-								</label>
+								<label class="control-label" for="confirmPassword">Confirm
+									Password </label>
 								<div class="controls">
 									<input type="password" id="confirmPassword"
 										placeholder="Confirm Password">
 								</div>
 							</div>
-							
+
 							<h4>Your address</h4>
 
 							<div class="control-group">
@@ -162,14 +161,14 @@
 									</select>
 								</div>
 							</div>
-							
+
 							<div class="control-group">
 								<label class="control-label" for="inputCity">City</label>
 								<div class="controls">
 									<input type="text" id="inputCity" placeholder="City">
 								</div>
 							</div>
-							
+
 							<div class="control-group">
 								<label class="control-label" for="inputStreet">Street</label>
 								<div class="controls">
@@ -178,27 +177,29 @@
 							</div>
 
 							<div class="control-group">
-								<label class="control-label" for="inputZipCode">House № / Flat №</label>
+								<label class="control-label" for="inputZipCode">House №
+									/ Flat №</label>
 								<div class="controls">
-									<input type="text" style="width: 85px;" id="inputZipCode" placeholder="Zip Code"> &nbsp;&nbsp;/&nbsp;
-									<input type="text" style="width: 85px;" id="inputZipCode" placeholder="Zip Code">
+									<input type="text" style="width: 85px;" id="inputZipCode"
+										placeholder="Zip Code"> &nbsp;&nbsp;/&nbsp; <input
+										type="text" style="width: 85px;" id="inputZipCode"
+										placeholder="Zip Code">
 								</div>
 							</div>
-							
+
 							<div class="control-group">
 								<label class="control-label" for="inputZipCode">Zip Code</label>
 								<div class="controls">
-									<input type="text" id="inputZipCode"
-										placeholder="Zip Code">
+									<input type="text" id="inputZipCode" placeholder="Zip Code">
 								</div>
 							</div>
 
 							<div class="control-group">
 								<div class="controls">
 									<input type="hidden" name="email_create" value="1"> <input
-										type="hidden" name="is_new_customer" value="1"> <input onclick="login()"
-										class="btn btn-large btn-success" type="button"
-										value="Register">
+										type="hidden" name="is_new_customer" value="1"> <input
+										onclick="login()" class="btn btn-large btn-success"
+										type="button" value="Register" id="register">
 								</div>
 							</div>
 						</form>
@@ -250,8 +251,9 @@
 	<script src="themes/js/jquery.js" type="text/javascript"></script>
 	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
-
+	<script src="bootstrap/js/login-check.js" type="text/javascript"></script>
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
+	<script src="bootstrap/js/tooltip.js" type="text/javascript"></script>
 </body>
 </html>

@@ -23,11 +23,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getItemById(int id) {
 		User user = userDAO.getElementById(id);
-		if (user != null) {
-			Contact contact = contactDAO.getElementById(user.getIdUser());
-			user.setContact(contact);
-			contact.setAddress(addressDAO.getElementById(contact.getIdContact()));
-		}
+		configUser(user);
 		return user;
 	}
 
@@ -65,15 +61,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean verifyUser(String login, String password) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public User getUser(String login, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = userDAO.getUser(login, password);
+		configUser(user);
+		return user;
+	}
+	
+	@Override
+	public boolean checkLogin(String login) {
+		return userDAO.checkLogin(login);
 	}
 
 	private void setUserContact(User currentUser, List<Contact> contacts, List<Address> address) {
@@ -93,5 +89,13 @@ public class UserServiceImpl implements UserService {
 				break;
 			}
 		return;
+	}
+
+	private void configUser(User user) {
+		if (user != null) {
+			Contact contact = contactDAO.getElementById(user.getIdUser());
+			user.setContact(contact);
+			contact.setAddress(addressDAO.getElementById(contact.getIdContact()));
+		}
 	}
 }
