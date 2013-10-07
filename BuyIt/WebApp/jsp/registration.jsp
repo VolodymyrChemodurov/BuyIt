@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv="Content-Type" content="text/html; charset="utf-8">
-<html lang="en">
+<html>
 <head>
 <meta charset="utf-8">
 <title>BuyIt</title>
@@ -43,6 +43,8 @@
 <style type="text/css" id="enject"></style>
 
 <script src="bootstrap/js/registration.js" type="text/javascript"></script>
+<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
 
 
 </head>
@@ -53,7 +55,7 @@
 		<div class="container">
 			<div class="row">
 				<!-- Sidebar ================================================== -->
-					<jsp:include page="sidebarMenu"></jsp:include>
+				<jsp:include page="sidebarMenu"></jsp:include>
 				<!-- Sidebar end=============================================== -->
 				<div class="span9">
 					<ul class="breadcrumb">
@@ -75,65 +77,67 @@
 		<button type="button" class="close" data-dismiss="alert">×</button>
 		<strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
 	 </div> -->
-						<form class="form-horizontal" method="post" action="registrationServlet">
+						<form class="form-horizontal" method="post"
+							action="registrationServlet">
+							<fieldset>
 							<h4>Your personal information</h4>
 							<div class="control-group">
-								<label class="control-label" for="inputLogin">Login
+								<label class="control-label" for="login">Login </label>
+								<div class="controls">
+									<input type="text" id="login" name="login" placeholder="Login" value="aleg">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="firstName">First name
 								</label>
 								<div class="controls">
-									<input type="text" id="inputLogin" placeholder="Login">
+									<input type="text" id="firstName" name="firstName" placeholder="First Name" value="Aleg">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputFname">First name
+								<label class="control-label" for="lastName">Last name
 								</label>
 								<div class="controls">
-									<input type="text" id="inputFname" placeholder="First Name">
+									<input type="text" id="lastName" name="lastName" placeholder="Last Name" value="Gupalo">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputLname">Last name </label>
+								<label class="control-label" for="email">Email </label>
 								<div class="controls">
-									<input type="text" id="inputLname" placeholder="Last Name">
+									<input type="text" id="email" name="email" placeholder="Email" value="aleg@qw.com">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputEmail">Email </label>
+								<label class="control-label" for="phone">Phone </label>
 								<div class="controls">
-									<input type="text" id="inputEmail" placeholder="Email">
+									<input type="text" id="phone" name="phone" placeholder="Phone" value="1234567897">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputPhone">Phone </label>
-								<div class="controls">
-									<input type="text" id="inputPhone" placeholder="Phone">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="inputPassword">Password
+								<label class="control-label" for="password">Password
 								</label>
 								<div class="controls">
-									<input type="password" id="inputPassword"
-										placeholder="Password">
+									<input type="password" id="password" value="alegaleg"
+										name="password" placeholder="Password">
 								</div>
 							</div>
-							
+
 							<div class="control-group">
-								<label class="control-label" for="confirmPassword">Confirm Password
-								</label>
+								<label class="control-label" for="confirmPassword">Confirm
+									Password </label>
 								<div class="controls">
 									<input type="password" id="confirmPassword"
-										placeholder="Confirm Password">
+										name="confirmPassword" placeholder="Confirm Password" value="alegaleg">
 								</div>
 							</div>
-							
+
 							<h4>Your address</h4>
 
 							<div class="control-group">
-								<label class="control-label" for="inputState">State</label>
+								<label class="control-label" for="region">State</label>
 								<div class="controls">
-									<select id="state">
-										<option value="">-</option>
+									<select id="region" name="region" >
+										<option value="">Test</option>
 										<option value="1">Vinnucka</option>
 										<option value="2">Volunska</option>
 										<option value="3">Dnipropetrovska</option>
@@ -162,45 +166,46 @@
 									</select>
 								</div>
 							</div>
-							
+
 							<div class="control-group">
-								<label class="control-label" for="inputCity">City</label>
+								<label class="control-label" for="city">City</label>
 								<div class="controls">
-									<input type="text" id="inputCity" placeholder="City">
-								</div>
-							</div>
-							
-							<div class="control-group">
-								<label class="control-label" for="inputStreet">Street</label>
-								<div class="controls">
-									<input type="text" id="inputStreet" placeholder="Street">
+									<input type="text" id="city" name="city" placeholder="City" value="Lviv">
 								</div>
 							</div>
 
 							<div class="control-group">
-								<label class="control-label" for="inputZipCode">House № / Flat №</label>
+								<label class="control-label" for="street">Street</label>
 								<div class="controls">
-									<input type="text" style="width: 85px;" id="inputZipCode" placeholder="Zip Code"> &nbsp;&nbsp;/&nbsp;
-									<input type="text" style="width: 85px;" id="inputZipCode" placeholder="Zip Code">
+									<input type="text" id="street" name="street" placeholder="Street" value="Alegaleg">
 								</div>
 							</div>
-							
+
 							<div class="control-group">
-								<label class="control-label" for="inputZipCode">Zip Code</label>
+								<label class="control-label" for="house">House №
+									/ Flat №</label>
 								<div class="controls">
-									<input type="text" id="inputZipCode"
-										placeholder="Zip Code">
+									<input type="text" style="width: 85px;" id="house" name="house" 
+										placeholder="House number"value="1"> &nbsp;&nbsp;/&nbsp; <input
+										type="text" style="width: 85px;" id="house" name="house" 
+										placeholder="Flat Number"value="1">
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label" for="zipCode">Zip Code</label>
+								<div class="controls">
+									<input type="text" id="zipCode" name="zipCode" placeholder="Zip Code"value="12345">
 								</div>
 							</div>
 
 							<div class="control-group">
 								<div class="controls">
-									<input type="hidden" name="email_create" value="1"> <input
-										type="hidden" name="is_new_customer" value="1"> <input onclick="login()"
-										class="btn btn-large btn-success" type="button"
-										value="Register">
+									<button class="btn btn-large btn-success"
+										type="submit">Register</button>
 								</div>
 							</div>
+							</fieldset>
 						</form>
 					</div>
 
