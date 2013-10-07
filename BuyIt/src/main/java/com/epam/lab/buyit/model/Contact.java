@@ -1,6 +1,8 @@
 package com.epam.lab.buyit.model;
 
+
 public class Contact {
+
 
 	private int idContact;
 	private int userId; 

@@ -8,6 +8,7 @@ import java.util.Map;
 public class Mook {
 
 	public static Map<String,List<String>> getProducts(){
+
 		Map<String,List<String>> result =  new LinkedHashMap<>();
 		List<String> phones = new ArrayList<>();
 		List<String> pcs = new ArrayList<>();
@@ -59,4 +60,6 @@ public class Mook {
 		}
 		return result;
 	}
+	
+	
 }
