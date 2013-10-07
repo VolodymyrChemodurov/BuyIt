@@ -10,10 +10,13 @@
 			<div class="navbar-inner">
 				<a class="brand" href="index.html"><img
 					src="themes/images/logo.png" alt="Bootsshop"></a>
+<!-- 				<form class="form-inline navbar-search" method="post" -->
+<!-- 					action="products.html"> -->
 				<form class="form-inline navbar-search" method="post"
-					action="products.html">
-					<input id="srchFld" class="srchTxt" type="text"> <select
-						class="srchTxt">
+					action="searchServlet">
+					<input id="srchFld" class="srchTxt" type="text" name="srchedFld"> 
+					<select class="srchTxt" name="srchedTxt">
+						<option>Select...</option>
 						<c:forEach var="product" items="${products}">
 							<option>${product.key}</option>
 						</c:forEach>
