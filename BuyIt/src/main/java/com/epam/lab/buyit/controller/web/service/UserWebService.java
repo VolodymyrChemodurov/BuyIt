@@ -37,9 +37,9 @@ public class UserWebService {
 		} catch (IOException e) {
 			LOGGER.error(e);
 			LOGIN = PASSWORD = "";
-		} 
+		}
 	}
-	
+
 	public UserWebService() {
 		userService = new UserServiceImpl();
 	}
@@ -65,11 +65,29 @@ public class UserWebService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public JSONObject getUsers(@QueryParam("login") String login,
 			@QueryParam("password") String password) {
-		
+
 		if (authentication(login, password)) {
 			List<User> users = userService.getAllItems();
 			UserListSerializationAdapter adapter = new UserListSerializationAdapter();
 			return JSONBuilder.buildbuildJSONObject(users, adapter);
+		}
+		return new JSONObject();
+	}
+
+	@GET
+	@Path("/sign_in/{login}/{password}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public JSONObject loginUser(@PathParam("login") String userLogin, 
+			@PathParam("password") String userPassword, 
+			@QueryParam("login") String login,
+			@QueryParam("password") String password) {
+		
+		if(authentication(login, password)) {
+			User user = userService.getUser(userLogin, userPassword);
+			if(user != null) {
+				UserSerializationAdapter adapter = new UserSerializationAdapter();
+				return JSONBuilder.buildJSONObject(user, adapter);
+			}
 		}
 		return new JSONObject();
 	}
