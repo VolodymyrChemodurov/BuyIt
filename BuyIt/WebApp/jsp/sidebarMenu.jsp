@@ -2,30 +2,31 @@
 <div id="sidebar" class="span3">
 
 	<ul id="sideManu" class="nav nav-tabs nav-stacked">
-		<c:forEach var="product" items="${products}" varStatus="statusOuter">
+		<c:forEach var="category" items="${categories}" varStatus="statusOuter">
 			<c:if test="${statusOuter.first}">
-				<li class="subMenu open"><a>${product.key}</a>
+				<li class="subMenu open"><a>${category.name}</a> 
 					<ul>
-						<c:forEach var="sub" items="${product.value}"
+						<c:forEach var="sub" items="${category.listSubCategories}"
 							varStatus="statusInner">
 							<c:if test="${statusInner.first}">
-								<li><a class="active" href="products.html"><i
-										class="icon-chevron-right"></i>${sub}</a></li>
+								<li><a class="active" 
+										href="select_category?id=<c:out value="${sub.idSubCategory}"/>"><i
+										class="icon-chevron-right"></i>${sub.name}</a></li>
 							</c:if>
 							<c:if test="${!statusInner.first}">
-								<li><a href="products.html"><i
-										class="icon-chevron-right"></i>${sub}</a></li>
+								<li><a href="select_category?id=<c:out value="${sub.idSubCategory}"/>"><i
+										class="icon-chevron-right"></i>${sub.name}</a></li>
 							</c:if>
 
 						</c:forEach>
 					</ul></li>
 			</c:if>
 			<c:if test="${!statusOuter.first}">
-				<li class="subMenu"><a>${product.key}</a>
+				<li class="subMenu"><a>${category.name}</a>
 					<ul style="display: none">
-						<c:forEach var="sub" items="${product.value}">
-							<li><a href="products.html"><i
-									class="icon-chevron-right"></i>${sub}</a></li>
+						<c:forEach var="sub" items="${category.listSubCategories}">
+							<li><a href="select_category?id=<c:out value="${sub.idSubCategory}"/>"><i
+									class="icon-chevron-right"></i>${sub.name}</a></li>
 						</c:forEach>
 					</ul></li>
 			</c:if>

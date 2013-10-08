@@ -14,8 +14,8 @@
 					action="products.html">
 					<input id="srchFld" class="srchTxt" type="text"> <select
 						class="srchTxt">
-						<c:forEach var="product" items="${products}">
-							<option>${product.key}</option>
+						<c:forEach var="category" items="${categories}">
+							<option>${category.name}</option>
 						</c:forEach>
 					</select>
 					<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
