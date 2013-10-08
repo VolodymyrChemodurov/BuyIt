@@ -16,6 +16,8 @@ public class DescriptionTransformer implements
 			.getLogger(DescriptionTransformer.class);
 	private static final String CREATE_STATEMENT = "INSERT INTO descriptions"
 			+ "(features, desc_text, products_id) VALUES(?, ?, ?)";
+	private static final String UPDATE_STATEMENT = "UPDATE descriptions SET "
+			+ "features=?, desc_text=?, products_id=? WHERE id_description=?";
 
 	@Override
 	public PreparedStatement fromObjectToCreatePS(Description elem,
@@ -36,8 +38,18 @@ public class DescriptionTransformer implements
 	@Override
 	public PreparedStatement fromObjectToUpdatePS(Description elem,
 			Connection connection) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(UPDATE_STATEMENT,
+					Statement.RETURN_GENERATED_KEYS);
+			statement.setString(1, elem.getFeatures());
+			statement.setString(2, elem.getDescText());
+			statement.setInt(3, elem.getProductId());
+			statement.setInt(4, elem.getIdDescription());
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		}
+		return statement;
 	}
 
 	@Override

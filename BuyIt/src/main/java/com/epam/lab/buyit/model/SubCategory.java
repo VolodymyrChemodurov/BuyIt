@@ -7,12 +7,13 @@ public class SubCategory {
 
 	private int idSubCategory;
 	private String name;
+	private int categoryId;
 	private List<Product> products;
-	
+
 	public SubCategory() {
 		products = new ArrayList<Product>();
 	}
-	
+
 	public int getIdSubCategory() {
 		return idSubCategory;
 	}
@@ -31,6 +32,15 @@ public class SubCategory {
 		return this;
 	}
 
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public SubCategory setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+		return this;
+	}
+
 	public List<Product> getProducts() {
 		return products;
 	}
@@ -42,11 +52,11 @@ public class SubCategory {
 	public void addProduct(Product product) {
 		products.add(product);
 	}
-	
+
 	public Product getProduct(int number) {
 		return products.get(number);
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
