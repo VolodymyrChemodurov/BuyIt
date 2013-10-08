@@ -15,10 +15,10 @@ import com.epam.lab.buyit.controller.dao.utils.transformers.ProductTransformer;
 import com.epam.lab.buyit.model.Product;
 
 public class ProductDAO implements ProductDAOInterface {
-
+	private static final Logger LOGGER = Logger.getLogger(ProductDAO.class);
 	private final static String GET_BY_ID = "SELECT * FROM products WHERE id_product = ?";
 	private final static String GET_ALL_PRODUCTS = "SELECT * FROM products";
-	private static final Logger LOGGER = Logger.getLogger(ProductDAO.class);
+	private final static String GET_BY_SUBCATEGORY_ID = "SELECT * FROM products WHERE sub_category_id = ?";
 	private ProductTransformer transformer;
 
 	public ProductDAO() {
@@ -97,6 +97,28 @@ public class ProductDAO implements ProductDAOInterface {
 		ResultSet result = null;
 		try {
 			statement = connection.prepareStatement(GET_ALL_PRODUCTS);
+			result = statement.executeQuery();
+			while (result.next()) {
+				Product currentProduct = transformer.fromRSToObject(result);
+				products.add(currentProduct);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return products;
+	}
+
+	@Override
+	public List<Product> getProductsBySubCategoryId(int subCategoryId) {
+		List<Product> products = new ArrayList<Product>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_BY_SUBCATEGORY_ID);
+			statement.setInt(1, subCategoryId);
 			result = statement.executeQuery();
 			while (result.next()) {
 				Product currentProduct = transformer.fromRSToObject(result);

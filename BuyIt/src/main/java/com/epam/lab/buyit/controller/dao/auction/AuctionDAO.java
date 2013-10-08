@@ -14,7 +14,8 @@ import com.epam.lab.buyit.model.Auction;
 
 public class AuctionDAO implements AuctionDAOInterface{
 	private static final Logger LOGGER = Logger.getLogger(AuctionDAO.class);
-	private final static String GET_BY_ID = "SELECT * FROM auction WHERE id_auction = ?";
+	private final static String GET_BY_ID = "SELECT * FROM auctions WHERE id_auction = ?";
+	private final static String GET_BY_PRODUCT_ID = "SELECT * FROM auctions WHERE product_id = ?";
 	private AuctionTransformer transformer;
 
 	public AuctionDAO() {
@@ -75,6 +76,28 @@ public class AuctionDAO implements AuctionDAOInterface{
 	public void deleteElementById(int id) {
 		throw new UnsupportedOperationException();
 		
+	}
+	@Override
+	public Auction getByProductId(int productId) {
+		Auction currentAuctions = null;
+		Connection connection = com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager
+				.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_BY_PRODUCT_ID);
+			statement.setInt(1, productId);
+			result = statement.executeQuery();
+			if (result.next()) {
+				currentAuctions = transformer.fromRSToObject(result);
+				return currentAuctions;
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return currentAuctions;
 	}
 
 }

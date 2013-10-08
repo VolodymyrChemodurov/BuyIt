@@ -8,7 +8,6 @@ import com.epam.lab.buyit.model.Description;
 import com.epam.lab.buyit.model.Product;
 
 public class ProductServiceImpl implements ProductService {
-
 	private ProductDAO productDAO;
 	private DescriptionDAO descriptionDAO;
 

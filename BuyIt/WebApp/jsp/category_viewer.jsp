@@ -41,7 +41,6 @@
 <link rel="apple-touch-icon-precomposed"
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
-
 </head>
 <body>
 	<jsp:include page="navbar"></jsp:include>
@@ -55,22 +54,25 @@
 				<div class="span9">
 					<ul class="breadcrumb">
 						<li><a href="homePageServlet">Home</a> <span class="divider">/</span></li>
-						<li class="active"><c:out value="${category.name}"></c:out></li>
+						<li class="active"><c:out value="${subCategory.name}"></c:out></li>
 					</ul>
 
-					<c:forEach var="subCategory" items="category.listSubCategories">
-						<h3>
-							<c:out value="${subCategory.name}"></c:out>
-						</h3>
-						<div class="item">
-							<ul class="thumbnails">
-								<c:forEach var="product" items="subCategory.products">
-									<jsp:include page="item_preview"></jsp:include>
-								</c:forEach>
-							</ul>
-						</div>
 
-					</c:forEach>
+					<h3>
+						<c:out value="${subCategory.name}"></c:out>
+					</h3>
+					<div class="item">
+						<ul class="thumbnails">
+							<c:forEach begin="${requestScope.number}" end="${requestScope.number + 1}" var="current">
+								<c:set var="product" 
+								value="${subCategory.products[current]}" scope="request"></c:set>
+								<jsp:include page="item_preview"></jsp:include>
+							</c:forEach>
+						</ul>
+					</div>					
+					
+					<a href="category?number=${current - 1}">PREV</a>
+					<a href="category?number=${current + 1}/>">NEXT</a>
 
 				</div>
 			</div>
