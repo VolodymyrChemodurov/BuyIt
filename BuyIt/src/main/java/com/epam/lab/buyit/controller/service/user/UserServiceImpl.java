@@ -56,8 +56,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User updateItem(User item) {
-		// TODO Auto-generated method stub
-		return null;
+		userDAO.updateElement(item);
+
+		Contact contact = item.getContact();
+		contactDAO.updateElement(contact);
+
+		Address address = contact.getAddress();
+		addressDAO.updateElement(address);
+
+		return item;
 	}
 
 	@Override
@@ -66,13 +73,14 @@ public class UserServiceImpl implements UserService {
 		configUser(user);
 		return user;
 	}
-	
+
 	@Override
 	public boolean checkLogin(String login) {
 		return userDAO.checkLogin(login);
 	}
 
-	private void setUserContact(User currentUser, List<Contact> contacts, List<Address> address) {
+	private void setUserContact(User currentUser, List<Contact> contacts,
+			List<Address> address) {
 		for (Contact currentContact : contacts)
 			if (currentContact.getUserId() == currentUser.getIdUser()) {
 				currentUser.setContact(currentContact);
@@ -81,7 +89,7 @@ public class UserServiceImpl implements UserService {
 			}
 		return;
 	}
-	
+
 	private void setContactAddress(Contact currentContact, List<Address> address) {
 		for (Address currentAddress : address)
 			if (currentAddress.getContactId() == currentContact.getIdContact()) {

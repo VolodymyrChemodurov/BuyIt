@@ -11,9 +11,12 @@ import com.epam.lab.buyit.model.Product;
 
 public class ProductTransformer implements TransformerInterface<Product> {
 
-	private static final Logger LOGGER = Logger.getLogger(ProductTransformer.class);
+	private static final Logger LOGGER = Logger
+			.getLogger(ProductTransformer.class);
 	private static final String CREATE_STATEMENT = "INSERT INTO products"
 			+ "(name, sub_category_id, user_id) VALUES(?, ?, ?)";
+	private static final String UPDATE_STATEMENT = "UPDATE products SET "
+			+ "name=?, sub_category_id=?, user_id=? WHERE id_product=?";
 
 	@Override
 	public PreparedStatement fromObjectToCreatePS(Product elem,
@@ -34,8 +37,18 @@ public class ProductTransformer implements TransformerInterface<Product> {
 	@Override
 	public PreparedStatement fromObjectToUpdatePS(Product elem,
 			Connection connection) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(UPDATE_STATEMENT,
+					Statement.RETURN_GENERATED_KEYS);
+			statement.setString(1, elem.getName());
+			statement.setInt(2, elem.getSubCategoryId());
+			statement.setInt(3, elem.getUserId());
+			statement.setInt(4, elem.getIdProduct());
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		}
+		return statement;
 	}
 
 	@Override

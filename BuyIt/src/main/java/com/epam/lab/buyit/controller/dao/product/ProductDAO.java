@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -15,9 +17,10 @@ import com.epam.lab.buyit.model.Product;
 public class ProductDAO implements ProductDAOInterface {
 
 	private final static String GET_BY_ID = "SELECT * FROM products WHERE id_product = ?";
+	private final static String GET_ALL_PRODUCTS = "SELECT * FROM products";
 	private static final Logger LOGGER = Logger.getLogger(ProductDAO.class);
 	private ProductTransformer transformer;
-	
+
 	public ProductDAO() {
 		transformer = new ProductTransformer();
 	}
@@ -67,12 +70,44 @@ public class ProductDAO implements ProductDAOInterface {
 
 	@Override
 	public void updateElement(Product elem) {
-		throw new UnsupportedOperationException();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = transformer.fromObjectToUpdatePS(elem, connection);
+			if (statement != null) {
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
 	}
 
 	@Override
 	public void deleteElementById(int id) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Product> getAllProducts() {
+		List<Product> products = new ArrayList<Product>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_ALL_PRODUCTS);
+			result = statement.executeQuery();
+			while (result.next()) {
+				Product currentProduct = transformer.fromRSToObject(result);
+				products.add(currentProduct);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return products;
 	}
 
 }

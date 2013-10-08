@@ -8,27 +8,25 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
-import com.epam.lab.buyit.model.SubCategory;
+import com.epam.lab.buyit.model.Category;
 
-public class SubCategoryTransformer implements
-		TransformerInterface<SubCategory> {
+public class CategoryTransformer implements TransformerInterface<Category> {
 
 	private static final Logger LOGGER = Logger
-			.getLogger(SubCategoryTransformer.class);
-	private static final String CREATE_STATEMENT = "INSERT INTO sub_categories"
-			+ "(name, category_id) VALUES(?, ?)";
-	private static final String UPDATE_STATEMENT = "UPDATE sub_categories SET "
-			+ "name=?, category_id=? WHERE id_sub_category=?";
+			.getLogger(CategoryTransformer.class);
+	private static final String CREATE_STATEMENT = "INSERT INTO categories"
+			+ "(name) VALUES (?) ";
+	private static final String UPDATE_STATEMENT = "UPDATE categories SET "
+			+ "name=? WHERE id_category=?";
 
 	@Override
-	public PreparedStatement fromObjectToCreatePS(SubCategory elem,
+	public PreparedStatement fromObjectToCreatePS(Category elem,
 			Connection connection) {
 		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement(CREATE_STATEMENT,
 					Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, elem.getName());
-			statement.setInt(2, elem.getCategoryId());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
@@ -36,15 +34,14 @@ public class SubCategoryTransformer implements
 	}
 
 	@Override
-	public PreparedStatement fromObjectToUpdatePS(SubCategory elem,
+	public PreparedStatement fromObjectToUpdatePS(Category elem,
 			Connection connection) {
 		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement(UPDATE_STATEMENT,
 					Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, elem.getName());
-			statement.setInt(2, elem.getCategoryId());
-			statement.setInt(3, elem.getIdSubCategory());
+			statement.setInt(2, elem.getIdCategory());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
@@ -52,16 +49,15 @@ public class SubCategoryTransformer implements
 	}
 
 	@Override
-	public SubCategory fromRSToObject(ResultSet resultSet) {
-		SubCategory subCategory = new SubCategory();
+	public Category fromRSToObject(ResultSet resultSet) {
+		Category category = new Category();
 		try {
-			subCategory.setIdSubCategory(resultSet.getInt("id_sub_category"));
-			subCategory.setName(resultSet.getString("name"));
-			subCategory.setCategoryId(resultSet.getInt("category_id"));
+			category.setIdCategory(resultSet.getInt("id_category"));
+			category.setName(resultSet.getString("name"));
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
-		return subCategory;
+		return category;
 	}
 
 }
