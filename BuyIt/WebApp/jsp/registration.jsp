@@ -78,7 +78,8 @@
 							<div class="control-group">
 								<label class="control-label" for="alogin">Login </label>
 								<div class="controls">
-									<input type="text" id="alogin" name="login" placeholder="Login" value="aleg">
+									<input type="text" id="alogin" name="login" placeholder="Login"
+										value="aleg">
 									<div id="logindiv"></div>
 								</div>
 							</div>
@@ -86,31 +87,34 @@
 								<label class="control-label" for="firstName">First name
 								</label>
 								<div class="controls">
-									<input type="text" id="firstName" name="firstName" placeholder="First Name" value="Aleg">
+									<input type="text" id="firstName" name="firstName"
+										placeholder="First Name" value="Aleg">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="lastName">Last name
-								</label>
+								<label class="control-label" for="lastName">Last name </label>
 								<div class="controls">
-									<input type="text" id="lastName" name="lastName" placeholder="Last Name" value="Gupalo">
+									<input type="text" id="lastName" name="lastName"
+										placeholder="Last Name" value="Gupalo">
 								</div>
 							</div>
+
 							<div class="control-group">
 								<label class="control-label" for="email">Email </label>
 								<div class="controls">
-									<input type="text" id="email" name="email" placeholder="Email" value="aleg@qw.com">
+									<input type="text" id="email" name="email" placeholder="Email"
+										value="aleg@qw.com">
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="phone">Phone </label>
 								<div class="controls">
-									<input type="text" id="phone" name="phone" placeholder="Phone" value="1234567897">
+									<input type="text" id="phone" name="phone" placeholder="Phone"
+										value="1234567897">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="password">Password
-								</label>
+								<label class="control-label" for="password">Password </label>
 								<div class="controls">
 									<input type="password" id="password" value="alegaleg"
 										name="password" placeholder="Password">
@@ -122,7 +126,8 @@
 									Password </label>
 								<div class="controls">
 									<input type="password" id="confirmPassword"
-										name="confirmPassword" placeholder="Confirm Password" value="alegaleg">
+										name="confirmPassword" placeholder="Confirm Password"
+										value="alegaleg">
 								</div>
 							</div>
 
@@ -131,7 +136,7 @@
 							<div class="control-group">
 								<label class="control-label" for="region">State</label>
 								<div class="controls">
-									<select id="region" name="region" >
+									<select id="region" name="region">
 										<option value="">-</option>
 										<option value="1">Vinnucka</option>
 										<option value="2">Volunska</option>
@@ -165,39 +170,42 @@
 							<div class="control-group">
 								<label class="control-label" for="city">City</label>
 								<div class="controls">
-									<input type="text" id="city" name="city" placeholder="City" value="Lviv">
-								</div>
-							</div>
-							
-							<div class="control-group">
-								<label class="control-label" for="street">Street</label>
-								<div class="controls">
-									<input type="text" id="street" name="street" placeholder="Street" value="Alegaleg">
+									<input onclick="newTooltip();" type="text" id="city" name="city" placeholder="City"
+										value="Lviv">
 								</div>
 							</div>
 
 							<div class="control-group">
-								<label class="control-label" for="house">House №
-									/ Flat №</label>
+								<label class="control-label" for="street">Street</label>
 								<div class="controls">
-									<input type="text" style="width: 85px;" id="house" name="house" 
-										placeholder="House number"value="1"> &nbsp;&nbsp;/&nbsp; <input
-										type="text" style="width: 85px;" id="house" name="house" 
-										placeholder="Flat Number"value="1">
+									<input type="text" id="street" name="street"
+										placeholder="Street" value="Alegaleg">
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label" for="house">House № / Flat
+									№</label>
+								<div class="controls">
+									<input type="text" style="width: 85px;" id="house" name="house"
+										placeholder="House number" value="1">
+									&nbsp;&nbsp;/&nbsp; <input type="text" style="width: 85px;"
+										id="house" name="house" placeholder="Flat Number" value="1">
 								</div>
 							</div>
 
 							<div class="control-group">
 								<label class="control-label" for="zipCode">Zip Code</label>
 								<div class="controls">
-									<input type="text" id="zipCode" name="zipCode" placeholder="Zip Code"value="12345">
+									<input type="text" id="zipCode" name="zipCode"
+										placeholder="Zip Code" value="12345">
 								</div>
 							</div>
 
 							<div class="control-group">
 								<div class="controls">
-									<button class="btn btn-large btn-success"
-										type="submit" id="register">Register</button>
+									<button class="btn btn-large btn-success" type="submit"
+										id="register">Register</button>
 								</div>
 							</div>
 							</fieldset>
@@ -247,11 +255,20 @@
 		<!-- Container End -->
 	</div>
 	<!-- Placed at the end of the document so the pages load faster ============================================= -->
+	<script>
+		function newTooltip(){
+			$('#city').tooltip();
+		};
+	
+	
+	</script>
+	
 	<script src="themes/js/jquery.js" type="text/javascript"></script>
 	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
 	<script src="bootstrap/js/login-check.js" type="text/javascript"></script>
 	<script src="themes/js/bootshop.js"></script>
+	<script src="bootstrap/js/bootstrap-tooltip.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
 	<script src="bootstrap/js/tooltip.js" type="text/javascript"></script>
 </body>

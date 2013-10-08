@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if(user != null){
 			HttpSession session = request.getSession();
-			session.setAttribute("currentUser", user);
+			session.setAttribute("user", user);
 			if (user.getRole()){
 				RequestDispatcher dispatcher = request
 						.getRequestDispatcher("userProfile");

@@ -43,13 +43,13 @@
 <style type="text/css" id="enject"></style>
 </head>
 <body>
- 	<jsp:include page="navbar"></jsp:include>
+	<jsp:include page="navbar"></jsp:include>
 	<!-- Header End====================================================================== -->
 	<div id="carouselBlk">
 		<div id="myCarousel" class="carousel slide">
 			<div class="carousel-inner">
 				<c:forEach var="image" items="${carouselImages}" varStatus="status">
-					<c:if test ="${status.first}">
+					<c:if test="${status.first}">
 						<div class="item active">
 							<div class="container">
 								<a href="registration"><img style="width: 100%"
@@ -57,15 +57,15 @@
 							</div>
 						</div>
 					</c:if>
-					<c:if test ="${!status.first}">
+					<c:if test="${!status.first}">
 						<div class="item">
 							<div class="container">
 								<a href="registration"><img style="width: 100%"
 									src="${image}" alt="special offers"></a>
 							</div>
 						</div>
-					</c:if>		
-						
+					</c:if>
+
 				</c:forEach>
 			</div>
 			<a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
@@ -77,7 +77,7 @@
 		<div class="container">
 			<div class="row">
 				<!-- Sidebar ================================================== -->
-					<jsp:include page="sidebarMenu"></jsp:include>
+				<jsp:include page="sidebarMenu"></jsp:include>
 				<!-- Sidebar end=============================================== -->
 				<div class="span9">
 					<div class="well well-small">
@@ -465,7 +465,6 @@
 	<script src="themes/js/jquery.js" type="text/javascript"></script>
 	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
-
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
 
