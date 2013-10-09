@@ -79,7 +79,8 @@
 								<label class="control-label" for="alogin">Login </label>
 								<div class="controls">
 									<input type="text" id="alogin" name="login" placeholder="Login"
-										value="aleg">
+										value="aleg" class="tip"  data-toggle="tooltip" data-placement="right"
+										title="Login contains only number, small letters and '-' '_'">
 									<div id="logindiv"></div>
 								</div>
 							</div>
@@ -255,21 +256,15 @@
 		<!-- Container End -->
 	</div>
 	<!-- Placed at the end of the document so the pages load faster ============================================= -->
-	<script>
-		function newTooltip(){
-			$('#city').tooltip();
-		};
-	
-	
-	</script>
+
 	
 	<script src="themes/js/jquery.js" type="text/javascript"></script>
 	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
 	<script src="bootstrap/js/login-check.js" type="text/javascript"></script>
+	<script src="bootstrap/js/tip.js" type="text/javascript"></script>
 	<script src="themes/js/bootshop.js"></script>
-	<script src="bootstrap/js/bootstrap-tooltip.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
-	<script src="bootstrap/js/tooltip.js" type="text/javascript"></script>
+
 </body>
 </html>
