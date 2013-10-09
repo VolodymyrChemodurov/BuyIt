@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -15,12 +17,13 @@ import com.epam.lab.buyit.model.Description;
 public class DescriptionDAO implements DescriptionDAOInterface {
 	private static final Logger LOGGER = Logger.getLogger(DescriptionDAO.class);
 	private final static String GET_BY_ID = "SELECT * FROM descriptions WHERE products_id = ?";
+	private final static String GET_ALL_DESCRIPTIONS = "SELECT * FROM descriptions";
 	private DescriptionTransformer transformer;
 
 	public DescriptionDAO() {
 		transformer = new DescriptionTransformer();
 	}
-	
+
 	@Override
 	public int createElement(Description elem) {
 		Connection connection = ConnectionManager.getConnection();
@@ -66,12 +69,45 @@ public class DescriptionDAO implements DescriptionDAOInterface {
 
 	@Override
 	public void updateElement(Description elem) {
-		throw new UnsupportedOperationException();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = transformer.fromObjectToUpdatePS(elem, connection);
+			if (statement != null) {
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
 	}
 
 	@Override
 	public void deleteElementById(int id) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Description> getAllDescriptions() {
+		List<Description> descriptions = new ArrayList<Description>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_ALL_DESCRIPTIONS);
+			result = statement.executeQuery();
+			while (result.next()) {
+				Description currentDescription = transformer
+						.fromRSToObject(result);
+				descriptions.add(currentDescription);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return descriptions;
 	}
 
 }

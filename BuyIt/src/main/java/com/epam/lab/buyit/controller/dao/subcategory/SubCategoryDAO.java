@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -15,8 +17,13 @@ import com.epam.lab.buyit.model.SubCategory;
 public class SubCategoryDAO implements SubCategoryDAOInterface {
 
 	private final static String GET_BY_ID = "SELECT * FROM sub_categories WHERE id_sub_category = ?";
+	private final static String GET_ALL_SUBCATEGORIES_BY_CATEGORY_ID = "SELECT * FROM sub_categories WHERE category_id=?";
 	private static final Logger LOGGER = Logger.getLogger(SubCategoryDAO.class);
 	private SubCategoryTransformer transformer;
+
+	public SubCategoryDAO() {
+		transformer = new SubCategoryTransformer();
+	}
 
 	@Override
 	public int createElement(SubCategory elem) {
@@ -63,12 +70,47 @@ public class SubCategoryDAO implements SubCategoryDAOInterface {
 
 	@Override
 	public void updateElement(SubCategory elem) {
-		throw new UnsupportedOperationException();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = transformer.fromObjectToUpdatePS(elem, connection);
+			if (statement != null) {
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
 	}
 
 	@Override
 	public void deleteElementById(int id) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<SubCategory> getAllSubCategoriesByIdCategory(int id_category) {
+		List<SubCategory> subCategories = new ArrayList<SubCategory>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection
+					.prepareStatement(GET_ALL_SUBCATEGORIES_BY_CATEGORY_ID);
+			statement.setInt(1, id_category);
+			result = statement.executeQuery();
+			while (result.next()) {
+				SubCategory currentSubCategory = transformer
+						.fromRSToObject(result);
+				subCategories.add(currentSubCategory);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return subCategories;
 	}
 
 }
