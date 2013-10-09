@@ -49,7 +49,16 @@
     <servlet-name>RegistrationServlet</servlet-name>
     <url-pattern>/registrationServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
+    <servlet-name>LogOutServlet</servlet-name>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.LogOutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogOutServlet</servlet-name>
+    <url-pattern>/logOutServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>Error</servlet-name>
     <jsp-file>/jsp/error404.jsp</jsp-file>
   </servlet>
@@ -113,5 +122,4 @@
     <servlet-name>checkLoginServlet</servlet-name>
     <url-pattern>/check</url-pattern>
   </servlet-mapping>
-
 </web-app>

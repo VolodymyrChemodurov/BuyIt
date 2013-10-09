@@ -32,19 +32,13 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 			if (user.getRole()){
-				RequestDispatcher dispatcher = request
-						.getRequestDispatcher("userProfile");
-				dispatcher.forward(request, response);
 				
 			} else {
-				RequestDispatcher dispatcher = request
-						.getRequestDispatcher("adminMain");
-				dispatcher.forward(request, response);
+
 			}
-		} else {
+		}
 			response.sendRedirect("homePageServlet");
 			
-		}
 	}
 
 }

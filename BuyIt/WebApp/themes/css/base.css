@@ -71,7 +71,7 @@
 #logoArea, #logoArea a{outline:none;}
 .alignR .checkbox input[type="checkbox"] {float: right;margin: 4px 0 8px 11px;}
 
-.navbar .nav.pull-right, #sideManu {overflow:hidden;}
+.navbar .nav.pull-right, #sideManu {overflow:show;}
 #logoArea  #smallScreen {margin: 21px 14px 0 0;}
 .navbar-search {margin-top: 8px;}
 /* Responsive--------------------- */
