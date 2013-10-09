@@ -157,5 +157,13 @@
     <servlet-name>ItemPreview</servlet-name>
     <url-pattern>/item_preview</url-pattern>
   </servlet-mapping>
+	<servlet>
+    <servlet-name>footerJSP</servlet-name>
+    <jsp-file>/jsp/footer.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>footerJSP</servlet-name>
+    <url-pattern>/footer</url-pattern>
+  </servlet-mapping>
 
 </web-app>

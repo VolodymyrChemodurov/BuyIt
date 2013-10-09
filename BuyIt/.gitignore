@@ -3,3 +3,4 @@
 build/*
 .settings/*
 /build
+WebApp/META-INF/context.xml
