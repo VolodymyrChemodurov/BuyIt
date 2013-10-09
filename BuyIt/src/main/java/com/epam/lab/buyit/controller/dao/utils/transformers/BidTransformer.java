@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.apache.log4j.Logger;
-
-import com.epam.lab.buyit.model.Address;
 import com.epam.lab.buyit.model.Bid;
 
 public class BidTransformer implements TransformerInterface<Bid>{
@@ -41,7 +39,7 @@ public class BidTransformer implements TransformerInterface<Bid>{
 	}
 
 	@Override
-	public Bid fromRStoObject(ResultSet resultSet) {
+	public Bid fromRSToObject(ResultSet resultSet) {
 		Bid currentBid = new Bid();
 		try {
 			currentBid.setIdBid(resultSet.getInt("id_bid"));

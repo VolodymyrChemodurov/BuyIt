@@ -26,7 +26,7 @@ public class SubCategoryTransformer implements
 			statement = connection.prepareStatement(CREATE_STATEMENT,
 					Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, elem.getName());
-			statement.setInt(2, elem.getCategoryId());
+//			statement.setInt(2, elem.getCategoryId());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
@@ -41,12 +41,12 @@ public class SubCategoryTransformer implements
 	}
 
 	@Override
-	public SubCategory fromRStoObject(ResultSet resultSet) {
+	public SubCategory fromRSToObject(ResultSet resultSet) {
 		SubCategory subCategory = new SubCategory();
 		try {
 			subCategory.setIdSubCategory(resultSet.getInt("id_sub_category"));
 			subCategory.setName(resultSet.getString("name"));
-			subCategory.setCategoryId(resultSet.getInt("category_id"));
+//			subCategory.setCategoryId(resultSet.getInt("category_id"));
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}

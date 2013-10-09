@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import com.epam.lab.buyit.controller.dao.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.DAOUtils;
+import com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.transformers.SubCategoryTransformer;
 import com.epam.lab.buyit.model.SubCategory;
 
@@ -40,7 +40,7 @@ public class SubCategoryDAO implements SubCategoryDAOInterface {
 	}
 
 	@Override
-	public SubCategory readElementById(int id) {
+	public SubCategory getElementById(int id) {
 		SubCategory subCategory = null;
 		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
@@ -50,7 +50,7 @@ public class SubCategoryDAO implements SubCategoryDAOInterface {
 			statement.setInt(1, id);
 			result = statement.executeQuery();
 			if (result.next()) {
-				subCategory = transformer.fromRStoObject(result);
+				subCategory = transformer.fromRSToObject(result);
 				return subCategory;
 			}
 		} catch (SQLException e) {

@@ -8,10 +8,9 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 
 import com.epam.lab.buyit.controller.dao.address.AddressDAO;
-import com.epam.lab.buyit.controller.dao.connection.ConnectionManager;
-import com.epam.lab.buyit.controller.dao.utils.transformers.AddressTransformer;
+import com.epam.lab.buyit.controller.dao.utils.DAOUtils;
+import com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.transformers.BidTransformer;
-import com.epam.lab.buyit.model.Address;
 import com.epam.lab.buyit.model.Bid;
 
 public class BidDAO implements BidDAOInterface{
@@ -29,7 +28,7 @@ public class BidDAO implements BidDAOInterface{
 		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
 		ResultSet generatedKeys = null;
-		try {
+		try {	
 			statement = transformer.fromObjectToCreatePS(elem, connection);
 			if (statement != null) {
 				statement.executeUpdate();
@@ -41,15 +40,15 @@ public class BidDAO implements BidDAOInterface{
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-			//DAOUtils.close(generatedKeys, statement, connection);
+			DAOUtils.close(generatedKeys, statement, connection);
 		}
 		return 0;
 	}
 
 	@Override
-	public Bid readElementById(int id) {
+	public Bid getElementById(int id) {
 		Bid currentBid = null;
-		Connection connection = com.epam.lab.buyit.controller.dao.connection.ConnectionManager
+		Connection connection = com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager
 				.getConnection();
 		PreparedStatement statement = null;
 		ResultSet result = null;
@@ -58,13 +57,13 @@ public class BidDAO implements BidDAOInterface{
 			statement.setInt(1, id);
 			result = statement.executeQuery();
 			if (result.next()) {
-				currentBid = transformer.fromRStoObject(result);
+				currentBid = transformer.fromRSToObject(result);
 				return currentBid;
 			}
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-			// DAOUtils.close(result, statement, connection);
+			DAOUtils.close(result, statement, connection);
 		}
 		return currentBid;
 	}

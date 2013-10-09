@@ -11,10 +11,13 @@ public class User {
 	private String login;
 	private String password;
 	private Contact contact;
-	private int contactsId;
 	private List<Product> productList;
 	private List<Bid> bidList;
 
+	public User() {
+		contact = new Contact();
+	}
+	
 	public int getIdUser() {
 		return idUser;
 	}
@@ -78,15 +81,6 @@ public class User {
 		return this;
 	}
 
-	public int getContactsId() {
-		return contactsId;
-	}
-
-	public User setContactsId(int contactsId) {
-		this.contactsId = contactsId;
-		return this;
-	}
-
 	public List<Product> getProductList() {
 		return productList;
 	}
@@ -103,6 +97,17 @@ public class User {
 	public User setBidList(List<Bid> bidList) {
 		this.bidList = bidList;
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder string = new StringBuilder();
+		string.append(idUser).append(" role: ")
+				.append(role ? " Admin" : " User").append(" first name: ")
+				.append(firstName).append(" last name: ").append(lastName)
+				.append(" login: ").append(login).append(" password: ")
+				.append(password);
+		return string.toString();
 	}
 
 }

@@ -40,10 +40,9 @@ public class ImageTransformer implements TransformerInterface<Image> {
 	}
 
 	@Override
-	public Image fromRStoObject(ResultSet resultSet) {
+	public Image fromRSToObject(ResultSet resultSet) {
 		Image image = new Image();
 		try {
-			image.setIdImage(resultSet.getInt("id_image"));
 			image.setDescriptionId(resultSet.getInt("description_id"));
 			image.setPath(resultSet.getString("path"));
 		} catch (SQLException e) {

@@ -4,7 +4,7 @@ public interface GenericDAO<T> {
 
 	int createElement(T elem);
 
-	T readElementById(int id);
+	T getElementById(int id);
 
 	void updateElement(T elem);
 

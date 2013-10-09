@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.epam.lab.buyit.controller.dao.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.DAOUtils;
+import com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.transformers.AddressTransformer;
 import com.epam.lab.buyit.model.Address;
 
@@ -44,9 +45,9 @@ public class AddressDAO implements AddressDAOInterface {
 	}
 
 	@Override
-	public Address readElementById(int id) {
+	public Address getElementById(int id) {
 		Address currentAddress = null;
-		Connection connection = com.epam.lab.buyit.controller.dao.connection.ConnectionManager
+		Connection connection = ConnectionManager
 				.getConnection();
 		PreparedStatement statement = null;
 		ResultSet result = null;
@@ -55,7 +56,7 @@ public class AddressDAO implements AddressDAOInterface {
 			statement.setInt(1, id);
 			result = statement.executeQuery();
 			if (result.next()) {
-				currentAddress = transformer.fromRStoObject(result);
+				currentAddress = transformer.fromRSToObject(result);
 				return currentAddress;
 			}
 		} catch (SQLException e) {
@@ -87,6 +88,12 @@ public class AddressDAO implements AddressDAOInterface {
 	public void deleteElementById(int id) {
 		throw new UnsupportedOperationException();
 
+	}
+
+	@Override
+	public List<Address> getAllAddress() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

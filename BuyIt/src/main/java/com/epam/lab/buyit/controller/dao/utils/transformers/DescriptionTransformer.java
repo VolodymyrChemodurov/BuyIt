@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.apache.log4j.Logger;
-
 import com.epam.lab.buyit.model.Description;
 
 public class DescriptionTransformer implements
@@ -16,7 +15,7 @@ public class DescriptionTransformer implements
 	private static final Logger LOGGER = Logger
 			.getLogger(DescriptionTransformer.class);
 	private static final String CREATE_STATEMENT = "INSERT INTO descriptions"
-			+ "(features, desc_text) VALUES(?, ?)";
+			+ "(features, desc_text, products_id) VALUES(?, ?, ?)";
 
 	@Override
 	public PreparedStatement fromObjectToCreatePS(Description elem,
@@ -27,6 +26,7 @@ public class DescriptionTransformer implements
 					Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, elem.getFeatures());
 			statement.setString(2, elem.getDescText());
+			statement.setInt(3, elem.getProductId());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
@@ -41,10 +41,11 @@ public class DescriptionTransformer implements
 	}
 
 	@Override
-	public Description fromRStoObject(ResultSet resultSet) {
+	public Description fromRSToObject(ResultSet resultSet) {
 		Description description = new Description();
 		try {
 			description.setIdDescription(resultSet.getInt("id_description"));
+			description.setProductId(resultSet.getInt("products_id"));
 			description.setFeatures(resultSet.getString("features"));
 			description.setDescText(resultSet.getString("desc_text"));
 		} catch (SQLException e) {
