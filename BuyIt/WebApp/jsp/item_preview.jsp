@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 .thumbnail-my img {
+	 display: block;
+    margin-left: auto;
+    margin-right: auto;
 	height: 150px;
 }
 
@@ -13,6 +16,10 @@
 
 .span3 {
 	width: 190px;
+}
+
+.thumbnail-my h5,.thumbnail-my p{
+	text-align: center;
 }
 
 .thumbnail-my {
@@ -35,7 +42,6 @@
 	background: #fff;
 	position: relative;
 	border: 1px solid #eee;
-	text-align:center;
 }
 </style>
 <li class="span3">
@@ -48,8 +54,8 @@
 			</h5>
 			<h4>
 				<a class="btn" href="product_details.html">VIEW</a> <span
-					class="pull-right"><c:out
-						value="${product.auction.buyItNow}"></c:out></span>
+					class="pull-right"><a class="btn btn-primary" href="#"><c:out
+							value="${product.auction.buyItNow}"></c:out></a></span>
 			</h4>
 		</div>
 	</div>

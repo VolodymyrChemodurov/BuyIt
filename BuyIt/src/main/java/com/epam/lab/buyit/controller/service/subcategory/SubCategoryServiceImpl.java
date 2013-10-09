@@ -11,8 +11,9 @@ import com.epam.lab.buyit.model.SubCategory;
 
 public class SubCategoryServiceImpl implements SubCategoryService {
 	private SubCategoryDAO subCategoryDAO;
-	private ProductDAO productDAO;
-	private AuctionDAO auctionDAO;
+	private ProductDAO productDAO; // delete this
+	private AuctionDAO auctionDAO; //Change to Product Service where 
+	//implement getBySubCategoryId method that configure products with auctions
 	private DescriptionServiceImpl descriptionService;
 
 	public SubCategoryServiceImpl() {
@@ -25,10 +26,10 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 	@Override
 	public SubCategory getItemById(int id) {
 		SubCategory subCategory = subCategoryDAO.getElementById(id);
-		List<Product> products = productDAO
-				.getProductsBySubCategoryId(subCategory.getIdSubCategory());
-		for (Product product : products) {
-			product.setAuction(auctionDAO.getByProductId(product.getIdProduct()));
+		List<Product> products = productDAO									//
+				.getProductsBySubCategoryId(subCategory.getIdSubCategory()); // use 
+		for (Product product : products) {									//here
+			product.setAuction(auctionDAO.getByProductId(product.getIdProduct()));//
 			product.setDescription(descriptionService.getByProductId(product
 					.getIdProduct()));
 		}

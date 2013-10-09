@@ -56,24 +56,35 @@
 						<li><a href="homePageServlet">Home</a> <span class="divider">/</span></li>
 						<li class="active"><c:out value="${subCategory.name}"></c:out></li>
 					</ul>
-
-
+					
 					<h3>
 						<c:out value="${subCategory.name}"></c:out>
 					</h3>
-					<div class="item">
-						<ul class="thumbnails">
-							<c:forEach begin="${requestScope.number}" end="${requestScope.number + 1}" var="current">
-								<c:set var="product" 
-								value="${subCategory.products[current]}" scope="request"></c:set>
-								<jsp:include page="item_preview"></jsp:include>
-							</c:forEach>
-						</ul>
-					</div>					
+					<c:if test="${not empty subCategory.products}">
+						<div class="item">
+							<ul class="thumbnails">
+								<c:forEach begin="${requestScope.number}"
+									end="${requestScope.number + onPage - 1}" var="current">
+									<c:set var="product" value="${subCategory.products[current]}"
+										scope="request"></c:set>
+									<jsp:include page="item_preview"></jsp:include>
+								</c:forEach>
+							</ul>
+						</div>
+						<hr class="soft"/>
+						<div class="pagination">
+							<ul>
+							<li><a
+								href="category_contrl?id=${subCategory.idSubCategory}&number=${number}&way=prev&page=${page}">&lsaquo;</a>
+							</li>
+							<li><a href="#"><c:out value="${page}" /></a></li>
+							<li><a
+								href="category_contrl?id=${subCategory.idSubCategory}&number=${number}&way=next&page=${page}">&rsaquo;</a>
+							</li>
+							</ul>
+						</div>
+					</c:if>
 					
-					<a href="category?number=${current - 1}">PREV</a>
-					<a href="category?number=${current + 1}/>">NEXT</a>
-
 				</div>
 			</div>
 		</div>

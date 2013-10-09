@@ -10,22 +10,45 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.lab.buyit.controller.service.subcategory.SubCategoryServiceImpl;
 import com.epam.lab.buyit.model.SubCategory;
 
-public class CategoryServlet extends HttpServlet {
+public class CategoryControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int ITEMS_ON_PAGE = 2;
-	private SubCategoryServiceImpl subCategoryServce;
-	
+	private SubCategoryServiceImpl service;
+
 	public void init() {
-		subCategoryServce = new SubCategoryServiceImpl();
+		service = new SubCategoryServiceImpl();
 	}
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int number = Integer.parseInt(request.getParameter("number"));
+		int page = Integer.parseInt(request.getParameter("page"));
+		String way = request.getParameter("way");
 		int subCategory_id = Integer.parseInt(request.getParameter("id"));
-		SubCategory subCategory = subCategoryServce.getItemById(subCategory_id);
+		SubCategory subCategory = service.getItemById(subCategory_id);
+		
+		int onPage = setCountItemsOnPage(subCategory);
+		int productsCount = subCategory.getProducts().size();
+		
+		if (way.equals("prev")) {
+			number -= onPage;
+			page -= 1;
+		} else {
+			number += onPage;
+			page += 1;
+		}
+		if(number >= productsCount) {
+			number = 0;
+			page = 1;
+		}
+		else if(number < 0) { 
+			number = productsCount - onPage;
+			page = productsCount/onPage;
+		}
+		
+		request.setAttribute("onPage", onPage);
+		request.setAttribute("page", page);
+		request.setAttribute("number", number);
 		request.setAttribute("subCategory", subCategory);
-		request.setAttribute("number", 0);
-		request.setAttribute("page", 1);
-		request.setAttribute("onPage", setCountItemsOnPage(subCategory));
 		request.getRequestDispatcher("category").forward(request, response);
 	}
 
@@ -35,4 +58,5 @@ public class CategoryServlet extends HttpServlet {
 		else 
 			return ITEMS_ON_PAGE;
 	}
+	
 }
