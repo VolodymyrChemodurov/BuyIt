@@ -37,6 +37,27 @@
 <body>
 	<jsp:include page="navbar"></jsp:include>
 	<!-- Header End====================================================================== -->
+	<div class="container">
+		<ul class="nav nav-tabs">
+			<li class="active" style="margin-left: 6px"><a href="#"><b>Profile</b></a></li>
+			<li><a href="#"><b>Sales</b></a></li>
+			<li><a href="#"><b>Shopping</b></a></li>
+			<li><a href="#"><b>Comments</b></a></li>
+		</ul>
+		<div class="inner-left-menu">
+		asdasdasdasd
+		asdasd
+		asdasd
+		asdasd
+		asd
+		
+		
+		
+		</div>
+		
+	</div>
+
+
 
 	<jsp:include page="footer"></jsp:include>
 	<!-- Placed at the end of the document so the pages load faster ============================================= -->
