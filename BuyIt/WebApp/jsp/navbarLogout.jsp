@@ -7,7 +7,7 @@
 			data-toggle="dropdown" href="#" style="padding-right: 0;" role="text" >
 			<h4><jsp:getProperty property="login" name="user" /><b class="caret"></b></h4></a>
 						<ul class="dropdown-menu">
-				<li><a href="#">Profile</a></li>
+				<li><a href="userProfile">Profile</a></li>
 				<li class="divider"></li>
 				<li><a href="#">Products</a></li>
 				<li><a href="#">Bids</a></li>

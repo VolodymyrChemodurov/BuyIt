@@ -21,7 +21,8 @@
 						<input type="password" id="password" name="password" placeholder="Password">
 					</div>
 					<div></div>
-					<br>
+					<a class="dropdown-toggle" href="forgetPassword" style="text-decoration:none"><h4>Forget password</h4></a>
+					<div></div>
 					<button type="submit" class="btn btn-success">Sign in</button>
 					<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 				</form>
