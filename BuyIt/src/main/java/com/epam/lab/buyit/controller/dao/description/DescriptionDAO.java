@@ -16,7 +16,7 @@ import com.epam.lab.buyit.model.Description;
 
 public class DescriptionDAO implements DescriptionDAOInterface {
 	private static final Logger LOGGER = Logger.getLogger(DescriptionDAO.class);
-	private final static String GET_BY_ID = "SELECT * FROM descriptions WHERE products_id = ?";
+	private final static String GET_BY_PRODUCT_ID = "SELECT * FROM descriptions WHERE products_id = ?";
 	private final static String GET_ALL_DESCRIPTIONS = "SELECT * FROM descriptions";
 	private DescriptionTransformer transformer;
 
@@ -47,24 +47,7 @@ public class DescriptionDAO implements DescriptionDAOInterface {
 
 	@Override
 	public Description getElementById(int id) {
-		Description description = null;
-		Connection connection = ConnectionManager.getConnection();
-		PreparedStatement statement = null;
-		ResultSet result = null;
-		try {
-			statement = connection.prepareStatement(GET_BY_ID);
-			statement.setInt(1, id);
-			result = statement.executeQuery();
-			if (result.next()) {
-				description = transformer.fromRSToObject(result);
-				return description;
-			}
-		} catch (SQLException e) {
-			LOGGER.error(e);
-		} finally {
-			DAOUtils.close(result, statement, connection);
-		}
-		return description;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -108,6 +91,28 @@ public class DescriptionDAO implements DescriptionDAOInterface {
 			DAOUtils.close(result, statement, connection);
 		}
 		return descriptions;
+	}
+
+	@Override
+	public Description getDescriptionByProductId(int productId) {
+		Description description = null;
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_BY_PRODUCT_ID);
+			statement.setInt(1, productId);
+			result = statement.executeQuery();
+			if (result.next()) {
+				description = transformer.fromRSToObject(result);
+				return description;
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return description;
 	}
 
 }

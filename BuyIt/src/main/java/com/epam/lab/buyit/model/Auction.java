@@ -1,6 +1,6 @@
 package com.epam.lab.buyit.model;
 
-import java.sql.Time;
+import java.sql.Timestamp;
 
 public class Auction {
 
@@ -11,8 +11,8 @@ public class Auction {
 	private int count;
 	private double currentPrice;
 	private String status;
-	private Time startTime;
-	private Time endTime;
+	private Timestamp startTime;
+	private Timestamp endTime;
 
 	public int getIdAuction() {
 		return idAuction;
@@ -32,20 +32,20 @@ public class Auction {
 		return this;
 	}
 
-	public Time getStartTime() {
+	public Timestamp getStartTime() {
 		return startTime;
 	}
 
-	public Auction setStartTime(Time startTime) {
+	public Auction setStartTime(Timestamp startTime) {
 		this.startTime = startTime;
 		return this;
 	}
 
-	public Time getEndTime() {
+	public Timestamp getEndTime() {
 		return endTime;
 	}
 
-	public Auction setEndTime(Time endTime) {
+	public Auction setEndTime(Timestamp endTime) {
 		this.endTime = endTime;
 		return this;
 	}
@@ -85,7 +85,7 @@ public class Auction {
 		this.currentPrice = currentPrice;
 		return this;
 	}
-	
+
 	public int getProductId() {
 		return productId;
 	}

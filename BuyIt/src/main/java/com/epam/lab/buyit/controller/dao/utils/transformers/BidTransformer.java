@@ -9,7 +9,7 @@ import java.sql.Statement;
 import org.apache.log4j.Logger;
 import com.epam.lab.buyit.model.Bid;
 
-public class BidTransformer implements TransformerInterface<Bid>{
+public class BidTransformer implements TransformerInterface<Bid> {
 	private static final Logger LOGGER = Logger
 			.getLogger(AddressTransformer.class);
 	private static final String CREATE_STATEMENT = "INSERT INTO bids(time, auction_id, user_id) VALUES(? , ? , ?)";
@@ -21,7 +21,7 @@ public class BidTransformer implements TransformerInterface<Bid>{
 		try {
 			statement = connection.prepareStatement(CREATE_STATEMENT,
 					Statement.RETURN_GENERATED_KEYS);
-			statement.setTime(1, elem.getTime());
+			statement.setTimestamp(1, elem.getTime());
 			statement.setInt(2, elem.getAuctionId());
 			statement.setInt(3, elem.getUserId());
 
@@ -43,7 +43,7 @@ public class BidTransformer implements TransformerInterface<Bid>{
 		Bid currentBid = new Bid();
 		try {
 			currentBid.setIdBid(resultSet.getInt("id_bid"));
-			currentBid.setTime(resultSet.getTime("time"));
+			currentBid.setTime(resultSet.getTimestamp("time"));
 			currentBid.setAuctionId(resultSet.getInt("auction_id"));
 			currentBid.setUserId(resultSet.getInt("user_id"));
 

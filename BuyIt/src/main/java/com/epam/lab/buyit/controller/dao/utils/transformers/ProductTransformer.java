@@ -14,9 +14,9 @@ public class ProductTransformer implements TransformerInterface<Product> {
 	private static final Logger LOGGER = Logger
 			.getLogger(ProductTransformer.class);
 	private static final String CREATE_STATEMENT = "INSERT INTO products"
-			+ "(name, sub_category_id, user_id) VALUES(?, ?, ?)";
+			+ "(name, sub_category_id, user_id, delivery) VALUES(?, ?, ?, ?)";
 	private static final String UPDATE_STATEMENT = "UPDATE products SET "
-			+ "name=?, sub_category_id=?, user_id=? WHERE id_product=?";
+			+ "name=?, sub_category_id=?, user_id=?, delivery=? WHERE id_product=?";
 
 	@Override
 	public PreparedStatement fromObjectToCreatePS(Product elem,
@@ -28,6 +28,7 @@ public class ProductTransformer implements TransformerInterface<Product> {
 			statement.setString(1, elem.getName());
 			statement.setInt(2, elem.getSubCategoryId());
 			statement.setInt(3, elem.getUserId());
+			statement.setString(4, elem.getDelivery());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
@@ -44,7 +45,8 @@ public class ProductTransformer implements TransformerInterface<Product> {
 			statement.setString(1, elem.getName());
 			statement.setInt(2, elem.getSubCategoryId());
 			statement.setInt(3, elem.getUserId());
-			statement.setInt(4, elem.getIdProduct());
+			statement.setString(4, elem.getDelivery());
+			statement.setInt(5, elem.getIdProduct());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
@@ -59,6 +61,7 @@ public class ProductTransformer implements TransformerInterface<Product> {
 			product.setName(resultSet.getString("name"));
 			product.setSubCategoryId(resultSet.getInt("sub_category_id"));
 			product.setUserId(resultSet.getInt("user_id"));
+			product.setDelivery(resultSet.getString("delivery"));
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}

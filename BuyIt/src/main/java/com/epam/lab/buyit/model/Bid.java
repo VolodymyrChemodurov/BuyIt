@@ -1,13 +1,13 @@
 package com.epam.lab.buyit.model;
 
-import java.sql.Time;
+import java.sql.Timestamp;
 
 public class Bid {
 
 	private int idBid;
 	private int auctionId;
 	private int userId;
-	private Time time;
+	private Timestamp time;
 
 	public int getIdBid() {
 		return idBid;
@@ -18,11 +18,11 @@ public class Bid {
 		return this;
 	}
 
-	public Time getTime() {
+	public Timestamp getTime() {
 		return time;
 	}
 
-	public Bid setTime(Time time) {
+	public Bid setTime(Timestamp time) {
 		this.time = time;
 		return this;
 	}
