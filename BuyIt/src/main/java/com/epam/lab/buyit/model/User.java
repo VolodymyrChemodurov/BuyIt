@@ -11,13 +11,15 @@ public class User {
 	private String login;
 	private String password;
 	private Contact contact;
+	private String avatar;
+	private boolean ban;
 	private List<Product> productList;
 	private List<Bid> bidList;
 
 	public User() {
 		contact = new Contact();
 	}
-	
+
 	public int getIdUser() {
 		return idUser;
 	}
@@ -78,6 +80,24 @@ public class User {
 
 	public User setContact(Contact contact) {
 		this.contact = contact;
+		return this;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public User setAvatar(String avatar) {
+		this.avatar = avatar;
+		return this;
+	}
+
+	public boolean getBan() {
+		return ban;
+	}
+
+	public User setBan(boolean ban) {
+		this.ban = ban;
 		return this;
 	}
 

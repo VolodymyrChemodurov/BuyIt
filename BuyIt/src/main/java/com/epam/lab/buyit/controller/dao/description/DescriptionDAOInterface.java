@@ -9,4 +9,6 @@ public interface DescriptionDAOInterface extends GenericDAO<Description> {
 
 	List<Description> getAllDescriptions();
 
+	Description getDescriptionByProductId(int productId);
+
 }

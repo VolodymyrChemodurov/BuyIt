@@ -41,7 +41,8 @@ public class DescriptionServiceImpl implements DescriptionService {
 
 	@Override
 	public Description getByProductId(int productId) {
-		Description description = descriptionDAO.getElementById(productId);
+		Description description = descriptionDAO
+				.getDescriptionByProductId(productId);
 		description.setItemPhotos(imageDAO.getImagesByDescriptionId(description
 				.getIdDescription()));
 		return description;
