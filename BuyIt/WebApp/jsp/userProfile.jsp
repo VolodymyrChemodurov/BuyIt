@@ -12,10 +12,12 @@
 <meta name="author" content="">
 
 <!-- Bootstrap style -->
+
 <link id="callCss" rel="stylesheet"
 	href="themes/bootshop/bootstrap.min.css" media="screen">
 <link href="themes/css/base.css" rel="stylesheet" media="screen">
 <!-- Bootstrap style responsive -->
+<link href="bootstrap/css/userpage.css" rel="stylesheet">
 <link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="themes/css/font-awesome.css" rel="stylesheet"
 	type="text/css">
@@ -44,18 +46,83 @@
 			<li><a href="#"><b>Shopping</b></a></li>
 			<li><a href="#"><b>Comments</b></a></li>
 		</ul>
-		<div class="inner-left-menu">
-		asdasdasdasd
-		asdasd
-		asdasd
-		asdasd
-		asd
-		
-		
-		
+		<div class="row">
+			<span class="inner-left-menu"> asdasdasdasd asdasdas
+				dasdasdsad asdasasd asdasdddddddddddddddd asdddddddddddddddddddddd
+				asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd </span>
 		</div>
-		
 	</div>
+<div class="container">
+	<div id="maWrapper" class="corAll5">
+		<ul id="vMenu">
+			<li id="active"><strong>Profile</strong></li>
+			<li><a href="#">Salles</a></li>
+			<li><a href="#">Shopping</a></li>
+			<li><a href="#">Comments</a></li>
+		</ul>
+		<!-- / #vMenu -->
+		<div style="overflow: hidden;">
+			<div width="200" class="left-menu">
+				<ul class="navs" id="navs">
+					<li id="navs-1-1" class="current"><big>Аукционы и Купить
+							сейчас! <span class="status_icon"></span>
+					</big>
+						<ul>
+							<li class="active"><a href="/myaccount/bid.php">Действующие</a></li>
+							<li><a href="/myaccount/won.php">Куплено</a></li>
+							<li><a href="/myaccount/notwon.php">Не куплено</a></li>
+							<li><a href="/myaccount/payu/MyPayments.php">Список моих
+									платежей</a></li>
+							<li><a href="/myaccount/Debates/alert.php">Предупреждения
+									по сделкам</a></li>
+							<li class="jump"><a href="/myaccount/feedbacks/add.php">Отзывы</a></li>
+						</ul></li>
+					
+				</ul>
+			</div>
+			<!-- /left-menu -->
+
+
+
+
+			<div id="maContent" class="corAll5">
+				<h2 class="themeHead tmp-cz-color">Список лотов со ставками</h2>
+				<div class="paddingContent">
+
+					<div class="table-msg">
+						<table align="center" cellspacing="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<td class="totop"><img
+										src="http://static.allegrostatic.pl/site_images/209/0/common/msg.gif"
+										alt="" width="30" height="30" class="displayBlock"></td>
+									<td class="tomiddle">
+										<div class="msg">
+											<b>В настоящее время вы не принимаете участия в торгах ни
+												по одному из лотов</b>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="rgTopPosition">
+						<div class="recommendedGalleryWrapper"></div>
+					</div>
+
+
+
+
+				</div>
+				<!--/paddingContent -->
+
+
+			</div>
+			<!-- /maContent -->
+		</div>
+	</div>
+
+</div>
 
 
 
