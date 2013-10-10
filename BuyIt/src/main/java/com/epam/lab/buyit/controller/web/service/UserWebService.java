@@ -1,6 +1,5 @@
 package com.epam.lab.buyit.controller.web.service;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
@@ -25,13 +24,13 @@ import com.epam.lab.buyit.model.User;
 public class UserWebService {
 	private static final Logger LOGGER = Logger.getLogger(UserWebService.class);
 	private static String LOGIN, PASSWORD;
-	private static final String propFilePath = "D:\\Repsitory\\BuyIt\\BuyIt\\src\\main\\java\\web-services.properties";
+	private static final String propFilePath = "web-services.properties";
 	private UserServiceImpl userService;
 
 	static {
 		Properties prop = new Properties();
 		try {
-			prop.load(new FileInputStream(propFilePath));
+			prop.load(UserWebService.class.getClassLoader().getResourceAsStream(propFilePath));
 			LOGIN = prop.getProperty("user.login");
 			PASSWORD = prop.getProperty("user.password");
 		} catch (IOException e) {
