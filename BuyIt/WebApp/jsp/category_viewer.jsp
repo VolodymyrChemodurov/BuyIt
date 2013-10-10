@@ -56,35 +56,47 @@
 						<li><a href="homePageServlet">Home</a> <span class="divider">/</span></li>
 						<li class="active"><c:out value="${subCategory.name}"></c:out></li>
 					</ul>
-					
+
 					<h3>
 						<c:out value="${subCategory.name}"></c:out>
 					</h3>
 					<c:if test="${not empty subCategory.products}">
 						<div class="item">
 							<ul class="thumbnails">
-								<c:forEach begin="${requestScope.number}"
-									end="${requestScope.number + onPage - 1}" var="current">
-									<c:set var="product" value="${subCategory.products[current]}"
-										scope="request"></c:set>
+								<c:forEach var="product" items="${subCategory.products}">
+									<c:set var="product" value="${product}" scope="request"></c:set>
 									<jsp:include page="item_preview"></jsp:include>
 								</c:forEach>
 							</ul>
 						</div>
-						<hr class="soft"/>
+						<hr class="soft" />
 						<div class="pagination">
 							<ul>
-							<li><a
-								href="category_contrl?id=${subCategory.idSubCategory}&number=${number}&way=prev&page=${page}">&lsaquo;</a>
-							</li>
-							<li><a href="#"><c:out value="${page}" /></a></li>
-							<li><a
-								href="category_contrl?id=${subCategory.idSubCategory}&number=${number}&way=next&page=${page}">&rsaquo;</a>
-							</li>
+								<c:if test="${page != 1}">
+									<li><a
+										href="select_category?page=${page - 1}&id=${subCategory.idSubCategory}">&lsaquo;</a></li>
+								</c:if>
+
+								<c:forEach begin="1" end="${noOfPages}" var="i">
+									<c:choose>
+										<c:when test="${page eq i}">
+											<li  class="active"><a href="#">${i}</a></li>
+										</c:when>
+										<c:otherwise>
+											<li><a 
+												href="select_category?page=${i}&id=${subCategory.idSubCategory}">${i}</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+
+								<c:if test="${page lt noOfPages}">
+									<li><a
+										href="select_category?page=${page + 1}&id=${subCategory.idSubCategory}">&rsaquo;</a></li>
+								</c:if>
 							</ul>
 						</div>
 					</c:if>
-					
+
 				</div>
 			</div>
 		</div>

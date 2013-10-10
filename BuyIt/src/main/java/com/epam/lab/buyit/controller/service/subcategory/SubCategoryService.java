@@ -8,5 +8,7 @@ import com.epam.lab.buyit.model.SubCategory;
 public interface SubCategoryService extends GenericService<SubCategory> {
 
 	List<SubCategory> getAllItemsByCategoryId(int id_category);
+	
+	SubCategory getWithProductSelection(int subCategoryId, int offset, int numberOfRecords);
 
 }

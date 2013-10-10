@@ -33,16 +33,6 @@
     <servlet-name>HomePageServlet</servlet-name>
     <url-pattern>/homePageServlet</url-pattern>
   </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>categoryController</servlet-name>
-    <servlet-class>com.epam.lab.buyit.controller.web.servlet.CategoryControllerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>categoryController</servlet-name>
-    <url-pattern>/category_contrl</url-pattern>
-  </servlet-mapping>
-  
   <servlet>
     <servlet-name>CategoryServlet</servlet-name>
     <servlet-class>com.epam.lab.buyit.controller.web.servlet.CategoryServlet</servlet-class>

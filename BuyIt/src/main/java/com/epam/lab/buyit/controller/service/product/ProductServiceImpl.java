@@ -72,4 +72,9 @@ public class ProductServiceImpl implements ProductService {
 		return;
 	}
 
+	@Override
+	public int getCountBySubCategoryId(int id) {
+		return productDAO.getCountBySubCategoryId(id);
+	}
+
 }

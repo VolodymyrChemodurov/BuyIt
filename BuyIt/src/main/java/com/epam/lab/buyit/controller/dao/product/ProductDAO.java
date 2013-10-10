@@ -19,6 +19,9 @@ public class ProductDAO implements ProductDAOInterface {
 	private final static String GET_BY_ID = "SELECT * FROM products WHERE id_product = ?";
 	private final static String GET_ALL_PRODUCTS = "SELECT * FROM products";
 	private final static String GET_BY_SUBCATEGORY_ID = "SELECT * FROM products WHERE sub_category_id = ?";
+	private final static String GET_SELECTION = "SELECT SQL_CALC_FOUND_ROWS * FROM products WHERE sub_category_id = ? "
+			+ "LIMIT ?, ?";
+	private final static String GET_ROWS_COUNT_BY_SYBCATEGORY_ID = "SELECT COUNT(id_product) FROM products WHERE sub_category_id = ?";
 	private ProductTransformer transformer;
 
 	public ProductDAO() {
@@ -130,6 +133,51 @@ public class ProductDAO implements ProductDAOInterface {
 			DAOUtils.close(result, statement, connection);
 		}
 		return products;
+	}
+
+	@Override
+	public List<Product> getSelectionBySubCategoryId(int id, int offset,
+			int numberOfRecords) {
+
+		List<Product> products = new ArrayList<Product>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_SELECTION);
+			statement.setInt(1, id);
+			statement.setInt(2, offset);
+			statement.setInt(3, numberOfRecords);
+			result = statement.executeQuery();
+			while (result.next()) {
+				Product currentProduct = transformer.fromRSToObject(result);
+				products.add(currentProduct);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return products;
+	}
+
+	@Override
+	public int getCountBySubCategoryId(int id) {
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_ROWS_COUNT_BY_SYBCATEGORY_ID);
+			statement.setInt(1, id);
+			result = statement.executeQuery();
+			if (result.next())
+				return result.getInt(1);
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return 0;
 	}
 
 }

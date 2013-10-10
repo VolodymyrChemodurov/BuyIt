@@ -11,11 +11,11 @@
 			<h5>
 				<c:out value="${product.name}"></c:out>
 			</h5>
-			<h4>
-				<a class="btn" href="product_details.html">VIEW</a> <span
-					class="pull-right"><a class="btn btn-primary" href="#"><c:out
-							value="${product.auction.buyItNow}"></c:out></a></span>
-			</h4>
 		</div>
+		<h4>
+			<a class="btn-my" href="#">INFO</a>
+			<span class="pull-right"><a class="btn btn-primary" href="#"><c:out
+						value="${product.auction.buyItNow}"></c:out></a></span>
+		</h4>
 	</div>
 </li>
