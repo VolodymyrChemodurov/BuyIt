@@ -3,9 +3,10 @@ package com.epam.lab.buyit.model;
 public class Product {
 
 	private int idProduct;
+	private String name;
 	private int subCategoryId;
 	private int userId;
-	private String name;
+	private String delivery;
 	private Description description;
 	private Auction auction;
 
@@ -46,6 +47,15 @@ public class Product {
 
 	public Product setUserId(int userId) {
 		this.userId = userId;
+		return this;
+	}
+
+	public String getDelivery() {
+		return delivery;
+	}
+
+	public Product setDelivery(String delivery) {
+		this.delivery = delivery;
 		return this;
 	}
 

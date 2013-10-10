@@ -14,9 +14,9 @@ public class UserTransformer implements TransformerInterface<User> {
 	private static final Logger LOGGER = Logger
 			.getLogger(UserTransformer.class);
 	private static final String CREATE_STATEMENT = "INSERT INTO users"
-			+ "(role, first_name, last_name, login, password) VALUES(?, ?, ?, ?, ?)";
+			+ "(role, first_name, last_name, login, password, avatar, ban) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STATEMENT = "UPDATE users SET "
-			+ "role=?, first_name=?, last_name=?, login=?, password=? WHERE id_user=?";
+			+ "role=?, first_name=?, last_name=?, login=?, password=?, avatar=?, ban=? WHERE id_user=?";
 
 	@Override
 	public PreparedStatement fromObjectToCreatePS(User elem,
@@ -30,6 +30,8 @@ public class UserTransformer implements TransformerInterface<User> {
 			statement.setString(3, elem.getLastName());
 			statement.setString(4, elem.getLogin());
 			statement.setString(5, elem.getPassword());
+			statement.setString(6, elem.getAvatar());
+			statement.setBoolean(7, elem.getRole());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
@@ -48,7 +50,9 @@ public class UserTransformer implements TransformerInterface<User> {
 			statement.setString(3, elem.getLastName());
 			statement.setString(4, elem.getLogin());
 			statement.setString(5, elem.getPassword());
-			statement.setInt(6, elem.getIdUser());
+			statement.setString(6, elem.getAvatar());
+			statement.setBoolean(7, elem.getRole());
+			statement.setInt(8, elem.getIdUser());
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
@@ -65,6 +69,8 @@ public class UserTransformer implements TransformerInterface<User> {
 			user.setLastName(resultSet.getString("last_name"));
 			user.setLogin(resultSet.getString("login"));
 			user.setPassword(resultSet.getString("password"));
+			user.setAvatar(resultSet.getString("avatar"));
+			user.setBan(resultSet.getBoolean("ban"));
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
