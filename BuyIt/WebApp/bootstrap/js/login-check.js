@@ -8,7 +8,7 @@ $(document).ready(function() {
 			}, function(responseText) {
 				if (responseText == value) {
 					$('#register').prop('disabled', false);
-					$('#logindiv').text("");
+					$('#logindiv').text("");					
 				} else {
 					$('#register').prop('disabled', true);
 					$('#logindiv').text(responseText);

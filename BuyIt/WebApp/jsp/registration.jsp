@@ -42,6 +42,8 @@
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
 
+<link href="themes/assets/css/assets_style.css" rel="stylesheet">
+
 </head>
 <body>
 	<jsp:include page="navbar"></jsp:include>
@@ -72,14 +74,14 @@
 		<button type="button" class="close" data-dismiss="alert">×</button>
 		<strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
 	 </div> -->
-						<form class="form-horizontal" method="post"
+						<form class="form-horizontal" method="post" id="registration-form"
 							action="registrationServlet">
 							<h4>Your personal information</h4>
 							<div class="control-group">
 								<label class="control-label" for="alogin">Login </label>
 								<div class="controls">
 									<input type="text" id="alogin" name="login" placeholder="Login"
-										value="aleg" class="tip"  data-toggle="tooltip" data-placement="right"
+										value="" class="tip"  data-toggle="tooltip" data-placement="right"
 										title="Login contains only number, small letters and '-' '_'">
 									<div id="logindiv"></div>
 								</div>
@@ -89,36 +91,33 @@
 								</label>
 								<div class="controls">
 									<input type="text" id="firstName" name="firstName"
-										placeholder="First Name" value="Aleg">
+										placeholder="First Name">
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="lastName">Last name </label>
 								<div class="controls">
-									<input type="text" id="lastName" name="lastName"
-										placeholder="Last Name" value="Gupalo">
+									<input type="text" id="lastName" name="lastName" class="form-control"
+										placeholder="Last Name">
 								</div>
 							</div>
 
 							<div class="control-group">
 								<label class="control-label" for="email">Email </label>
 								<div class="controls">
-									<input type="text" id="email" name="email" placeholder="Email"
-										value="aleg@qw.com">
+									<input type="text" id="email" name="email" placeholder="Email">
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="phone">Phone </label>
 								<div class="controls">
-									<input type="text" id="phone" name="phone" placeholder="Phone"
-										value="1234567897">
+									<input type="text" id="phone" name="phone" placeholder="Phone">
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="password">Password </label>
 								<div class="controls">
-									<input type="password" id="password" value="alegaleg"
-										name="password" placeholder="Password">
+									<input type="password" id="password2" name="password" placeholder="Password">
 								</div>
 							</div>
 
@@ -126,9 +125,8 @@
 								<label class="control-label" for="confirmPassword">Confirm
 									Password </label>
 								<div class="controls">
-									<input type="password" id="confirmPassword"
-										name="confirmPassword" placeholder="Confirm Password"
-										value="alegaleg">
+									<input type="password" id="confirmPassword2"
+										name="confirmPassword" placeholder="Confirm Password">
 								</div>
 							</div>
 
@@ -171,8 +169,7 @@
 							<div class="control-group">
 								<label class="control-label" for="city">City</label>
 								<div class="controls">
-									<input onclick="newTooltip();" type="text" id="city" name="city" placeholder="City"
-										value="Lviv">
+									<input onclick="newTooltip();" type="text" id="city" name="city" placeholder="City">
 								</div>
 							</div>
 
@@ -180,7 +177,7 @@
 								<label class="control-label" for="street">Street</label>
 								<div class="controls">
 									<input type="text" id="street" name="street"
-										placeholder="Street" value="Alegaleg">
+										placeholder="Street">
 								</div>
 							</div>
 
@@ -189,9 +186,9 @@
 									№</label>
 								<div class="controls">
 									<input type="text" style="width: 85px;" id="house" name="house"
-										placeholder="House number" value="1">
+										placeholder="House number">
 									&nbsp;&nbsp;/&nbsp; <input type="text" style="width: 85px;"
-										id="house" name="house" placeholder="Flat Number" value="1">
+										id="house" name="house" placeholder="Flat Number">
 								</div>
 							</div>
 
@@ -199,7 +196,7 @@
 								<label class="control-label" for="zipCode">Zip Code</label>
 								<div class="controls">
 									<input type="text" id="zipCode" name="zipCode"
-										placeholder="Zip Code" value="12345">
+										placeholder="Zip Code">
 								</div>
 							</div>
 
@@ -229,6 +226,9 @@
 	<script src="bootstrap/js/tip.js" type="text/javascript"></script>
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
+	<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
+	<script src="themes/assets/js/jquery.validate.js"></script>
+	<script src="themes/assets/js/script.js"></script>
 
 </body>
 </html>
