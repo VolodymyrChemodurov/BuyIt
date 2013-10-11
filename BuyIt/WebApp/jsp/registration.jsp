@@ -81,8 +81,8 @@
 								<label class="control-label" for="alogin">Login </label>
 								<div class="controls">
 									<input type="text" id="alogin" name="login" placeholder="Login"
-										value="" class="tip"  data-toggle="tooltip" data-placement="right"
-										title="Login contains only number, small letters and '-' '_'">
+										class="tip" data-toggle="tooltip" data-placement="right"
+										title="More then 4 characters Only number, small letters and '-' '_'">
 									<div id="logindiv"></div>
 								</div>
 							</div>
@@ -91,14 +91,16 @@
 								</label>
 								<div class="controls">
 									<input type="text" id="firstName" name="firstName"
-										placeholder="First Name">
+										placeholder="First Name" class="tip" data-toggle="tooltip"
+										data-placement="right" title="Start only from capital letter">
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="lastName">Last name </label>
 								<div class="controls">
-									<input type="text" id="lastName" name="lastName" class="form-control"
-										placeholder="Last Name">
+									<input type="text" id="lastName" name="lastName"
+										placeholder="Last Name" class="tip" data-toggle="tooltip"
+										data-placement="right" title="Start only from capital letter">
 								</div>
 							</div>
 
@@ -111,13 +113,18 @@
 							<div class="control-group">
 								<label class="control-label" for="phone">Phone </label>
 								<div class="controls">
-									<input type="text" id="phone" name="phone" placeholder="Phone">
+									<input type="text" id="phone" name="phone" placeholder="Phone"
+										class="tip" data-toggle="tooltip" data-placement="right"
+										title="Yours phone number (10 digits)" value="0564879685">
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="password">Password </label>
 								<div class="controls">
-									<input type="password" id="password2" name="password" placeholder="Password">
+									<input type="password" id="password2" name="password"
+										placeholder="Password" class="tip" data-toggle="tooltip"
+										data-placement="right"
+										title="More then 6 characters Only number, small letters and '-' '_'">
 								</div>
 							</div>
 
@@ -126,7 +133,9 @@
 									Password </label>
 								<div class="controls">
 									<input type="password" id="confirmPassword2"
-										name="confirmPassword" placeholder="Confirm Password">
+										name="confirmPassword" placeholder="Confirm Password"
+										class="tip" data-toggle="tooltip" data-placement="right"
+										title="Confirm your password">
 								</div>
 							</div>
 
@@ -137,31 +146,31 @@
 								<div class="controls">
 									<select id="region" name="region">
 										<option value="">-</option>
-										<option value="1">Vinnucka</option>
-										<option value="2">Volunska</option>
-										<option value="3">Dnipropetrovska</option>
-										<option value="4">Donetska</option>
-										<option value="5">Jutomirska</option>
-										<option value="6">Zakarpatska</option>
-										<option value="7">Zaporizka</option>
-										<option value="8">Ivano-Frankivska</option>
-										<option value="9">Kyivska</option>
-										<option value="10">Kirovogradska</option>
-										<option value="11">Krum</option>
-										<option value="12">Lyganska</option>
-										<option value="13">Lvivska</option>
-										<option value="14">Mukolaivska</option>
-										<option value="15">Odeska</option>
-										<option value="16">Poltavska</option>
-										<option value="17">Rivnenska</option>
-										<option value="18">Symska</option>
-										<option value="19">Ternopilska</option>
-										<option value="20">Kharkivska</option>
-										<option value="21">Khersonska</option>
-										<option value="22">Khmelnutska</option>
-										<option value="23">Sherkaska</option>
-										<option value="24">Shernigivska</option>
-										<option value="25">Shernivetska</option>
+										<option value="Vinnucka">Vinnucka</option>
+										<option value="Volunska">Volunska</option>
+										<option value="Dnipropetrovska">Dnipropetrovska</option>
+										<option value="Donetska">Donetska</option>
+										<option value="Jutomirska">Jutomirska</option>
+										<option value="Zakarpatska">Zakarpatska</option>
+										<option value="Zaporizka">Zaporizka</option>
+										<option value="Ivano-Frankivska">Ivano-Frankivska</option>
+										<option value="Kyivska">Kyivska</option>
+										<option value="Kirovogradska">Kirovogradska</option>
+										<option value="Krum">Krum</option>
+										<option value="Lyganska">Lyganska</option>
+										<option value="Lvivska">Lvivska</option>
+										<option value="Mukolaivska">Mukolaivska</option>
+										<option value="Odeska">Odeska</option>
+										<option value="Poltavska">Poltavska</option>
+										<option value="Rivnenska">Rivnenska</option>
+										<option value="Symska">Symska</option>
+										<option value="Ternopilska">Ternopilska</option>
+										<option value="Kharkivska">Kharkivska</option>
+										<option value="Khersonska">Khersonska</option>
+										<option value="Khmelnutska">Khmelnutska</option>
+										<option value="Sherkaska">Sherkaska</option>
+										<option value="Shernigivska">Shernigivska</option>
+										<option value="Shernivetska">Shernivetska</option>
 									</select>
 								</div>
 							</div>
@@ -169,7 +178,10 @@
 							<div class="control-group">
 								<label class="control-label" for="city">City</label>
 								<div class="controls">
-									<input onclick="newTooltip();" type="text" id="city" name="city" placeholder="City">
+									<input onclick="newTooltip();" type="text" id="city"
+										name="city" placeholder="City" class="tip"
+										data-toggle="tooltip" data-placement="right"
+										title="Please enter your city">
 								</div>
 							</div>
 
@@ -177,7 +189,8 @@
 								<label class="control-label" for="street">Street</label>
 								<div class="controls">
 									<input type="text" id="street" name="street"
-										placeholder="Street">
+										placeholder="Street" class="tip" data-toggle="tooltip"
+										data-placement="right" title="Please enter you street">
 								</div>
 							</div>
 
@@ -186,9 +199,9 @@
 									№</label>
 								<div class="controls">
 									<input type="text" style="width: 85px;" id="house" name="house"
-										placeholder="House number">
-									&nbsp;&nbsp;/&nbsp; <input type="text" style="width: 85px;"
-										id="house" name="house" placeholder="Flat Number">
+										placeholder="House number"> &nbsp;&nbsp;/&nbsp; <input
+										type="text" style="width: 85px;" id="house" name="house"
+										placeholder="Flat Number">
 								</div>
 							</div>
 
@@ -196,7 +209,8 @@
 								<label class="control-label" for="zipCode">Zip Code</label>
 								<div class="controls">
 									<input type="text" id="zipCode" name="zipCode"
-										placeholder="Zip Code">
+										placeholder="Zip Code" class="tip" data-toggle="tooltip"
+										data-placement="right" title="Enter zip code (5 digits)">
 								</div>
 							</div>
 
@@ -218,7 +232,7 @@
 	<jsp:include page="footer"></jsp:include>
 	<!-- Placed at the end of the document so the pages load faster ============================================= -->
 
-	
+
 	<script src="themes/js/jquery.js" type="text/javascript"></script>
 	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
@@ -226,7 +240,8 @@
 	<script src="bootstrap/js/tip.js" type="text/javascript"></script>
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
-	<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
+	<script
+		src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
 	<script src="themes/assets/js/jquery.validate.js"></script>
 	<script src="themes/assets/js/script.js"></script>
 

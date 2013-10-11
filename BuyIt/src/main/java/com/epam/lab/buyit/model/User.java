@@ -12,7 +12,7 @@ public class User {
 	private String password;
 	private Contact contact;
 	private String avatar;
-	private boolean ban;
+	private Status ban;
 	private List<Product> productList;
 	private List<Bid> bidList;
 
@@ -92,12 +92,12 @@ public class User {
 		return this;
 	}
 
-	public boolean getBan() {
-		return ban;
+	public String getBan() {
+		return ban.getStatus();
 	}
 
 	public User setBan(boolean ban) {
-		this.ban = ban;
+		this.ban = Status.geRoleByType(ban);
 		return this;
 	}
 

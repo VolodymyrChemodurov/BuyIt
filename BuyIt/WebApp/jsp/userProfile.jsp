@@ -12,10 +12,12 @@
 <meta name="author" content="">
 
 <!-- Bootstrap style -->
+
 <link id="callCss" rel="stylesheet"
 	href="themes/bootshop/bootstrap.min.css" media="screen">
 <link href="themes/css/base.css" rel="stylesheet" media="screen">
 <!-- Bootstrap style responsive -->
+<link href="bootstrap/css/userpage.css" rel="stylesheet">
 <link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="themes/css/font-awesome.css" rel="stylesheet"
 	type="text/css">
@@ -37,24 +39,87 @@
 <body>
 	<jsp:include page="navbar"></jsp:include>
 	<!-- Header End====================================================================== -->
+
 	<div class="container">
-		<ul class="nav nav-tabs">
-			<li class="active" style="margin-left: 6px"><a href="#"><b>Profile</b></a></li>
-			<li><a href="#"><b>Sales</b></a></li>
-			<li><a href="#"><b>Shopping</b></a></li>
-			<li><a href="#"><b>Comments</b></a></li>
-		</ul>
-		<div class="inner-left-menu">
-		asdasdasdasd
-		asdasd
-		asdasd
-		asdasd
-		asd
+		<div id="maWrapper" class="corAll5">
+			<ul id="vMenu">
+				<li id="active"><strong>Profile</strong></li>
+				<li><a href="#">Salles</a></li>
+				<li><a href="#">Shopping</a></li>
+				<li><a href="#">Comments</a></li>
+			</ul>
+			<!-- / #vMenu -->
+			<div style="overflow: hidden;">
+				<div width="200" class="left-menu">
+					<div class="avatar-wrapper">
+						<img src="${user.avatar}">
+					</div>
+				</div>
+				<!-- /left-menu -->
+
+
+
+
+				<div id="maContent" class="corAll5">
+					<div class="mycontent">
+						<h3> General information</h3>
+						<div class="myrow">
+							<span class="span-1">First Name:</span>
+							<span class="span-2"><c:out value="${user.firstName}" ></c:out></span>
+							<input
+						</div>
+						<div class="myrow">
+							<span class="span-1">Last Name:</span>
+							<span class="span-2"><c:out value="${user.lastName}" ></c:out></span>
+						</div>
+						<div class="myrow">
+							<span class="span-1">Role:</span>
+							<span class="span-2"><c:out value="${user.ban}" ></c:out></span>
+						</div>
+						<h3> Adress</h3>
+						<div class="myrow">
+							<span class="span-1">City:</span>
+							<span class="span-2"><c:out value="${user.contact.address.city}" ></c:out></span>
+						</div>
+						<div class="myrow">
+							<span class="span-1">Region:</span>
+							<span class="span-2"><c:out value="${user.contact.address.region}" ></c:out> obl</span>
+						</div>
+						<div class="myrow">
+							<span class="span-1">Street</span>
+							<span class="span-2"><c:out value="${user.contact.address.street}" ></c:out></span>
+						</div>
+						<div class="myrow">
+							<span class="span-1">House / Flat</span>
+							<span class="span-2"><c:out value="${user.contact.address.house}" ></c:out></span>
+						</div>
+						<div class="myrow">
+							<span class="span-1">Zip Code</span>
+							<span class="span-2"><c:out value="${user.contact.address.zipCode}" ></c:out></span>
+						</div>
+						<h3> Contacts</h3>
+						<div class="myrow">
+							<span class="span-1">Phone:</span>
+							<span class="span-2"><c:out value="${user.contact.phone}" ></c:out></span>
+						</div>
+						<div class="myrow">
+							<span class="span-1">Email:</span>
+							<span class="span-2"><c:out value="${user.contact.email}" ></c:out> obl</span>
+						</div>
 		
-		
-		
+	
+					</div>
+
+				</div>
+				<!-- /maContent -->
+			</div>
 		</div>
-		
+
+	</div>
+	
+	<div style="height: 330px;">
+	
+	
 	</div>
 
 

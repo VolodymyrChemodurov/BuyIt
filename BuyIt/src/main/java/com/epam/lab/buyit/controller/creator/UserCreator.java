@@ -27,6 +27,8 @@ public class UserCreator {
 			String value = tempMap.get(currentElement.getField())[0];
 			currentElement.setField(createdUser, value);
 		}
+		createdUser.setAvatar("bootstrap/img/avatars/user-icon.png");
+		createdUser.setBan(false);
 		return createdUser;
 	}
 }
