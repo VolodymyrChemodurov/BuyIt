@@ -79,8 +79,8 @@
 								<label class="control-label" for="alogin">Login </label>
 								<div class="controls">
 									<input type="text" id="alogin" name="login" placeholder="Login"
-										value="aleg" class="tip"  data-toggle="tooltip" data-placement="right"
-										title="Login contains only number, small letters and '-' '_'">
+										class="tip" data-toggle="tooltip" data-placement="right"
+										title="More then 4 characters Only number, small letters and '-' '_'" value="aleg">
 									<div id="logindiv"></div>
 								</div>
 							</div>
@@ -89,36 +89,40 @@
 								</label>
 								<div class="controls">
 									<input type="text" id="firstName" name="firstName"
-										placeholder="First Name" value="Aleg">
+										placeholder="First Name" class="tip" data-toggle="tooltip"
+										data-placement="right" title="Start only from capital letter" value="Aleg">
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="lastName">Last name </label>
 								<div class="controls">
 									<input type="text" id="lastName" name="lastName"
-										placeholder="Last Name" value="Gupalo">
+										placeholder="Last Name" class="tip" data-toggle="tooltip"
+										data-placement="right" title="Start only from capital letter" value="Aleg">
 								</div>
 							</div>
 
 							<div class="control-group">
 								<label class="control-label" for="email">Email </label>
 								<div class="controls">
-									<input type="text" id="email" name="email" placeholder="Email"
-										value="aleg@qw.com">
+									<input type="text" id="email" name="email" placeholder="Email" value="aleg@asd.com">
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="phone">Phone </label>
 								<div class="controls">
 									<input type="text" id="phone" name="phone" placeholder="Phone"
-										value="1234567897">
+										class="tip" data-toggle="tooltip" data-placement="right"
+										title="Yours phone number (10 digits)" value="0564879685">
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="password">Password </label>
 								<div class="controls">
-									<input type="password" id="password" value="alegaleg"
-										name="password" placeholder="Password">
+									<input type="password" id="password" name="password"
+										placeholder="Password" class="tip" data-toggle="tooltip"
+										data-placement="right"
+										title="More then 6 characters Only number, small letters and '-' '_'" value="123456">
 								</div>
 							</div>
 
@@ -128,7 +132,8 @@
 								<div class="controls">
 									<input type="password" id="confirmPassword"
 										name="confirmPassword" placeholder="Confirm Password"
-										value="alegaleg">
+										class="tip" data-toggle="tooltip" data-placement="right"
+										title="Confirm your password" value="123456">
 								</div>
 							</div>
 
@@ -139,40 +144,70 @@
 								<div class="controls">
 									<select id="region" name="region">
 										<option value="">-</option>
-										<option value="1">Vinnucka</option>
-										<option value="2">Volunska</option>
-										<option value="3">Dnipropetrovska</option>
-										<option value="4">Donetska</option>
-										<option value="5">Jutomirska</option>
-										<option value="6">Zakarpatska</option>
-										<option value="7">Zaporizka</option>
-										<option value="8">Ivano-Frankivska</option>
-										<option value="9">Kyivska</option>
-										<option value="10">Kirovogradska</option>
-										<option value="11">Krum</option>
-										<option value="12">Lyganska</option>
-										<option value="13">Lvivska</option>
-										<option value="14">Mukolaivska</option>
-										<option value="15">Odeska</option>
-										<option value="16">Poltavska</option>
-										<option value="17">Rivnenska</option>
-										<option value="18">Symska</option>
-										<option value="19">Ternopilska</option>
-										<option value="20">Kharkivska</option>
-										<option value="21">Khersonska</option>
-										<option value="22">Khmelnutska</option>
-										<option value="23">Sherkaska</option>
-										<option value="24">Shernigivska</option>
-										<option value="25">Shernivetska</option>
+										<option value="Vinnucka">Vinnucka</option>
+										<option value="Volunska">Volunska</option>
+										<option value="Dnipropetrovska">Dnipropetrovska</option>
+										<option value="Donetska">Donetska</option>
+										<option value="Jutomirska">Jutomirska</option>
+										<option value="Zakarpatska">Zakarpatska</option>
+										<option value="Zaporizka">Zaporizka</option>
+										<option value="Ivano-Frankivska">Ivano-Frankivska</option>
+										<option value="Kyivska">Kyivska</option>
+										<option value="Kirovogradska">Kirovogradska</option>
+										<option value="Krum">Krum</option>
+										<option value="Lyganska">Lyganska</option>
+										<option value="Lvivska">Lvivska</option>
+										<option value="Mukolaivska">Mukolaivska</option>
+										<option value="Odeska">Odeska</option>
+										<option value="Poltavska">Poltavska</option>
+										<option value="Rivnenska">Rivnenska</option>
+										<option value="Symska">Symska</option>
+										<option value="Ternopilska">Ternopilska</option>
+										<option value="Kharkivska">Kharkivska</option>
+										<option value="Khersonska">Khersonska</option>
+										<option value="Khmelnutska">Khmelnutska</option>
+										<option value="Sherkaska">Sherkaska</option>
+										<option value="Shernigivska">Shernigivska</option>
+										<option value="Shernivetska">Shernivetska</option>
 									</select>
+									<!-- <select id="region" name="region">
+										<option value="">-</option>
+										<option value="1">Вінницька</option>
+										<option value="2">Волинська</option>
+										<option value="3">Дніпропетровська</option>
+										<option value="4">Донецька</option>
+										<option value="5">Житомирська</option>
+										<option value="6">Закарпатська</option>
+										<option value="7">Запорізька</option>
+										<option value="8">Івано-Франківська</option>
+										<option value="9">Київська</option>
+										<option value="10">Кіровоградська</option>
+										<option value="11">Крим</option>
+										<option value="12">Луганська</option>
+										<option value="13">Львівська</option>
+										<option value="14">Миколаївська</option>
+										<option value="15">Одеська</option>
+										<option value="16">Полтавська</option>
+										<option value="17">Рівненська</option>
+										<option value="18">Сумська</option>
+										<option value="19">Тернопільська</option>
+										<option value="20">Харківська</option>
+										<option value="21">Херсонська</option>
+										<option value="22">Хмельницька</option>
+										<option value="23">Черкаська</option>
+										<option value="24">Чернігівська</option>
+										<option value="25">Чернівецька</option>
+									</select> -->
 								</div>
 							</div>
 
 							<div class="control-group">
 								<label class="control-label" for="city">City</label>
 								<div class="controls">
-									<input onclick="newTooltip();" type="text" id="city" name="city" placeholder="City"
-										value="Lviv">
+									<input onclick="newTooltip();" type="text" id="city"
+										name="city" placeholder="City" class="tip"
+										data-toggle="tooltip" data-placement="right"
+										title="Please enter your city" value="asdasdasda">
 								</div>
 							</div>
 
@@ -180,7 +215,8 @@
 								<label class="control-label" for="street">Street</label>
 								<div class="controls">
 									<input type="text" id="street" name="street"
-										placeholder="Street" value="Alegaleg">
+										placeholder="Street"class="tip" data-toggle="tooltip" data-placement="right"
+										title="Please enter you street" value="asdasd">
 								</div>
 							</div>
 
@@ -199,7 +235,8 @@
 								<label class="control-label" for="zipCode">Zip Code</label>
 								<div class="controls">
 									<input type="text" id="zipCode" name="zipCode"
-										placeholder="Zip Code" value="12345">
+										placeholder="Zip Code" class="tip" data-toggle="tooltip" data-placement="right"
+										title="Enter zip code (5 digits)" value="12345">
 								</div>
 							</div>
 
@@ -221,7 +258,7 @@
 	<jsp:include page="footer"></jsp:include>
 	<!-- Placed at the end of the document so the pages load faster ============================================= -->
 
-	
+
 	<script src="themes/js/jquery.js" type="text/javascript"></script>
 	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
