@@ -13,7 +13,7 @@ import com.epam.lab.buyit.model.SubCategory;
 
 public class CategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final int ITEMS_ON_PAGE = 16;
+	private static final int ITEMS_ON_PAGE = 8;
 	private SubCategoryServiceImpl subCategoryServce;
 	private ProductServiceImpl productService;
 
