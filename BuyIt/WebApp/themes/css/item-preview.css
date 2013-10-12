@@ -14,26 +14,13 @@
 	width: 190px;
 }
 
-.thumbnail-my
- 
-h5
-,
-.thumbnail-my
- 
-p
-,
-{
-text-align
-:
- 
-center
-;
-
-
+.thumbnail-my h5 ,.thumbnail-my p{
+	text-align : center;
 }
+
 .thumbnail-my h4 {
 	text-align: justify;
-	margin: 5px;
+	margin: 4px;
 }
 
 .btn-my {
@@ -75,7 +62,7 @@ center
 
 .thumbnail-my {
 	width: 200px;
-	height: 240px;
+	height: 250px;
 	display: block;
 	padding: 4px;
 	line-height: 20px;
@@ -93,5 +80,9 @@ center
 	background: #fff;
 	position: relative;
 	border: 1px solid #eee;
+	text-align: center;
+}
+
+.my {
 	text-align: center;
 }
