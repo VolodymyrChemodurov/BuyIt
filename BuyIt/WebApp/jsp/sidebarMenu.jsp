@@ -3,35 +3,32 @@
 
 	<ul id="sideManu" class="nav nav-tabs nav-stacked">
 		<c:forEach var="category" items="${categories}" varStatus="statusOuter">
-			<c:if test="${statusOuter.first}">
-				<li class="subMenu open"><a>${category.name}</a> 
-					<ul>
-						<c:forEach var="sub" items="${category.listSubCategories}"
-							varStatus="statusInner">
-							<c:if test="${statusInner.first}">
-								<li><a class="active" 
-										href="select_category?id=<c:out value="${sub.idSubCategory}"/>"><i
-										class="icon-chevron-right"></i>${sub.name}</a></li>
-							</c:if>
-							<c:if test="${!statusInner.first}">
-								<li><a href="select_category?id=<c:out value="${sub.idSubCategory}"/>"><i
-										class="icon-chevron-right"></i>${sub.name}</a></li>
-							</c:if>
-
-						</c:forEach>
-					</ul></li>
-			</c:if>
-			<c:if test="${!statusOuter.first}">
-				<li class="subMenu"><a>${category.name}</a>
-					<ul style="display: none">
-						<c:forEach var="sub" items="${category.listSubCategories}">
-							<li><a href="select_category?id=<c:out value="${sub.idSubCategory}"/>"><i
-									class="icon-chevron-right"></i>${sub.name}</a></li>
-						</c:forEach>
-					</ul></li>
-			</c:if>
+			<li class="subMenu">
+				<a>${category.name}</a>
+				<c:if test="${category.idCategory == categoryId}">
+				<ul>
+					<c:forEach var="sub" items="${category.listSubCategories}">
+					<li>
+						<a href="select_category?id=${sub.idSubCategory}&categoryId=${category.idCategory}">
+							<i class="icon-chevron-right"></i>${sub.name}
+						</a>
+					</li>
+					</c:forEach>
+				</ul>
+				</c:if>
+				<c:if test="${category.idCategory != categoryId}">
+				<ul style="display: none">
+					<c:forEach var="sub" items="${category.listSubCategories}">
+					<li>
+						<a href="select_category?id=${sub.idSubCategory}&categoryId=${category.idCategory}">
+							<i class="icon-chevron-right"></i>${sub.name}
+						</a>
+					</li>
+					</c:forEach>
+				</ul>
+				</c:if>
+			</li>
 		</c:forEach>
-
 	</ul>
 
 	<br>
