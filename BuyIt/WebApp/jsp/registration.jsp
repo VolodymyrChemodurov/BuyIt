@@ -115,7 +115,7 @@
 								<div class="controls">
 									<input type="text" id="phone" name="phone" placeholder="Phone"
 										class="tip" data-toggle="tooltip" data-placement="right"
-										title="Yours phone number (10 digits)" value="0564879685">
+										title="Yours phone number (10 digits)">
 								</div>
 							</div>
 							<div class="control-group">
@@ -195,15 +195,21 @@
 							</div>
 
 							<div class="control-group">
-								<label class="control-label" for="house">House № / Flat
-									№</label>
+								<label class="control-label" for="house">House №</label>
 								<div class="controls">
-									<input type="text" style="width: 85px;" id="house" name="house"
-										placeholder="House number"> &nbsp;&nbsp;/&nbsp; <input
-										type="text" style="width: 85px;" id="house" name="house"
-										placeholder="Flat Number">
+									<input type="text" id="house" name="house"
+										placeholder="House number">
 								</div>
 							</div>
+							
+							<div class="control-group">
+								<label class="control-label" for="flat">Flat №</label>
+								<div class="controls">
+									<input type="text" id="flat" name="flat"
+										placeholder="Flat number">
+								</div>
+							</div>
+							
 
 							<div class="control-group">
 								<label class="control-label" for="zipCode">Zip Code</label>

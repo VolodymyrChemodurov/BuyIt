@@ -5,6 +5,7 @@ import java.util.List;
 import com.epam.lab.buyit.controller.dao.address.AddressDAO;
 import com.epam.lab.buyit.controller.dao.contact.ContactDAO;
 import com.epam.lab.buyit.controller.dao.user.UserDAO;
+import com.epam.lab.buyit.controller.security.MD5Encryptor;
 import com.epam.lab.buyit.model.Address;
 import com.epam.lab.buyit.model.Contact;
 import com.epam.lab.buyit.model.User;
@@ -69,7 +70,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUser(String login, String password) {
-		User user = userDAO.getUser(login, password);
+		User user = userDAO.getUser(login, MD5Encryptor.encrypt(password));
 		configUser(user);
 		return user;
 	}
