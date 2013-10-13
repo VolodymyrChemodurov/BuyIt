@@ -8,6 +8,16 @@ public class Bid {
 	private int auctionId;
 	private int userId;
 	private Timestamp time;
+	private double amount;
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public Bid setAmount(double amount) {
+		this.amount = amount;
+		return this;
+	}
 
 	public int getIdBid() {
 		return idBid;
@@ -49,7 +59,7 @@ public class Bid {
 	public String toString() {
 		StringBuilder string = new StringBuilder();
 		string.append(idBid).append(" time: ").append(time)
-				.append(" auction id: ").append(auctionId).append(" user id: ")
+				.append(" auction id: ").append(auctionId).append(" amount: ").append(amount).append(" user id: ")
 				.append(userId);
 		return string.toString();
 	}
