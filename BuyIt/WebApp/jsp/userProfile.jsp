@@ -147,7 +147,7 @@
 										value="${user.contact.phone}" /> </span>
 									<button type="submit" style="margin-left: 40px; width: auto;"
 										class="btn btn-success">Apply changes</button>
-								</div>7
+								</div>
 								<div class=myrow>
 									<span class="span-2"><input name="email"
 										value="${user.contact.email}" /> </span>
