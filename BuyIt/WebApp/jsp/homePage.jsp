@@ -92,6 +92,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<jsp:include page="footer"></jsp:include>
 	<!-- Placed at the end of the document so the pages load faster ============================================= -->
 	<script src="themes/js/jquery.js" type="text/javascript"></script>
