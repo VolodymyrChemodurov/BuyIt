@@ -16,7 +16,7 @@
 					<select class="srchTxt" name="srchedTxt">
 						<option>Select...</option>
 						<c:forEach var="product" items="${categories}">
-							<option>${product.key}</option>
+							<option>${product}</option>
 						</c:forEach>
 					</select>
 					<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
