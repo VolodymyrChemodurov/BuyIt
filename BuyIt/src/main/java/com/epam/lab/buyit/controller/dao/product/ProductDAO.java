@@ -16,6 +16,10 @@ import com.epam.lab.buyit.model.Product;
 
 public class ProductDAO implements ProductDAOInterface {
 	private static final Logger LOGGER = Logger.getLogger(ProductDAO.class);
+	private final static String GET_PRD_BY_NAME = "SELECT * FROM products WHERE name LIKE ? ORDER BY name";
+	private final static String GET_PRD_BY_CATEGORY = "SELECT * FROM products WHERE sub_category_id IN (SELECT id_sub_category FROM sub_categories WHERE category_id = (SELECT id_category FROM categories WHERE categories.name = ?)) ORDER BY products.name";
+	private final static String GET_PRD_BY_NAME_CATEGORY = "SELECT * FROM products WHERE sub_category_id IN (SELECT id_sub_category FROM sub_categories WHERE category_id = (SELECT id_category FROM categories WHERE categories.name = ?)) AND products.name LIKE ? ORDER BY products.name";
+
 	private final static String GET_BY_ID = "SELECT * FROM products WHERE id_product = ?";
 	private final static String GET_ALL_PRODUCTS = "SELECT * FROM products";
 	private final static String GET_BY_SUBCATEGORY_ID = "SELECT * FROM products WHERE sub_category_id = ?";
@@ -23,10 +27,81 @@ public class ProductDAO implements ProductDAOInterface {
 			+ "LIMIT ?, ?";
 	private final static String GET_ROWS_COUNT_BY_SYBCATEGORY_ID = "SELECT COUNT(id_product) FROM products WHERE sub_category_id = ?";
 	private ProductTransformer transformer;
-
 	public ProductDAO() {
 		transformer = new ProductTransformer();
 	}
+	
+	public List<Product> findElementByNameCategory(String prdName, String category) {
+		Product product = null;
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		List<Product> list = new ArrayList<Product>();
+		try {
+			statement = connection.prepareStatement(GET_PRD_BY_NAME_CATEGORY);
+			statement.setString(1, category);
+			statement.setString(2, "%" + prdName + "%");
+			result = statement.executeQuery();
+			while (result.next()) {
+				product = transformer.fromRSToObject(result);
+				list.add(product);
+			}
+			return list;
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return list;
+	}
+	
+	public List<Product> findElementByCategory(String name) {
+		Product product = null;
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		List<Product> list = new ArrayList<Product>();
+		try {
+			statement = connection.prepareStatement(GET_PRD_BY_CATEGORY);
+			statement.setString(1, name);
+			result = statement.executeQuery();
+			while (result.next()) {
+				product = transformer.fromRSToObject(result);
+				list.add(product);
+			}
+			return list;
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return list;
+	}
+
+	
+	public List<Product> findElementByName(String name) {
+		Product product = null;
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		List<Product> list = new ArrayList<Product>();
+		try {
+			statement = connection.prepareStatement(GET_PRD_BY_NAME);
+			statement.setString(1, "%" + name + "%");
+			result = statement.executeQuery();
+			while (result.next()) {
+				product = transformer.fromRSToObject(result);
+				list.add(product);
+			}
+			return list;
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return list;
+	}
+
 
 	@Override
 	public int createElement(Product elem) {

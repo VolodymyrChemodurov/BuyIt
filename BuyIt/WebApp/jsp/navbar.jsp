@@ -11,11 +11,12 @@
 				<a class="brand" href="homePage"><img
 					src="themes/images/logo.png" alt="Bootsshop"></a>
 				<form class="form-inline navbar-search" method="post"
-					action="products.html">
-					<input id="srchFld" class="srchTxt" type="text"> <select
-						class="srchTxt">
-						<c:forEach var="category" items="${categories}">
-							<option>${category.name}</option>
+					action="searchServlet">
+					<input id="srchFld" class="srchTxt" type="text" name="srchedFld">
+					<select class="srchTxt" name="srchedTxt">
+						<option>Select...</option>
+						<c:forEach var="product" items="${products}">
+							<option>${product.key}</option>
 						</c:forEach>
 					</select>
 					<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
