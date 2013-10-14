@@ -10,7 +10,7 @@ $(document).ready(
 		    }, "FIRST NAME");
 			
 			$.validator.addMethod("lastNameRegex", function(value, element) {
-		        return this.optional(element) || /^[a-zA-Z ]+$/i.test(value);
+		        return this.optional(element) || /^[A-Z][a-zA-Z ]+$/i.test(value);
 		    }, "LAST NAME");
 			
 			$.validator.addMethod("passwordRegex", function(value, element) {
@@ -30,8 +30,12 @@ $(document).ready(
 		    }, "STREET");
 			
 			$.validator.addMethod("houseRegex", function(value, element) {
-		        return this.optional(element) || /^[\d]{1,3}[a-z]*\/[\d]{1,3}[a-z]*$/i.test(value);
-		    }, "");
+		        return this.optional(element) || /^[\d]{1,3}[a-z]?$/i.test(value);
+		    }, "HOUSE");
+			
+			$.validator.addMethod("flatRegex", function(value, element) {
+		        return this.optional(element) || /^[\d]{1,3}[a-z]?$/i.test(value);
+		    }, "FLAT");
 			
 			$.validator.addMethod("zipCodeRegex", function(value, element) {
 		        return this.optional(element) || /^\d{5}$/i.test(value);
@@ -76,6 +80,9 @@ $(document).ready(
 							},
 							house: {
 								houseRegex: true
+							},
+							flat: {
+								flatRegex: true
 							},
 							zipCode: {
 								zipCodeRegex: true

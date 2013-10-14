@@ -16,11 +16,15 @@ public class AuctionDAO implements AuctionDAOInterface{
 	private static final Logger LOGGER = Logger.getLogger(AuctionDAO.class);
 	private final static String GET_BY_ID = "SELECT * FROM auctions WHERE id_auction = ?";
 	private final static String GET_BY_PRODUCT_ID = "SELECT * FROM auctions WHERE product_id = ?";
+
 	private AuctionTransformer transformer;
 
 	public AuctionDAO() {
 		transformer = new AuctionTransformer();
 	}
+	
+	
+	
 	@Override
 	public int createElement(Auction elem) {
 		Connection connection = ConnectionManager.getConnection();
@@ -99,5 +103,5 @@ public class AuctionDAO implements AuctionDAOInterface{
 		}
 		return currentAuctions;
 	}
-
+	
 }

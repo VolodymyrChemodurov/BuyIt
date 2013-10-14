@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>BuyIt</display-name>
   <welcome-file-list>
     <welcome-file>homePageServlet</welcome-file>
@@ -24,6 +24,14 @@
   <servlet-mapping>
     <servlet-name>Jersey REST Service</servlet-name>
     <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SearchServlet</servlet-name>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.SearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchServlet</servlet-name>
+    <url-pattern>/searchServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>HomePageServlet</servlet-name>
@@ -129,6 +137,14 @@
   <servlet-mapping>
     <servlet-name>Registration</servlet-name>
     <url-pattern>/registration</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Searching</servlet-name>
+    <jsp-file>/jsp/searchResult.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Searching</servlet-name>
+    <url-pattern>/searching</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>checkLoginServlet</servlet-name>

@@ -1,5 +1,6 @@
 package com.epam.lab.buyit.controller.setters;
 
+import com.epam.lab.buyit.controller.security.MD5Encryptor;
 import com.epam.lab.buyit.model.User;
 
 public enum UserSetter {
@@ -21,7 +22,8 @@ public enum UserSetter {
 	},
 	PASSWORD("password") {
 		public void setField(User user, String value) {
-			user.setPassword(value);
+			String password = MD5Encryptor.encrypt(value);
+			user.setPassword(password);
 		}
 	},
 	EMAIL("email") {
@@ -56,7 +58,8 @@ public enum UserSetter {
 	},
 	FLAT("flat") {
 		public void setField(User user, String value) {
-			user.getContact().getAddress().setHouse(value);
+			String house = user.getContact().getAddress().getHouse();
+			user.getContact().getAddress().setHouse(house + "/" + value);
 		}
 	},
 	ZIP_CODE("zipCode") {

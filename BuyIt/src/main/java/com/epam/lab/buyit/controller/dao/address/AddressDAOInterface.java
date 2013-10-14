@@ -7,5 +7,5 @@ import com.epam.lab.buyit.model.Address;
 
 public interface AddressDAOInterface extends GenericDAO<Address>{
 
-	List<Address> getAllAddress();
+	public List<Address> getAllAddress();
 }

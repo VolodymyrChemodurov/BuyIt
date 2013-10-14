@@ -135,7 +135,9 @@
 										value="${user.contact.address.street}" /> </span>
 								</div>
 								<div class=myrow>
-									<span class="span-2"><input name="flat"
+									<span class="span-3"><input name="house"
+										value="${user.contact.address.house}" /> </span>
+									<span class="span-3"><input name="flat"
 										value="${user.contact.address.house}" /> </span>
 								</div>
 								<div class=myrow>
@@ -145,14 +147,14 @@
 								<div class=myrow style="padding-top: 40px;">
 									<span class="span-2"><input name="phone"
 										value="${user.contact.phone}" /> </span>
-									<button type="submit" style="margin-left: 40px; width: auto;"
-										class="btn btn-success">Apply changes</button>
+									<button type="submit" style="margin-left: 40px; width: 120px;"
+										class="btn btn-mini btn-success">Apply changes</button>
 								</div>
 								<div class=myrow>
 									<span class="span-2"><input name="email"
 										value="${user.contact.email}" /> </span>
 									<input type="button" id="btn-back" style="margin-left: 40px; width: 120px;"
-										class="btn btn-danger" value="Cancel"></button>
+										class="btn btn-mini btn-danger" value="Cancel"></button>
 								</div>
 							</form>
 						</div>

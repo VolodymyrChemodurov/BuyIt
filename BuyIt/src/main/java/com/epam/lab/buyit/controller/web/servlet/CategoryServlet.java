@@ -39,6 +39,7 @@ public class CategoryServlet extends HttpServlet {
 		int numberOfRecords = productService.getCountBySubCategoryId(subCategory_id);
 		int numberOfPages = (int) Math.ceil(numberOfRecords * 1.0 / ITEMS_ON_PAGE);
 		
+		request.setAttribute("categoryId", request.getParameter("categoryId"));
 		request.setAttribute("subCategory", subCategory);
 		request.setAttribute("noOfPages", numberOfPages);
 		request.setAttribute("page", page);
