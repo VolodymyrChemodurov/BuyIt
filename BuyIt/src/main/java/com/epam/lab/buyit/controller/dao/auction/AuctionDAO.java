@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -12,15 +14,18 @@ import com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.transformers.AuctionTransformer;
 import com.epam.lab.buyit.model.Auction;
 
-public class AuctionDAO implements AuctionDAOInterface{
+public class AuctionDAO implements AuctionDAOInterface {
 	private static final Logger LOGGER = Logger.getLogger(AuctionDAO.class);
 	private final static String GET_BY_ID = "SELECT * FROM auctions WHERE id_auction = ?";
 	private final static String GET_BY_PRODUCT_ID = "SELECT * FROM auctions WHERE product_id = ?";
+	private final static String GET_LATEST = "SELECT * FROM auctions WHERE status='inProgress' ORDER BY end_time LIMIT ?";
+
 	private AuctionTransformer transformer;
 
 	public AuctionDAO() {
 		transformer = new AuctionTransformer();
 	}
+
 	@Override
 	public int createElement(Auction elem) {
 		Connection connection = ConnectionManager.getConnection();
@@ -46,8 +51,7 @@ public class AuctionDAO implements AuctionDAOInterface{
 	@Override
 	public Auction getElementById(int id) {
 		Auction currentAuctions = null;
-		Connection connection = com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager
-				.getConnection();
+		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		try {
@@ -69,19 +73,19 @@ public class AuctionDAO implements AuctionDAOInterface{
 	@Override
 	public void updateElement(Auction elem) {
 		throw new UnsupportedOperationException();
-		
+
 	}
 
 	@Override
 	public void deleteElementById(int id) {
 		throw new UnsupportedOperationException();
-		
+
 	}
+
 	@Override
 	public Auction getByProductId(int productId) {
 		Auction currentAuctions = null;
-		Connection connection = com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager
-				.getConnection();
+		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		try {
@@ -98,6 +102,28 @@ public class AuctionDAO implements AuctionDAOInterface{
 			DAOUtils.close(result, statement, connection);
 		}
 		return currentAuctions;
+	}
+
+	@Override
+	public List<Auction> getLatestAuctions(int number) {
+		List<Auction> auctions = new ArrayList<Auction>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_LATEST);
+			statement.setInt(1, number);
+			result = statement.executeQuery();
+			while (result.next()) {
+				Auction currentAuction = transformer.fromRSToObject(result);
+				auctions.add(currentAuction);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return auctions;
 	}
 
 }
