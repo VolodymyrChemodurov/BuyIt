@@ -94,6 +94,7 @@ public class ProductServiceImpl implements ProductService {
 		for (Auction currAuction : latestAuctions) {
 			Product currProduct = productDAO.getElementById(currAuction
 					.getProductId());
+			currProduct.setAuction(currAuction);
 			latestProducts.add(currProduct);
 		}
 		List<Description> descriptions = descriptionDAO.getAllDescriptions();
