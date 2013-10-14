@@ -8,12 +8,12 @@ import com.epam.lab.buyit.model.User;
 
 public class UserCreator {
 
-	public UserCreator(){
-		
+	public UserCreator() {
+
 	}
 
-	public User create(Map<String,String[]> inputMap){
-		Map<String,String[]> tempMap = new LinkedHashMap<>(inputMap);
+	public User create(Map<String, String[]> inputMap) {
+		Map<String, String[]> tempMap = new LinkedHashMap<>(inputMap);
 		User createdUser = new User();
 		for(UserSetter currentElement: UserSetter.values()){
 			String value = tempMap.get(currentElement.getField())[0];
