@@ -54,6 +54,11 @@ public enum UserSetter {
 			user.getContact().getAddress().setHouse(value);
 		}
 	},
+	FLAT("flat") {
+		public void setField(User user, String value) {
+			user.getContact().getAddress().setHouse(value);
+		}
+	},
 	ZIP_CODE("zipCode") {
 		public void setField(User user, String value) {
 			user.getContact().getAddress().setZipCode(value);
