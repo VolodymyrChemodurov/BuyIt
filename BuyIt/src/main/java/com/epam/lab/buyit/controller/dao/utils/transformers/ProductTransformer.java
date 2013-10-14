@@ -42,10 +42,10 @@ public class ProductTransformer implements TransformerInterface<Product> {
 	public Product fromRSToObject(ResultSet resultSet) {
 		Product product = new Product();
 		try {
-			product.setIdProduct(resultSet.getInt("id_category"));
+			product.setIdProduct(resultSet.getInt("id_product"));
 			product.setName(resultSet.getString("name"));
-//			product.setSubCategoryId(resultSet.getInt("sub_category_id"));
-//			product.setUserId(resultSet.getInt("user_id"));
+			product.setSubCategoryId(resultSet.getInt("sub_category_id"));
+			product.setUserId(resultSet.getInt("user_id"));
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}

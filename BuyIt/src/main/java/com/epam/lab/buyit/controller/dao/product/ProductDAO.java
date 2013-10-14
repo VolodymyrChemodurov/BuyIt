@@ -19,8 +19,8 @@ public class ProductDAO implements ProductDAOInterface {
 	private final static String GET_BY_ID = "SELECT * FROM products WHERE id_product = ?";
 	
 	private final static String GET_PRD_BY_NAME = "SELECT * FROM products WHERE name LIKE ? ORDER BY name";
-	private final static String GET_PRD_BY_CATEGORY = "SELECT * FROM categories WHERE name = ? ORDER BY name";
-	private final static String GET_PRD_BY_NAME_CATEGORY = "SELECT * FROM products WHERE sub_category_id IN (SELECT id_sub_category FROM sub_categories WHERE category_id = (SELECT id_category FROM categories WHERE name = ?)) AND name LIKE ?";
+	private final static String GET_PRD_BY_CATEGORY = "SELECT * FROM products WHERE sub_category_id IN (SELECT id_sub_category FROM sub_categories WHERE category_id = (SELECT id_category FROM categories WHERE categories.name = ?)) ORDER BY products.name";
+	private final static String GET_PRD_BY_NAME_CATEGORY = "SELECT * FROM products WHERE sub_category_id IN (SELECT id_sub_category FROM sub_categories WHERE category_id = (SELECT id_category FROM categories WHERE categories.name = ?)) AND products.name LIKE ? ORDER BY products.name";
 	
 	private static final Logger LOGGER = Logger.getLogger(ProductDAO.class);
 	private ProductTransformer transformer;
