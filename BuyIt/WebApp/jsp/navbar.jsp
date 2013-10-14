@@ -15,7 +15,7 @@
 					<input id="srchFld" class="srchTxt" type="text" name="srchedFld">
 					<select class="srchTxt" name="srchedTxt">
 						<option>Select...</option>
-						<c:forEach var="product" items="${products}">
+						<c:forEach var="product" items="${categories}">
 							<option>${product.key}</option>
 						</c:forEach>
 					</select>
