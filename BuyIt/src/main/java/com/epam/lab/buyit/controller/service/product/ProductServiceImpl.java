@@ -1,19 +1,27 @@
 package com.epam.lab.buyit.controller.service.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.epam.lab.buyit.controller.dao.auction.AuctionDAO;
 import com.epam.lab.buyit.controller.dao.description.DescriptionDAO;
+import com.epam.lab.buyit.controller.dao.image.ImageDAO;
 import com.epam.lab.buyit.controller.dao.product.ProductDAO;
+import com.epam.lab.buyit.model.Auction;
 import com.epam.lab.buyit.model.Description;
 import com.epam.lab.buyit.model.Product;
 
 public class ProductServiceImpl implements ProductService {
 	private ProductDAO productDAO;
 	private DescriptionDAO descriptionDAO;
+	private AuctionDAO auctionDAO;
+	private ImageDAO imageDAO; 
 
 	public ProductServiceImpl() {
 		productDAO = new ProductDAO();
 		descriptionDAO = new DescriptionDAO();
+		auctionDAO = new AuctionDAO();
+		imageDAO=new ImageDAO();
 	}
 
 	@Override
@@ -65,6 +73,8 @@ public class ProductServiceImpl implements ProductService {
 		for (Description currentDescription : descriptions) {
 			if (currentDescription.getProductId() == currentProduct
 					.getIdProduct()) {
+				currentDescription.setItemPhotos(imageDAO.getImagesByDescriptionId(currentDescription
+						.getIdDescription()));
 				currentProduct.setDescription(currentDescription);
 				break;
 			}
@@ -75,6 +85,22 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int getCountBySubCategoryId(int id) {
 		return productDAO.getCountBySubCategoryId(id);
+	}
+
+	@Override
+	public List<Product> getLatestProducts(int number) {
+		List<Product> latestProducts = new ArrayList<Product>();
+		List<Auction> latestAuctions = auctionDAO.getLatestAuctions(number);
+		for (Auction currAuction : latestAuctions) {
+			Product currProduct = productDAO.getElementById(currAuction
+					.getProductId());
+			latestProducts.add(currProduct);
+		}
+		List<Description> descriptions = descriptionDAO.getAllDescriptions();
+		for (Product currentProduct : latestProducts) {
+			setProductDescription(currentProduct, descriptions);
+		}
+		return latestProducts;
 	}
 
 }
