@@ -79,6 +79,19 @@
 				<!-- Sidebar ================================================== -->
 				<jsp:include page="sidebarMenu"></jsp:include>
 				<!-- Sidebar end=============================================== -->
+				
+				<div class="span9">
+					<ul class="breadcrumb">
+						<li class="active">
+							<a href="homePageServlet">Home</a>
+						</li>
+					</ul>
+
+					<h3>
+						Latest Auctions
+					</h3>
+				</div>
+				
 				<c:if test="${not empty latestProducts}">
 					<div class="item">
 						<ul class="thumbnails">
