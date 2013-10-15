@@ -3,37 +3,49 @@ package com.epam.lab.buyit.controller.service.product;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.epam.lab.buyit.controller.dao.auction.AuctionDAO;
-import com.epam.lab.buyit.controller.dao.description.DescriptionDAO;
+//import com.epam.lab.buyit.controller.dao.auction.AuctionDAO;
+//import com.epam.lab.buyit.controller.dao.description.DescriptionDAO;
 import com.epam.lab.buyit.controller.dao.image.ImageDAO;
 import com.epam.lab.buyit.controller.dao.product.ProductDAO;
+import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
+import com.epam.lab.buyit.controller.service.description.DescriptionServiceImpl;
 import com.epam.lab.buyit.model.Auction;
 import com.epam.lab.buyit.model.Description;
 import com.epam.lab.buyit.model.Product;
 
 public class ProductServiceImpl implements ProductService {
 	private ProductDAO productDAO;
-	private DescriptionDAO descriptionDAO;
-	private AuctionDAO auctionDAO;
+	//private DescriptionDAO descriptionDAO;
 	private ImageDAO imageDAO; 
+	private DescriptionServiceImpl descriptionServiceImpl; 
+	private AuctionServiceImp auctionService;
 
 	public ProductServiceImpl() {
 		productDAO = new ProductDAO();
-		descriptionDAO = new DescriptionDAO();
-		auctionDAO = new AuctionDAO();
+		//descriptionDAO = new DescriptionDAO();
+		//auctionDAO = new AuctionDAO();
 		imageDAO=new ImageDAO();
+		descriptionServiceImpl = new DescriptionServiceImpl();
+		auctionService = new AuctionServiceImp();
 	}
 
 	@Override
 	public Product getItemById(int id) {
-		Product product = productDAO.getElementById(id);
-		return product;
+		Product currentProduct = productDAO.getElementById(id);
+		int productId =currentProduct.getIdProduct();
+		Auction auction = auctionService.getByProductId(productId);
+		Description description = descriptionServiceImpl.getByProductId(productId);
+		
+		currentProduct.setDescription(description);
+		currentProduct.setAuction(auction);
+		return currentProduct;
 	}
 
 	@Override
 	public List<Product> getAllItems() {
 		List<Product> products = productDAO.getAllProducts();
-		List<Description> descriptions = descriptionDAO.getAllDescriptions();
+		//List<Description> descriptions = descriptionDAO.getAllDescriptions();
+		List<Description> descriptions = descriptionServiceImpl.getAllItems();
 		for (Product currentProduct : products) {
 			setProductDescription(currentProduct, descriptions);
 		}
@@ -47,7 +59,8 @@ public class ProductServiceImpl implements ProductService {
 
 		Description description = item.getDescription();
 		description.setProductId(generated_product_id);
-		descriptionDAO.createElement(description);
+		//descriptionDAO.createElement(description);
+		descriptionServiceImpl.createItem(description);
 
 		return item;
 	}
@@ -63,7 +76,8 @@ public class ProductServiceImpl implements ProductService {
 
 		Description description = item.getDescription();
 		description.setIdDescription(item.getIdProduct());
-		descriptionDAO.updateElement(description);
+		//descriptionDAO.updateElement(description);
+		descriptionServiceImpl.updateItem(description);
 
 		return item;
 	}
@@ -90,7 +104,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> getLatestProducts(int number) {
 		List<Product> latestProducts = new ArrayList<Product>();
-		List<Auction> latestAuctions = auctionDAO.getLatestAuctions(number);
+		List<Auction> latestAuctions = auctionService.getLatestAuctions(number);
 		for (Auction currAuction : latestAuctions) {
 			Product currProduct = productDAO.getElementById(currAuction
 					.getProductId());
@@ -98,7 +112,8 @@ public class ProductServiceImpl implements ProductService {
 			latestProducts.add(currProduct);
 			
 		}
-		List<Description> descriptions = descriptionDAO.getAllDescriptions();
+		//List<Description> descriptions = descriptionDAO.getAllDescriptions();
+		List<Description> descriptions = descriptionServiceImpl.getAllItems();
 		for (Product currentProduct : latestProducts) {
 			setProductDescription(currentProduct, descriptions);
 		}

@@ -1,12 +1,15 @@
 package com.epam.lab.buyit.controller.service.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.epam.lab.buyit.controller.dao.address.AddressDAO;
 import com.epam.lab.buyit.controller.dao.contact.ContactDAO;
 import com.epam.lab.buyit.controller.dao.user.UserDAO;
 import com.epam.lab.buyit.controller.security.MD5Encryptor;
+import com.epam.lab.buyit.controller.service.bid.BidServiceImp;
 import com.epam.lab.buyit.model.Address;
+import com.epam.lab.buyit.model.Bid;
 import com.epam.lab.buyit.model.Contact;
 import com.epam.lab.buyit.model.User;
 
@@ -14,11 +17,13 @@ public class UserServiceImpl implements UserService {
 	private UserDAO userDAO;
 	private ContactDAO contactDAO;
 	private AddressDAO addressDAO;
+	private BidServiceImp bidService;
 
 	public UserServiceImpl() {
 		userDAO = new UserDAO();
 		contactDAO = new ContactDAO();
 		addressDAO = new AddressDAO();
+		bidService = new BidServiceImp();
 	}
 
 	@Override
@@ -106,5 +111,23 @@ public class UserServiceImpl implements UserService {
 			user.setContact(contact);
 			contact.setAddress(addressDAO.getElementById(contact.getIdContact()));
 		}
+	}
+
+	@Override
+	public List<User> getWhoMakeBidInAuction(int auctionId) {
+		List<Bid> bidList = new ArrayList<Bid>();
+		List<User> userList = new ArrayList<User>();
+		
+		bidList = bidService.getByAuctionId(auctionId);
+		User currentUser = null;
+		for (Bid bid : bidList) {
+			currentUser = userDAO.getElementById(bid.getUserId());
+			currentUser.setBidList(new ArrayList<Bid>());
+			currentUser.getBidList().add(bid);
+			
+			userList.add(currentUser);
+			
+		}
+		return userList;
 	}
 }

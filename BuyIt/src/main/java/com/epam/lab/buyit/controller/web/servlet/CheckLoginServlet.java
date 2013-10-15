@@ -17,7 +17,7 @@ public class CheckLoginServlet extends HttpServlet {
 		service = new UserServiceImpl();
 	}
 		
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
 		String responseText = login;
 		if(service.checkLogin(login)) {

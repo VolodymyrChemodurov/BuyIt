@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -17,6 +19,9 @@ public class BidDAO implements BidDAOInterface{
 
 	private static final Logger LOGGER = Logger.getLogger(AddressDAO.class);
 	private final static String GET_BY_ID = "SELECT * FROM bids WHERE id_bid = ?";
+	private final static String GET_BY_AUCTION_ID ="SELECT * FROM bids WHERE auction_id = ?";
+	private final static String GET_BY_USER_ID ="SELECT * FROM bids WHERE user_id = ?";
+	private final static String GET_ALL_BIDS ="SELECT * FROM bids";
 	private BidTransformer transformer;
 
 	public BidDAO() {
@@ -70,7 +75,18 @@ public class BidDAO implements BidDAOInterface{
 
 	@Override
 	public void updateElement(Bid elem) {
-		throw new UnsupportedOperationException();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = transformer.fromObjectToUpdatePS(elem, connection);
+			if (statement != null) {
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
 		
 	}
 
@@ -78,6 +94,77 @@ public class BidDAO implements BidDAOInterface{
 	public void deleteElementById(int id) {
 		throw new UnsupportedOperationException();
 		
+	}
+
+	@Override
+	public List<Bid> getByAuctionId(int auctionId) {
+		Bid currentBid = null;
+		List<Bid> bidList = new ArrayList<Bid>();
+		Connection connection = com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager
+				.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_BY_AUCTION_ID);
+			statement.setInt(1, auctionId);
+			result = statement.executeQuery();
+			while (result.next()) {
+				currentBid = transformer.fromRSToObject(result);
+				bidList.add(currentBid);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return bidList;
+	}
+
+	@Override
+	public List<Bid> getByUserId(int userId) {
+		Bid currentBid = null;
+		List<Bid> bidList = new ArrayList<Bid>();
+		Connection connection = com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager
+				.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_BY_USER_ID);
+			statement.setInt(1, userId);
+			result = statement.executeQuery();
+			while (result.next()) {
+				currentBid = transformer.fromRSToObject(result);
+				bidList.add(currentBid);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return bidList;
+	}
+
+	@Override
+	public List<Bid> getAllBids() {
+		Bid currentBid = null;
+		List<Bid> bidList = new ArrayList<Bid>();
+		Connection connection = com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager
+				.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_ALL_BIDS);
+			result = statement.executeQuery();
+			while (result.next()) {
+				currentBid = transformer.fromRSToObject(result);
+				bidList.add(currentBid);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return bidList;
 	}
 
 }

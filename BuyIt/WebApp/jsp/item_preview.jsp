@@ -6,7 +6,7 @@
 
 <li class="span3-my">
 	<div class="thumbnail-my">
-		<a href="product_details.html"> <img
+		<a href="productDetails?id=${product.idProduct}"> <img
 			src="<c:out value="${product.description.itemPhotos[0].path }"></c:out>">
 		</a>
 		<div class="caption">
@@ -38,8 +38,8 @@
 			</span>
 		</h4>
 	</div> <!-- Modal -->
-	<div class="modal fade" id="myModal${product.idProduct}" tabindex="-1"
-		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal hide fade in" tabindex="-1" role="dialog" aria-hidden="false" id="myModal${product.idProduct}"
+		aria-labelledby="myModalLabel">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">

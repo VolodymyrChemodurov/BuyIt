@@ -218,4 +218,20 @@
 		<servlet-name>EmailUsServlet</servlet-name>
 		<url-pattern>/emailUs</url-pattern>
 	</servlet-mapping>
+	<servlet>
+   <servlet-name>ProductPage</servlet-name>
+    <jsp-file>/jsp/productPage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductPage</servlet-name>
+    <url-pattern>/productPage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ProductDetailsServlet</servlet-name>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.ProductDetailsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductDetailsServlet</servlet-name>
+    <url-pattern>/productDetails</url-pattern>
+  </servlet-mapping>
 </web-app>
