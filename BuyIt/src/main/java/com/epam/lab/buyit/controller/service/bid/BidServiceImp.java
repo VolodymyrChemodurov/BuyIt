@@ -37,4 +37,10 @@ public class BidServiceImp implements BidService {
 		return item;
 	}
 
+	@Override
+	public List<Bid> getByAuctionId(int auctionId) {
+		
+		return bidDAO.getByAuctionId(auctionId);
+	}
+
 }

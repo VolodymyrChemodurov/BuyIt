@@ -4,22 +4,35 @@ import java.util.List;
 
 import com.epam.lab.buyit.controller.dao.description.DescriptionDAO;
 import com.epam.lab.buyit.controller.dao.product.ProductDAO;
+import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
+import com.epam.lab.buyit.controller.service.description.DescriptionServiceImpl;
+import com.epam.lab.buyit.model.Auction;
 import com.epam.lab.buyit.model.Description;
 import com.epam.lab.buyit.model.Product;
 
 public class ProductServiceImpl implements ProductService {
 	private ProductDAO productDAO;
 	private DescriptionDAO descriptionDAO;
+	private DescriptionServiceImpl descriptionServiceImpl; 
+	private AuctionServiceImp auctionService;
 
 	public ProductServiceImpl() {
 		productDAO = new ProductDAO();
 		descriptionDAO = new DescriptionDAO();
+		descriptionServiceImpl = new DescriptionServiceImpl();
+		auctionService = new AuctionServiceImp();
 	}
 
 	@Override
 	public Product getItemById(int id) {
-		Product product = productDAO.getElementById(id);
-		return product;
+		Product currentProduct = productDAO.getElementById(id);
+		int productId =currentProduct.getIdProduct();
+		Auction auction = auctionService.getByProductId(productId);
+		Description description = descriptionServiceImpl.getByProductId(productId);
+		
+		currentProduct.setDescription(description);
+		currentProduct.setAuction(auction);
+		return currentProduct;
 	}
 
 	@Override
@@ -76,5 +89,6 @@ public class ProductServiceImpl implements ProductService {
 	public int getCountBySubCategoryId(int id) {
 		return productDAO.getCountBySubCategoryId(id);
 	}
+
 
 }

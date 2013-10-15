@@ -6,7 +6,6 @@ import com.epam.lab.buyit.model.Product;
 public interface ProductService extends GenericService<Product> {
 
 	Product updateByProductId(Product item);
-	
-	int getCountBySubCategoryId(int id);
 
+	int getCountBySubCategoryId(int id);
 }
