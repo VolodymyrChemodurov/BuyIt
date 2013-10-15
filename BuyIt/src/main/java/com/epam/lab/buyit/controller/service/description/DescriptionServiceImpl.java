@@ -17,26 +17,25 @@ public class DescriptionServiceImpl implements DescriptionService {
 
 	@Override
 	public Description getItemById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return descriptionDAO.getElementById(id);
 	}
 
 	@Override
 	public List<Description> getAllItems() {
-		// TODO Auto-generated method stub
-		return null;
+		return descriptionDAO.getAllDescriptions();
 	}
 
 	@Override
 	public Description createItem(Description item) {
-		// TODO Auto-generated method stub
-		return null;
+		int id = descriptionDAO.createElement(item);
+		item.setIdDescription(id);
+		return item;
 	}
 
 	@Override
 	public Description updateItem(Description item) {
-		// TODO Auto-generated method stub
-		return null;
+		descriptionDAO.updateElement(item);
+		return item;
 	}
 
 	@Override

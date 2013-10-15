@@ -47,7 +47,24 @@ public class DescriptionDAO implements DescriptionDAOInterface {
 
 	@Override
 	public Description getElementById(int id) {
-		throw new UnsupportedOperationException();
+		Description description = null;
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_BY_PRODUCT_ID);
+			statement.setInt(1, id);
+			result = statement.executeQuery();
+			if (result.next()) {
+				description = transformer.fromRSToObject(result);
+				return description;
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return description;
 	}
 
 	@Override

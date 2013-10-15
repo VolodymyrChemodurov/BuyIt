@@ -194,4 +194,44 @@
     <servlet-name>UserProfile</servlet-name>
     <url-pattern>/userProfile</url-pattern>
   </servlet-mapping>
+  	<servlet>
+		<servlet-name>Contact</servlet-name>
+		<jsp-file>/jsp/contact.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Contact</servlet-name>
+		<url-pattern>/contact</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>LegalNotice</servlet-name>
+		<jsp-file>/jsp/legalNotice.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LegalNotice</servlet-name>
+		<url-pattern>/legalNotice</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EmailUsServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.EmailUsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmailUsServlet</servlet-name>
+		<url-pattern>/emailUs</url-pattern>
+	</servlet-mapping>
+	<servlet>
+   <servlet-name>ProductPage</servlet-name>
+    <jsp-file>/jsp/productPage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductPage</servlet-name>
+    <url-pattern>/productPage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ProductDetailsServlet</servlet-name>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.ProductDetailsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductDetailsServlet</servlet-name>
+    <url-pattern>/productDetails</url-pattern>
+  </servlet-mapping>
 </web-app>

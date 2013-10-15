@@ -15,8 +15,8 @@
 					<input id="srchFld" class="srchTxt" type="text" name="srchedFld">
 					<select class="srchTxt" name="srchedTxt">
 						<option>Select...</option>
-						<c:forEach var="product" items="${categories}">
-							<option>${product}</option>
+						<c:forEach var="category" items="${categories}">
+							<option>${category.name}</option>
 						</c:forEach>
 					</select>
 					<button type="submit" id="submitButton" class="btn btn-primary">Go</button>

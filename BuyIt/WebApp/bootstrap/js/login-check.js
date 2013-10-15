@@ -3,15 +3,18 @@ $(document).ready(function() {
 	$('#alogin').focusout(function() {
 		var value = $("#alogin").val();
 		if (value != '') {
-			$.get('check', {
-				login : value
-			}, function(responseText) {
-				if (responseText == value) {
-					$('#register').prop('disabled', false);
-					$('#logindiv').text("");					
-				} else {
-					$('#register').prop('disabled', true);
-					$('#logindiv').text(responseText);
+			$.ajax( {
+				type: 'POST',
+				url: 'check',
+				data: {'login': value},
+				success: function(responseText) {
+					if (responseText == value) {
+						$('#register').prop('disabled', false);
+						$('#logindiv').text("");					
+					} else {
+						$('#register').prop('disabled', true);
+						$('#logindiv').text(responseText);
+					}
 				}
 			});
 		} else $('#register').prop('disabled', true);

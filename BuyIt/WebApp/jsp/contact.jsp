@@ -10,14 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<!--Less styles -->
-<!-- Other Less css file //different less files has different color scheam
-	<link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
-	<link rel="stylesheet/less" type="text/css" href="themes/less/classified.less">
-	<link rel="stylesheet/less" type="text/css" href="themes/less/amelia.less">  MOVE DOWN TO activate
-	-->
-<!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
-	<script src="themes/js/less.js" type="text/javascript"></script> -->
 
 <!-- Bootstrap style -->
 <link id="callCss" rel="stylesheet"
@@ -45,67 +37,71 @@
 <body>
 	<jsp:include page="navbar"></jsp:include>
 	<!-- Header End====================================================================== -->
-	<div id="carouselBlk">
-		<div id="myCarousel" class="carousel slide">
-			<div class="carousel-inner">
-				<c:forEach var="image" items="${carouselImages}" varStatus="status">
-					<c:if test="${status.first}">
-						<div class="item active">
-							<div class="container">
-								<a href="registration"><img style="width: 100%"
-									src="${image}" alt="special offers"></a>
-							</div>
-						</div>
-					</c:if>
-					<c:if test="${!status.first}">
-						<div class="item">
-							<div class="container">
-								<a href="registration"><img style="width: 100%"
-									src="${image}" alt="special offers"></a>
-							</div>
-						</div>
-					</c:if>
 
-				</c:forEach>
-			</div>
-			<a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-			<a class="right carousel-control" href="#myCarousel"
-				data-slide="next">›</a>
-		</div>
-	</div>
 	<div id="mainBody">
 		<div class="container">
+			<hr class="soften">
+			<h2>Contact Details</h2>
+			<hr class="soften">
 			<div class="row">
-				<!-- Sidebar ================================================== -->
-				<jsp:include page="sidebarMenu"></jsp:include>
-				<!-- Sidebar end=============================================== -->
-				
-				<div class="span9">
-					<ul class="breadcrumb">
-						<li class="active">
-							<a href="homePageServlet">Home</a>
-						</li>
-					</ul>
-
-					<h3>
-						Latest Auctions
-					</h3>
+				<div class="span4">
+					<p>
+						buyitinternetauction@gmail.com<br> ﻿Tel 123-456-6780<br>
+						Fax 123-456-5679<br> web:buyit.com
+					</p>
 				</div>
-				
-				<c:if test="${not empty latestProducts}">
-					<div class="item">
-						<ul class="thumbnails">
-							<c:forEach var="product" items="${latestProducts}">
-								<c:set var="product" value="${product}" scope="request"></c:set>
-								<jsp:include page="item_preview"></jsp:include>
-							</c:forEach>
-						</ul>
-					</div>
-				</c:if>
+
+				<div class="span4">
+					<h4>Managers</h4>
+					<hr class="soften">
+					<h5>Chemodurov Volodymyr</h5>
+					<p>
+						098-266-81-76<br>
+					</p>
+					<h5>Reka Andrii</h5>
+					<p>
+						097-606-50-09<br>
+					</p>
+					<h5>Gupalo Oleg</h5>
+					<p>
+						096-381-96-48<br>
+					</p>
+					<h5>Doroshenko Maksym</h5>
+					<p>
+						098-463-02-50<br>
+					</p>
+					<h5>Lobachov Pavlo</h5>
+					<p>
+						063-654-02-29<br>
+					</p>
+				</div>
+				<div class="span4">
+					<h4>Email Us</h4>
+					<form class="form-horizontal" action=emailUs method="post">
+
+						<fieldset>
+							<div class="control-group">
+
+								<input type="text" placeholder="subject" class="input-xlarge"
+									name="subject">
+
+							</div>
+							<div class="control-group">
+								<textarea rows="3" id="textarea" placeholder="your message"
+									class="input-xlarge" name="message"></textarea>
+
+							</div>
+
+							<button class="btn btn-large" type="submit">Send Message</button>
+
+						</fieldset>
+
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<jsp:include page="footer"></jsp:include>
 	<!-- Placed at the end of the document so the pages load faster ============================================= -->
 	<script src="themes/js/jquery.js" type="text/javascript"></script>
