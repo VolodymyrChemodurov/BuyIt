@@ -23,7 +23,7 @@ public class ProductDAO implements ProductDAOInterface {
 	private final static String GET_BY_ID = "SELECT * FROM products WHERE id_product = ?";
 	private final static String GET_ALL_PRODUCTS = "SELECT * FROM products";
 	private final static String GET_BY_SUBCATEGORY_ID = "SELECT * FROM products WHERE sub_category_id = ?";
-	private final static String GET_SELECTION = "SELECT SQL_CALC_FOUND_ROWS * FROM products WHERE sub_category_id = ? "
+	private final static String GET_SELECTION = "SELECT SQL_CALC_FOUND_ROWS * FROM products JOIN auctions ON products.id_product = auctions.product_id WHERE sub_category_id = ? AND status = 'inProgress'"
 			+ "LIMIT ?, ?";
 	private final static String GET_ROWS_COUNT_BY_SYBCATEGORY_ID = "SELECT COUNT(id_product) FROM products WHERE sub_category_id = ?";
 	private ProductTransformer transformer;
