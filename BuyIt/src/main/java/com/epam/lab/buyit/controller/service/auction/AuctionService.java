@@ -8,6 +8,10 @@ import com.epam.lab.buyit.model.Auction;
 public interface AuctionService extends GenericService<Auction> {
 
 	Auction getByProductId(int id);
-	
+
 	List<Auction> getLatestAuctions(int number);
+
+	List<Auction> getSoonEndingAuctions(long currentTime, long endTime);
+
+	void closeAuction(int auctionId);
 }

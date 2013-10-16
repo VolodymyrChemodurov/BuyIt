@@ -7,10 +7,11 @@ import com.epam.lab.buyit.model.Auction;
 
 public class AuctionServiceImp implements AuctionService {
 	private AuctionDAO auctionDAO;
-	
+
 	public AuctionServiceImp() {
 		auctionDAO = new AuctionDAO();
 	}
+
 	@Override
 	public Auction getItemById(int id) {
 		// TODO Auto-generated method stub
@@ -39,9 +40,20 @@ public class AuctionServiceImp implements AuctionService {
 	public Auction getByProductId(int id) {
 		return auctionDAO.getByProductId(id);
 	}
+
 	@Override
 	public List<Auction> getLatestAuctions(int number) {
 		return auctionDAO.getLatestAuctions(number);
 	}
 
+	@Override
+	public List<Auction> getSoonEndingAuctions(long currentTime, long endTime) {
+		return auctionDAO.getSoonEndingAuctions(currentTime, endTime);
+	}
+
+	@Override
+	public void closeAuction(int auctionId) {
+		auctionDAO.closeAuction(auctionId);
+
+	}
 }
