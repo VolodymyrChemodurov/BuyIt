@@ -206,7 +206,11 @@
 											<label class="control-label"><span>Current Price: 
 											<c:out value="${product.auction.currentPrice}"></c:out>$ </span></label>
 											<div class="controls">
-												<label class="control-label" text-align="right"><span> You Bid:</span></label>
+												<a href="buyItServe?id_product=${product.idProduct}"> 
+													<label class="control-label" text-align="right">
+														<span> You Bid:</span>
+													</label>
+												</a>
 												<input type="number" value="<c:out value="${product.auction.currentPrice+1}"></c:out>" class="span1" placeholder="Your Bid" />
 												<button type="submit"
 													class="btn btn-large btn-primary pull-right">
@@ -219,18 +223,24 @@
 									</c:if>
 
 							<c:if test="${product.auction.buyItNow != 0 }">
-									<form class="form-horizontal qtyFrm">
+									<form class="form-horizontal qtyFrm" method="GET" action="buyItServe">
 										<div class="control-group">
-											<label class="control-label"><span> Buy it By:
-											<c:out value="${product.auction.buyItNow}"></c:out> $</span></label>
+											<label class="control-label">
+												<span> Buy it By:
+													<c:out value="${product.auction.buyItNow}"></c:out>
+													 $</span>
+											</label>
 											<div class="controls">
-											<label class="control-label" text-align="right"><span> Quantity:</span></label>
-												<input type="number" class="span1" placeholder="Qty." />
+											<label class="control-label" text-align="right">
+												<span> Quantity:</span>
+											</label>
+												<input type="number" class="span1" placeholder="Qty." name="count"/>
 												<button type="submit"
 													class="btn btn-large btn-primary pull-right">Buy
 													it now</button>
 											</div>
 										</div>
+										<input type="hidden" value="${product.idProduct}" name="id_product"/>
 									</form>
 									<hr class="soft" />
 							</c:if>

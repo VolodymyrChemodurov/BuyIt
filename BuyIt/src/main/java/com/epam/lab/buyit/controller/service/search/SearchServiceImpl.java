@@ -9,13 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.epam.lab.buyit.controller.dao.auction.AuctionDAO;
-import com.epam.lab.buyit.controller.dao.description.DescriptionDAO;
-import com.epam.lab.buyit.controller.dao.image.ImageDAO;
 import com.epam.lab.buyit.controller.dao.product.ProductDAO;
-import com.epam.lab.buyit.model.Auction;
-import com.epam.lab.buyit.model.Description;
-import com.epam.lab.buyit.model.Image;
+import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
 import com.epam.lab.buyit.model.Product;
 
 public class SearchServiceImpl implements SearchService {
@@ -90,16 +85,12 @@ public class SearchServiceImpl implements SearchService {
 	private void forwardToJsp(HttpServletRequest request,
 			HttpServletResponse response, List<Product> srchedPrdct)
 			throws ServletException, IOException {
-		List<Auction> buyingDetails = getPrice(srchedPrdct);
-		List<Description> description = getDesription(srchedPrdct);
-		List<Image> images = getImages(description);
+		
+		List<Product> products = setProductDetailes(srchedPrdct);
 
 		if (srchedPrdct != null) {
 
-			request.setAttribute("srchedPrdct", srchedPrdct);
-			request.setAttribute("buyingDetails", buyingDetails);
-			request.setAttribute("description", description);
-			request.setAttribute("images", images);
+			request.setAttribute("srchedPrdct", products);
 			request.setAttribute("aviliablePrdcts", srchedPrdct.size());
 			RequestDispatcher view = request.getRequestDispatcher("/searching");
 			view.forward(request, response);
@@ -107,6 +98,15 @@ public class SearchServiceImpl implements SearchService {
 		} else {
 			searchError(request, response, "No product found");
 		}
+	}
+
+	private List<Product> setProductDetailes(List<Product> srchedPrdct) {
+		List<Product> tmpPrdct = new ArrayList<>();
+		ProductServiceImpl productService = new ProductServiceImpl();
+		for (Product aList : srchedPrdct) {
+			tmpPrdct.add(productService.getItemById(aList.getIdProduct()));
+		}
+		return tmpPrdct;
 	}
 
 	private void searchError(HttpServletRequest request,
@@ -117,35 +117,7 @@ public class SearchServiceImpl implements SearchService {
 		view.forward(request, response);
 	}
 
-	private List<Auction> getPrice(List<Product> srchedPrdct) {
-		AuctionDAO auctionDAO = new AuctionDAO();
-		List<Auction> buyingDetails = new ArrayList<>();
-		for (Product aList : srchedPrdct) {
-			buyingDetails
-					.add(auctionDAO.getByProductId(aList.getIdProduct()));
-		}
-		return buyingDetails;
-	}
-
-	private List<Description> getDesription(List<Product> srchedPrdct) {
-		DescriptionDAO descriptionDAO = new DescriptionDAO();
-		List<Description> description = new ArrayList<>();
-		for (Product aList : srchedPrdct) {
-			description
-					.add(descriptionDAO.getElementById(aList.getIdProduct()));
-		}
-		return description;
-	}
 	
-	private List<Image> getImages(List<Description> description) {
-		ImageDAO imageDAO = new ImageDAO();
-		List<Image> images = new ArrayList<>();
-		for (Description aList : description) {
-			images.add(imageDAO.getElementById(aList.getIdDescription()));
-		}
-		return images;
-	}
-
 	@Override
 	public Product getItemById(int id) {
 		throw new UnsupportedOperationException();
