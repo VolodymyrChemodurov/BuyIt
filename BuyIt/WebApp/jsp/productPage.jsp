@@ -59,34 +59,45 @@
 <jsp:include page="sidebarMenu"></jsp:include>
 						<div class="span9">
 							<ul class="breadcrumb">
-								<li><a href="index.html">Home</a> <span class="divider">/</span></li>
-								<li><a href="products.html">Products</a> <span
+								<c:forEach var="subCategory" items="${category.listSubCategories}">
+								<li><a href="homePageServlet">Home</a> <span class="divider">/</span></li>
+								
+								<li><a href="select_category?id=${subCategory.idSubCategory}">${category.name}</a> <span
 									class="divider">/</span></li>
-								<li class="active">product Details</li>
+								
+								<li class="active"><c:out value="${subCategory.name}"></c:out></li>
+								</c:forEach>
 							</ul>
 
 							<div class="row">
+								<c:if test="${fn:length(product.description.itemPhotos) eq 0}">
+								<div id="gallery" class="span3">
+										 <img
+											src="<c:out value="themes/images/mocks/noAvailablePhoto.jpg"></c:out>"
+											style="height: 250px" alt="no photo" />
 
-
+										
+									</div>
+								</c:if>
 								<c:if test="${fn:length(product.description.itemPhotos) eq 1}">
-									<div id="gallery" class="span3">
+									<div id="gallery" class="span3" style="text-align: center">
 										<a
 											href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
 											title="<c:out value="${product.name }" />"> <img
 											src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-											style="width: 100%" alt="<c:out value="${product.name }" />">
+											style="height: 250px " alt="<c:out value="${product.name }" />">
 
 										</a>
 									</div>
 								</c:if>
 								<c:if
 									test="${(fn:length(product.description.itemPhotos) gt 1) && (fn:length(product.description.itemPhotos) le 3)}">
-									<div id="gallery" class="span3">
+									<div id="gallery" class="span3" style="text-align: center">
 										<a
 											href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
 											title="<c:out value="${product.name }" />"> <img
 											src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-											style="width: 99%" alt="<c:out value="${product.name }" />">
+											style="height: 250px" alt="<c:out value="${product.name }" />">
 
 										</a>
 
@@ -115,12 +126,12 @@
 								</c:if>
 
 								<c:if test="${(fn:length(product.description.itemPhotos) >= 4)}">
-									<div id="gallery" class="span3">
+									<div id="gallery" class="span3" style="text-align: center">
 										<a
 											href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
 											title="<c:out value="${product.name }" />"> <img
 											src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-											style="width: 100%" alt="<c:out value="${product.name }" />">
+											style="height: 250px" alt="<c:out value="${product.name }" />">
 
 										</a>
 
@@ -234,10 +245,11 @@
 										<c:out value="${product.description.features}"></c:out>
 									</p>
 									<br class="clr" /> <a href="#" name="detail"></a>
-									<hr class="soft" />
+								
 								</div>
 
 								<div class="span9">
+								<div class="thumbnail">
 									<ul id="productDetail" class="nav nav-tabs">
 										<li class="active"><a href="#home" data-toggle="tab">Product
 												Details</a></li>
@@ -253,7 +265,7 @@
 											Auction end time: <c:out value="${product.auction.endTime}"></c:out>
 											<hr class="soft" />
 											<c:out value="${product.description.descText} "></c:out>
-											<hr class="soft" />
+											
 										</div>
 
 
@@ -279,11 +291,11 @@
 													
 												</tbody>
 											</table>
-											<hr class="soft" />
+										
 										</div>
 
 
-
+	
 										<div class="tab-pane fade" id="profile">
 												<h4>Information for Buyers</h4>
 										
@@ -292,7 +304,9 @@
 											<hr class="soft" />
 											<br class="clr">
 										</div>
+									
 									</div>
+											</div>
 								</div>
 
 							</div>
