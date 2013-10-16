@@ -10,10 +10,15 @@ $(document).ready(function() {
 				success: function(responseText) {
 					if (responseText == value) {
 						$('#register').prop('disabled', false);
-						$('#logindiv').text("");					
+						$('#logindiv').text("");
+						$('#logindiv').addClass('valid').closest(
+						'.control-group').removeClass('error')
+						.addClass('success');
 					} else {
 						$('#register').prop('disabled', true);
 						$('#logindiv').text(responseText);
+						$('#logindiv').closest('.control-group').removeClass(
+						'success').addClass('error');
 					}
 				}
 			});

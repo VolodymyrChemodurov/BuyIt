@@ -1,14 +1,14 @@
 label.valid {
 	width: 24px;
 	height: 24px;
-	background: url(../img/valid.png) center center no-repeat;
+	font-weight: italic;
 	display: inline-block;
 	text-indent: -9999px;
 
 }
 
-label.error {
-	font-weight: bold;
+label.error, #logindiv {
+	font-weight: italic;
 	color: red;
 	padding: 2px 8px;
 	margin-top: 2px;
