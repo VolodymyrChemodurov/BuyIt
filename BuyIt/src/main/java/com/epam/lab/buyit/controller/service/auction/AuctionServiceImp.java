@@ -56,4 +56,10 @@ public class AuctionServiceImp implements AuctionService {
 		auctionDAO.closeAuction(auctionId);
 
 	}
+
+	@Override
+	public int buyItServe(int id, int count, String status, int oldCount,
+			String oldStatus) {
+		return auctionDAO.buyItServe(id, count, status, oldCount, oldStatus);
+	}
 }

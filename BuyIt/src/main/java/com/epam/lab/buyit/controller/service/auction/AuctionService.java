@@ -14,4 +14,7 @@ public interface AuctionService extends GenericService<Auction> {
 	List<Auction> getSoonEndingAuctions(long currentTime, long endTime);
 
 	void closeAuction(int auctionId);
+
+	int buyItServe(int id, int count, String status, int oldCount,
+			String oldStatus);
 }

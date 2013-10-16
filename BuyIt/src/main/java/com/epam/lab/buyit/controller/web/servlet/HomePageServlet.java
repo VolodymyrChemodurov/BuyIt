@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.quartz.SchedulerException;
+
+import com.epam.lab.buyit.controller.auction.AuctionScheduler;
 import com.epam.lab.buyit.controller.service.category.CategoryServiceImpl;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
 import com.epam.lab.buyit.controller.web.Mook;
@@ -33,7 +36,7 @@ public class HomePageServlet extends HttpServlet {
 		session.setAttribute("carouselImages", cauroselImagesList);
 		session.setAttribute("latestProducts",
 				productService.getLatestProducts(8));
-		
+
 		response.sendRedirect("homePage");
 
 	}
