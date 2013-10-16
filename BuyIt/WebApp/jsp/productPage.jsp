@@ -48,7 +48,7 @@
 
 
 <body>
-<jsp:include page="navbar"></jsp:include>
+	<jsp:include page="navbar"></jsp:include>
 	<div id="header" style="background: white">
 		<div class="container">
 
@@ -56,7 +56,7 @@
 				<div class="container">
 					<div class="row">
 
-<jsp:include page="sidebarMenu"></jsp:include>
+						<jsp:include page="sidebarMenu"></jsp:include>
 						<div class="span9">
 							<ul class="breadcrumb">
 								<li><a href="index.html">Home</a> <span class="divider">/</span></li>
@@ -97,19 +97,20 @@
 												<div class="item active">
 													<c:forEach var="image"
 														items="${product.description.itemPhotos }">
-														<a href="${image.path}"> <img style="width: 81px; height: 65px"
-															src="${image.path}" alt="" /></a>
+														<a href="${image.path}"> <img
+															style="width: 81px; height: 65px" src="${image.path}"
+															alt="" /></a>
 													</c:forEach>
 												</div>
 
 											</div>
 
-<!-- 											<a class="left carousel-control" href="#myCarousel" -->
-<!-- 												data-slide="prev">‹</a> <a class="right carousel-control" -->
-<!-- 												href="#myCarousel" data-slide="next">›</a> -->
+											<!-- 											<a class="left carousel-control" href="#myCarousel" -->
+											<!-- 												data-slide="prev">‹</a> <a class="right carousel-control" -->
+											<!-- 												href="#myCarousel" data-slide="next">›</a> -->
 
 										</div>
-										Photos in Gallery: 
+										Photos in Gallery:
 										<c:out value="${fn:length(product.description.itemPhotos)}"></c:out>
 									</div>
 								</c:if>
@@ -144,13 +145,13 @@
 													</c:forEach>
 
 												</div>
-												Photos in Gallery: 
+												Photos in Gallery:
 												<c:out value="${fn:length(product.description.itemPhotos)}"></c:out>
 											</div>
 
-<!-- 											<a class="left carousel-control" href="#myCarousel" -->
-<!-- 												data-slide="prev">‹</a> <a class="right carousel-control" -->
-<!-- 												href="#myCarousel" data-slide="next">›</a> -->
+											<!-- 											<a class="left carousel-control" href="#myCarousel" -->
+											<!-- 												data-slide="prev">‹</a> <a class="right carousel-control" -->
+											<!-- 												href="#myCarousel" data-slide="next">›</a> -->
 
 										</div>
 
@@ -180,50 +181,60 @@
 										<c:out value="${product.name}"></c:out>
 									</h3>
 									<c:if test="${diffInDays <= 1}">
- 									<font size="3" color="red">( <c:out value="${diffInDays}"></c:out> Days left for end )</font> 
+										<font size="3" color="red">( <c:out
+												value="${diffInDays}"></c:out> Days left for end )
+										</font>
 									</c:if>
 									<c:if test="${diffInDays > 3}">
- 									<font size="3" color="green">( <c:out value="${diffInDays}"></c:out> Days left for end )</font> 
+										<font size="3" color="green">( <c:out
+												value="${diffInDays}"></c:out> Days left for end )
+										</font>
 									</c:if>
 									<c:if test="${(diffInDays >1)&&(diffInDays <=3) }">
- 									<font size="3" color="red">( <c:out value="${diffInDays}"></c:out> Days left for end )</font> 
+										<font size="3" color="red">( <c:out
+												value="${diffInDays}"></c:out> Days left for end )
+										</font>
 									</c:if>
 									<hr class="soft" />
 									<c:if test="${product.auction.currentPrice != 0 }">
-									<form class="form-horizontal qtyFrm">
-										<div class="control-group">
-											<label class="control-label"><span>Current Price: 
-											<c:out value="${product.auction.currentPrice}"></c:out>$ </span></label>
-											<div class="controls">
-												<label class="control-label" text-align="right"><span> You Bid:</span></label>
-												<input type="number" value="<c:out value="${product.auction.currentPrice+1}"></c:out>" class="span1" placeholder="Your Bid" />
-												<button type="submit"
-													class="btn btn-large btn-primary pull-right">
-													Place a Bid 
-												</button>
+										<form class="form-horizontal qtyFrm">
+											<div class="control-group">
+												<label class="control-label"><span>Current
+														Price: <c:out value="${product.auction.currentPrice}"></c:out>$
+												</span></label>
+												<div class="controls">
+													<label class="control-label" text-align="right"><span>
+															You Bid:</span></label> <input type="number"
+														value="<c:out value="${product.auction.currentPrice+1}"></c:out>"
+														class="span1" placeholder="Your Bid" />
+													<button type="submit"
+														class="btn btn-large btn-primary pull-right">
+														Place a Bid</button>
+												</div>
 											</div>
-										</div>
-									</form>
-									<hr class="soft" />
+										</form>
+										<hr class="soft" />
 									</c:if>
 
-							<c:if test="${product.auction.buyItNow != 0 }">
-									<form class="form-horizontal qtyFrm">
-										<div class="control-group">
-											<label class="control-label"><span> Buy it By:
-											<c:out value="${product.auction.buyItNow}"></c:out> $</span></label>
-											<div class="controls">
-											<label class="control-label" text-align="right"><span> Quantity:</span></label>
-												<input type="number" class="span1" placeholder="Qty." />
-												<button type="submit"
-													class="btn btn-large btn-primary pull-right">Buy
-													it now</button>
+									<c:if test="${product.auction.buyItNow != 0 }">
+										<form class="form-horizontal qtyFrm">
+											<div class="control-group">
+												<label class="control-label"><span> Buy it
+														By: <c:out value="${product.auction.buyItNow}"></c:out> $
+												</span></label>
+												<div class="controls">
+													<label class="control-label" text-align="right"><span>
+															Quantity:</span></label> <input type="number" class="span1"
+														placeholder="Qty." />
+													<button type="submit"
+														class="btn btn-large btn-primary pull-right">Buy
+														it now</button>
+												</div>
 											</div>
-										</div>
-									</form>
-									<hr class="soft" />
-							</c:if>
-									
+										</form>
+										<hr class="soft" />
+									</c:if>
+
 									<h4>
 										<c:out value="${product.auction.count}"></c:out>
 										items in stock
@@ -248,9 +259,10 @@
 										<div class="tab-pane fade active in" id="home">
 											<h4>Product Information</h4>
 											<hr class="soft" />
-											Auction start time: <c:out value="${product.auction.startTime}"></c:out>
-											<br>
-											Auction end time: <c:out value="${product.auction.endTime}"></c:out>
+											Auction start time:
+											<c:out value="${product.auction.startTime}"></c:out>
+											<br> Auction end time:
+											<c:out value="${product.auction.endTime}"></c:out>
 											<hr class="soft" />
 											<c:out value="${product.description.descText} "></c:out>
 											<hr class="soft" />
@@ -268,15 +280,15 @@
 														<th>Amount</th>
 													</tr>
 													<c:forEach var="userItem" items="${userList}">
-													<tr class="techSpecRow">
-														<td class="techSpecTD1">${userItem.login}"</td>
-														<c:forEach var="bid" items="${userItem.bidList}">
-														<td class="techSpecTD1">${bid.time}</td>
-														<td class="techSpecTD1">${bid.amount}</td>
-														</c:forEach>
-													</tr>
+														<tr class="techSpecRow">
+															<td class="techSpecTD1">${userItem.login}"</td>
+															<c:forEach var="bid" items="${userItem.bidList}">
+																<td class="techSpecTD1">${bid.time}</td>
+																<td class="techSpecTD1">${bid.amount}</td>
+															</c:forEach>
+														</tr>
 													</c:forEach>
-													
+
 												</tbody>
 											</table>
 											<hr class="soft" />
@@ -285,8 +297,8 @@
 
 
 										<div class="tab-pane fade" id="profile">
-												<h4>Information for Buyers</h4>
-										
+											<h4>Information for Buyers</h4>
+
 											<hr class="soft" />
 											<c:out value="${product.delivery }"></c:out>
 											<hr class="soft" />
@@ -299,9 +311,9 @@
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
-			
+
 			<!-- MainBody End ============================= -->
 			<script src="themes/js/jquery.js" type="text/javascript"></script>
 			<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
@@ -309,6 +321,7 @@
 
 			<script src="themes/js/bootshop.js"></script>
 			<script src="themes/js/jquery.lightbox-0.5.js"></script>
+			<script src="bootstrap/js/search.js"></script>
 
 
 		</div>

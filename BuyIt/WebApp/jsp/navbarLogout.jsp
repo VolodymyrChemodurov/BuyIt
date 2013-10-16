@@ -24,8 +24,8 @@
 				<ul class="dropdown-menu">
 					<li><a href="userProfile">Profile</a></li>
 					<li class="divider"></li>
-					<li><a href="userSales">Sales</a></li>
-					<li><a href="#">Shopping</a></li>
+					<li><a href="userSalesServlet">Sales</a></li>
+					<li><a href="userShoppingServlet">Shopping</a></li>
 					<li><a href="#">Comments</a></li>
 				</ul></li>
 		</c:if>

@@ -15,7 +15,7 @@ import com.epam.lab.buyit.model.Address;
 
 public class AddressDAO implements AddressDAOInterface {
 	private static final Logger LOGGER = Logger.getLogger(AddressDAO.class);
-	private final static String GET_BY_ID = "SELECT * FROM address WHERE id_address = ?";
+	private final static String GET_BY_ID = "SELECT * FROM address WHERE contacts_id = ?";
 	private AddressTransformer transformer;
 
 	public AddressDAO() {

@@ -128,9 +128,6 @@ div.bookmarksArea #vMenu li a {padding:0 16px!important;}
     margin:0;
 }
 .left-menu { 
-	border: 1px solid #C8C8C8;
-    
-	
 	width: 200px; float: left; margin-right: 8px; 
 }
 div.avatar-wrapper {
@@ -142,6 +139,7 @@ div.avatar-wrapper {
 }
 
 div.avatar-wrapper img {
+	border-radius: 5px;
 	margin: auto;
 	height: 200px;
 	width: 200px;

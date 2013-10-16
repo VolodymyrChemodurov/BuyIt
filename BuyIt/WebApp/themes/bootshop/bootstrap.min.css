@@ -3442,12 +3442,13 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 .nav-header {
 	display: block;
 	padding: 3px 15px;
-	font-size: 11px;
+	font-size: 13px;
 	font-weight: bold;
 	line-height: 20px;
-	color: #999;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	color: #1f1f1f;
+	background-color: #ddd;
 	text-transform: uppercase
+	
 }
 
 .nav li+.nav-header {
@@ -3457,7 +3458,10 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 .nav-list {
 	padding-right: 15px;
 	padding-left: 15px;
-	margin-bottom: 0
+	margin-bottom: 0;
+	border-radius: 5px;
+	overflow: hidden;
+	background-color: #fff;
 }
 
 .nav-list>li>a,.nav-list .nav-header {
