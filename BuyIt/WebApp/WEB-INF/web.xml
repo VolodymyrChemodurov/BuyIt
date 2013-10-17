@@ -234,4 +234,13 @@
     <servlet-name>ProductDetailsServlet</servlet-name>
     <url-pattern>/productDetails</url-pattern>
   </servlet-mapping>
+  
+  <filter>
+    <filter-name>sideMenuFilter</filter-name>
+    <filter-class>com.epam.lab.buyit.controller.web.filter.SideMenuFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>sideMenuFilter</filter-name>
+    <url-pattern>*</url-pattern>
+  </filter-mapping>
 </web-app>
