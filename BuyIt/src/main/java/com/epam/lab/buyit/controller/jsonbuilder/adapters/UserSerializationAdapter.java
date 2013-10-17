@@ -17,7 +17,6 @@ public class UserSerializationAdapter implements JsonSerializer<User> {
 		object.addProperty("firstName", user.getFirstName());
 		object.addProperty("lastName", user.getLastName());
 		object.addProperty("login", user.getLogin());
-		object.addProperty("password", user.getPassword());
 		object.addProperty("role", user.getRole()? "Admin":"User");
 		object.addProperty("email", user.getContact().getEmail());
 		return object;
