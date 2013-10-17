@@ -55,6 +55,7 @@
 
 
 <body>
+<!-- ---------------------------NAVBAR---------------------------------------- -->
 	<jsp:include page="navbar"></jsp:include>
 	<div id="header" style="background: white">
 		<div class="container">
@@ -128,9 +129,7 @@
 
 											</div>
 
-											<!-- 											<a class="left carousel-control" href="#myCarousel" -->
-											<!-- 												data-slide="prev">‹</a> <a class="right carousel-control" -->
-											<!-- 												href="#myCarousel" data-slide="next">›</a> -->
+											
 
 										</div>
 										Photos in Gallery:
@@ -173,22 +172,7 @@
 												<c:out value="${fn:length(product.description.itemPhotos)}"></c:out>
 											</div>
 
-											<!-- 											<a class="left carousel-control" href="#myCarousel" -->
-											<!-- 												data-slide="prev">‹</a> <a class="right carousel-control" -->
-											<!-- 												href="#myCarousel" data-slide="next">›</a> -->
-
-										</div>
-
-										<input style="">
-										<div class="btn-toolbar">
-											<div class="btn-group">
-												<span class="btn"><i class="icon-envelope"></i></span> <span
-													class="btn"><i class="icon-print"></i></span> <span
-													class="btn"><i class="icon-zoom-in"></i></span> <span
-													class="btn"><i class="icon-star"></i></span> <span
-													class="btn"><i class=" icon-thumbs-up"></i></span> <span
-													class="btn"><i class="icon-thumbs-down"></i></span>
-											</div>
+											
 										</div>
 									</div>
 								</c:if>
@@ -199,7 +183,7 @@
 
 
 
-
+<!-- -------------------------CENTRAL CONTROL PANEL (place a bid , Buy it now )-------------------- -->
 								<div class="span6">
 									<font size="5"> <c:out value="${product.name}"></c:out>
 									</font> <br>
@@ -245,11 +229,12 @@
 														By: <c:out value="${product.auction.buyItNow}"></c:out> $
 												</span></label>
 												<div class="controls">
+												<input type="hidden" id="count" value="${product.auction.count}" />
 													<label class="control-label" text-align="right"><span>
-															Quantity:</span></label> <input type="number" class="span1"
+															Quantity:</span></label> <input type="number" id="quantity" class="span1"
 														placeholder="Qty." />
-													<button type="submit"
-														class="btn btn-large btn-primary pull-right">Buy
+													<button  type="submit" id="buyItButton"
+														class="btn btn-large btn-primary pull-right" >Buy
 														it now</button>
 												</div>
 											</div>
@@ -259,7 +244,7 @@
 
 									<h4>
 										<c:out value="${product.auction.count}"></c:out>
-										items in stock
+										Items in Stock
 									</h4>
 
 									<hr class="soft clr" />
@@ -269,14 +254,14 @@
 									<br class="clr" /> <a href="#" name="detail"></a>
 
 								</div>
-
+<!--    ------------DELIVERY--------BID HISTORY----------DETAILS------------ -->
 								<div class="span9">
 									<div class="thumbnail">
 										<ul id="productDetail" class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">Product
 													Details</a></li>
 											<li><a href="#history" data-toggle="tab">Bid History</a></li>
-											<li><a href="#profile" data-toggle="tab">Delivery</a></li>
+											<li><a href="#delivery" data-toggle="tab">Delivery</a></li>
 										</ul>
 										<div id="myTabContent" class="tab-content">
 											<div class="tab-pane fade active in" id="home">
@@ -319,7 +304,7 @@
 
 
 
-											<div class="tab-pane fade" id="profile">
+											<div class="tab-pane fade" id="delivery">
 												<h4>Information for Buyers</h4>
 
 												<hr class="soft" />
@@ -358,6 +343,7 @@
 						var placeBidButton = $('#placeBidButton');
 						var currentPrice = document.getElementById("currentBid").value;
 						var bid = $('#placeBidInput').attr('value');
+						//alert("Good");
 						if(currentPrice > bid){
 							placeBidButton.attr("disabled","disabled");
 						}else{
@@ -367,9 +353,25 @@
 							
 						
 					});
+				
+			
+					$('#quantity').focusout(function() {
+						var buyItButton = $('#buyItButton');
+						var count = document.getElementById("count").value;
+						var quantity = $('#quantity').attr('value');
+						//alert("Fackin good line");
+						if(quantity > count){
+							buyItButton.attr("disabled","disabled");
+						}else{
+							buyItButton.removeAttr("disabled");
+						}	
+						
+					});
 				});
 			</script>
 		</div>
+<!-- 		----------------footer--------------------------------------- -->
 		<jsp:include page="footer"></jsp:include>
+		</div>
 </body>
 </html>

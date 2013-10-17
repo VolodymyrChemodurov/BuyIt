@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xmlns:web_1="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>BuyIt</display-name>
   <welcome-file-list>
     <welcome-file>homePageServlet</welcome-file>
@@ -62,8 +62,8 @@
     <servlet-class>com.epam.lab.buyit.controller.web.servlet.RegistrationServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-	<servlet-name>RegistrationServlet</servlet-name>
-	<url-pattern>/registrationServlet</url-pattern>
+    <servlet-name>RegistrationServlet</servlet-name>
+    <url-pattern>/registrationServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>LogOutServlet</servlet-name>
@@ -81,7 +81,6 @@
     <servlet-name>UserPageServlet</servlet-name>
     <url-pattern>/userPageServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Error</servlet-name>
     <jsp-file>/jsp/error404.jsp</jsp-file>
@@ -194,32 +193,32 @@
     <servlet-name>UserProfile</servlet-name>
     <url-pattern>/userProfile</url-pattern>
   </servlet-mapping>
-  	<servlet>
-		<servlet-name>Contact</servlet-name>
-		<jsp-file>/jsp/contact.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Contact</servlet-name>
-		<url-pattern>/contact</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>LegalNotice</servlet-name>
-		<jsp-file>/jsp/legalNotice.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>LegalNotice</servlet-name>
-		<url-pattern>/legalNotice</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>EmailUsServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.EmailUsServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>EmailUsServlet</servlet-name>
-		<url-pattern>/emailUs</url-pattern>
-	</servlet-mapping>
-	<servlet>
-   <servlet-name>ProductPage</servlet-name>
+  <servlet>
+    <servlet-name>Contact</servlet-name>
+    <jsp-file>/jsp/contact.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Contact</servlet-name>
+    <url-pattern>/contact</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LegalNotice</servlet-name>
+    <jsp-file>/jsp/legalNotice.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LegalNotice</servlet-name>
+    <url-pattern>/legalNotice</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EmailUsServlet</servlet-name>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.EmailUsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmailUsServlet</servlet-name>
+    <url-pattern>/emailUs</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ProductPage</servlet-name>
     <jsp-file>/jsp/productPage.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
@@ -235,12 +234,13 @@
     <url-pattern>/productDetails</url-pattern>
   </servlet-mapping>
   
+  
   <servlet>
-    <servlet-name>TimerServlet</servlet-name>
-    <servlet-class>com.epam.lab.buyit.controller.web.servlet.TimerServlet</servlet-class>
+    <servlet-name>Time</servlet-name>
+    <jsp-file>/jsp/CountDouwn.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
-    <servlet-name>TimerServlet</servlet-name>
-    <url-pattern>/timer</url-pattern>
+    <servlet-name>Time</servlet-name>
+    <url-pattern>/time</url-pattern>
   </servlet-mapping>
 </web-app>
