@@ -10,6 +10,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
+
+<link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" />
+<link rel="stylesheet" href="jsp/assets/css/styles.css" />
+<link rel="stylesheet" href="jsp/assets/countdown/jquery.countdown.css" />
+
+
 <!--Less styles -->
 <!-- Other Less css file //different less files has different color scheam
 	<link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
@@ -48,7 +55,7 @@
 
 
 <body>
-<jsp:include page="navbar"></jsp:include>
+	<jsp:include page="navbar"></jsp:include>
 	<div id="header" style="background: white">
 		<div class="container">
 
@@ -56,27 +63,30 @@
 				<div class="container">
 					<div class="row">
 
-<jsp:include page="sidebarMenu"></jsp:include>
+						<jsp:include page="sidebarMenu"></jsp:include>
 						<div class="span9">
 							<ul class="breadcrumb">
-								<c:forEach var="subCategory" items="${category.listSubCategories}">
-								<li><a href="homePageServlet">Home</a> <span class="divider">/</span></li>
-								
-								<li><a href="select_category?id=${subCategory.idSubCategory}">${category.name}</a> <span
-									class="divider">/</span></li>
-								
-								<li class="active"><c:out value="${subCategory.name}"></c:out></li>
+								<c:forEach var="subCategory"
+									items="${category.listSubCategories}">
+									<li><a href="homePageServlet">Home</a> <span
+										class="divider">/</span></li>
+
+									<li><a
+										href="select_category?id=${subCategory.idSubCategory}">${category.name}</a>
+										<span class="divider">/</span></li>
+
+									<li class="active"><c:out value="${subCategory.name}"></c:out></li>
 								</c:forEach>
 							</ul>
 
 							<div class="row">
 								<c:if test="${fn:length(product.description.itemPhotos) eq 0}">
-								<div id="gallery" class="span3">
-										 <img
+									<div id="gallery" class="span3">
+										<img
 											src="<c:out value="themes/images/mocks/noAvailablePhoto.jpg"></c:out>"
 											style="height: 250px" alt="no photo" />
 
-										
+
 									</div>
 								</c:if>
 								<c:if test="${fn:length(product.description.itemPhotos) eq 1}">
@@ -85,7 +95,8 @@
 											href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
 											title="<c:out value="${product.name }" />"> <img
 											src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-											style="height: 250px " alt="<c:out value="${product.name }" />">
+											style="height: 250px"
+											alt="<c:out value="${product.name }" />">
 
 										</a>
 									</div>
@@ -97,7 +108,8 @@
 											href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
 											title="<c:out value="${product.name }" />"> <img
 											src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-											style="height: 250px" alt="<c:out value="${product.name }" />">
+											style="height: 250px"
+											alt="<c:out value="${product.name }" />">
 
 										</a>
 
@@ -108,19 +120,20 @@
 												<div class="item active">
 													<c:forEach var="image"
 														items="${product.description.itemPhotos }">
-														<a href="${image.path}"> <img style="width: 81px; height: 65px"
-															src="${image.path}" alt="" /></a>
+														<a href="${image.path}"> <img
+															style="width: 81px; height: 65px" src="${image.path}"
+															alt="" /></a>
 													</c:forEach>
 												</div>
 
 											</div>
 
-<!-- 											<a class="left carousel-control" href="#myCarousel" -->
-<!-- 												data-slide="prev">‹</a> <a class="right carousel-control" -->
-<!-- 												href="#myCarousel" data-slide="next">›</a> -->
+											<!-- 											<a class="left carousel-control" href="#myCarousel" -->
+											<!-- 												data-slide="prev">‹</a> <a class="right carousel-control" -->
+											<!-- 												href="#myCarousel" data-slide="next">›</a> -->
 
 										</div>
-										Photos in Gallery: 
+										Photos in Gallery:
 										<c:out value="${fn:length(product.description.itemPhotos)}"></c:out>
 									</div>
 								</c:if>
@@ -131,7 +144,8 @@
 											href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
 											title="<c:out value="${product.name }" />"> <img
 											src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-											style="height: 250px" alt="<c:out value="${product.name }" />">
+											style="height: 250px"
+											alt="<c:out value="${product.name }" />">
 
 										</a>
 
@@ -155,17 +169,17 @@
 													</c:forEach>
 
 												</div>
-												Photos in Gallery: 
+												Photos in Gallery:
 												<c:out value="${fn:length(product.description.itemPhotos)}"></c:out>
 											</div>
 
-<!-- 											<a class="left carousel-control" href="#myCarousel" -->
-<!-- 												data-slide="prev">‹</a> <a class="right carousel-control" -->
-<!-- 												href="#myCarousel" data-slide="next">›</a> -->
+											<!-- 											<a class="left carousel-control" href="#myCarousel" -->
+											<!-- 												data-slide="prev">‹</a> <a class="right carousel-control" -->
+											<!-- 												href="#myCarousel" data-slide="next">›</a> -->
 
 										</div>
 
-
+										<input style="">
 										<div class="btn-toolbar">
 											<div class="btn-group">
 												<span class="btn"><i class="icon-envelope"></i></span> <span
@@ -187,54 +201,62 @@
 
 
 								<div class="span6">
-									<h3>
-										<c:out value="${product.name}"></c:out>
-									</h3>
-									<c:if test="${diffInDays <= 1}">
- 									<font size="3" color="red">( <c:out value="${diffInDays}"></c:out> Days left for end )</font> 
-									</c:if>
-									<c:if test="${diffInDays > 3}">
- 									<font size="3" color="green">( <c:out value="${diffInDays}"></c:out> Days left for end )</font> 
-									</c:if>
-									<c:if test="${(diffInDays >1)&&(diffInDays <=3) }">
- 									<font size="3" color="red">( <c:out value="${diffInDays}"></c:out> Days left for end )</font> 
-									</c:if>
+									<font size="5"> <c:out value="${product.name}"></c:out>
+									</font> <br>
+									<dir class="form-horizontal qtyFrm" style="padding: 10px">
+										<small style="width: 250px" id="note"></small>
+									</dir>
+									<dir class="form-horizontal qtyFrm">
+										<input type="hidden" id="currentBid" value="${product.auction.currentPrice}"/>
+										<input type="hidden" id="time"
+											value="${product.auction.endTime}" />
+										<input type="hidden" id="status"
+											value="${product.auction.status}" />
+										<div id="countdown"></div>
+									</dir>
 									<hr class="soft" />
 									<c:if test="${product.auction.currentPrice != 0 }">
-									<form class="form-horizontal qtyFrm">
-										<div class="control-group">
-											<label class="control-label"><span>Current Price: 
-											<c:out value="${product.auction.currentPrice}"></c:out>$ </span></label>
-											<div class="controls">
-												<label class="control-label" text-align="right"><span> You Bid:</span></label>
-												<input type="number" value="<c:out value="${product.auction.currentPrice+1}"></c:out>" class="span1" placeholder="Your Bid" />
-												<button type="submit"
-													class="btn btn-large btn-primary pull-right">
-													Place a Bid 
-												</button>
+										<form class="form-horizontal qtyFrm">
+											<div class="control-group">
+												<label class="control-label"><span>Current
+														Price: <c:out value="${product.auction.currentPrice}"></c:out>$
+												</span></label>
+												<div class="controls">
+													<label class="control-label"><span> You
+															Bid:</span></label> <input type="number" id="placeBidInput"
+														value="<c:out value="${product.auction.currentPrice+1}"></c:out>"
+														class="span1" placeholder="Your Bid" />
+													<button type="submit" id="placeBidButton" 
+														class="btn btn-large btn-primary pull-right">
+														Place a Bid</button>
+												</div>
 											</div>
-										</div>
-									</form>
-									<hr class="soft" />
+										</form>
+										<hr class="soft" />
 									</c:if>
 
-							<c:if test="${product.auction.buyItNow != 0 }">
-									<form class="form-horizontal qtyFrm">
-										<div class="control-group">
-											<label class="control-label"><span> Buy it By:
-											<c:out value="${product.auction.buyItNow}"></c:out> $</span></label>
-											<div class="controls">
-											<label class="control-label" text-align="right"><span> Quantity:</span></label>
-												<input type="number" class="span1" placeholder="Qty." />
-												<button type="submit"
-													class="btn btn-large btn-primary pull-right">Buy
-													it now</button>
+
+
+
+									<c:if test="${product.auction.buyItNow != 0 }">
+										<form class="form-horizontal qtyFrm">
+											<div class="control-group">
+												<label class="control-label"><span> Buy it
+														By: <c:out value="${product.auction.buyItNow}"></c:out> $
+												</span></label>
+												<div class="controls">
+													<label class="control-label" text-align="right"><span>
+															Quantity:</span></label> <input type="number" class="span1"
+														placeholder="Qty." />
+													<button type="submit"
+														class="btn btn-large btn-primary pull-right">Buy
+														it now</button>
+												</div>
 											</div>
-										</div>
-									</form>
-									<hr class="soft" />
-							</c:if>
-									
+										</form>
+										<hr class="soft" />
+									</c:if>
+
 									<h4>
 										<c:out value="${product.auction.count}"></c:out>
 										items in stock
@@ -245,77 +267,78 @@
 										<c:out value="${product.description.features}"></c:out>
 									</p>
 									<br class="clr" /> <a href="#" name="detail"></a>
-								
+
 								</div>
 
 								<div class="span9">
-								<div class="thumbnail">
-									<ul id="productDetail" class="nav nav-tabs">
-										<li class="active"><a href="#home" data-toggle="tab">Product
-												Details</a></li>
-										<li><a href="#history" data-toggle="tab">Bid History</a></li>
-										<li><a href="#profile" data-toggle="tab">Delivery</a></li>
-									</ul>
-									<div id="myTabContent" class="tab-content">
-										<div class="tab-pane fade active in" id="home">
-											<h4>Product Information</h4>
-											<hr class="soft" />
-											Auction start time: <c:out value="${product.auction.startTime}"></c:out>
-											<br>
-											Auction end time: <c:out value="${product.auction.endTime}"></c:out>
-											<hr class="soft" />
-											<c:out value="${product.description.descText} "></c:out>
-											
-										</div>
+									<div class="thumbnail">
+										<ul id="productDetail" class="nav nav-tabs">
+											<li class="active"><a href="#home" data-toggle="tab">Product
+													Details</a></li>
+											<li><a href="#history" data-toggle="tab">Bid History</a></li>
+											<li><a href="#profile" data-toggle="tab">Delivery</a></li>
+										</ul>
+										<div id="myTabContent" class="tab-content">
+											<div class="tab-pane fade active in" id="home">
+												<h4>Product Information</h4>
+												<hr class="soft" />
+												Auction start time:
+												<c:out value="${product.auction.startTime}"></c:out>
+												<br> Auction end time:
+												<c:out value="${product.auction.endTime}"></c:out>
+												<hr class="soft" />
+												<c:out value="${product.description.descText} "></c:out>
 
-
-										<div class="tab-pane fade" id="history">
-											<h4>Bid History</h4>
-											<hr class="soft" />
-											<table class="table table-bordered">
-												<tbody>
-													<tr class="techSpecRow">
-														<th>User Name</th>
-														<th>Time</th>
-														<th>Amount</th>
-													</tr>
-													<c:forEach var="userItem" items="${userList}">
-													<tr class="techSpecRow">
-														<td class="techSpecTD1">${userItem.login}"</td>
-														<c:forEach var="bid" items="${userItem.bidList}">
-														<td class="techSpecTD1">${bid.time}</td>
-														<td class="techSpecTD1">${bid.amount}</td>
-														</c:forEach>
-													</tr>
-													</c:forEach>
-													
-												</tbody>
-											</table>
-										
-										</div>
-
-
-	
-										<div class="tab-pane fade" id="profile">
-												<h4>Information for Buyers</h4>
-										
-											<hr class="soft" />
-											<c:out value="${product.delivery }"></c:out>
-											<hr class="soft" />
-											<br class="clr">
-										</div>
-									
-									</div>
 											</div>
+
+
+											<div class="tab-pane fade" id="history">
+												<h4>Bid History</h4>
+												<hr class="soft" />
+												<table class="table table-bordered">
+													<tbody>
+														<tr class="techSpecRow">
+															<th>User Name</th>
+															<th>Time</th>
+															<th>Amount</th>
+														</tr>
+														<c:forEach var="userItem" items="${userList}">
+															<tr class="techSpecRow">
+																<td class="techSpecTD1">${userItem.login}"</td>
+																<c:forEach var="bid" items="${userItem.bidList}">
+																	<td class="techSpecTD1">${bid.time}</td>
+																	<td class="techSpecTD1">${bid.amount}</td>
+																</c:forEach>
+															</tr>
+														</c:forEach>
+
+													</tbody>
+												</table>
+
+											</div>
+
+
+
+											<div class="tab-pane fade" id="profile">
+												<h4>Information for Buyers</h4>
+
+												<hr class="soft" />
+												<c:out value="${product.delivery }"></c:out>
+												<hr class="soft" />
+												<br class="clr">
+											</div>
+
+										</div>
+									</div>
 								</div>
 
 							</div>
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
-			
+
 			<!-- MainBody End ============================= -->
 			<script src="themes/js/jquery.js" type="text/javascript"></script>
 			<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
@@ -324,7 +347,28 @@
 			<script src="themes/js/bootshop.js"></script>
 			<script src="themes/js/jquery.lightbox-0.5.js"></script>
 
+			<!-- JavaScript includes -->
+			<!-- 		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script> -->
+			<script src="jsp/assets/countdown/jquery.countdown.js"></script>
+			<script src="jsp/assets/js/script.js"></script>
 
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$('#placeBidInput').focusout(function() {
+						var placeBidButton = $('#placeBidButton');
+						var currentPrice = document.getElementById("currentBid").value;
+						var bid = $('#placeBidInput').attr('value');
+						if(currentPrice > bid){
+							placeBidButton.attr("disabled","disabled");
+						}else{
+							placeBidButton.removeAttr("disabled");
+						}
+						
+							
+						
+					});
+				});
+			</script>
 		</div>
 		<jsp:include page="footer"></jsp:include>
 </body>
