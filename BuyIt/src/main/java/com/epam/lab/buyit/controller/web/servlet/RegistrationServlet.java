@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.epam.lab.buyit.controller.creator.UserCreator;
 import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
-import com.epam.lab.buyit.controller.validator.Validator;
+import com.epam.lab.buyit.controller.validator.UserValidation;
 import com.epam.lab.buyit.model.User;
 
 public class RegistrationServlet extends HttpServlet {
@@ -20,7 +20,7 @@ public class RegistrationServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String[]> inputRegistrationValues = request.getParameterMap();
 		UserServiceImpl userService = new UserServiceImpl();
-		if (checkingInput(inputRegistrationValues)) {
+		if (UserValidation.checkingInput(inputRegistrationValues)) {
 			User user = new UserCreator().create(inputRegistrationValues);
 			userService.createItem(user);
 			response.sendRedirect("homePageServlet");
@@ -29,22 +29,6 @@ public class RegistrationServlet extends HttpServlet {
 			response.sendRedirect("error404");
 		}
 
-	}
-
-	private boolean checkingInput(Map<String, String[]> inputMap) {
-		boolean result = true;
-		for (Validator currentElement : Validator.values()) {
-			String name = currentElement.getField();
-			result = currentElement.validate(inputMap.get(name)[0]);
-			if (!result) {
-				break;
-			}
-		}
-		result = result
-				&& inputMap.get(Validator.PASSWORD.getField())[0]
-						.equals(inputMap.get(Validator.CONFIRM_PASSWORD
-								.getField())[0]);
-		return result;
 	}
 
 }

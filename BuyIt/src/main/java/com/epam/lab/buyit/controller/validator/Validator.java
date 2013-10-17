@@ -10,7 +10,7 @@ public enum Validator {
 	LAST_NAME(UserSetter.LAST_NAME.getField(), "^[A-Z][a-z-]+{3,15}$", true),
 	LOGIN(UserSetter.LOGIN.getField(), "^[a-z0-9_-]{4,15}$", true),
 	PASSWORD(UserSetter.PASSWORD.getField(), "^[\\w_-]{6,15}$", true),
-	CONFIRM_PASSWORD("confirmPassword", "^[\\w_-]{6,15}$", true),
+	CONFIRM_PASSWORD("confirmPassword", "^[\\w_-]{6,15}$", false),
 	EMAIL(UserSetter.EMAIL.getField(), "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", true),
 	PHONE(UserSetter.PHONE.getField(), "^\\d{10}$", false),
