@@ -14,9 +14,8 @@ public class StartSchedulerServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		AuctionScheduler auctionScheduler = new AuctionScheduler();
 		try {
-			auctionScheduler.run();
+			AuctionScheduler.getInstance().run();
 		} catch (SchedulerException e) {
 			LOGGER.error(e);
 		}

@@ -8,7 +8,7 @@ $(document).ready(function() {
 				url: 'check',
 				data: {'login': value},
 				success: function(responseText) {
-					if (responseText == value) {
+					if (responseText == value && /^[a-z0-9_-]{4,15}$/i.test(responseText)) {
 						$('#register').prop('disabled', false);
 						$('#logindiv').text("");
 						$('#logindiv').addClass('valid').closest(
@@ -16,7 +16,8 @@ $(document).ready(function() {
 						.addClass('success');
 					} else {
 						$('#register').prop('disabled', true);
-						$('#logindiv').text(responseText);
+						if(responseText != value)
+							$('#logindiv').text(responseText);
 						$('#logindiv').closest('.control-group').removeClass(
 						'success').addClass('error');
 					}

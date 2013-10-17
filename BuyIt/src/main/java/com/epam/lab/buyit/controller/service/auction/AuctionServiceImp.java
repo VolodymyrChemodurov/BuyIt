@@ -14,8 +14,7 @@ public class AuctionServiceImp implements AuctionService {
 
 	@Override
 	public Auction getItemById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return auctionDAO.getElementById(id);
 	}
 
 	@Override

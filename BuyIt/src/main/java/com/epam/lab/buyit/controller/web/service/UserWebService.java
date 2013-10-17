@@ -33,11 +33,13 @@ public class UserWebService {
 
 	static {
 		Properties prop = new Properties();
+		LOGGER.info("Loading web-services properties...");
 		try {
 			prop.load(UserWebService.class.getClassLoader()
 					.getResourceAsStream(propFilePath));
 			LOGIN = prop.getProperty("user.login");
 			PASSWORD = prop.getProperty("user.password");
+			LOGGER.info("Web-services properties loading complete.");
 		} catch (IOException e) {
 			LOGGER.error(e);
 			LOGIN = PASSWORD = "";
@@ -54,11 +56,13 @@ public class UserWebService {
 	public JSONObject getUserById(@PathParam("id") int id,
 			@QueryParam("login") String login,
 			@QueryParam("password") String password) {
-
+		
+		LOGGER.info("getting user by id " + id);
 		if (authentication(login, password)) {
 			User user = userService.getItemById(id);
 			if (user != null) {
 				UserSerializationAdapter adapter = new UserSerializationAdapter();
+				LOGGER.info("sending user data");
 				return JSONBuilder.buildJSONObject(user, adapter);
 			}
 		}
@@ -70,6 +74,7 @@ public class UserWebService {
 	public JSONObject getUsers(@QueryParam("login") String login,
 			@QueryParam("password") String password) {
 
+		LOGGER.info("getting users");
 		if (authentication(login, password)) {
 			List<User> users = userService.getAllItems();
 			UserListSerializationAdapter adapter = new UserListSerializationAdapter();
@@ -86,6 +91,12 @@ public class UserWebService {
 			@QueryParam("login") String login,
 			@QueryParam("password") String password) {
 
+		StringBuilder infoString = new StringBuilder("try to login user with login = ")
+				.append(userLogin)
+				.append(" password = ")
+				.append(userPassword);
+		LOGGER.info(infoString);
+		
 		if (authentication(login, password)) {
 			User user = userService.getUser(userLogin, userPassword);
 			if (user != null) {
@@ -104,6 +115,7 @@ public class UserWebService {
 			@QueryParam("login") String login,
 			@QueryParam("password") String password) {
 		
+		LOGGER.info("try to register user");
 		if (authentication(login, password)) {
 			User user = new UserCreator().create(json);
 			if (UserValidation.checkingInput(json)) {
@@ -118,11 +130,17 @@ public class UserWebService {
 	}
 
 	private boolean authentication(String login, String password) {
+		LOGGER.info("starting authentication...");
 		boolean authenticationResult = false;
 		if (login != null && password != null) {
 			if (login.equals(LOGIN) && password.equals(PASSWORD))
 				authenticationResult = true;
-		}
+		} 
+		
+		if(authenticationResult) {
+			LOGGER.info("successful authentication");
+		} else LOGGER.info("authentication fails");
+		
 		return authenticationResult;
 	}
 

@@ -17,10 +17,10 @@ public class ServeAuctionJob implements Job {
 		int auctionId = (int) arg0.getTrigger().getJobDataMap()
 				.get("auctionId");
 		AuctionServiceImp auctionService = new AuctionServiceImp();
-
-		if (auctionService.getItemById(auctionId).getStatus() == "inProgress") {
+		LOGGER.info("Serving auction with id = " + auctionId);
+		if (auctionService.getItemById(auctionId).getStatus().equals("inProgress")) {
 			auctionService.closeAuction(auctionId);
-			LOGGER.info("closed auction with id = " + auctionId);
+			LOGGER.info("Serve auction with id = " + auctionId);
 		}
 	}
 
