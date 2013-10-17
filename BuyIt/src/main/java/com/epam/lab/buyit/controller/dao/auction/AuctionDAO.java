@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,9 @@ public class AuctionDAO implements AuctionDAOInterface {
 	private final static String GET_BY_ID = "SELECT * FROM auctions WHERE id_auction = ?";
 	private final static String GET_BY_PRODUCT_ID = "SELECT * FROM auctions WHERE product_id = ?";
 	private final static String GET_LATEST = "SELECT * FROM auctions WHERE status='inProgress' ORDER BY end_time LIMIT ?";
+	private final static String GET_SOON_ENDING = "SELECT * FROM auctions WHERE end_time > ? AND end_time < ? AND  status='inProgress'";
+	private final static String CLOSE = "UPDATE auctions SET status='closed' WHERE id_auction = ?";
+	private final static String BUY_IT_SERVE = "UPDATE auctions SET count=?, status=? WHERE id_auction=? AND count=? AND status=?";
 
 	private AuctionTransformer transformer;
 
@@ -124,6 +128,67 @@ public class AuctionDAO implements AuctionDAOInterface {
 			DAOUtils.close(result, statement, connection);
 		}
 		return auctions;
+	}
+
+	@Override
+	public List<Auction> getSoonEndingAuctions(long currentTime, long endTime) {
+		List<Auction> auctions = new ArrayList<Auction>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_SOON_ENDING);
+			statement.setTimestamp(1, new Timestamp(currentTime));
+			statement.setTimestamp(2, new Timestamp(endTime));
+			result = statement.executeQuery();
+			while (result.next()) {
+				Auction currentAuction = transformer.fromRSToObject(result);
+				auctions.add(currentAuction);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return auctions;
+	}
+
+	@Override
+	public void closeAuction(int id) {
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(CLOSE);
+			statement.setInt(1, id);
+			statement.executeUpdate();
+
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
+	}
+
+	@Override
+	public int buyItServe(int id, int count, String status, int oldCount,
+			String oldStatus) {
+		int affectedRows = 0;
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(BUY_IT_SERVE);
+			statement.setInt(1, count);
+			statement.setString(2, status);
+			statement.setInt(3, id);
+			statement.setInt(4, oldCount);
+			statement.setString(5, oldStatus);
+			affectedRows = statement.executeUpdate();
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
+		return affectedRows;
 	}
 
 }

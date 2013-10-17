@@ -15,16 +15,13 @@ import com.epam.lab.buyit.model.Product;
 
 public class ProductServiceImpl implements ProductService {
 	private ProductDAO productDAO;
-	//private DescriptionDAO descriptionDAO;
-	private ImageDAO imageDAO; 
-	private DescriptionServiceImpl descriptionServiceImpl; 
+	private ImageDAO imageDAO;
+	private DescriptionServiceImpl descriptionServiceImpl;
 	private AuctionServiceImp auctionService;
 
 	public ProductServiceImpl() {
 		productDAO = new ProductDAO();
-		//descriptionDAO = new DescriptionDAO();
-		//auctionDAO = new AuctionDAO();
-		imageDAO=new ImageDAO();
+		imageDAO = new ImageDAO();
 		descriptionServiceImpl = new DescriptionServiceImpl();
 		auctionService = new AuctionServiceImp();
 	}
@@ -32,10 +29,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product getItemById(int id) {
 		Product currentProduct = productDAO.getElementById(id);
-		int productId =currentProduct.getIdProduct();
+		int productId = currentProduct.getIdProduct();
 		Auction auction = auctionService.getByProductId(productId);
-		Description description = descriptionServiceImpl.getByProductId(productId);
-		
+		Description description = descriptionServiceImpl
+				.getByProductId(productId);
+
 		currentProduct.setDescription(description);
 		currentProduct.setAuction(auction);
 		return currentProduct;
@@ -44,7 +42,6 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> getAllItems() {
 		List<Product> products = productDAO.getAllProducts();
-		//List<Description> descriptions = descriptionDAO.getAllDescriptions();
 		List<Description> descriptions = descriptionServiceImpl.getAllItems();
 		for (Product currentProduct : products) {
 			setProductDescription(currentProduct, descriptions);
@@ -59,7 +56,6 @@ public class ProductServiceImpl implements ProductService {
 
 		Description description = item.getDescription();
 		description.setProductId(generated_product_id);
-		//descriptionDAO.createElement(description);
 		descriptionServiceImpl.createItem(description);
 
 		return item;
@@ -76,7 +72,6 @@ public class ProductServiceImpl implements ProductService {
 
 		Description description = item.getDescription();
 		description.setIdDescription(item.getIdProduct());
-		//descriptionDAO.updateElement(description);
 		descriptionServiceImpl.updateItem(description);
 
 		return item;
@@ -87,8 +82,9 @@ public class ProductServiceImpl implements ProductService {
 		for (Description currentDescription : descriptions) {
 			if (currentDescription.getProductId() == currentProduct
 					.getIdProduct()) {
-				currentDescription.setItemPhotos(imageDAO.getImagesByDescriptionId(currentDescription
-						.getIdDescription()));
+				currentDescription.setItemPhotos(imageDAO
+						.getImagesByDescriptionId(currentDescription
+								.getIdDescription()));
 				currentProduct.setDescription(currentDescription);
 				break;
 			}
@@ -110,9 +106,8 @@ public class ProductServiceImpl implements ProductService {
 					.getProductId());
 			currProduct.setAuction(currAuction);
 			latestProducts.add(currProduct);
-			
+
 		}
-		//List<Description> descriptions = descriptionDAO.getAllDescriptions();
 		List<Description> descriptions = descriptionServiceImpl.getAllItems();
 		for (Product currentProduct : latestProducts) {
 			setProductDescription(currentProduct, descriptions);

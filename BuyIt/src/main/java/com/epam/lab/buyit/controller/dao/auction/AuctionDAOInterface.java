@@ -10,4 +10,11 @@ public interface AuctionDAOInterface extends GenericDAO<Auction> {
 	Auction getByProductId(int productId);
 
 	List<Auction> getLatestAuctions(int number);
+
+	List<Auction> getSoonEndingAuctions(long currentTime, long endTime);
+
+	void closeAuction(int id);
+
+	int buyItServe(int id, int count, String status, int oldCount,
+			String oldStatus);
 }

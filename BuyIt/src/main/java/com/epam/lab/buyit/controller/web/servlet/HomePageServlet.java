@@ -31,7 +31,7 @@ public class HomePageServlet extends HttpServlet {
 		session.setAttribute("carouselImages", cauroselImagesList);
 		session.setAttribute("latestProducts",
 				productService.getLatestProducts(8));
-		
+
 		response.sendRedirect("homePage");
 
 	}

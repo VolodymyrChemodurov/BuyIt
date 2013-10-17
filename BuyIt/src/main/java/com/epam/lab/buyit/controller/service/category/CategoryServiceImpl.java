@@ -5,6 +5,7 @@ import java.util.List;
 import com.epam.lab.buyit.controller.dao.category.CategoryDAO;
 import com.epam.lab.buyit.controller.dao.subcategory.SubCategoryDAO;
 import com.epam.lab.buyit.model.Category;
+import com.epam.lab.buyit.model.SubCategory;
 
 public class CategoryServiceImpl implements CategoryService {
 	private CategoryDAO categoryDAO;
@@ -42,6 +43,17 @@ public class CategoryServiceImpl implements CategoryService {
 	public Category updateItem(Category item) {
 		categoryDAO.updateElement(item);
 		return item;
+	}
+
+	@Override
+	public Category getBySubCategoryId(int subCategoryId) {
+		Category category;
+		SubCategory subCategory;
+		subCategory = subCategoryDAO.getElementById(subCategoryId);
+		category = categoryDAO.getElementById(subCategory.getCategoryId());
+		category.getListSubCategories().add(subCategory);
+		
+		return category;
 	}
 
 }

@@ -24,17 +24,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
     
-    <script src="themes/js/jquery.js" type="text/javascript"></script>
-	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="themes/js/google-code-prettify/prettify.js"></script>
-	
-	<script src="themes/js/bootshop.js"></script>
-    <script src="themes/js/jquery.lightbox-0.5.js"></script>
-    
-<!--     <link type="text/css" rel="stylesheet" href="themes/css/pagination/animate.css"> -->
-<!--     <link type="text/css" rel="stylesheet" href="themes/css/pagination/github.css"> -->
     <link type="text/css" rel="stylesheet" href="themes/css/pagination/jPages.css">
-<!--     <link type="text/css" rel="stylesheet" href="themes/css/pagination/style.css"> -->
     
     <script type="text/javascript" src="themes/js/pagination/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="themes/js/pagination/highlight.pack.js"></script>
@@ -56,13 +46,15 @@
 	    });
 	});
   	</script>
-	
   </head>
   
 <body>
+	<jsp:include page="navbar"></jsp:include>
 	<div id="mainBody">
 		<div class="container">
 			<div class="row">
+			
+			<jsp:include page="sidebarMenu"></jsp:include>
 				<div class="span9">
 				
 					<h3> Search result <small class="pull-right"> ${aviliablePrdcts} products are available </small></h3>
@@ -75,111 +67,66 @@
 					</div>
 					
 					<br class="clr"/>
+					<br class="clr"/>
 					
 					<div class="tab-content">
 						 <div class="tab-pane" id="listView">
-							<c:forEach items="${srchedPrdct}" var="item">
-								<c:forEach items="${buyingDetails}" var="item1">
-								
-									<c:set var="auction" value="${item1.productId}"/>
-									<c:set var="product" value="${item.idProduct}"/>
-									
-									<c:if test="${(auction == product)}">
+							<c:forEach items="${srchedPrdct}" var="product">
 										<div class="row">	  
 											<div class="span2">
-											
 											<!-- Image of product -->
-												<c:set var="flag" value="0" scope="page"/>
-												<c:forEach items="${images}" var="item3">
-													<c:forEach items="${description}" var="item4">
-														<c:set var="desc" value="${item4.idDescription}"/>
-														<c:set var="image" value="${item3.descriptionId}"/>
-														<c:if test="${(desc == image) && flag != 1}">
-															<img src="${item3.path}" alt=""/>
-															<c:set var="flag" value="${flag + 1}" scope="page"/>
-														</c:if>
-													</c:forEach>
-												</c:forEach>
-												
+											<a href="productDetails?id=${product.idProduct}"> 
+													<img style="height:150px" src="<c:out value="${product.description.itemPhotos[0].path }"></c:out>"/>
+											</a>
+											<!-- Image of product -->
 											</div>
 											<div class="span4">
-												<h3><c:out value="${item.name}"/></h3>
+												<h3><c:out value="${product.name}"/></h3>
 												<hr class="soft"/>
 												<p>
 												<!-- Short details -->
-												<c:forEach items="${description}" var="item2">
-													<c:set var="detail" value="${item2.productId}"/>
-													<c:if test="${(detail == product)}">
-														<c:out value="${item2.descText}"/>
-													</c:if>
-												</c:forEach>
+												<c:out value="${product.description.descText}"/>
 												</p>
-												<a class="btn btn-small pull-right" href="product_details.html">View Details</a>
+												<a class="btn btn-small pull-right" href="productDetails?id=${product.idProduct}">View Details</a>
 												<!-- forward to product_detail.jsp -->
 												<br class="clr"/>
 											</div>
 											<div class="span3 alignR">
 											<form class="form-horizontal qtyFrm">
-											<h3> ${item1.currentPrice}</h3>
+											<h3>$ ${product.auction.currentPrice}</h3>
 											<!-- get price of the product from DB -->
 											<br/>
-											
-											  <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-											  <!-- forward to shopping_card.jsp -->
-											
 											</form>
 											</div>
 										</div>
-									</c:if>
-								</c:forEach>
+										<br class="clr"/>
 							</c:forEach>
 							<hr class="soft"/>
 						</div> 
 					
-						<div class="tab-pane  active" id="blockView">
+						<div class="tab-pane active" id="blockView">
 							<ul class="thumbnails" id="itemContainer">
-								<c:forEach items="${srchedPrdct}" var="item">
-									<c:forEach items="${buyingDetails}" var="item1">
-									
-										<c:set var="auction" value="${item1.productId}"/>
-										<c:set var="product" value="${item.idProduct}"/>
+								<c:forEach items="${srchedPrdct}" var="product">
 										
-										<c:if test="${(auction == product)}">
-										
-								   			<li class="span3">
+								   			<li class="span3 box">
 											  <div class="thumbnail">
-											  <!-- forward to product_detail.jsp -->
-												<a href="product_details.html">
-<!-- 													<img src="themes/images/products/3.jpg" alt=""/> -->
-													<c:set var="flag" value="0" scope="page"/>
-													<c:forEach items="${images}" var="item3">
-														<c:forEach items="${description}" var="item4">
-															<c:set var="desc" value="${item4.idDescription}"/>
-															<c:set var="image" value="${item3.descriptionId}"/>
-															<c:if test="${(desc == image) && flag != 1}">
-																<img src="${item3.path}" alt=""/>
-																<c:set var="flag" value="${flag + 1}" scope="page"/>
-															</c:if>
-														</c:forEach>
-													</c:forEach>
+												<!-- Image of product -->
+												<a href="productDetails?id=${product.idProduct}"> 
+													<img style="height:150px" src="<c:out value="${product.description.itemPhotos[0].path }"></c:out>"/>
 												</a>
+												<!-- Image of product -->
 												<div class="caption">
-												  <h5><c:out value="${item.name}"/></h5>
+												  <h5><c:out value="${product.name}"/></h5>
 												  <p> 
 													For details. Click here 
 												  </p>
 												   <h4 style="text-align:center">
-												   <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i>
-												   <!-- forward to product_detail.jsp -->
-												   </a> 
-												   <a class="btn btn-primary" href="#">$ ${item1.currentPrice}</a></h4>
+												   <a class="btn btn-primary" href="#">$ ${product.auction.currentPrice}</a></h4>
 												   <!-- get price of the product from DB -->
 												</div>
 											  </div>
 											</li>
 											
-										</c:if>
-									</c:forEach>
 								</c:forEach>
 							</ul>
 						<hr class="soft"/>
@@ -195,6 +142,11 @@
 		</div>
 	</div>
 </div>
-
+<jsp:include page="footer"></jsp:include>
+	<script src="themes/js/jquery.js" type="text/javascript"></script>
+	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="themes/js/google-code-prettify/prettify.js"></script>
+	<script src="themes/js/bootshop.js"></script>
+	<script src="themes/js/jquery.lightbox-0.5.js"></script>
 </body>
 </html>
