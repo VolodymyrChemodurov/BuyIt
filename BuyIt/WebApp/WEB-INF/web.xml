@@ -250,24 +250,24 @@
 		<servlet-name>BuyItServeServlet</servlet-name>
 		<url-pattern>/buyItServe</url-pattern>
 	</servlet-mapping>
-	 <servlet>
-    <servlet-name>CategoryViewerServlet</servlet-name>
-    <servlet-class>com.epam.lab.buyit.controller.web.servlet.CategoryViewerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CategoryViewerServlet</servlet-name>
-    <url-pattern>/categoryViewer</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>categoryViewer</servlet-name>
-    <jsp-file>/jsp/сategoryViewerPage.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>categoryViewer</servlet-name>
-    <url-pattern>/categoryViewerPage</url-pattern>
-  </servlet-mapping>
-  <servlet>
+	<servlet>
+		<servlet-name>CategoryViewerServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.CategoryViewerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryViewerServlet</servlet-name>
+		<url-pattern>/categoryViewer</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>categoryViewer</servlet-name>
+		<jsp-file>/jsp/сategoryViewerPage.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>categoryViewer</servlet-name>
+		<url-pattern>/categoryViewerPage</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>UserSales</servlet-name>
 		<jsp-file>/jsp/userSales.jsp</jsp-file>
 	</servlet>
@@ -314,6 +314,30 @@
 	<servlet-mapping>
 		<servlet-name>ChangePasswordServlet</servlet-name>
 		<url-pattern>/changePasswordServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>AdminPageServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.AdminPageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminPageServlet</servlet-name>
+		<url-pattern>/adminPageServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>AdminMainPage</servlet-name>
+		<jsp-file>/jsp/adminMainPage.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminMainPage</servlet-name>
+		<url-pattern>/adminMainPage</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>AdminProfile</servlet-name>
+		<jsp-file>/jsp/adminProfile.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminProfile</servlet-name>
+		<url-pattern>/adminProfile</url-pattern>
 	</servlet-mapping>
 	<filter>
 		<filter-name>sideMenuFilter</filter-name>

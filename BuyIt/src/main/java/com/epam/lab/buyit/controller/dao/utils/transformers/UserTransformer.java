@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.apache.log4j.Logger;
+
+import com.epam.lab.buyit.model.Status;
 import com.epam.lab.buyit.model.User;
 
 public class UserTransformer implements TransformerInterface<User> {
@@ -31,7 +33,7 @@ public class UserTransformer implements TransformerInterface<User> {
 			statement.setString(4, elem.getLogin());
 			statement.setString(5, elem.getPassword());
 			statement.setString(6, elem.getAvatar());
-			statement.setBoolean(7, elem.getRole());
+			statement.setBoolean(7, Status.getTypeByRole(elem.getBan()));
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}
@@ -51,7 +53,7 @@ public class UserTransformer implements TransformerInterface<User> {
 			statement.setString(4, elem.getLogin());
 			statement.setString(5, elem.getPassword());
 			statement.setString(6, elem.getAvatar());
-			statement.setBoolean(7, elem.getRole());
+			statement.setBoolean(7, Status.getTypeByRole(elem.getBan()));
 			statement.setInt(8, elem.getIdUser());
 		} catch (SQLException e) {
 			LOGGER.error(e);
