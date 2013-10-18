@@ -54,6 +54,19 @@
 					<div class="avatar-wrapper">
 						<img src="${user.avatar}">
 					</div>
+					<a style="color:white; padding-left: 20px;"><i class="icon-user"></i>Change avatar</a>
+					<br>
+					<a onclick="showPasswordBlock()" id="passwordLink"style="color:white; padding-left: 20px;"><i class="icon-user"></i>Change password</a>
+					<div id="changePasswordBlock" style="display:none;">
+						<span style="color:green; font-size: 14px;">Change password block</span>
+						<input type="password" placeholder="Old password" name="oldPassword"/>
+						<input type="password" placeholder="New password" name="newPassword"/>
+						<input type="password" placeholder="Confirm password" name="confirmPassword"/>
+						<div id="passwordChangeResult" style="display: none; color:green;"><b>Password changed</b></div>
+						<button id="passwordBlockApply" type="submit" style="width: 92px; margin-top:2px;" class="btn btn-success">Apply</button>
+						<button id="passwordBlockCancel"style="width: 92px; margin-top:2px;" class="btn btn-danger">Cancel</button>
+					</div>	
+						
 				</div>
 				<!-- /left-menu -->
 
@@ -145,9 +158,9 @@
 								</div>
 								<div class=myrow>
 									<span class="span-2"><input name="house"
-										style="width: 86px;" value="${user.contact.address.house}" />
+										style="width: 84px;" value="${user.contact.address.house}" />
 									</span> <span class="span-2"><input name="flat"
-										style="width: 87px;" value="${user.contact.address.flat}" />
+										style="width: 85px;" value="${user.contact.address.flat}" />
 									</span>
 								</div>
 								<div class=myrow>

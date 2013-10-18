@@ -40,6 +40,16 @@ public class ProductServiceImpl implements ProductService {
 		currentProduct.setAuction(auction);
 		return currentProduct;
 	}
+	
+	public List<Product> getItemsByUserId(int id) {
+		List<Product> products = productDAO.getElementsByUserId(id);
+		for(Product currentProduct: products){
+			Auction auction = auctionService.getByProductId(currentProduct.getIdProduct());
+			currentProduct.setAuction(auction);
+		}
+
+		return products;
+	}
 
 	@Override
 	public List<Product> getAllItems() {
@@ -118,6 +128,36 @@ public class ProductServiceImpl implements ProductService {
 			setProductDescription(currentProduct, descriptions);
 		}
 		return latestProducts;
+	}
+
+	public List<Product> getWonItemsByUserId(int id) {
+		List<Product> products = productDAO.getWonElementsByUserId(id);
+		for(Product currentProduct: products){
+			Auction auction = auctionService.getByProductId(currentProduct.getIdProduct());
+			currentProduct.setAuction(auction);
+		}
+
+		return products;
+	}
+
+	public List<Product> getLostItemsByUserId(int id) {
+		List<Product> products = productDAO.getLostElementsByUserId(id);
+		for(Product currentProduct: products){
+			Auction auction = auctionService.getByProductId(currentProduct.getIdProduct());
+			currentProduct.setAuction(auction);
+		}
+
+		return products;
+	}
+
+	public List<Product> getActiveItemsByUserId(int id) {
+		List<Product> products = productDAO.getActiveElementsByUserId(id);
+		for(Product currentProduct: products){
+			Auction auction = auctionService.getByProductId(currentProduct.getIdProduct());
+			currentProduct.setAuction(auction);
+		}
+
+		return products;
 	}
 
 }

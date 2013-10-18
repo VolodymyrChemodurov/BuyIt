@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
 		if (user != null) {
 			Contact contact = contactDAO.getElementById(user.getIdUser());
 			user.setContact(contact);
-			contact.setAddress(addressDAO.getElementById(contact.getIdContact()));
+			contact.setAddress(addressDAO.getElementByUserId(contact.getIdContact()));
 		}
 	}
 

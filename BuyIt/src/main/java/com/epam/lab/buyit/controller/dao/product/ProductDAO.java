@@ -19,13 +19,18 @@ public class ProductDAO implements ProductDAOInterface {
 	private final static String GET_PRD_BY_NAME = "SELECT * FROM products WHERE name LIKE ? ORDER BY name";
 	private final static String GET_PRD_BY_CATEGORY = "SELECT * FROM products WHERE sub_category_id IN (SELECT id_sub_category FROM sub_categories WHERE category_id = (SELECT id_category FROM categories WHERE categories.name = ?)) ORDER BY products.name";
 	private final static String GET_PRD_BY_NAME_CATEGORY = "SELECT * FROM products WHERE sub_category_id IN (SELECT id_sub_category FROM sub_categories WHERE category_id = (SELECT id_category FROM categories WHERE categories.name = ?)) AND products.name LIKE ? ORDER BY products.name";
-
+	private final static String GET_BY_USER_ID = "SELECT * FROM products WHERE user_id = ?";
+	private final static String GET_WON_BY_USER_ID = "SELECT * FROM products WHERE id_product IN (SELECT product_id	FROM (auctions A JOIN (SELECT * FROM bids WHERE user_id = ?) B  ON B.auction_id=A.id_auction) WHERE (amount = current_price)AND(status='closed'))";
+	private final static String GET_ACTIVE_BY_USER_ID = "SELECT * FROM products WHERE id_product IN (SELECT product_id	FROM (auctions A JOIN (SELECT * FROM bids WHERE user_id = ?) B  ON B.auction_id=A.id_auction) WHERE status='inProgress')";
+	private final static String GET_LOST_BY_USER_ID = "SELECT * FROM products WHERE id_product IN (SELECT product_id FROM (auctions A JOIN (SELECT * FROM bids WHERE user_id = ?) B  ON B.auction_id=A.id_auction) WHERE (amount < current_price)AND(status='closed'))";
 	private final static String GET_BY_ID = "SELECT * FROM products WHERE id_product = ?";
 	private final static String GET_ALL_PRODUCTS = "SELECT * FROM products";
 	private final static String GET_BY_SUBCATEGORY_ID = "SELECT * FROM products WHERE sub_category_id = ?";
 	private final static String GET_SELECTION = "SELECT SQL_CALC_FOUND_ROWS * FROM products WHERE sub_category_id = ? "
 			+ "LIMIT ?, ?";
 	private final static String GET_ROWS_COUNT_BY_SYBCATEGORY_ID = "SELECT COUNT(id_product) FROM products WHERE sub_category_id = ?";
+	
+	
 	private ProductTransformer transformer;
 	public ProductDAO() {
 		transformer = new ProductTransformer();
@@ -145,7 +150,7 @@ public class ProductDAO implements ProductDAOInterface {
 		}
 		return product;
 	}
-
+	
 	@Override
 	public void updateElement(Product elem) {
 		Connection connection = ConnectionManager.getConnection();
@@ -253,6 +258,90 @@ public class ProductDAO implements ProductDAOInterface {
 			DAOUtils.close(result, statement, connection);
 		}
 		return 0;
+	}
+
+	public List<Product> getElementsByUserId(int id) {
+		List<Product> products = new ArrayList<Product>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_BY_USER_ID);
+			statement.setInt(1, id);
+			result = statement.executeQuery();
+			while (result.next()) {
+				Product currentProduct = transformer.fromRSToObject(result);
+				products.add(currentProduct);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return products;
+	}
+	
+	public List<Product> getWonElementsByUserId(int id) {
+		List<Product> products = new ArrayList<Product>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_WON_BY_USER_ID);
+			statement.setInt(1, id);
+			result = statement.executeQuery();
+			while (result.next()) {
+				Product currentProduct = transformer.fromRSToObject(result);
+				products.add(currentProduct);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return products;
+	}
+
+	public List<Product> getLostElementsByUserId(int id) {
+		List<Product> products = new ArrayList<Product>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_LOST_BY_USER_ID);
+			statement.setInt(1, id);
+			result = statement.executeQuery();
+			while (result.next()) {
+				Product currentProduct = transformer.fromRSToObject(result);
+				products.add(currentProduct);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return products;
+	}
+
+	public List<Product> getActiveElementsByUserId(int id) {
+		List<Product> products = new ArrayList<Product>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_ACTIVE_BY_USER_ID);
+			statement.setInt(1, id);
+			result = statement.executeQuery();
+			while (result.next()) {
+				Product currentProduct = transformer.fromRSToObject(result);
+				products.add(currentProduct);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return products;
 	}
 
 }

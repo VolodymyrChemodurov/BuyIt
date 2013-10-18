@@ -43,4 +43,8 @@ public class BidServiceImp implements BidService {
 		return bidDAO.getByAuctionId(auctionId);
 	}
 
+	public Object getItemByUserId(int id) {
+		return bidDAO.getByUserId(id);
+	}
+
 }
