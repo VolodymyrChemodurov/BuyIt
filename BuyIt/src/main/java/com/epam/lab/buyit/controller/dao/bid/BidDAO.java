@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.epam.lab.buyit.controller.dao.address.AddressDAO;
 import com.epam.lab.buyit.controller.dao.utils.DAOUtils;
 import com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.transformers.BidTransformer;
@@ -17,7 +16,7 @@ import com.epam.lab.buyit.model.Bid;
 
 public class BidDAO implements BidDAOInterface{
 
-	private static final Logger LOGGER = Logger.getLogger(AddressDAO.class);
+	private static final Logger LOGGER = Logger.getLogger(BidDAO.class);
 	private final static String GET_BY_ID = "SELECT * FROM bids WHERE id_bid = ?";
 	private final static String GET_BY_AUCTION_ID ="SELECT * FROM bids WHERE auction_id = ?";
 	private final static String GET_BY_USER_ID ="SELECT * FROM bids WHERE user_id = ?";

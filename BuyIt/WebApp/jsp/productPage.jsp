@@ -14,7 +14,8 @@
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" />
 <link rel="stylesheet" href="themes/assets_timer/css/styles.css" />
-<link rel="stylesheet" href="themes/assets_timer/countdown/jquery.countdown.css" />
+<link rel="stylesheet"
+	href="themes/assets_timer/countdown/jquery.countdown.css" />
 
 
 <!--Less styles -->
@@ -67,19 +68,18 @@
 						<jsp:include page="sidebarMenu"></jsp:include>
 						<div class="span9">
 							<ul class="breadcrumb">
-										<li><a href="homePageServlet">Home</a> <span
-												class="divider">/</span></li>
-									<li><a
-									href="categoryViewer?id=${category.idCategory}">${category.name}</a>
+								<li><a href="homePageServlet">Home</a> <span
+									class="divider">/</span></li>
+								<li><a href="categoryViewer?id=${category.idCategory}">${category.name}</a>
 									<span class="divider">/</span></li>
-								
-									
+
+
 								<c:forEach var="subCategory"
 									items="${category.listSubCategories}">
-										<li><a
-									href="select_category?id=${subCategory.idSubCategory}">${subCategory.name}</a>
-									<span class="divider">/</span></li>
-									
+									<li><a
+										href="select_category?id=${subCategory.idSubCategory}">${subCategory.name}</a>
+										<span class="divider">/</span></li>
+
 									<li class="active"><c:out value="${product.name}"></c:out></li>
 								</c:forEach>
 							</ul>
@@ -204,6 +204,8 @@
 										<div id="countdown"></div>
 									</dir>
 									<hr class="soft" />
+									
+<!-- 						----------------------	PLACE A BID------------------------- -->
 									<c:if test="${product.auction.currentPrice != 0 }">
 										<form class="form-horizontal qtyFrm">
 											<div class="control-group">
@@ -225,16 +227,18 @@
 									</c:if>
 
 
-
+<!-- ---------------------------------------------BUY IT NOW------------------------ -->
 
 									<c:if test="${product.auction.buyItNow != 0 }">
-										<form class="form-horizontal qtyFrm">
+										<form class="form-horizontal qtyFrm" action="buyItServe"
+											method="POST">
 											<div class="control-group">
+												<input typr= "hidden" name="id_product" value="${product.idProduct}"/>
 												<label class="control-label"><span> Buy it
 														By: <c:out value="${product.auction.buyItNow}"></c:out> $
 												</span></label>
 												<div class="controls">
-													<input type="hidden" id="count"
+													<input type="hidden" name="count"  id="count"
 														value="${product.auction.count}" /> <label
 														class="control-label" text-align="right"><span>
 															Quantity:</span></label> <input type="number" id="quantity"
@@ -371,16 +375,22 @@
 									$('#quantity')
 											.focusout(
 													function() {
-														var count = $('#count').val();
-														console.log("count: " + count);
-														var quantity = $('#quantity').val();
+														var count = $('#count')
+																.val();
+														console.log("count: "
+																+ count);
+														var quantity = $(
+																'#quantity')
+																.val();
 														if (parseInt(quantity) > parseInt(count)) {
-															 $('#buyItButton').attr(
-																	"disabled",
-																	"disabled");
+															$('#buyItButton')
+																	.attr(
+																			"disabled",
+																			"disabled");
 														} else {
-															 $('#buyItButton')
-																	.removeAttr("disabled");
+															$('#buyItButton')
+																	.removeAttr(
+																			"disabled");
 														}
 
 													});

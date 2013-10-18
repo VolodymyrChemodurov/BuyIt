@@ -57,9 +57,8 @@ public class AuctionServiceImp implements AuctionService {
 	}
 
 	@Override
-	public int buyItServe(int id, int count, String status,
-			double newCurrentPrice, int oldCount, String oldStatus) {
-		return auctionDAO.buyItServe(id, count, status, newCurrentPrice,
-				oldCount, oldStatus);
+	public int buyItServe(int id, int count, String status, int oldCount,
+			String oldStatus) {
+		return auctionDAO.buyItServe(id, count, status, oldCount, oldStatus);
 	}
 }

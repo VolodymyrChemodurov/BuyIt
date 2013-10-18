@@ -15,6 +15,6 @@ public interface AuctionService extends GenericService<Auction> {
 
 	void closeAuction(int auctionId);
 
-	int buyItServe(int id, int count, String status, double newCurrentPrice,
-			int oldCount, String oldStatus);
+	int buyItServe(int id, int count, String status, int oldCount,
+			String oldStatus);
 }

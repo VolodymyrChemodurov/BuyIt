@@ -12,14 +12,16 @@ import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
 import com.epam.lab.buyit.controller.service.bid.BidServiceImp;
 import com.epam.lab.buyit.model.Auction;
 import com.epam.lab.buyit.model.Bid;
+import com.epam.lab.buyit.model.User;
 
 public class BuyItServeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request,
+	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		int idProduct = Integer.parseInt(request.getParameter("id_product"));
 		int count = Integer.parseInt(request.getParameter("count"));
+		User user = (User) request.getSession(false).getAttribute("user");
 
 		AuctionServiceImp auctionService = new AuctionServiceImp();
 		BidServiceImp bidService = new BidServiceImp();
@@ -30,20 +32,20 @@ public class BuyItServeServlet extends HttpServlet {
 		if (auction.getStatus().equals("inProgress")) {
 			if (realCount < count) {
 				response.sendRedirect("cfxgc");
-			} else if (auction.getCount() - count == 0) {
+			} else if (realCount - count == 0) {
 				status = "closed";
 			} else {
 				status = "inProgress";
 			}
 			int affectedRows = auctionService.buyItServe(
 					auction.getIdAuction(), realCount - count, status,
-					auction.getBuyItNow(), realCount, auction.getStatus());
+					realCount, auction.getStatus());
 			if (affectedRows == 1) {
 				Bid bid = new Bid();
 				bid.setTime(new Timestamp(System.currentTimeMillis()));
 				bid.setAmount(auction.getBuyItNow());
 				bid.setAuctionId(auction.getIdAuction());
-				bid.setUserId(userId);
+				bid.setUserId(user.getIdUser());
 				bidService.createItem(bid);
 
 				response.sendRedirect("homePageServlet");
