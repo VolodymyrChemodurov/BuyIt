@@ -146,31 +146,9 @@
 								<div class="controls">
 									<select id="region" name="region">
 										<option value="">-</option>
-										<option value="Vinnucka">Vinnucka</option>
-										<option value="Volunska">Volunska</option>
-										<option value="Dnipropetrovska">Dnipropetrovska</option>
-										<option value="Donetska">Donetska</option>
-										<option value="Jutomirska">Jutomirska</option>
-										<option value="Zakarpatska">Zakarpatska</option>
-										<option value="Zaporizka">Zaporizka</option>
-										<option value="Ivano-Frankivska">Ivano-Frankivska</option>
-										<option value="Kyivska">Kyivska</option>
-										<option value="Kirovogradska">Kirovogradska</option>
-										<option value="Krum">Krum</option>
-										<option value="Lyganska">Lyganska</option>
-										<option value="Lvivska">Lvivska</option>
-										<option value="Mukolaivska">Mukolaivska</option>
-										<option value="Odeska">Odeska</option>
-										<option value="Poltavska">Poltavska</option>
-										<option value="Rivnenska">Rivnenska</option>
-										<option value="Symska">Symska</option>
-										<option value="Ternopilska">Ternopilska</option>
-										<option value="Kharkivska">Kharkivska</option>
-										<option value="Khersonska">Khersonska</option>
-										<option value="Khmelnutska">Khmelnutska</option>
-										<option value="Sherkaska">Sherkaska</option>
-										<option value="Shernigivska">Shernigivska</option>
-										<option value="Shernivetska">Shernivetska</option>
+										<c:forEach var="current" items="${region}">
+											<option value="${current}">${current}</option>
+										</c:forEach>
 									</select>
 								</div>
 							</div>

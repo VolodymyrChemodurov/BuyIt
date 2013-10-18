@@ -76,7 +76,7 @@ function showPasswordBlock(){
 function editProduct(id) {
 
 	$('#salesTabs li:eq(3) a').click();
-	$('#salesTabs li:eq(3) a').click();
+	
 }
 
 $('#salesTabs li:eq(4) a').click(function() {

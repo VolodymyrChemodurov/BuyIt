@@ -84,7 +84,7 @@
 								<tbody>
 									<c:forEach var="product" items="${userActiveSales}">
 										<tr>
-											<td>${product.name}</td>
+											<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
 											<td>${product.auction.startTime}</td>
 											<td>${product.auction.endTime}</td>
 
@@ -133,7 +133,7 @@
 								<tbody>
 									<c:forEach var="product" items="${userEndedSales}">
 										<tr>
-											<td>${product.name}</td>
+											<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
 											<td>${product.auction.startTime}</td>
 											<td>${product.auction.endTime}</td>
 

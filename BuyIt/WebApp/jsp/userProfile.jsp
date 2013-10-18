@@ -149,7 +149,16 @@
 								</div>
 								<div class=myrow style="padding-top: 70px;">
 									<span class="span-2"><input name="city"
-										value="${user.contact.address.city}" /> </span>
+										value="${user.contact.address.city}" />
+										<select id="region" name="region">
+											<option value="${user.contact.address.region}">${user.contact.address.region}</option>
+											<c:forEach var="current" items="${region}">
+												<c:if test="${user.contact.address.region != current}">
+													<option value="${current}">${current}</option>
+												</c:if>
+											</c:forEach>
+										</select>
+									</span>
 								</div>
 								<div class=myrow>
 									<span class="span-2"><input name="region"
