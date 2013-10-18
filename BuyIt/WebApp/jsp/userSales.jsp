@@ -76,7 +76,6 @@
 								<thead>
 									<tr>
 										<th>Product Name</th>
-										<th>Auction id</th>
 										<th>Start Time</th>
 										<th>End Time</th>
 
@@ -86,7 +85,6 @@
 									<c:forEach var="product" items="${userActiveSales}">
 										<tr>
 											<td>${product.name}</td>
-											<td>${product.auction.idAuction}</td>
 											<td>${product.auction.startTime}</td>
 											<td>${product.auction.endTime}</td>
 
@@ -127,7 +125,6 @@
 								<thead>
 									<tr>
 										<th>Product Name</th>
-										<th>Auction id</th>
 										<th>Start Time</th>
 										<th>End Time</th>
 
@@ -137,7 +134,6 @@
 									<c:forEach var="product" items="${userEndedSales}">
 										<tr>
 											<td>${product.name}</td>
-											<td>${product.auction.idAuction}</td>
 											<td>${product.auction.startTime}</td>
 											<td>${product.auction.endTime}</td>
 

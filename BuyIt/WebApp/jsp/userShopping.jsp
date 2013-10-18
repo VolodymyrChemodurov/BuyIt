@@ -71,7 +71,6 @@
 								<thead>
 									<tr>
 										<th>Product Name</th>
-										<th>Auction id</th>
 										<th>Start Time</th>
 										<th>End Time</th>
 										<th>Current price</th>
@@ -83,7 +82,6 @@
 									<c:forEach var="product" items="${userActiveShopping}">
 										<tr>
 											<td>${product.name}</td>
-											<td>${product.auction.idAuction}</td>
 											<td>${product.auction.startTime}</td>
 											<td>${product.auction.endTime}</td>
 											<td>${product.auction.currentPrice}</td>
@@ -133,7 +131,6 @@
 								<thead>
 									<tr>
 										<th>Product Name</th>
-										<th>Auction id</th>
 										<th>Start Time</th>
 										<th>End Time</th>
 										<th>Current price</th>
@@ -143,7 +140,6 @@
 									<c:forEach var="product" items="${userPurchasedShopping}">
 										<tr>
 											<td>${product.name}</td>
-											<td>${product.auction.idAuction}</td>
 											<td>${product.auction.startTime}</td>
 											<td>${product.auction.endTime}</td>
 											<td>${product.auction.currentPrice}</td>
@@ -165,7 +161,6 @@
 								<thead>
 									<tr>
 										<th>Product Name</th>
-										<th>Auction id</th>
 										<th>Start Time</th>
 										<th>End Time</th>
 										<th>Current price</th>
@@ -177,7 +172,6 @@
 									<c:forEach var="product" items="${userLostShopping}">
 										<tr>
 											<td>${product.name}</td>
-											<td>${product.auction.idAuction}</td>
 											<td>${product.auction.startTime}</td>
 											<td>${product.auction.endTime}</td>
 											<td>${product.auction.currentPrice}</td>

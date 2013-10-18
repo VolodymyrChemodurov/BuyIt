@@ -39,29 +39,35 @@ $('#passwordBlockCancel').click(function() {
 	$('#changePasswordBlock').hide();
 });
 
-$('#passwordBlockApply').click(function() {
-	var old = $("oldPassword").value();
-	var newp = $("newPassword").value();
-	var confirm = $("confirmPassword").value();
-	
-	if (old == ''){
-		
-	} else if(newp == ''){}
-	
-	$.ajax( {
-		type: 'POST',
-		url: 'subcategory',
-		data: {'categoryId': $(this).val()},
-		success: function(data) {
-			$.each(data, function(index, value) {
-				a=value;
-			  $("#subCategory").append('<option value="">'+value.name+'</option>');
-			});
-		}
-	});
-	
-	
+$('#oldPassword').change(function() {
+	var password = $("#oldPassword").val();
+	var login = $("#login").val();
+	if (password == ''){
+		$('#passwordChangeResult').empty();
+		$('#passwordChangeResult').show();
+		$('#passwordChangeResult').append('<span style ="color:red;">Incorrect old password</span>');
+		$('#passwordBlockApply').attr("disabled", "disabled");
+	} else {
+		$.ajax( {
+			type: 'POST',
+			url: 'checkPassword',
+			data: {'login': login, 'password':password},
+			success: function(data) {
+				if (data == login) {
+					$('#passwordChangeResult').empty();
+					$('#passwordChangeResult').append('<span style ="color:red;">Incorrect old password</span>');
+					$('#passwordBlockApply').attr("disabled", "disabled");
+					$('#passwordChangeResult').show();
+				} else {
+					$('#passwordChangeResult').hide();
+					$('#passwordBlockApply').removeAttr("disabled");
+
+				}
+			}
+		});
+	}
 });
+
 
 function showPasswordBlock(){
 	$('#changePasswordBlock').show();

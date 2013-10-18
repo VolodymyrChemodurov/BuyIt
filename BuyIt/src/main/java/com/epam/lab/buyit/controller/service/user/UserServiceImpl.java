@@ -84,6 +84,14 @@ public class UserServiceImpl implements UserService {
 	public boolean checkLogin(String login) {
 		return userDAO.checkLogin(login);
 	}
+	
+	public boolean checkPassword(String login, String password) {
+		boolean checkResult = false;
+		if (getUser(login, password)== null){
+			checkResult = true;
+		}
+		return checkResult;
+	}
 
 	private void setUserContact(User currentUser, List<Contact> contacts,
 			List<Address> address) {
