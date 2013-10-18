@@ -158,11 +158,11 @@
 		<url-pattern>/check</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>CategoryViewer</servlet-name>
-		<jsp-file>/jsp/category_viewer.jsp</jsp-file>
+		<servlet-name>subCategoryViewer</servlet-name>
+		<jsp-file>/jsp/subCategory_viewer.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>CategoryViewer</servlet-name>
+		<servlet-name>subCategoryViewer</servlet-name>
 		<url-pattern>/category</url-pattern>
 	</servlet-mapping>
 	<servlet>
@@ -250,6 +250,23 @@
 		<servlet-name>BuyItServeServlet</servlet-name>
 		<url-pattern>/buyItServe</url-pattern>
 	</servlet-mapping>
+	 <servlet>
+    <servlet-name>CategoryViewerServlet</servlet-name>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.CategoryViewerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CategoryViewerServlet</servlet-name>
+    <url-pattern>/categoryViewer</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>categoryViewer</servlet-name>
+    <jsp-file>/jsp/categoryViewer.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>categoryViewer</servlet-name>
+    <url-pattern>/categoryViewerPage</url-pattern>
+  </servlet-mapping>
 	<filter>
 		<filter-name>sideMenuFilter</filter-name>
 		<filter-class>com.epam.lab.buyit.controller.web.filter.SideMenuFilter</filter-class>

@@ -115,4 +115,20 @@ public class ProductServiceImpl implements ProductService {
 		return latestProducts;
 	}
 
+	@Override
+	public List<Product> getBySubCategoryId(int subCategoryId) {
+		
+		List<Product> productList = productDAO.getProductsBySubCategoryId(subCategoryId);
+		for (Product product : productList) {
+			int productId =product.getIdProduct();
+			Auction auction = auctionService.getByProductId(productId);
+			Description description = descriptionServiceImpl.getByProductId(productId);
+		
+			product.setDescription(description);
+			product.setAuction(auction);
+		}
+		
+		return productList;
+	}
+
 }

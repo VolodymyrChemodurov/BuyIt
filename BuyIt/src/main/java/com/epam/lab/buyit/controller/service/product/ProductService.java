@@ -12,5 +12,7 @@ public interface ProductService extends GenericService<Product> {
 	int getCountBySubCategoryId(int id);
 
 	List<Product> getLatestProducts(int number);
+	
+	List<Product> getBySubCategoryId(int subCategoryId);
 
 }
