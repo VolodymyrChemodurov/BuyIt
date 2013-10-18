@@ -249,6 +249,7 @@
 	<script src="themes/assets/js/jquery.validate.js"></script>
 	<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
 	<script src="themes/assets/js/script.js"></script>
+	<script src="bootstrap/js/search.js"></script>
 
 </body>
 </html>

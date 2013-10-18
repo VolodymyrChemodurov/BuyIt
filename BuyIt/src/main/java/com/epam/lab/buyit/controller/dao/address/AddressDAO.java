@@ -18,6 +18,7 @@ public class AddressDAO implements AddressDAOInterface {
 	private static final Logger LOGGER = Logger.getLogger(AddressDAO.class);
 	private final static String GET_BY_ID = "SELECT * FROM address WHERE id_address = ?";
 	private final static String GET_ALL = "SELECT * FROM address";
+	private final static String GET_BY_USER_ID = "SELECT * FROM address WHERE contacts_id = ?";
 	private AddressTransformer transformer;
 
 	public AddressDAO() {
@@ -41,7 +42,7 @@ public class AddressDAO implements AddressDAOInterface {
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-		DAOUtils.close(generatedKeys, statement, connection);
+			DAOUtils.close(generatedKeys, statement, connection);
 		}
 		return 0;
 	}
@@ -49,8 +50,7 @@ public class AddressDAO implements AddressDAOInterface {
 	@Override
 	public Address getElementById(int id) {
 		Address currentAddress = null;
-		Connection connection = ConnectionManager
-				.getConnection();
+		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		try {
@@ -64,7 +64,7 @@ public class AddressDAO implements AddressDAOInterface {
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-		 DAOUtils.close(result, statement, connection);
+			DAOUtils.close(result, statement, connection);
 		}
 		return currentAddress;
 	}
@@ -83,7 +83,7 @@ public class AddressDAO implements AddressDAOInterface {
 		} finally {
 			DAOUtils.close(statement, connection);
 		}
-		
+
 	}
 
 	@Override
@@ -108,11 +108,30 @@ public class AddressDAO implements AddressDAOInterface {
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
-		 DAOUtils.close(result, statement, connection);
+			DAOUtils.close(result, statement, connection);
 		}
 		return address;
 	}
 
-	
+	public Address getElementByUserId(int id) {
+		Address currentAddress = null;
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_BY_USER_ID);
+			statement.setInt(1, id);
+			result = statement.executeQuery();
+			if (result.next()) {
+				currentAddress = transformer.fromRSToObject(result);
+				return currentAddress;
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return currentAddress;
+	}
 
 }

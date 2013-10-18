@@ -49,6 +49,17 @@ public class ProductServiceImpl implements ProductService {
 		return products;
 	}
 
+	public List<Product> getItemsByUserId(int id) {
+		List<Product> products = productDAO.getElementsByUserId(id);
+		for (Product currentProduct : products) {
+			Auction auction = auctionService.getByProductId(currentProduct
+					.getIdProduct());
+			currentProduct.setAuction(auction);
+		}
+
+		return products;
+	}
+
 	@Override
 	public Product createItem(Product item) {
 		int generated_product_id = productDAO.createElement(item);
@@ -117,18 +128,54 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> getBySubCategoryId(int subCategoryId) {
-		
-		List<Product> productList = productDAO.getProductsBySubCategoryId(subCategoryId);
+
+		List<Product> productList = productDAO
+				.getProductsBySubCategoryId(subCategoryId);
 		for (Product product : productList) {
-			int productId =product.getIdProduct();
+			int productId = product.getIdProduct();
 			Auction auction = auctionService.getByProductId(productId);
-			Description description = descriptionServiceImpl.getByProductId(productId);
-		
+			Description description = descriptionServiceImpl
+					.getByProductId(productId);
+
 			product.setDescription(description);
 			product.setAuction(auction);
 		}
-		
+
 		return productList;
+
+	}
+
+	public List<Product> getWonItemsByUserId(int id) {
+		List<Product> products = productDAO.getWonElementsByUserId(id);
+		for (Product currentProduct : products) {
+			Auction auction = auctionService.getByProductId(currentProduct
+					.getIdProduct());
+			currentProduct.setAuction(auction);
+		}
+
+		return products;
+	}
+
+	public List<Product> getLostItemsByUserId(int id) {
+		List<Product> products = productDAO.getLostElementsByUserId(id);
+		for (Product currentProduct : products) {
+			Auction auction = auctionService.getByProductId(currentProduct
+					.getIdProduct());
+			currentProduct.setAuction(auction);
+		}
+
+		return products;
+	}
+
+	public List<Product> getActiveItemsByUserId(int id) {
+		List<Product> products = productDAO.getActiveElementsByUserId(id);
+		for (Product currentProduct : products) {
+			Auction auction = auctionService.getByProductId(currentProduct
+					.getIdProduct());
+			currentProduct.setAuction(auction);
+		}
+
+		return products;
 	}
 
 }

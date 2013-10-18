@@ -34,6 +34,27 @@ div.bookmarksArea #maWrapper {margin:0; z-index:-1;}
 	width: 500px;
 	
 }
+
+#maContent .mycontent select {
+	width: 213px;
+	border-color: #9C9C9C;
+	height: 26px;
+	line-height: 20px;
+	margin-bottom: 4px;
+	font-size: 14px;
+	color:#000;
+	padding: 0px;
+	border-radius:0;
+
+}
+
+#maContent  h1 {
+	
+	margin:auto;
+	padding-left: 20px;
+}
+
+
 #maContent .my-right-content #form-container h3,
 #maContent .mycontent h3 {
 	
@@ -128,11 +149,38 @@ div.bookmarksArea #vMenu li a {padding:0 16px!important;}
     margin:0;
 }
 .left-menu { 
-	border: 1px solid #C8C8C8;
-    
-	
 	width: 200px; float: left; margin-right: 8px; 
 }
+
+.left-menu input { 
+	color: white;
+	font-weight:bold;
+	float: left; 
+	width: 190px;
+	padding:0;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-align: center;
+	margin-bottom:4px; 
+	margin-left:3px;
+	margin-right:3px;
+	margin-top:2px;
+	position: relative;
+	background-color: #3A3F44;
+}
+
+.left-menu #changePasswordBlock { 
+	margin-top:10px;
+	height:190px;
+	text-align: center; 
+	    background: none;
+    background-color: #eee;
+    border: 1px solid #c8c8c8;
+    border-radius: 5px;
+
+}
+
+
 div.avatar-wrapper {
 	width: 200px;
 	height: 200px;
@@ -142,6 +190,7 @@ div.avatar-wrapper {
 }
 
 div.avatar-wrapper img {
+	border-radius: 5px;
 	margin: auto;
 	height: 200px;
 	width: 200px;

@@ -7,6 +7,7 @@ public class Address {
 	private String city;
 	private String street;
 	private String house;
+	private String flat;
 	private String zipCode;
 
 	public int getContactId() {
@@ -54,6 +55,16 @@ public class Address {
 		return this;
 	}
 
+	public String getFlat() {
+		return flat;
+	}
+
+	public Address setFlat(String flat) {
+		this.flat = flat;
+		return this;
+	}
+	
+	
 	public String getZipCode() {
 		return zipCode;
 	}

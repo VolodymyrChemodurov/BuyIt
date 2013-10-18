@@ -4,7 +4,7 @@ import com.epam.lab.buyit.controller.security.MD5Encryptor;
 import com.epam.lab.buyit.model.User;
 
 public enum UserSetter {
-	
+
 	FIRST_NAME("firstName") {
 		public void setField(User user, String value) {
 			user.setFirstName(value);
@@ -58,8 +58,7 @@ public enum UserSetter {
 	},
 	FLAT("flat") {
 		public void setField(User user, String value) {
-			String house = user.getContact().getAddress().getHouse();
-			user.getContact().getAddress().setHouse(house + "/" + value);
+			user.getContact().getAddress().setFlat(value);
 		}
 	},
 	ZIP_CODE("zipCode") {
@@ -67,17 +66,27 @@ public enum UserSetter {
 			user.getContact().getAddress().setZipCode(value);
 		}
 	};
-	
+
 	private UserSetter(String field) {
 		this.field = field;
 	}
-	
+
 	private String field;
-	
+
 	public String getField() {
 		return field;
 	}
-	
+
 	public abstract void setField(User user, String value);
-	
+
+	public static UserSetter getSetter(String value) {
+		UserSetter result = null;
+		for (UserSetter setter : values()) {
+			if (setter.getField().equals(value)) {
+				result = setter;
+			}
+		}
+		return result;
+	}
+
 }

@@ -17,10 +17,10 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserServiceImpl userServise = new UserServiceImpl();
+		UserServiceImpl userService = new UserServiceImpl();
 		String login = request.getParameter("login").trim();
 		String password = request.getParameter("password").trim();
-		User user = userServise.getUser(login, password);
+		User user = userService.getUser(login, password);
 		
 		if(user != null){
 			LOGGER.info(user.getLogin() + " sign in");

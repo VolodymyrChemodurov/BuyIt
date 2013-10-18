@@ -44,8 +44,8 @@
 		<div id="maWrapper" class="corAll5">
 			<ul id="vMenu">
 				<li id="active"><strong>Profile</strong></li>
-				<li><a href="#">Salles</a></li>
-				<li><a href="#">Shopping</a></li>
+				<li><a href="userSalesServlet">Sales</a></li>
+				<li><a href="userShoppingServlet">Shopping</a></li>
 				<li><a href="#">Comments</a></li>
 			</ul>
 			<!-- / #vMenu -->
@@ -54,6 +54,22 @@
 					<div class="avatar-wrapper">
 						<img src="${user.avatar}">
 					</div>
+					<a style="color:white; padding-left: 20px;"><i class="icon-user"></i>Change avatar</a>
+					<br>
+					<a onclick="showPasswordBlock()" id="passwordLink"style="color:white; padding-left: 20px;"><i class="icon-user"></i>Change password</a>
+					<div id="changePasswordBlock" style="display:none;">
+						<form action="changePasswordServlet" method="post">
+							<span style="color:green; font-size: 14px;">Change password block</span>
+							<input id="login" style="display: none; color:green;" name="login" value="${user.login}"/>
+							<input id="oldPassword" type="password" placeholder="Old password" name="oldPassword"/>
+							<input id="newPassword" type="password" placeholder="New password" name="newPassword"/>
+							<input id="confirmPassword" type="password" placeholder="Confirm password" name="confirmPassword"/>
+							<div id="passwordChangeResult" style="display: none; color:green;"><b>Password changed</b></div>
+							<button id="passwordBlockApply" type="submit" style="width: 92px; margin-top:2px;" class="btn btn-success">Apply</button>
+							<button id="passwordBlockCancel"style="width: 92px; margin-top:2px;" class="btn btn-danger">Cancel</button>
+						</form>
+					</div>	
+						
 				</div>
 				<!-- /left-menu -->
 
@@ -75,7 +91,7 @@
 							<span class="span-1">Role:</span> <span class="span-2"><c:out
 									value="${user.ban}"></c:out></span>
 						</div>
-						<h3>Adress</h3>
+						<h3>Address</h3>
 						<div class="myrow">
 							<span class="span-1">City:</span> <span class="span-2"><c:out
 									value="${user.contact.address.city}"></c:out></span>
@@ -89,9 +105,18 @@
 									value="${user.contact.address.street}"></c:out></span>
 						</div>
 						<div class="myrow">
-							<span class="span-1">House / Flat</span> <span class="span-2"><c:out
-									value="${user.contact.address.house}"></c:out></span>
+							<span class="span-1">House / Flat</span>
+							<c:if test="${user.contact.address.flat eq ''}">
+								<span class="span-2"><c:out
+										value="${user.contact.address.house}"></c:out></span>
+							</c:if>
+							<c:if test="${user.contact.address.flat != ''}">
+								<span class="span-2"><c:out
+										value="${user.contact.address.house.concat('/').concat(user.contact.address.flat)}"></c:out></span>
+							</c:if>
 						</div>
+
+
 						<div class="myrow">
 							<span class="span-1">Zip Code</span> <span class="span-2"><c:out
 									value="${user.contact.address.zipCode}"></c:out></span>
@@ -115,12 +140,12 @@
 						<div id="form-container" style="display: none">
 							<form action="userPageServlet" method="post">
 								<div class=myrow style="padding-top: 40px;">
-									<span class="span-2"><input name="firstName" value="${user.firstName}" />
-									</span>
+									<span class="span-2"><input name="firstName"
+										value="${user.firstName}" /> </span>
 								</div>
 								<div class=myrow>
-									<span class="span-2"><input name="lasttName" value="${user.lastName}" />
-									</span>
+									<span class="span-2"><input name="lastName"
+										value="${user.lastName}" /> </span>
 								</div>
 								<div class=myrow style="padding-top: 70px;">
 									<span class="span-2"><input name="city"
@@ -135,13 +160,14 @@
 										value="${user.contact.address.street}" /> </span>
 								</div>
 								<div class=myrow>
-									<span class="span-3"><input name="house"
-										value="${user.contact.address.house}" /> </span>
-									<span class="span-3"><input name="flat"
-										value="${user.contact.address.house}" /> </span>
+									<span class="span-2"><input name="house"
+										style="width: 84px;" value="${user.contact.address.house}" />
+									</span> <span class="span-2"><input name="flat"
+										style="width: 85px;" value="${user.contact.address.flat}" />
+									</span>
 								</div>
 								<div class=myrow>
-									<span class="span-2"><input name="ZipCode"
+									<span class="span-2"><input name="zipCode"
 										value="${user.contact.address.zipCode}" /> </span>
 								</div>
 								<div class=myrow style="padding-top: 40px;">
@@ -152,9 +178,10 @@
 								</div>
 								<div class=myrow>
 									<span class="span-2"><input name="email"
-										value="${user.contact.email}" /> </span>
-									<input type="button" id="btn-back" style="margin-left: 40px; width: 120px;"
-										class="btn btn-mini btn-danger" value="Cancel"></button>
+										value="${user.contact.email}" /> </span> <input type="button"
+										id="btn-back" style="margin-left: 40px; width: 120px;"
+										class="btn btn-mini btn-danger" value="Cancel">
+									</button>
 								</div>
 							</form>
 						</div>
@@ -168,7 +195,7 @@
 
 	</div>
 
-	<div style="height: 330px;"></div>
+	<div style="height: 60px;"></div>
 
 
 
@@ -180,5 +207,6 @@
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
 	<script src="bootstrap/js/userPage.js"></script>
+	<script src="bootstrap/js/search.js"></script>
 </body>
 </html>

@@ -267,6 +267,54 @@
     <servlet-name>categoryViewer</servlet-name>
     <url-pattern>/categoryViewerPage</url-pattern>
   </servlet-mapping>
+  <servlet>
+		<servlet-name>UserSales</servlet-name>
+		<jsp-file>/jsp/userSales.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserSales</servlet-name>
+		<url-pattern>/userSales</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserShopping</servlet-name>
+		<jsp-file>/jsp/userShopping.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserShopping</servlet-name>
+		<url-pattern>/userShopping</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserSalesServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserSalesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserSalesServlet</servlet-name>
+		<url-pattern>/userSalesServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserShoppingServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserShoppingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserShoppingServlet</servlet-name>
+		<url-pattern>/userShoppingServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CheckPasswordServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.CheckPasswordServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckPasswordServlet</servlet-name>
+		<url-pattern>/checkPassword</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChangePasswordServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.ChangePasswordServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangePasswordServlet</servlet-name>
+		<url-pattern>/changePasswordServlet</url-pattern>
+	</servlet-mapping>
 	<filter>
 		<filter-name>sideMenuFilter</filter-name>
 		<filter-class>com.epam.lab.buyit.controller.web.filter.SideMenuFilter</filter-class>

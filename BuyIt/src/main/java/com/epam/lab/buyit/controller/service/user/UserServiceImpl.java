@@ -84,6 +84,14 @@ public class UserServiceImpl implements UserService {
 	public boolean checkLogin(String login) {
 		return userDAO.checkLogin(login);
 	}
+	
+	public boolean checkPassword(String login, String password) {
+		boolean checkResult = false;
+		if (getUser(login, password)== null){
+			checkResult = true;
+		}
+		return checkResult;
+	}
 
 	private void setUserContact(User currentUser, List<Contact> contacts,
 			List<Address> address) {
@@ -109,7 +117,7 @@ public class UserServiceImpl implements UserService {
 		if (user != null) {
 			Contact contact = contactDAO.getElementById(user.getIdUser());
 			user.setContact(contact);
-			contact.setAddress(addressDAO.getElementById(contact.getIdContact()));
+			contact.setAddress(addressDAO.getElementByUserId(contact.getIdContact()));
 		}
 	}
 
