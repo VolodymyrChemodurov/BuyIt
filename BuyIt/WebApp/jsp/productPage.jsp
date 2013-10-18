@@ -238,7 +238,7 @@
 														value="${product.auction.count}" /> <label
 														class="control-label" text-align="right"><span>
 															Quantity:</span></label> <input type="number" id="quantity"
-														class="span1" placeholder="Qty." />
+														class="span1" value="1" />
 													<button type="submit" id="buyItButton"
 														class="btn btn-large btn-primary pull-right">Buy
 														it now</button>
@@ -356,8 +356,7 @@
 														var bid = $(
 																'#placeBidInput')
 																.attr('value');
-														//alert("Good");
-														if (currentPrice > bid) {
+														if (parseInt(currentPrice) > parseInt(bid)) {
 															placeBidButton
 																	.attr(
 																			"disabled",
@@ -372,19 +371,15 @@
 									$('#quantity')
 											.focusout(
 													function() {
-														var buyItButton = $('#buyItButton');
-														var count = document
-																.getElementById("count").value;
-														var quantity = $(
-																'#quantity')
-																.attr('value');
-														//alert("Fackin good line");
-														if (quantity > count) {
-															buyItButton.attr(
+														var count = $('#count').val();
+														console.log("count: " + count);
+														var quantity = $('#quantity').val();
+														if (parseInt(quantity) > parseInt(count)) {
+															 $('#buyItButton').attr(
 																	"disabled",
 																	"disabled");
 														} else {
-															buyItButton
+															 $('#buyItButton')
 																	.removeAttr("disabled");
 														}
 
