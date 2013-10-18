@@ -250,24 +250,23 @@
 		<servlet-name>BuyItServeServlet</servlet-name>
 		<url-pattern>/buyItServe</url-pattern>
 	</servlet-mapping>
-	 <servlet>
-    <servlet-name>CategoryViewerServlet</servlet-name>
-    <servlet-class>com.epam.lab.buyit.controller.web.servlet.CategoryViewerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CategoryViewerServlet</servlet-name>
-    <url-pattern>/categoryViewer</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>categoryViewer</servlet-name>
-    <jsp-file>/jsp/сategoryViewerPage.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>categoryViewer</servlet-name>
-    <url-pattern>/categoryViewerPage</url-pattern>
-  </servlet-mapping>
-  <servlet>
+	<servlet>
+		<servlet-name>CategoryViewerServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.CategoryViewerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryViewerServlet</servlet-name>
+		<url-pattern>/categoryViewer</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>categoryViewer</servlet-name>
+		<jsp-file>/jsp/сategoryViewerPage.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>categoryViewer</servlet-name>
+		<url-pattern>/categoryViewerPage</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>UserSales</servlet-name>
 		<jsp-file>/jsp/userSales.jsp</jsp-file>
 	</servlet>
@@ -322,5 +321,19 @@
 	<filter-mapping>
 		<filter-name>sideMenuFilter</filter-name>
 		<url-pattern>*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.epam.lab.buyit.controller.web.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/buyItServe</url-pattern>
+		<url-pattern>/userPageServlet</url-pattern>
+		<url-pattern>/userProfile</url-pattern>
+		<url-pattern>/userSales</url-pattern>
+		<url-pattern>/userShopping</url-pattern>
+		<url-pattern>/userSalesServlet</url-pattern>
+		<url-pattern>/userShoppingServlet</url-pattern>
 	</filter-mapping>
 </web-app>
