@@ -236,11 +236,19 @@
   
   
   <servlet>
-    <servlet-name>Time</servlet-name>
-    <jsp-file>/jsp/CountDouwn.jsp</jsp-file>
+    <servlet-name>CategoryViewerServlet</servlet-name>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.CategoryViewerServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Time</servlet-name>
-    <url-pattern>/time</url-pattern>
+    <servlet-name>CategoryViewerServlet</servlet-name>
+    <url-pattern>/myCategoryViewer</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MyCategoryViewer</servlet-name>
+    <jsp-file>/jsp/myCategoryViewer.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyCategoryViewer</servlet-name>
+    <url-pattern>/categoryViewer</url-pattern>
   </servlet-mapping>
 </web-app>
