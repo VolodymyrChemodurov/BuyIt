@@ -261,7 +261,7 @@
   
   <servlet>
     <servlet-name>categoryViewer</servlet-name>
-    <jsp-file>/jsp/categoryViewer.jsp</jsp-file>
+    <jsp-file>/jsp/сategoryViewerPage.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>categoryViewer</servlet-name>
