@@ -1,13 +1,17 @@
 package com.epam.lab.buyit.controller.web.servlet;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
+import com.epam.lab.buyit.controller.service.bid.BidServiceImp;
 import com.epam.lab.buyit.model.Auction;
+import com.epam.lab.buyit.model.Bid;
 
 public class BuyItServeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -18,6 +22,7 @@ public class BuyItServeServlet extends HttpServlet {
 		int count = Integer.parseInt(request.getParameter("count"));
 
 		AuctionServiceImp auctionService = new AuctionServiceImp();
+		BidServiceImp bidService = new BidServiceImp();
 		Auction auction = auctionService.getByProductId(idProduct);
 		int realCount = auction.getCount();
 		String status = null;
@@ -32,8 +37,15 @@ public class BuyItServeServlet extends HttpServlet {
 			}
 			int affectedRows = auctionService.buyItServe(
 					auction.getIdAuction(), realCount - count, status,
-					realCount, auction.getStatus());
+					auction.getBuyItNow(), realCount, auction.getStatus());
 			if (affectedRows == 1) {
+				Bid bid = new Bid();
+				bid.setTime(new Timestamp(System.currentTimeMillis()));
+				bid.setAmount(auction.getBuyItNow());
+				bid.setAuctionId(auction.getIdAuction());
+				bid.setUserId(userId);
+				bidService.createItem(bid);
+
 				response.sendRedirect("homePageServlet");
 			} else {
 				response.sendRedirect("cfxgc");

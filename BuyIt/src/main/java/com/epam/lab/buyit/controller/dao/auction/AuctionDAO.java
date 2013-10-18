@@ -22,7 +22,7 @@ public class AuctionDAO implements AuctionDAOInterface {
 	private final static String GET_LATEST = "SELECT * FROM auctions WHERE status='inProgress' ORDER BY end_time LIMIT ?";
 	private final static String GET_SOON_ENDING = "SELECT * FROM auctions WHERE end_time > ? AND end_time < ? AND  status='inProgress'";
 	private final static String CLOSE = "UPDATE auctions SET status='closed' WHERE id_auction = ?";
-	private final static String BUY_IT_SERVE = "UPDATE auctions SET count=?, status=? WHERE id_auction=? AND count=? AND status=?";
+	private final static String BUY_IT_SERVE = "UPDATE auctions SET count=?, status=?, current_price=? WHERE id_auction=? AND count=? AND status=?";
 
 	private AuctionTransformer transformer;
 
@@ -170,7 +170,8 @@ public class AuctionDAO implements AuctionDAOInterface {
 	}
 
 	@Override
-	public int buyItServe(int id, int count, String status, int oldCount,
+	public int buyItServe(int id, int count, String status,
+			double newCurrentPrice, int oldCount,
 			String oldStatus) {
 		int affectedRows = 0;
 		Connection connection = ConnectionManager.getConnection();
@@ -179,9 +180,10 @@ public class AuctionDAO implements AuctionDAOInterface {
 			statement = connection.prepareStatement(BUY_IT_SERVE);
 			statement.setInt(1, count);
 			statement.setString(2, status);
-			statement.setInt(3, id);
-			statement.setInt(4, oldCount);
-			statement.setString(5, oldStatus);
+			statement.setDouble(3, newCurrentPrice);
+			statement.setInt(4, id);
+			statement.setInt(5, oldCount);
+			statement.setString(6, oldStatus);
 			affectedRows = statement.executeUpdate();
 		} catch (SQLException e) {
 			LOGGER.error(e);
