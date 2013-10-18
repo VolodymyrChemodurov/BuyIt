@@ -20,7 +20,7 @@ public class BuyItServeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		int idProduct = Integer.parseInt(request.getParameter("id_product"));
-		int count = Integer.parseInt(request.getParameter("count"));
+		int count = Integer.parseInt(request.getParameter("quantity"));
 		User user = (User) request.getSession(false).getAttribute("user");
 
 		AuctionServiceImp auctionService = new AuctionServiceImp();
@@ -45,6 +45,7 @@ public class BuyItServeServlet extends HttpServlet {
 				bid.setTime(new Timestamp(System.currentTimeMillis()));
 				bid.setAmount(auction.getBuyItNow());
 				bid.setAuctionId(auction.getIdAuction());
+				System.out.println(user.toString());
 				bid.setUserId(user.getIdUser());
 				bidService.createItem(bid);
 

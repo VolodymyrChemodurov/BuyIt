@@ -204,8 +204,8 @@
 										<div id="countdown"></div>
 									</dir>
 									<hr class="soft" />
-									
-<!-- 						----------------------	PLACE A BID------------------------- -->
+
+									<!-- 						----------------------	PLACE A BID------------------------- -->
 									<c:if test="${product.auction.currentPrice != 0 }">
 										<form class="form-horizontal qtyFrm">
 											<div class="control-group">
@@ -227,22 +227,23 @@
 									</c:if>
 
 
-<!-- ---------------------------------------------BUY IT NOW------------------------ -->
+									<!-- ---------------------------------------------BUY IT NOW------------------------ -->
 
 									<c:if test="${product.auction.buyItNow != 0 }">
 										<form class="form-horizontal qtyFrm" action="buyItServe"
 											method="POST">
 											<div class="control-group">
-												<input typr= "hidden" name="id_product" value="${product.idProduct}"/>
-												<label class="control-label"><span> Buy it
-														By: <c:out value="${product.auction.buyItNow}"></c:out> $
+												<input typr="hidden" name="id_product"
+													value="${product.idProduct}" /> <label
+													class="control-label"><span> Buy it By: <c:out
+															value="${product.auction.buyItNow}"></c:out> $
 												</span></label>
 												<div class="controls">
-													<input type="hidden" name="count"  id="count"
+													<input type="hidden" name="count" id="count"
 														value="${product.auction.count}" /> <label
 														class="control-label" text-align="right"><span>
 															Quantity:</span></label> <input type="number" id="quantity"
-														class="span1" value="1" />
+														name="quantity" class="span1" value="1" />
 													<button type="submit" id="buyItButton"
 														class="btn btn-large btn-primary pull-right">Buy
 														it now</button>
