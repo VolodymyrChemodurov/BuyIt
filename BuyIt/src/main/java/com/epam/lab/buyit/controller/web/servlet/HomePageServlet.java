@@ -13,6 +13,7 @@ import org.quartz.SchedulerException;
 
 import com.epam.lab.buyit.controller.auction.AuctionScheduler;
 import com.epam.lab.buyit.controller.service.category.CategoryServiceImpl;
+import com.epam.lab.buyit.controller.service.image.ImageServiceImpl;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
 import com.epam.lab.buyit.controller.web.Mook;
 import com.epam.lab.buyit.model.Category;
@@ -21,15 +22,17 @@ public class HomePageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CategoryServiceImpl categoryService;
 	private ProductServiceImpl productService;
+	private ImageServiceImpl imageService;
 
 	public void init() {
 		categoryService = new CategoryServiceImpl();
 		productService = new ProductServiceImpl();
+		imageService = new ImageServiceImpl();
 	}
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		List<String> cauroselImagesList = Mook.getImagesUrl();
+		List<String> cauroselImagesList = imageService.getImagesUrl();
 		HttpSession session = request.getSession(true);
 		List<Category> cat = categoryService.getAllItems();
 		session.setAttribute("categories", categoryService.getAllItems());

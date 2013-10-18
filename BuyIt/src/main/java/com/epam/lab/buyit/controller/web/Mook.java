@@ -38,16 +38,6 @@ public class Mook {
 		return result;
 	}
 
-	public static List<String> getImagesUrl() {
-		List<String> result = new ArrayList<String>();
-		result.add("themes/images/carousel/1.png");
-		result.add("themes/images/carousel/2.png");
-		result.add("themes/images/carousel/3.png");
-		result.add("themes/images/carousel/4.png");
-
-		return result;
-	}
-
 	public static boolean authentication(String login, String password) {
 		boolean result = false;
 		if (login.equals("admin") && password.equals("admin")) {
