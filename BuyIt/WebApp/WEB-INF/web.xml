@@ -347,4 +347,18 @@
 		<filter-name>sideMenuFilter</filter-name>
 		<url-pattern>*</url-pattern>
 	</filter-mapping>
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.epam.lab.buyit.controller.web.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/buyItServe</url-pattern>
+		<url-pattern>/userPageServlet</url-pattern>
+		<url-pattern>/userProfile</url-pattern>
+		<url-pattern>/userSales</url-pattern>
+		<url-pattern>/userShopping</url-pattern>
+		<url-pattern>/userSalesServlet</url-pattern>
+		<url-pattern>/userShoppingServlet</url-pattern>
+	</filter-mapping>
 </web-app>
