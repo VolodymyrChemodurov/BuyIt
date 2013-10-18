@@ -1,10 +1,15 @@
 package com.epam.lab.buyit.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Category {
+public class Category implements Serializable  {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idCategory;
 	private String name;
 	private List<SubCategory> listSubCategories;
