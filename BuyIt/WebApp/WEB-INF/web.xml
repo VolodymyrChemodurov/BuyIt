@@ -209,6 +209,16 @@
 		<servlet-name>LegalNotice</servlet-name>
 		<jsp-file>/jsp/legalNotice.jsp</jsp-file>
 	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>messagePage</servlet-name>
+		<url-pattern>/message_page</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>messagePage</servlet-name>
+		<jsp-file>/jsp/message_page.jsp</jsp-file>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>LegalNotice</servlet-name>
 		<url-pattern>/legalNotice</url-pattern>

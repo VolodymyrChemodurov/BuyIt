@@ -25,7 +25,7 @@
 			<a data-toggle="modal" href="#myModal${product.idProduct}"
 				class="btn icon-search" href="#"></a> 
 			<span class="pull-right">
-				<a class="btn btn-info" href="#">
+				<a class="btn btn-info" href="buyItServe?id_product=${product.idProduct}&quantity=1"">
 					<c:choose>
 						<c:when test="${product.auction.buyItNow > 0}"> 
 							<c:out value="Buy It! ${product.auction.buyItNow}$"></c:out>
@@ -85,7 +85,7 @@
 					</table>
 				
 					<c:if test="${product.auction.buyItNow > 0}">
-						<a class="btn btn-info" href="#"> 
+						<a class="btn btn-info" href="buyItServe?id_product=${product.idProduct}&quantity=1""> 
 							<c:out value="Buy It! ${product.auction.buyItNow}$"></c:out>
 						</a>
 					</c:if>

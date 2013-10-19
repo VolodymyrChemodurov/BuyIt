@@ -19,6 +19,16 @@ public class BuyItServeServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		serve(request, response);
+	}
+
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		serve(request, response);
+	}
+
+	private void serve(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 		int idProduct = Integer.parseInt(request.getParameter("id_product"));
 		int count = Integer.parseInt(request.getParameter("quantity"));
 		User user = (User) request.getSession(false).getAttribute("user");
@@ -45,16 +55,19 @@ public class BuyItServeServlet extends HttpServlet {
 				bid.setTime(new Timestamp(System.currentTimeMillis()));
 				bid.setAmount(auction.getBuyItNow());
 				bid.setAuctionId(auction.getIdAuction());
-				System.out.println(user.toString());
 				bid.setUserId(user.getIdUser());
 				bidService.createItem(bid);
-
 				response.sendRedirect("homePageServlet");
 			} else {
-				response.sendRedirect("cfxgc");
+				request.setAttribute("message", "Sorry, some error with query.");
+				request.setAttribute("alert", "error");
+				request.getRequestDispatcher("message_page").forward(request, response);
 			}
 
+		} else {
+			request.setAttribute("message", "Sorry, this auction allready closed.");
+			request.setAttribute("alert", "block");
+			request.getRequestDispatcher("message_page").forward(request, response);
 		}
 	}
-
 }

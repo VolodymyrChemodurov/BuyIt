@@ -283,7 +283,7 @@
                                                                                                 <br> Auction end time:
                                                                                                 <c:out value="${product.auction.endTime}"></c:out>
                                                                                                 <hr class="soft" />
-                                                                                                <div>
+                                                                                                <div class="form-horizontal qtyFrm">
                                                                                                 	${product.description.descText}
                                                                                                 </div>
                                                                                         </div>
