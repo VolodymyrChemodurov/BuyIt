@@ -16,7 +16,6 @@ import com.epam.lab.buyit.model.User;
 public class LoginFilter implements Filter {
 
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response,
@@ -25,8 +24,7 @@ public class LoginFilter implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		User user = (User) httpRequest.getSession(false).getAttribute("user");
 		if (user == null) {
-			httpResponse.sendRedirect("registration");
-
+			httpResponse.sendRedirect("login_form");
 		} else {
 			chain.doFilter(request, response);
 		}

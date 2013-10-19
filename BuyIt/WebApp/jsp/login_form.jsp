@@ -44,77 +44,48 @@
 </head>
 <body>
 	<jsp:include page="navbar"></jsp:include>
-	<!-- Header End====================================================================== -->
-	<div id="carouselBlk">
-		<div id="myCarousel" class="carousel slide">
-			<div class="carousel-inner">
-				<c:forEach var="image" items="${carouselImages}" varStatus="status">
-					<c:if test="${status.first}">
-						<div class="item active">
-							<div class="container">
-								<a href="registration"><img style="width: 100%"
-									src="${image}" alt="special offers"></a>
-							</div>
-						</div>
-					</c:if>
-					<c:if test="${!status.first}">
-						<div class="item">
-							<div class="container">
-								<a href="registration"><img style="width: 100%"
-									src="${image}" alt="special offers"></a>
-							</div>
-						</div>
-					</c:if>
-
-				</c:forEach>
-			</div>
-			<a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-			<a class="right carousel-control" href="#myCarousel"
-				data-slide="next">›</a>
-		</div>
-	</div>
 	<div id="mainBody">
 		<div class="container">
 			<div class="row">
+
 				<!-- Sidebar ================================================== -->
 				<jsp:include page="sidebarMenu"></jsp:include>
 				<!-- Sidebar end=============================================== -->
-				
 				<div class="span9">
 					<ul class="breadcrumb">
-						<li class="active">
-							<a href="homePageServlet">Home</a>
-						</li>
+						<li><a href="homePageServlet">Home</a> <span class="divider">/</span></li>
+						<li class="active">Sign In</li>
 					</ul>
-
-					<h3>
-						Soon Ending Auctions
-					</h3>
+					<form class="form-horizontal loginFrm" method="post"
+						action="loginServlet">
+						<div class="control-group">
+							<label><font color="red">You must login first</font></label>
+						</div>
+						<div class="control-group">
+							<input type="text" id="login" name="login" placeholder="Login">
+						</div>
+						<div class="control-group">
+							<input type="password" id="password" name="password"
+								placeholder="Password">
+						</div>
+						<div class="control-group">
+							<a class="dropdown-toggle" href="forgetPassword"
+								style="text-decoration: none"><h5>Forget password?</h5></a>
+						</div>
+						<div class="control-group">
+							<button type="submit" class="btn btn-success">Sign in</button>
+						</div>
+					</form>
 				</div>
-				
-				<c:if test="${not empty latestProducts}">
-					<div class="item">
-						<ul class="thumbnails">
-							<c:forEach var="product" items="${latestProducts}">
-								<c:set var="product" value="${product}" scope="request"></c:set>
-								<jsp:include page="item_preview"></jsp:include>
-							</c:forEach>
-						</ul>
-					</div>
-				</c:if>
 			</div>
 		</div>
 	</div>
-	
 	<jsp:include page="footer"></jsp:include>
-	<!-- Placed at the end of the document so the pages load faster ============================================= -->
 	<script src="themes/js/jquery.js" type="text/javascript"></script>
 	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
 	<script src="bootstrap/js/search.js"></script>
-	
-
 </body>
 </html>

@@ -283,6 +283,16 @@
 		<servlet-name>UserShopping</servlet-name>
 		<url-pattern>/userShopping</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>loginForm</servlet-name>
+		<url-pattern>/login_form</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>loginForm</servlet-name>
+		<jsp-file>/jsp/login_form.jsp</jsp-file>
+	</servlet>
+	
 	<servlet>
 		<servlet-name>UserSalesServlet</servlet-name>
 		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserSalesServlet</servlet-class>

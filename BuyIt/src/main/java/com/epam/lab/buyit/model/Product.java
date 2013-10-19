@@ -1,7 +1,13 @@
 package com.epam.lab.buyit.model;
 
-public class Product {
+import java.io.Serializable;
 
+public class Product implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idProduct;
 	private String name;
 	private int subCategoryId;

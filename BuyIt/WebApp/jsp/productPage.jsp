@@ -260,7 +260,7 @@
 
                                                                         <hr class="soft clr" />
                                                                         <p>
-                                                                                <c:out value="${product.description.features}"></c:out>
+                                                                                ${product.description.features}
                                                                         </p>
                                                                         <br class="clr" /> <a href="#" name="detail"></a>
 
@@ -283,8 +283,7 @@
                                                                                                 <br> Auction end time:
                                                                                                 <c:out value="${product.auction.endTime}"></c:out>
                                                                                                 <hr class="soft" />
-                                                                                                <c:out value="${product.description.descText} "></c:out>
-
+                                                                                                ${product.description.descText}
                                                                                         </div>
 
 
