@@ -1,7 +1,7 @@
 $(window).load(function() {
 	$('.my-image').each(function() {
 		var maxWidth = 200;
-		var maxHeight = 150;
+		var maxHeight = 160;
 		var ratio = 0;
 		var width = $(this).width();
 		var height = $(this).height();
