@@ -189,6 +189,8 @@
 
                                                                 <!-- -------------------------CENTRAL CONTROL PANEL (place a bid , Buy it now )-------------------- -->
                                                                 <div class="span6">
+                                                                		<input type="hidden" id="userIdProduct" value="${product.userId}" />
+                                                                		<input type="hidden" id="userId" value="${user.idUser}" />
                                                                         <font size="5"> <c:out value="${product.name}"></c:out>
                                                                         </font> <br>
                                                                         <dir class="form-horizontal qtyFrm" style="padding: 10px">
@@ -230,7 +232,7 @@
                                                                         <!-- ---------------------------------------------BUY IT NOW------------------------ -->
 
                                                                         <c:if test="${product.auction.buyItNow != 0 }">
-                                                                                <form class="form-horizontal qtyFrm" action="buyItServe"
+                                                                                <form class="form-horizontal qtyFrm" action="buyItServe" 
                                                                                         method="POST">
                                                                                         <div class="control-group">
                                                                                                 <input type="hidden" name="id_product"
@@ -359,18 +361,47 @@
 
                         <script type="text/javascript">
                                 $(document)
-                                                .ready(
-                                                                function() {
-                                                                        $('#placeBidInput')
-                                                                                        .change(
-                                                                                                        function() {
-                                                                                                                var placeBidButton = $('#placeBidButton');
-                                                                                                                var currentPrice = document
-                                                                                                                                .getElementById("currentBid").value;
-                                                                                                                var bid = $(
-                                                                                                                                '#placeBidInput')
-                                                                                                                                .attr('value');
-                                                                                                                if (parseInt(currentPrice) >= parseInt(bid)) {
+                                            .ready(
+                                                   function() {
+                                                	   $(window).load(function(){
+                                                		   console.log("session user:"+$('#userId').val() + "  product userId:"+$('#userIdProduct').val() );
+                                                    	   if ($('#userId').val() == $('#userIdProduct').val()){
+                                                    		   $('#buyItButton')
+                                                               .attr(
+                                                                               "disabled",
+                                                                               "disabled");
+                                                    		   
+                                                               $('#placeBidButton')
+                                                               .attr(
+                                                                               "disabled",
+                                                                               "disabled");
+                                                               $(
+                                                               '#quantity').attr(
+                                                                       			"disabled",
+                                                               					"disabled");
+                                                               $(
+                                                               '#placeBidInput').attr(
+                                                              					"disabled",
+                                              									"disabled");
+                                                    	   }
+                                                   		});
+                                                	   
+                                                	   
+                                                	   
+                                                	  
+                                                	   
+                                                	   
+                                                	   
+                                                              $('#placeBidInput')
+                                                                               .change(
+                                                                                               function() {
+                                                                                                       var placeBidButton = $('#placeBidButton');
+                                                                                                        var currentPrice = document
+                                                                                                                        .getElementById("currentBid").value;
+                                                                                                         var bid = $(
+                                                                                                                            '#placeBidInput')
+                                                                                                                            .attr('value');
+                                                                                                               if (parseInt(currentPrice) >= parseInt(bid)) {
                                                                                                                         placeBidButton
                                                                                                                                         .attr(
                                                                                                                                                         "disabled",
@@ -405,7 +436,13 @@
                                                                                                                 }}
 
                                                                                                         });
+                                                                        
+                                                                          
+                                                                   
+                                                                        
                                                                 });
+                              
+                                
                         </script>
                 </div>
                 <!--                 ----------------footer--------------------------------------- -->
