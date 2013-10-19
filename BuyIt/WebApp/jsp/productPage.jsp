@@ -259,9 +259,7 @@
                                                                         </h4>
 
                                                                         <hr class="soft clr" />
-                                                                        <p>
-                                                                                ${product.description.features}
-                                                                        </p>
+                                                                       
                                                                         <br class="clr" /> <a href="#" name="detail"></a>
 
                                                                 </div>
@@ -273,6 +271,7 @@
                                                                                                         Details</a></li>
                                                                                         <li><a href="#history" data-toggle="tab">Bid History</a></li>
                                                                                         <li><a href="#delivery" data-toggle="tab">Delivery</a></li>
+                                                                                        <li><a href="#features" data-toggle="tab">Features</a></li>
                                                                                 </ul>
                                                                                 <div id="myTabContent" class="tab-content">
                                                                                         <div class="tab-pane fade active in" id="home">
@@ -322,6 +321,16 @@
                                                                                                 <hr class="soft" />
                                                                                                 <br class="clr">
                                                                                         </div>
+                                                                                        
+                                                                                        <div class="tab-pane fade" id="features">
+                                                                                                <h4>Features</h4>
+
+                                                                                                <hr class="soft" />
+                                                                                                ${product.description.features }"
+                                                                                                <hr class="soft" />
+                                                                                                <br class="clr">
+                                                                                        </div>
+                                                                                        
 
                                                                                 </div>
                                                                         </div>
@@ -353,7 +362,7 @@
                                                 .ready(
                                                                 function() {
                                                                         $('#placeBidInput')
-                                                                                        .focusout(
+                                                                                        .change(
                                                                                                         function() {
                                                                                                                 var placeBidButton = $('#placeBidButton');
                                                                                                                 var currentPrice = document
@@ -361,7 +370,7 @@
                                                                                                                 var bid = $(
                                                                                                                                 '#placeBidInput')
                                                                                                                                 .attr('value');
-                                                                                                                if (parseInt(currentPrice) > parseInt(bid)) {
+                                                                                                                if (parseInt(currentPrice) >= parseInt(bid)) {
                                                                                                                         placeBidButton
                                                                                                                                         .attr(
                                                                                                                                                         "disabled",
@@ -374,7 +383,7 @@
                                                                                                         });
 
                                                                         $('#quantity')
-                                                                                        .focusout(
+                                                                                        .change(
                                                                                                         function() {
                                                                                                                 var count = $('#count')
                                                                                                                                 .val();
@@ -389,10 +398,11 @@
                                                                                                                                                         "disabled",
                                                                                                                                                         "disabled");
                                                                                                                 } else {
+                                                                                                                	if(parseInt(quantity)>parsInt(0)){
                                                                                                                         $('#buyItButton')
                                                                                                                                         .removeAttr(
                                                                                                                                                         "disabled");
-                                                                                                                }
+                                                                                                                }}
 
                                                                                                         });
                                                                 });
