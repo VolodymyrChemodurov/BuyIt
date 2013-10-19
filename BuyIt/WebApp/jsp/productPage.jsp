@@ -429,7 +429,7 @@
                                                                                                                                                         "disabled",
                                                                                                                                                         "disabled");
                                                                                                                 } else {
-                                                                                                                	if(parseInt(quantity)>parsInt(0)){
+                                                                                                                	if(parseInt(quantity)>0){
                                                                                                                         $('#buyItButton')
                                                                                                                                         .removeAttr(
                                                                                                                                                         "disabled");
