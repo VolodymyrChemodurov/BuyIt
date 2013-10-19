@@ -6,7 +6,7 @@
 
 <li class="span3-my">
 	<div class="thumbnail-my">
-		<a href="productDetails?id=${product.idProduct}"> <img
+		<a href="productDetails?id=${product.idProduct}"> <img class="my-image"
 			src="<c:out value="${product.description.itemPhotos[0].path }"></c:out>">
 		</a>
 		<div class="caption">
