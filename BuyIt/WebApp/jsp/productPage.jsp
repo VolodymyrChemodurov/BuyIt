@@ -283,7 +283,9 @@
                                                                                                 <br> Auction end time:
                                                                                                 <c:out value="${product.auction.endTime}"></c:out>
                                                                                                 <hr class="soft" />
-                                                                                                ${product.description.descText}
+                                                                                                <div>
+                                                                                                	${product.description.descText}
+                                                                                                </div>
                                                                                         </div>
 
 
