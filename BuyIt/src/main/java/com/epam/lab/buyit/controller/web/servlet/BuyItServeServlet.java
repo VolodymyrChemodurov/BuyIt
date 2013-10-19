@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
 import com.epam.lab.buyit.controller.service.bid.BidServiceImp;
+import com.epam.lab.buyit.controller.service.product.ProductService;
+import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
 import com.epam.lab.buyit.model.Auction;
 import com.epam.lab.buyit.model.Bid;
 import com.epam.lab.buyit.model.User;
@@ -57,7 +59,13 @@ public class BuyItServeServlet extends HttpServlet {
 				bid.setAuctionId(auction.getIdAuction());
 				bid.setUserId(user.getIdUser());
 				bidService.createItem(bid);
-				response.sendRedirect("homePageServlet");
+				
+				ProductService productService = new ProductServiceImpl();
+				request.setAttribute("product", productService.getItemById(idProduct));
+				request.setAttribute("user", user);
+				request.setAttribute("bid", bid);
+				request.setAttribute("count", count);
+				request.getRequestDispatcher("deal_information").forward(request, response);
 			} else {
 				request.setAttribute("message", "Sorry, some error with query.");
 				request.setAttribute("alert", "error");

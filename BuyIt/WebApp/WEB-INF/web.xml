@@ -218,7 +218,14 @@
 		<servlet-name>messagePage</servlet-name>
 		<jsp-file>/jsp/message_page.jsp</jsp-file>
 	</servlet>
-	
+	<servlet>
+		<servlet-name>dealInformationPage</servlet-name>
+		<jsp-file>/jsp/information_page.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dealInformationPage</servlet-name>
+		<url-pattern>/deal_information</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>LegalNotice</servlet-name>
 		<url-pattern>/legalNotice</url-pattern>
