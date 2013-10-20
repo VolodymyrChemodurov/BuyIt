@@ -3,6 +3,8 @@ package com.epam.lab.buyit.controller.service.auction;
 import java.util.List;
 
 import com.epam.lab.buyit.controller.dao.auction.AuctionDAO;
+import com.epam.lab.buyit.controller.exception.AuctionAllreadyClosedException;
+import com.epam.lab.buyit.controller.exception.WrongProductCountException;
 import com.epam.lab.buyit.model.Auction;
 
 public class AuctionServiceImp implements AuctionService {
@@ -57,8 +59,28 @@ public class AuctionServiceImp implements AuctionService {
 	}
 
 	@Override
-	public int buyItServe(int id, int count, String status, int oldCount,
-			String oldStatus) {
-		return auctionDAO.buyItServe(id, count, status, oldCount, oldStatus);
+	public boolean buyItServe(int id, int count)
+			throws AuctionAllreadyClosedException, WrongProductCountException {
+		
+		Auction auction = getByProductId(id);
+		String oldStatus = auction.getStatus();
+		if (oldStatus.equals("closed"))
+			throw new AuctionAllreadyClosedException(
+					"Try to bought allready closed auction with id = " + auction.getIdAuction());
+		
+		int oldCount = auction.getCount();
+		if (oldCount < count || count <= 0)
+			throw new WrongProductCountException("Try to bought product with count "
+					+ oldCount + " < requested count" + count);
+
+		String newStatus = "InProgress";
+		if(oldCount == count) newStatus = "Closed";
+		
+		int result = auctionDAO.buyItServe(auction.getIdAuction(), count, newStatus, oldCount, oldStatus);
+		if (result == 1) {
+			return true;
+		} else
+			return false;
+
 	}
 }

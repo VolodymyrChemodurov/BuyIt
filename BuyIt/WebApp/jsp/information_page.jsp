@@ -67,7 +67,7 @@
 						</tr>
 						<tr>
 							<td>Product price</td>
-							<td>${bid.amount}</td>
+							<td>${bid.amount}$</td>
 						</tr>
 						<tr>
 							<td>To pay</td>

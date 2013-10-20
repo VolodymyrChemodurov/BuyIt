@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
+import com.epam.lab.buyit.controller.exception.AuctionAllreadyClosedException;
+import com.epam.lab.buyit.controller.exception.WrongProductCountException;
 import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
 import com.epam.lab.buyit.controller.service.bid.BidServiceImp;
 import com.epam.lab.buyit.controller.service.product.ProductService;
@@ -17,6 +21,7 @@ import com.epam.lab.buyit.model.Bid;
 import com.epam.lab.buyit.model.User;
 
 public class BuyItServeServlet extends HttpServlet {
+	private static Logger LOGGER = Logger.getLogger(BuyItServeServlet.class);
 	private static final long serialVersionUID = 1L;
 	private AuctionServiceImp auctionService;
 	private BidServiceImp bidService;
@@ -43,40 +48,31 @@ public class BuyItServeServlet extends HttpServlet {
 
 		int idProduct = Integer.parseInt(request.getParameter("id_product"));
 		int count = Integer.parseInt(request.getParameter("quantity"));
-		User user = (User) request.getSession(false).getAttribute("user");
 
-		Auction auction = auctionService.getByProductId(idProduct);
-		int realCount = auction.getCount();
-		String status = null;
-
-		if (auction.getStatus().equals("inProgress")) {
-			if (realCount < count) {
-				wrongProductCount(request, response);
-			} else if (realCount - count == 0) {
-				status = "closed";
+		try {
+			if (auctionService.buyItServe(idProduct, count)) {
+				successfulPurchase(request, response, count, idProduct);
 			} else {
-				status = "inProgress";
-			}
-			int affectedRows = auctionService.buyItServe(
-					auction.getIdAuction(), realCount - count, status,
-					realCount, auction.getStatus());
-			if (affectedRows == 1) {
-				successfulPurchase(request, response, auction, user, realCount, idProduct);
-			} else {
+				LOGGER.warn("Buy It qury was fail");
 				queryFail(request, response);
 			}
-		} else {
+		} catch (AuctionAllreadyClosedException e) {
+			LOGGER.warn(e);
 			auctionAllreadyClosed(request, response);
+		} catch (WrongProductCountException e) {
+			LOGGER.warn(e);
+			wrongProductCount(request, response);
 		}
 	}
 
 	private void successfulPurchase(HttpServletRequest request,
-			HttpServletResponse response, Auction auction, User user,
-			int count, int idProduct) throws ServletException, IOException {
+			HttpServletResponse response, int count, int idProduct) throws ServletException, IOException {
+		Auction auction = auctionService.getByProductId(idProduct);
 		Bid bid = new Bid();
 		bid.setTime(new Timestamp(System.currentTimeMillis()));
 		bid.setAmount(auction.getBuyItNow());
 		bid.setAuctionId(auction.getIdAuction());
+		User user = (User) request.getSession(false).getAttribute("user");
 		bid.setUserId(user.getIdUser());
 		bidService.createItem(bid);
 
@@ -84,7 +80,8 @@ public class BuyItServeServlet extends HttpServlet {
 		request.setAttribute("user", user);
 		request.setAttribute("bid", bid);
 		request.setAttribute("count", count);
-		request.getRequestDispatcher("deal_information").forward(request,response);
+		request.getRequestDispatcher("deal_information").forward(request,
+				response);
 	}
 
 	private void queryFail(HttpServletRequest request,
@@ -103,7 +100,8 @@ public class BuyItServeServlet extends HttpServlet {
 
 	private void wrongProductCount(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("message","Sorry, you count exceeds the existing.");
+		request.setAttribute("message",
+				"Sorry, you count exceeds the existing.");
 		request.setAttribute("alert", "block");
 		request.getRequestDispatcher("message_page").forward(request, response);
 	}
