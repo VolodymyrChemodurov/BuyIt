@@ -98,23 +98,23 @@
                                                                         <div id="gallery" class="span3" style="text-align: center">
                                                                                 <a
                                                                                         href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-                                                                                        title="<c:out value="${product.name }" />"> <img
+                                                                                        title="<c:out value="${product.name }" />"> <img class="my-image"
                                                                                         src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-                                                                                        style="height: 250px"
+                                                                                       
                                                                                         alt="<c:out value="${product.name }" />">
 
                                                                                 </a>
+
                                                                         </div>
                                                                 </c:if>
                                                                 <c:if
                                                                         test="${(fn:length(product.description.itemPhotos) gt 1) && (fn:length(product.description.itemPhotos) le 3)}">
-                                                                        <div id="gallery" class="span3" style="text-align: center">
+                                                                        <div id="gallery" class="span3" style="text-align: center ">
                                                                                 <a
                                                                                         href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-                                                                                        title="<c:out value="${product.name }" />"> <img
+                                                                                        title="<c:out value="${product.name }" />"><div style="height: 250px; text-align: center"><img class="my-image"
                                                                                         src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-                                                                                        style="height: 250px"
-                                                                                        alt="<c:out value="${product.name }" />">
+                                                                                        alt="<c:out value="${product.name }" />"></div>
 
                                                                                 </a>
 
@@ -142,12 +142,11 @@
                                                                 </c:if>
 
                                                                 <c:if test="${(fn:length(product.description.itemPhotos) >= 4)}">
-                                                                        <div id="gallery" class="span3" style="text-align: center">
+                                                                        <div id="gallery" class="span3" style="text-align: center; height: 250px">
                                                                                 <a
                                                                                         href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-                                                                                        title="<c:out value="${product.name }" />"> <img
+                                                                                        title="<c:out value="${product.name }" />"> <img class="my-image"
                                                                                         src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-                                                                                        style="height: 250px"
                                                                                         alt="<c:out value="${product.name }" />">
 
                                                                                 </a>
@@ -358,6 +357,7 @@
                         <script src="themes/assets_timer/countdown/jquery.countdown.js"></script>
                         <script src="themes/assets_timer/js/script.js"></script>
                         <script src="bootstrap/js/search.js"></script>
+                        <script src="bootstrap/js/thumbnail-image-large.js" type="text/javascript"></script>
 
                         <script type="text/javascript">
                                 $(document)
@@ -423,17 +423,17 @@
                                                                                                                 var quantity = $(
                                                                                                                                 '#quantity')
                                                                                                                                 .val();
-                                                                                                                if (parseInt(quantity) > parseInt(count)) {
+                                                                                                                if ((parseInt(quantity) > parseInt(count))||(parseInt(quantity) < 1)) {
                                                                                                                         $('#buyItButton')
                                                                                                                                         .attr(
                                                                                                                                                         "disabled",
                                                                                                                                                         "disabled");
                                                                                                                 } else {
-                                                                                                                	if(parseInt(quantity)>0){
+                                                                                                                	
                                                                                                                         $('#buyItButton')
                                                                                                                                         .removeAttr(
                                                                                                                                                         "disabled");
-                                                                                                                }}
+                                                                                                                }
 
                                                                                                         });
                                                                         
