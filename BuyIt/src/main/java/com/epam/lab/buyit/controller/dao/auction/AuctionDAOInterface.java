@@ -17,4 +17,6 @@ public interface AuctionDAOInterface extends GenericDAO<Auction> {
 
 	int buyItServe(int id, int count, String status, int oldCount,
 			String oldStatus);
+	
+	int bidServe(int auctionId, double newCurrentPrice, double oldCurrentPrice, String status);
 }

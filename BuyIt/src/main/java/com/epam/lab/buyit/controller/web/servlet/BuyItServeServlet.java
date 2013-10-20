@@ -1,7 +1,6 @@
 package com.epam.lab.buyit.controller.web.servlet;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.epam.lab.buyit.controller.builder.BidBuilder;
 import com.epam.lab.buyit.controller.exception.AuctionAllreadyClosedException;
 import com.epam.lab.buyit.controller.exception.WrongProductCountException;
 import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
@@ -43,66 +43,35 @@ public class BuyItServeServlet extends HttpServlet {
 		serve(request, response);
 	}
 
-	private void serve(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+	private void serve(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		int idProduct = Integer.parseInt(request.getParameter("id_product"));
 		int count = Integer.parseInt(request.getParameter("quantity"));
-
 		try {
 			if (auctionService.buyItServe(idProduct, count)) {
-				successfulPurchase(request, response, count, idProduct);
+				LOGGER.info("Successful purchase");
+				Auction auction = auctionService.getByProductId(idProduct);
+				User user = (User) request.getSession(false).getAttribute("user");
+				Bid bid = BidBuilder.build(auction.getIdAuction(), user.getIdUser(), auction.getBuyItNow());
+				bidService.createItem(bid);
+
+				request.setAttribute("product", productService.getItemById(idProduct));
+				request.setAttribute("actionMessage", "You bought");
+				request.setAttribute("bidAmount", bid.getAmount());
+				request.setAttribute("count", count);
 			} else {
-				LOGGER.warn("Buy It qury was fail");
-				queryFail(request, response);
+				LOGGER.warn("Buy It query was failed");
+				request.setAttribute("queryFail", true);
 			}
 		} catch (AuctionAllreadyClosedException e) {
 			LOGGER.warn(e);
-			auctionAllreadyClosed(request, response);
+			request.setAttribute("auctionCloseException", true);
 		} catch (WrongProductCountException e) {
 			LOGGER.warn(e);
-			wrongProductCount(request, response);
+			request.setAttribute("wrongCountException", true);
+		} finally {
+			request.getRequestDispatcher("deal_information").forward(request, response);
 		}
 	}
 
-	private void successfulPurchase(HttpServletRequest request,
-			HttpServletResponse response, int count, int idProduct) throws ServletException, IOException {
-		Auction auction = auctionService.getByProductId(idProduct);
-		Bid bid = new Bid();
-		bid.setTime(new Timestamp(System.currentTimeMillis()));
-		bid.setAmount(auction.getBuyItNow());
-		bid.setAuctionId(auction.getIdAuction());
-		User user = (User) request.getSession(false).getAttribute("user");
-		bid.setUserId(user.getIdUser());
-		bidService.createItem(bid);
-
-		request.setAttribute("product", productService.getItemById(idProduct));
-		request.setAttribute("user", user);
-		request.setAttribute("bid", bid);
-		request.setAttribute("count", count);
-		request.getRequestDispatcher("deal_information").forward(request,
-				response);
-	}
-
-	private void queryFail(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("message", "Sorry, some error with query.");
-		request.setAttribute("alert", "error");
-		request.getRequestDispatcher("message_page").forward(request, response);
-	}
-
-	private void auctionAllreadyClosed(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("message", "Sorry, this auction allready closed.");
-		request.setAttribute("alert", "block");
-		request.getRequestDispatcher("message_page").forward(request, response);
-	}
-
-	private void wrongProductCount(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("message",
-				"Sorry, you count exceeds the existing.");
-		request.setAttribute("alert", "block");
-		request.getRequestDispatcher("message_page").forward(request, response);
-	}
 }

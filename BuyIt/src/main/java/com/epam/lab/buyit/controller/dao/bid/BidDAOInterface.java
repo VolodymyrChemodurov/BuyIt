@@ -9,4 +9,5 @@ public interface BidDAOInterface extends GenericDAO<Bid>{
 	List<Bid> getByAuctionId(int auctionId);
 	List<Bid> getByUserId(int userId);
 	List<Bid> getAllBids();
+	Bid getUserBid(int userId, int auctionId);
 }

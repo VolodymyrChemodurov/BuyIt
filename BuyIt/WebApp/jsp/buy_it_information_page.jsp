@@ -58,7 +58,7 @@
 					</ul>
 					<div class="alert alert-success">
 						<h4>Congratulation ${user.firstName}!</h4>
-						You bought ${product.name}<br/>
+						${actionMessage} ${product.name}<br/>
 					</div>
 					<table class="table table-striped">
 						<tr>
@@ -67,11 +67,11 @@
 						</tr>
 						<tr>
 							<td>Product price</td>
-							<td>${bid.amount}$</td>
+							<td>${bidAmount}$</td>
 						</tr>
 						<tr>
 							<td>To pay</td>
-							<td>${bid.amount * count}$</td>
+							<td>${bidAmount * count}$</td>
 						</tr>
 						</table>
 						<em>You will soon receive an email with detailed information</em>

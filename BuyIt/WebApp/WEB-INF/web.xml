@@ -209,7 +209,6 @@
 		<servlet-name>LegalNotice</servlet-name>
 		<jsp-file>/jsp/legalNotice.jsp</jsp-file>
 	</servlet>
-	
 	<servlet-mapping>
 		<servlet-name>messagePage</servlet-name>
 		<url-pattern>/message_page</url-pattern>
@@ -220,11 +219,19 @@
 	</servlet>
 	<servlet>
 		<servlet-name>dealInformationPage</servlet-name>
-		<jsp-file>/jsp/information_page.jsp</jsp-file>
+		<jsp-file>/jsp/buy_it_information_page.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dealInformationPage</servlet-name>
 		<url-pattern>/deal_information</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>bidInformationPage</servlet-name>
+		<jsp-file>/jsp/bid_information_page.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>bidInformationPage</servlet-name>
+		<url-pattern>/bid_information</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>LegalNotice</servlet-name>
@@ -275,7 +282,6 @@
 		<servlet-name>CategoryViewerServlet</servlet-name>
 		<url-pattern>/categoryViewer</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<servlet-name>categoryViewer</servlet-name>
 		<jsp-file>/jsp/сategoryViewerPage.jsp</jsp-file>
@@ -300,7 +306,6 @@
 		<servlet-name>UserShopping</servlet-name>
 		<url-pattern>/userShopping</url-pattern>
 	</servlet-mapping>
-	
 	<servlet-mapping>
 		<servlet-name>loginForm</servlet-name>
 		<url-pattern>/login_form</url-pattern>
@@ -309,7 +314,6 @@
 		<servlet-name>loginForm</servlet-name>
 		<jsp-file>/jsp/login_form.jsp</jsp-file>
 	</servlet>
-	
 	<servlet>
 		<servlet-name>UserSalesServlet</servlet-name>
 		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserSalesServlet</servlet-class>
@@ -351,6 +355,14 @@
 		<url-pattern>/adminPageServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>bidServeServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.BidServeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>bidServeServlet</servlet-name>
+		<url-pattern>/bid_serve</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>AdminMainPage</servlet-name>
 		<jsp-file>/jsp/adminMainPage.jsp</jsp-file>
 	</servlet>
@@ -387,5 +399,64 @@
 		<url-pattern>/userShopping</url-pattern>
 		<url-pattern>/userSalesServlet</url-pattern>
 		<url-pattern>/userShoppingServlet</url-pattern>
+		<url-pattern>/bid_serve</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>bidFilter</filter-name>
+		<filter-class>com.epam.lab.buyit.controller.web.filter.BidFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>bidFilter</filter-name>
+		<url-pattern>/bid_serve</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>buyItFilter</filter-name>
+		<filter-class>com.epam.lab.buyit.controller.web.filter.BuyItFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>buyItFilter</filter-name>
+		<url-pattern>/buyItServe</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>closedAuctionFilter</filter-name>
+		<filter-class>com.epam.lab.buyit.controller.web.filter.ClosedAuctionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>closedAuctionFilter</filter-name>
+		<url-pattern>/bid_information</url-pattern>
+		<url-pattern>/deal_information</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter>
+		<filter-name>wrongCountFilter</filter-name>
+		<filter-class>com.epam.lab.buyit.controller.web.filter.WrongCountFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>wrongCountFilter</filter-name>
+		<url-pattern>/deal_information</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter>
+		<filter-name>bidAmountFilter</filter-name>
+		<filter-class>com.epam.lab.buyit.controller.web.filter.BidAmountFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>bidAmountFilter</filter-name>
+		<url-pattern>/bid_information</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter>
+		<filter-name>queryFialFilter</filter-name>
+		<filter-class>com.epam.lab.buyit.controller.web.filter.QueryFailFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>queryFialFilter</filter-name>
+		<url-pattern>/deal_information</url-pattern>
+		<url-pattern>/bid_information</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 </web-app>

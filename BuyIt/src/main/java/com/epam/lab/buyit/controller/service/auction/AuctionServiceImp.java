@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.epam.lab.buyit.controller.dao.auction.AuctionDAO;
 import com.epam.lab.buyit.controller.exception.AuctionAllreadyClosedException;
+import com.epam.lab.buyit.controller.exception.BidAmountException;
 import com.epam.lab.buyit.controller.exception.WrongProductCountException;
 import com.epam.lab.buyit.model.Auction;
 
@@ -82,5 +83,21 @@ public class AuctionServiceImp implements AuctionService {
 		} else
 			return false;
 
+	}
+
+	@Override
+	public int placeBidServe(int idProduct, double bidAmount) throws AuctionAllreadyClosedException, BidAmountException {
+		Auction auction = auctionDAO.getByProductId(idProduct);
+		
+		double currentPrice = auction.getCurrentPrice(); 
+		if(bidAmount <= currentPrice) throw new BidAmountException("Bid amount is to small");
+		
+		String status = auction.getStatus();
+		if(status.equalsIgnoreCase("closed")) 
+			throw new AuctionAllreadyClosedException("Try to palce a bid on allready closed auction with id = " + auction.getIdAuction());
+		
+		int result = auctionDAO.bidServe(auction.getIdAuction(), bidAmount, currentPrice, status);
+		if(result == 1) return auction.getIdAuction();
+		else return 0;
 	}
 }

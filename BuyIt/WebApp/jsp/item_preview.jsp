@@ -25,16 +25,19 @@
 			<a data-toggle="modal" href="#myModal${product.idProduct}"
 				class="btn icon-search" href="#"></a> 
 			<span class="pull-right">
-				<a class="btn btn-info" href="buyItServe?id_product=${product.idProduct}&quantity=1"">
-					<c:choose>
-						<c:when test="${product.auction.buyItNow > 0}"> 
+				<c:choose>
+					<c:when test="${product.auction.buyItNow > 0}">
+						<a class="btn btn-info" href="buyItServe?id_product=${product.idProduct}&quantity=1""> 
 							<c:out value="Buy It! ${product.auction.buyItNow}$"></c:out>
-						</c:when>
-						<c:when test="${product.auction.buyItNow eq 0 and product.auction.currentPrice > 0}">
+						</a>
+					</c:when>
+					<c:when test="${product.auction.buyItNow eq 0 and product.auction.currentPrice > 0}">
+						<a class="btn btn-info" 
+							href="bid_serve?id_product=${product.idProduct}&bid=${product.auction.currentPrice + 1}">
 							<c:out value="Place a bid ${product.auction.currentPrice + 1}$"></c:out>
-						</c:when>
-					</c:choose>
-				</a>
+						</a>
+					</c:when>
+				</c:choose>
 			</span>
 		</h4>
 	</div> <!-- Modal -->
@@ -90,7 +93,7 @@
 						</a>
 					</c:if>
 					<c:if test="${product.auction.currentPrice > 0}">
-						<a class="btn btn-info" href="#">
+						<a class="btn btn-info" href="bid_serve?id_product=${product.idProduct}&bid=${product.auction.currentPrice + 1}">
 						<c:out value="Place a bid ${product.auction.currentPrice + 1}$"></c:out>
 						</a>
 					</c:if>

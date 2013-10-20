@@ -21,6 +21,7 @@ public class BidDAO implements BidDAOInterface{
 	private final static String GET_BY_AUCTION_ID ="SELECT * FROM bids WHERE auction_id = ?";
 	private final static String GET_BY_USER_ID ="SELECT * FROM bids WHERE user_id = ?";
 	private final static String GET_ALL_BIDS ="SELECT * FROM bids";
+	private final static String GET_USER_BID = "SELECT * FROM bids WHERE auction_id = ? AND user_id = ?";
 	private BidTransformer transformer;
 
 	public BidDAO() {
@@ -164,6 +165,29 @@ public class BidDAO implements BidDAOInterface{
 			DAOUtils.close(result, statement, connection);
 		}
 		return bidList;
+	}
+
+	@Override
+	public Bid getUserBid(int userId, int auctionId) {
+		Bid currentBid = null;
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_USER_BID);
+			statement.setInt(1, auctionId);
+			statement.setInt(2, userId);
+			result = statement.executeQuery();
+			if (result.next()) {
+				currentBid = transformer.fromRSToObject(result);
+				return currentBid;
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return currentBid;
 	}
 
 }
