@@ -75,7 +75,7 @@ public class AuctionServiceImp implements AuctionService {
 					+ oldCount + " < requested count" + count);
 
 		String newStatus = "InProgress";
-		if(oldCount == count) newStatus = "Closed";
+		if(oldCount == count) newStatus = "closed";
 		
 		int result = auctionDAO.buyItServe(auction.getIdAuction(), count, newStatus, oldCount, oldStatus);
 		if (result == 1) {

@@ -24,7 +24,8 @@ public class LoginFilter implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		User user = (User) httpRequest.getSession(false).getAttribute("user");
 		if (user == null) {
-			httpResponse.sendRedirect("login_form");
+			httpRequest.setAttribute("message", "You must login first");
+			httpRequest.getRequestDispatcher("login_form").forward(httpRequest, httpResponse);
 		} else {
 			chain.doFilter(request, response);
 		}

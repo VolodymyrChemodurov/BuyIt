@@ -23,9 +23,9 @@ public class RegistrationServlet extends HttpServlet {
 		if (UserValidation.checkingInput(inputRegistrationValues)) {
 			User user = new UserCreator().create(inputRegistrationValues);
 			userService.createItem(user);
-			response.sendRedirect("homePageServlet");
+			request.setAttribute("message", "Congratulations! Registration was successful");
+			request.getRequestDispatcher("login_form").forward(request, response);
 		} else {
-			// TODO change
 			response.sendRedirect("error404");
 		}
 
