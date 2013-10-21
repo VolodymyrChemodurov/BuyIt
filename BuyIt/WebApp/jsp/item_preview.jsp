@@ -6,8 +6,15 @@
 
 <li class="span3-my">
         <div class="thumbnail-my">
-                <a href="productDetails?id=${product.idProduct}"> <img class="my-image"
+                <a href="productDetails?id=${product.idProduct}"> 
+                <c:if test="${fn:length(product.description.itemPhotos) eq 0}">
+                <img class="my-image"
+                        src="<c:out value="themes/images/mocks/noAvailablePhoto.jpg"></c:out>">
+                </c:if>
+                <c:if test="${fn:length(product.description.itemPhotos) >= 1}">
+                <img class="my-image"
                         src="<c:out value="${product.description.itemPhotos[0].path }"></c:out>">
+                </c:if>
                 </a>
                 <div class="caption">
                         <h6>

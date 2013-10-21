@@ -60,4 +60,12 @@ public class CategoryServiceImpl implements CategoryService {
 		return category;
 	}
 
+	@Override
+	public Category getNotClosedById(int id,
+			int productNumber) {
+		Category category = categoryDAO.getElementById(id);
+		category.setListSubCategories(subCategoryService.getNotClosedByCategoryId(id, productNumber));
+		return category;
+	}
+
 }
