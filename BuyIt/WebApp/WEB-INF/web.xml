@@ -389,7 +389,14 @@
 		<servlet-name>CategoryCreator</servlet-name>
 		<url-pattern>/categoryCreator</url-pattern>
 	</servlet-mapping>
-
+	<servlet>
+		<servlet-name>categoryViewer</servlet-name>
+		<jsp-file>/jsp/сategoryViewerPage.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>categoryViewer</servlet-name>
+		<url-pattern>/categoryViewerPage</url-pattern>
+	</servlet-mapping>
 
 	<!-- <servlet> <servlet-name>UserSales</servlet-name> <jsp-file>/jsp/userSales.jsp</jsp-file> 
 		</servlet> <servlet-mapping> <servlet-name>UserSales</servlet-name> <url-pattern>/userSales</url-pattern> 
