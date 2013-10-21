@@ -7,39 +7,39 @@ $(document).ready(
 			
 			$.validator.addMethod("firstNameRegex", function(value, element) {
 		        return this.optional(element) || /^[A-Z][a-zA-Z ]+$/i.test(value);
-		    }, "FIRST NAME");
+		    }, "Start only from capital letter");
 			
 			$.validator.addMethod("lastNameRegex", function(value, element) {
 		        return this.optional(element) || /^[A-Z][a-zA-Z ]+$/i.test(value);
-		    }, "LAST NAME");
+		    }, "Start only from capital letter");
 			
 			$.validator.addMethod("passwordRegex", function(value, element) {
 		        return this.optional(element) || /^[\w_-]{6,15}$/i.test(value);
-		    }, "PASSWORD");
+		    }, "More then 6 characters. Only numbers, small letters and dashes");
 			
 			$.validator.addMethod("phoneRegex", function(value, element) {
 		        return this.optional(element) || /^\d{10}$/i.test(value);
-		    }, "PHONE");
+		    }, "Yours phone number (10 digits)");
 			
 			$.validator.addMethod("cityRegex", function(value, element) {
 		        return this.optional(element) || /^[A-Za-z]+$/i.test(value);
-		    }, "CITY");
+		    }, "Please enter valid city name");
 			
 			$.validator.addMethod("streetRegex", function(value, element) {
 		        return this.optional(element) || /^[A-Za-z]+$/i.test(value);
-		    }, "STREET");
+		    }, "Please enter valid street name");
 			
 			$.validator.addMethod("houseRegex", function(value, element) {
 		        return this.optional(element) || /^[\d]{1,3}[a-z]?$/i.test(value);
-		    }, "HOUSE");
+		    }, "Please enter valid house number");
 			
 			$.validator.addMethod("flatRegex", function(value, element) {
 		        return this.optional(element) || /^[\d]{1,3}[a-z]?$/i.test(value);
-		    }, "FLAT");
+		    }, "Pleas enter valid flat number");
 			
 			$.validator.addMethod("zipCodeRegex", function(value, element) {
 		        return this.optional(element) || /^\d{5}$/i.test(value);
-		    }, "ZIP_CODE");
+		    }, "Enter zip code (5 digits)");
 			
 			$('#registration-form').validate(
 					{
