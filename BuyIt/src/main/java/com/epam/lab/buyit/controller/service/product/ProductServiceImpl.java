@@ -177,5 +177,9 @@ public class ProductServiceImpl implements ProductService {
 
 		return products;
 	}
+	
+	public void deleteItemById(int id){
+		productDAO.deleteElementById(id);
+	}
 
 }

@@ -35,6 +35,18 @@ $("#category").change(function() {
 
 }).change();
 
+$('.oleg').click(function () {
+	$.ajax( {
+		type: 'POST',
+		url: 'userDeleteItemServlet',
+		data: {'itemId': $(this).val()},
+		success: function(){
+			alert("in success");
+		}
+	});
+	$('#salesTabs li:eq(1) a').click();
+});
+
 $('#passwordBlockCancel').click(function() {
 	$('#changePasswordBlock').hide();
 });
@@ -73,11 +85,6 @@ function showPasswordBlock(){
 	$('#changePasswordBlock').show();
 }
 
-function editProduct(id) {
-
-	$('#salesTabs li:eq(3) a').click();
-	
-}
 
 $('#salesTabs li:eq(4) a').click(function() {
 	$(this).tab('show');
@@ -133,3 +140,9 @@ $('#shoppingTabs li:eq(3) a').click(function() {
 	$('#purchasedShopping').hide();
 	$('#lostShopping').show();
 });
+
+function editProduct(id) {
+
+	$('#salesTabs li:eq(3) a').trigger("click");
+	
+}

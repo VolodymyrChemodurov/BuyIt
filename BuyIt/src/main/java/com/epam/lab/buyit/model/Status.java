@@ -41,4 +41,14 @@ public enum Status {
 		}
 		return result;
 	}
+	
+	public static boolean getTypeByRole(String value){
+		boolean result = false;
+		for(Status temp: Status.values()){
+			if (temp.getStatus() == value){
+				result = temp.getType();
+			}
+		}
+		return result;
+	}
 }

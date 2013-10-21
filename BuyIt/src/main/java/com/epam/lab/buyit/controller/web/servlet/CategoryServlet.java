@@ -22,7 +22,7 @@ public class CategoryServlet extends HttpServlet {
 		productService = new ProductServiceImpl();
 	}
 
-	protected void doGet(HttpServletRequest request,
+	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		int subCategory_id = 0;

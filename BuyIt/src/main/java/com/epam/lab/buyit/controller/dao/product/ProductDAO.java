@@ -29,13 +29,14 @@ public class ProductDAO implements ProductDAOInterface {
 	private final static String GET_SELECTION = "SELECT SQL_CALC_FOUND_ROWS * FROM products JOIN auctions ON products.id_product = auctions.product_id WHERE sub_category_id = ? AND status = 'inProgress'"
 			+ "LIMIT ?, ?";
 	private final static String GET_ROWS_COUNT_BY_SYBCATEGORY_ID = "SELECT COUNT(id_product) FROM products WHERE sub_category_id = ?";
-	
-	
+	private final static String DELETE_BY_ID = "DELETE FROM products WHERE id_product = ?";
+
 	private ProductTransformer transformer;
+
 	public ProductDAO() {
 		transformer = new ProductTransformer();
 	}
-	
+
 	public List<Product> findElementByNameCategory(String prdName, String category) {
 		Product product = null;
 		Connection connection = ConnectionManager.getConnection();
@@ -59,7 +60,7 @@ public class ProductDAO implements ProductDAOInterface {
 		}
 		return list;
 	}
-	
+
 	public List<Product> findElementByCategory(String name) {
 		Product product = null;
 		Connection connection = ConnectionManager.getConnection();
@@ -83,7 +84,6 @@ public class ProductDAO implements ProductDAOInterface {
 		return list;
 	}
 
-	
 	public List<Product> findElementByName(String name) {
 		Product product = null;
 		Connection connection = ConnectionManager.getConnection();
@@ -106,7 +106,6 @@ public class ProductDAO implements ProductDAOInterface {
 		}
 		return list;
 	}
-
 
 	@Override
 	public int createElement(Product elem) {
@@ -150,7 +149,7 @@ public class ProductDAO implements ProductDAOInterface {
 		}
 		return product;
 	}
-	
+
 	@Override
 	public void updateElement(Product elem) {
 		Connection connection = ConnectionManager.getConnection();
@@ -169,7 +168,19 @@ public class ProductDAO implements ProductDAOInterface {
 
 	@Override
 	public void deleteElementById(int id) {
-		throw new UnsupportedOperationException();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(DELETE_BY_ID);
+			statement.setInt(1, id);
+			if (statement != null) {
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
 	}
 
 	@Override
@@ -216,8 +227,7 @@ public class ProductDAO implements ProductDAOInterface {
 	}
 
 	@Override
-	public List<Product> getSelectionBySubCategoryId(int id, int offset,
-			int numberOfRecords) {
+	public List<Product> getSelectionBySubCategoryId(int id, int offset, int numberOfRecords) {
 
 		List<Product> products = new ArrayList<Product>();
 		Connection connection = ConnectionManager.getConnection();
@@ -280,7 +290,7 @@ public class ProductDAO implements ProductDAOInterface {
 		}
 		return products;
 	}
-	
+
 	public List<Product> getWonElementsByUserId(int id) {
 		List<Product> products = new ArrayList<Product>();
 		Connection connection = ConnectionManager.getConnection();

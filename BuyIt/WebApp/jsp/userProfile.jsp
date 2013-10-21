@@ -150,6 +150,10 @@
 								<div class=myrow style="padding-top: 70px;">
 									<span class="span-2"><input name="city"
 										value="${user.contact.address.city}" />
+									</span>
+								</div>
+								<div class=myrow>
+									<span class="span-2">
 										<select id="region" name="region">
 											<option value="${user.contact.address.region}">${user.contact.address.region}</option>
 											<c:forEach var="current" items="${region}">
@@ -159,10 +163,6 @@
 											</c:forEach>
 										</select>
 									</span>
-								</div>
-								<div class=myrow>
-									<span class="span-2"><input name="region"
-										value="${user.contact.address.region}" /> </span>
 								</div>
 								<div class=myrow>
 									<span class="span-2"><input name="street"
@@ -215,6 +215,9 @@
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
+	<script src="themes/assets/js/jquery.validate.js"></script>
+	<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
+	<script src="themes/assets/js/update.validate.js"></script>
 	<script src="bootstrap/js/userPage.js"></script>
 	<script src="bootstrap/js/search.js"></script>
 </body>

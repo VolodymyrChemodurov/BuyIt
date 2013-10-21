@@ -250,24 +250,24 @@
 		<servlet-name>BuyItServeServlet</servlet-name>
 		<url-pattern>/buyItServe</url-pattern>
 	</servlet-mapping>
-	 <servlet>
-    <servlet-name>CategoryViewerServlet</servlet-name>
-    <servlet-class>com.epam.lab.buyit.controller.web.servlet.CategoryViewerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CategoryViewerServlet</servlet-name>
-    <url-pattern>/categoryViewer</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>categoryViewer</servlet-name>
-    <jsp-file>/jsp/сategoryViewerPage.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>categoryViewer</servlet-name>
-    <url-pattern>/categoryViewerPage</url-pattern>
-  </servlet-mapping>
-  <servlet>
+	<servlet>
+		<servlet-name>CategoryViewerServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.CategoryViewerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryViewerServlet</servlet-name>
+		<url-pattern>/categoryViewer</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>categoryViewer</servlet-name>
+		<jsp-file>/jsp/сategoryViewerPage.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>categoryViewer</servlet-name>
+		<url-pattern>/categoryViewerPage</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>UserSales</servlet-name>
 		<jsp-file>/jsp/userSales.jsp</jsp-file>
 	</servlet>
@@ -306,6 +306,22 @@
 	<servlet-mapping>
 		<servlet-name>CheckPasswordServlet</servlet-name>
 		<url-pattern>/checkPassword</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>SubCategoryServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.SubCategoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SubCategoryServlet</servlet-name>
+		<url-pattern>/subcategory</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserDeleteItemServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserDeleteItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserDeleteItemServlet</servlet-name>
+		<url-pattern>/userDeleteItemServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ChangePasswordServlet</servlet-name>
