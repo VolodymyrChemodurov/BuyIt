@@ -195,7 +195,14 @@
 		<servlet-name>bidServeServlet</servlet-name>
 		<url-pattern>/bid_serve</url-pattern>
 	</servlet-mapping>
-
+	<servlet>
+		<servlet-name>CreateCategoryServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.CreateCategoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateCategoryServlet</servlet-name>
+		<url-pattern>/createCategoryServlet</url-pattern>
+	</servlet-mapping>
 
 	<!-- ///////////////////////////////JSP/////////////////////////////////////////////////// -->
 	<servlet>
@@ -366,31 +373,32 @@
 		<servlet-name>AdminProfile</servlet-name>
 		<url-pattern>/adminProfile</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>AdminRegistration</servlet-name>
+		<jsp-file>/jsp/adminRegistration.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminRegistration</servlet-name>
+		<url-pattern>/adminRegistration</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CategoryCreator</servlet-name>
+		<jsp-file>/jsp/categoryCreator.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryCreator</servlet-name>
+		<url-pattern>/categoryCreator</url-pattern>
+	</servlet-mapping>
 
-<!-- 	<servlet>
-		<servlet-name>UserSales</servlet-name>
-		<jsp-file>/jsp/userSales.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UserSales</servlet-name>
-		<url-pattern>/userSales</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>UserShopping</servlet-name>
-		<jsp-file>/jsp/userShopping.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UserShopping</servlet-name>
-		<url-pattern>/userShopping</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>UserSalesServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserSalesServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UserSalesServlet</servlet-name>
-		<url-pattern>/userSalesServlet</url-pattern>
-	</servlet-mapping> -->
+
+	<!-- <servlet> <servlet-name>UserSales</servlet-name> <jsp-file>/jsp/userSales.jsp</jsp-file> 
+		</servlet> <servlet-mapping> <servlet-name>UserSales</servlet-name> <url-pattern>/userSales</url-pattern> 
+		</servlet-mapping> <servlet> <servlet-name>UserShopping</servlet-name> <jsp-file>/jsp/userShopping.jsp</jsp-file> 
+		</servlet> <servlet-mapping> <servlet-name>UserShopping</servlet-name> <url-pattern>/userShopping</url-pattern> 
+		</servlet-mapping> <servlet> <servlet-name>UserSalesServlet</servlet-name> 
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserSalesServlet</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>UserSalesServlet</servlet-name> 
+		<url-pattern>/userSalesServlet</url-pattern> </servlet-mapping> -->
 	<!-- ///////////////////FILTERS/////////////////////////////////////////////////////// -->
 	<filter>
 		<filter-name>sideMenuFilter</filter-name>

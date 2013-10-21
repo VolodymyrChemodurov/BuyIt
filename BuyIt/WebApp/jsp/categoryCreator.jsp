@@ -34,31 +34,9 @@
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
 
-<style>
-	thead { display:block; margin:0px; cell-spacing:0px; left:0px; }
-	tbody { display:block; overflow:auto; height:200px; }
-	th { height:50px; width:60px; }
-	td { height:50px; width:80px; margin:0px; cell-spacing:0px;}
-</style>
 
 <script src="themes/js/jquery.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-
-
-$( document ).ready(function() {
-	$("input").each(function(){
-		if(this.id == "banned"){
-			this.disabled = true; 
-			this.type = "hidden";
-			};
-		if(this.id == "uunbanned"){
-			this.disabled = true; 
-			this.type = "hidden";
-			};
-			});
-		});
-</script>
 </head>
 
 <body data-spy="scroll" data-target=".navbar">
@@ -67,18 +45,12 @@ $( document ).ready(function() {
 	<div class="container">
 		<div id="maWrapper" class="corAll5">
 			<ul id="vMenu">
-				<li id="active"><strong>Ban Users</strong></li>
-				<li><a href="categoryCreator">Create Category</a></li>
+				<li><a href="adminMainPage">Ban Users</a></li>
+				<li id="active"><strong>Create Category</strong></li>
 				<li><a href="adminRegistration">Register Administrator</a></li>
 				<li><a href="adminProfile">Profile</a></li>
 			</ul>
 			<!-- / #vMenu -->
-<!-- 			<div style="overflow: hidden;"> -->
-<!-- 				<div width="200" class="left-menu"> -->
-<!-- 					<div class="avatar-wrapper"> -->
-<%-- 						<img src="${user.avatar}"> --%>
-<!-- 					</div> -->
-<!-- 				</div> -->
 				
 				<div width="200" class="left-menu">
 					<div class="avatar-wrapper">
@@ -103,109 +75,79 @@ $( document ).ready(function() {
 				</div>
 				
 				<!-- /left-menu -->
-				
 				<div id="maContent" class="corAll5">
-					<div class="table table-striped" id="navbar">
-					<!-- class="mycontent" -->
-					<h2>General information about users</h2>
-						<br class="clr"/>
-						<table cellpadding="1">
-						<thead>
-							<tr class="success">
-								<th colspan="4"><h3>General information</h3></th>
-								<th colspan="3"><h3>Adress</h3></th>
-								<th colspan="6"><h3>Contacts</h3></th>
-							</tr>
-							<tr class="success">
-								<th>
-									First Name 
-								</th>
-								<th>
-									Last Name 
-								</th>
-								<th>
-									Status 
-								</th>
-								<th>
-									City 
-								</th>
-								<th>
-									Region 
-								</th>
-								<th>
-									Street 
-								</th>
-								<th>
-									House / Flat 
-								</th>
-								<th>
-									Zip Code 
-								</th>
-								<th>
-									Phone 
-								</th>
-								<th>
-									Email 
-								</th>
-								<th>
-								</th>
-								<th>
-								</th>
-								
-							</tr>
-							</thead>
 
-							<tbody>
-							<c:forEach items="${onlyUsers}" var="user">
-							
-								<tr>
-									<td>
-										<c:out value="${user.firstName}"></c:out>
-									</td>
-									<td>
-										<c:out	value="${user.lastName}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.ban}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.contact.address.city}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.contact.address.region}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.contact.address.street}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.contact.address.house}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.contact.address.zipCode}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.contact.phone}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.contact.email}"></c:out> 
-									</td>
-									<td>
-										 <form method="post" action="adminPageServlet">
-												<input type="hidden" value="${user.idUser}" name="idUsr"/>
-									            <input class="btn btn-success" style="padding: 0 4px 0 4px;" id="${user.ban}" type="submit" name="button" value="bann"/>
-									            <input type="hidden" value="${user.idUser}" name="idUsr"/>
-								            	<input class="btn btn-danger" style="padding: 0 4px 0 4px;" id="u${user.ban}" type="submit" name="button" value="unbann"/>
-								         </form>
-									</td>
-								</tr>
-							
-							</c:forEach>
-							</tbody>
-						</table>
+					<div class="span9">
+						<h3>Registration</h3>
+						<div class="well">
+						
+	                            	<form class="form-horizontal" method="post" id="createCategory-form"
+										action="createCategoryServlet">
+
+										<h4>Create new category</h4>
+										
+										<div class="control-group">
+											<label class="control-label" for="category">Category name </label>
+											<div class="controls">
+												<input type="text" id="category" name="categoryName" placeholder="Category name"
+													class="tip" data-toggle="tooltip" data-placement="right"
+													title="More then 4 characters Only number, small letters and '-' '_'">
+											</div>
+										</div>
+										
+										<div class="control-group">
+											<div class="controls">
+												<button class="btn btn-large btn-success" type="submit"	id="register">Create</button>
+											</div>
+										</div>
+										
+									</form>
+									
+									<hr class="soft" />
+										
+									<form class="form-horizontal" method="post" id="createCategory-form"
+										action="createCategoryServlet">
+										
+										<h4>Create new Sub-category</h4>
+										
+										<h4>Select category</h4>
+										<div class="control-group">
+											<label class="control-label" for="categoryView">State</label>
+											<div class="controls">
+												<select id="categoryView" name="selectedCategory">
+													<option value="">Select...</option>
+<%-- 													<c:forEach var="cat" items="${category}"> --%>
+<%-- 															<option value="${role}">${role}</option> --%>
+<%-- 													</c:forEach> --%>
+												</select>
+											</div>
+										</div>
+										
+										<div class="control-group">
+											<label class="control-label" for="firstName">First name
+											</label>
+											<div class="controls">
+												<input type="text" id="firstName" name="firstName"
+													placeholder="First Name" class="tip" data-toggle="tooltip"
+													data-placement="right" title="Start only from capital letter">
+											</div>
+										</div>
+										
+										
+			
+										<div class="control-group">
+											<div class="controls">
+												
+												<button class="btn btn-large btn-success" type="submit" name="adminRole" value="1"
+													id="register">Create</button>
+											</div>
+										</div>
+									</form>
+						</div>
 					</div>
 				</div>
-
-<!-- 				/maContent -->
+				
+				<!-- /maContent -->
 			</div>
 		</div>
 
@@ -219,8 +161,13 @@ $( document ).ready(function() {
 	<script src="themes/js/jquery.js" type="text/javascript"></script>
 	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
+	<script src="bootstrap/js/login-check.js" type="text/javascript"></script>
+	<script src="bootstrap/js/tip.js" type="text/javascript"></script>
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
-	<script src="bootstrap/js/userPage.js"></script>
+	<script src="themes/assets/js/jquery.validate.js"></script>
+	<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
+	<script src="themes/assets/js/script.js"></script>
+	<script src="bootstrap/js/search.js"></script>
 </body>
 </html>
