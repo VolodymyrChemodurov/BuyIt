@@ -1,7 +1,8 @@
 package com.epam.lab.buyit.model;
 
 public enum Status {
-	BANNED("banned", true), UNBANNED("unbanned", false);
+	BANNED("banned", true),
+	UNBANNED("unbanned", false);
 
 	private boolean type;
 	private String status;

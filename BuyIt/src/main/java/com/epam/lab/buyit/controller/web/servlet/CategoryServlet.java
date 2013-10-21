@@ -24,6 +24,16 @@ public class CategoryServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		serve(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		serve(request, response);
+	}
+
+	private void serve(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		
 		int subCategory_id = 0;
 		if (request.getParameter("id") != null)
@@ -45,6 +55,4 @@ public class CategoryServlet extends HttpServlet {
 		request.setAttribute("page", page);
 		request.getRequestDispatcher("category").forward(request, response);
 	}
-
-
 }

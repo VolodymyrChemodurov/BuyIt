@@ -81,7 +81,7 @@
 								<tbody>
 									<c:forEach var="product" items="${userActiveShopping}">
 										<tr>
-											<td>${product.name}</td>
+											<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
 											<td>${product.auction.startTime}</td>
 											<td>${product.auction.endTime}</td>
 											<td>${product.auction.currentPrice}</td>
@@ -139,7 +139,7 @@
 								<tbody>
 									<c:forEach var="product" items="${userPurchasedShopping}">
 										<tr>
-											<td>${product.name}</td>
+											<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
 											<td>${product.auction.startTime}</td>
 											<td>${product.auction.endTime}</td>
 											<td>${product.auction.currentPrice}</td>
@@ -171,7 +171,7 @@
 								<tbody>
 									<c:forEach var="product" items="${userLostShopping}">
 										<tr>
-											<td>${product.name}</td>
+											<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
 											<td>${product.auction.startTime}</td>
 											<td>${product.auction.endTime}</td>
 											<td>${product.auction.currentPrice}</td>

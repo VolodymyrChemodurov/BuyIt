@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.epam.lab.buyit.controller.security.MD5Encryptor;
 import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
-import com.epam.lab.buyit.controller.validator.Validator;
+import com.epam.lab.buyit.controller.validator.UserValidation;
 import com.epam.lab.buyit.model.User;
 
 public class ChangePasswordServlet extends HttpServlet {
@@ -22,7 +22,7 @@ public class ChangePasswordServlet extends HttpServlet {
 		String newPassword = (String) request.getParameter("newPassword");
 		String confirmPassword = (String) request.getParameter("confirmPassword");
 		User user = (User) session.getAttribute("user");
-		if(checkingPassword(newPassword, confirmPassword)){
+		if(UserValidation.checkingPassword(newPassword, confirmPassword)){
 			userService.updateItem(user.setPassword(MD5Encryptor.encrypt(newPassword)));
 			session.setAttribute("user", user);
 		}
@@ -30,11 +30,4 @@ public class ChangePasswordServlet extends HttpServlet {
 	
 	}
 
-	private boolean checkingPassword(String password, String confirmPassword) {
-		boolean result = true;
-		result = Validator.PASSWORD.validate(password);
-		result = result
-				&& password.equals(confirmPassword);
-		return result;
-	}
 }

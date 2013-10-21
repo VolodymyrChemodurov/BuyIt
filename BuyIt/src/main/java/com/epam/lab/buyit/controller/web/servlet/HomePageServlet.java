@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.epam.lab.buyit.controller.service.category.CategoryServiceImpl;
 import com.epam.lab.buyit.controller.service.image.ImageServiceImpl;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
+import com.epam.lab.buyit.controller.utils.RegionCreator;
 
 public class HomePageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -33,7 +34,7 @@ public class HomePageServlet extends HttpServlet {
 		session.setAttribute("carouselImages", cauroselImagesList);
 		session.setAttribute("latestProducts",
 				productService.getLatestProducts(8));
-
+		session.setAttribute("region", RegionCreator.getRegionList());
 		response.sendRedirect("homePage");
 
 	}

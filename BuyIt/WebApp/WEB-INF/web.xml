@@ -12,6 +12,7 @@
 		<error-code>404</error-code>
 		<location>/error404</location>
 	</error-page>
+	<!-- /////////////////////////////////////SERVLET//////////////////////////////////////// -->
 	<servlet>
 		<servlet-name>Jersey REST Service</servlet-name>
 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
@@ -86,6 +87,118 @@
 		<url-pattern>/userPageServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>checkLoginServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.CheckLoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>checkLoginServlet</servlet-name>
+		<url-pattern>/check</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EmailUsServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.EmailUsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmailUsServlet</servlet-name>
+		<url-pattern>/emailUs</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ProductDetailsServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.ProductDetailsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProductDetailsServlet</servlet-name>
+		<url-pattern>/productDetails</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>StartSchedulerServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.StartSchedulerServlet</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>BuyItServeServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.BuyItServeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BuyItServeServlet</servlet-name>
+		<url-pattern>/buyItServe</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CategoryViewerServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.CategoryViewerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryViewerServlet</servlet-name>
+		<url-pattern>/categoryViewer</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserSalesServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserSalesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserSalesServlet</servlet-name>
+		<url-pattern>/userSalesServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserShoppingServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserShoppingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserShoppingServlet</servlet-name>
+		<url-pattern>/userShoppingServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CheckPasswordServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.CheckPasswordServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckPasswordServlet</servlet-name>
+		<url-pattern>/checkPassword</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChangePasswordServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.ChangePasswordServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangePasswordServlet</servlet-name>
+		<url-pattern>/changePasswordServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>SubCategoryServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.SubCategoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SubCategoryServlet</servlet-name>
+		<url-pattern>/subcategory</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserDeleteItemServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserDeleteItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserDeleteItemServlet</servlet-name>
+		<url-pattern>/userDeleteItemServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>AdminPageServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.AdminPageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminPageServlet</servlet-name>
+		<url-pattern>/adminPageServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>bidServeServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.BidServeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>bidServeServlet</servlet-name>
+		<url-pattern>/bid_serve</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- ///////////////////////////////JSP/////////////////////////////////////////////////// -->
+	<servlet>
 		<servlet-name>Error</servlet-name>
 		<jsp-file>/jsp/error404.jsp</jsp-file>
 	</servlet>
@@ -150,14 +263,6 @@
 		<url-pattern>/searching</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>checkLoginServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.CheckLoginServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>checkLoginServlet</servlet-name>
-		<url-pattern>/check</url-pattern>
-	</servlet-mapping>
-	<servlet>
 		<servlet-name>subCategoryViewer</servlet-name>
 		<jsp-file>/jsp/subCategory_viewer.jsp</jsp-file>
 	</servlet>
@@ -210,13 +315,17 @@
 		<jsp-file>/jsp/legalNotice.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>messagePage</servlet-name>
-		<url-pattern>/message_page</url-pattern>
+		<servlet-name>LegalNotice</servlet-name>
+		<url-pattern>/legalNotice</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>messagePage</servlet-name>
 		<jsp-file>/jsp/message_page.jsp</jsp-file>
 	</servlet>
+	<servlet-mapping>
+		<servlet-name>messagePage</servlet-name>
+		<url-pattern>/message_page</url-pattern>
+	</servlet-mapping>
 	<servlet>
 		<servlet-name>dealInformationPage</servlet-name>
 		<jsp-file>/jsp/buy_it_information_page.jsp</jsp-file>
@@ -233,18 +342,6 @@
 		<servlet-name>bidInformationPage</servlet-name>
 		<url-pattern>/bid_information</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>LegalNotice</servlet-name>
-		<url-pattern>/legalNotice</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>EmailUsServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.EmailUsServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>EmailUsServlet</servlet-name>
-		<url-pattern>/emailUs</url-pattern>
-	</servlet-mapping>
 	<servlet>
 		<servlet-name>ProductPage</servlet-name>
 		<jsp-file>/jsp/productPage.jsp</jsp-file>
@@ -252,115 +349,6 @@
 	<servlet-mapping>
 		<servlet-name>ProductPage</servlet-name>
 		<url-pattern>/productPage</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>ProductDetailsServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.ProductDetailsServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ProductDetailsServlet</servlet-name>
-		<url-pattern>/productDetails</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>StartSchedulerServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.StartSchedulerServlet</servlet-class>
-		<load-on-startup>0</load-on-startup>
-	</servlet>
-	<servlet>
-		<servlet-name>BuyItServeServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.BuyItServeServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>BuyItServeServlet</servlet-name>
-		<url-pattern>/buyItServe</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>CategoryViewerServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.CategoryViewerServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>CategoryViewerServlet</servlet-name>
-		<url-pattern>/categoryViewer</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>categoryViewer</servlet-name>
-		<jsp-file>/jsp/сategoryViewerPage.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>categoryViewer</servlet-name>
-		<url-pattern>/categoryViewerPage</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>UserSales</servlet-name>
-		<jsp-file>/jsp/userSales.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UserSales</servlet-name>
-		<url-pattern>/userSales</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>UserShopping</servlet-name>
-		<jsp-file>/jsp/userShopping.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UserShopping</servlet-name>
-		<url-pattern>/userShopping</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>loginForm</servlet-name>
-		<url-pattern>/login_form</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>loginForm</servlet-name>
-		<jsp-file>/jsp/login_form.jsp</jsp-file>
-	</servlet>
-	<servlet>
-		<servlet-name>UserSalesServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserSalesServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UserSalesServlet</servlet-name>
-		<url-pattern>/userSalesServlet</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>UserShoppingServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserShoppingServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UserShoppingServlet</servlet-name>
-		<url-pattern>/userShoppingServlet</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>CheckPasswordServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.CheckPasswordServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>CheckPasswordServlet</servlet-name>
-		<url-pattern>/checkPassword</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>ChangePasswordServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.ChangePasswordServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ChangePasswordServlet</servlet-name>
-		<url-pattern>/changePasswordServlet</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>AdminPageServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.AdminPageServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AdminPageServlet</servlet-name>
-		<url-pattern>/adminPageServlet</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>bidServeServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.BidServeServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>bidServeServlet</servlet-name>
-		<url-pattern>/bid_serve</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>AdminMainPage</servlet-name>
@@ -378,6 +366,32 @@
 		<servlet-name>AdminProfile</servlet-name>
 		<url-pattern>/adminProfile</url-pattern>
 	</servlet-mapping>
+
+<!-- 	<servlet>
+		<servlet-name>UserSales</servlet-name>
+		<jsp-file>/jsp/userSales.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserSales</servlet-name>
+		<url-pattern>/userSales</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserShopping</servlet-name>
+		<jsp-file>/jsp/userShopping.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserShopping</servlet-name>
+		<url-pattern>/userShopping</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserSalesServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserSalesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserSalesServlet</servlet-name>
+		<url-pattern>/userSalesServlet</url-pattern>
+	</servlet-mapping> -->
+	<!-- ///////////////////FILTERS/////////////////////////////////////////////////////// -->
 	<filter>
 		<filter-name>sideMenuFilter</filter-name>
 		<filter-class>com.epam.lab.buyit.controller.web.filter.SideMenuFilter</filter-class>

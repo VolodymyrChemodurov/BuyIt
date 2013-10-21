@@ -139,44 +139,53 @@
 						</div>
 						<div id="form-container" style="display: none">
 							<form action="userPageServlet" method="post">
-								<div class=myrow style="padding-top: 40px;">
+								<div class="myrow" style="padding-top: 40px;">
 									<span class="span-2"><input name="firstName"
 										value="${user.firstName}" /> </span>
 								</div>
-								<div class=myrow>
+								<div class="myrow">
 									<span class="span-2"><input name="lastName"
 										value="${user.lastName}" /> </span>
 								</div>
 								<div class=myrow style="padding-top: 70px;">
 									<span class="span-2"><input name="city"
-										value="${user.contact.address.city}" /> </span>
+										value="${user.contact.address.city}" />
+									</span>
 								</div>
-								<div class=myrow>
-									<span class="span-2"><input name="region"
-										value="${user.contact.address.region}" /> </span>
+								<div class="myrow">
+									<span class="span-2">
+										<select id="region" name="region">
+											<option value="${user.contact.address.region}">${user.contact.address.region}</option>
+											<c:forEach var="current" items="${region}">
+												<c:if test="${user.contact.address.region != current}">
+													<option value="${current}">${current}</option>
+												</c:if>
+											</c:forEach>
+										</select>
+									</span>
 								</div>
-								<div class=myrow>
+								<div class="myrow">
 									<span class="span-2"><input name="street"
 										value="${user.contact.address.street}" /> </span>
 								</div>
-								<div class=myrow>
+								<div class="myrow">
 									<span class="span-2"><input name="house"
 										style="width: 84px;" value="${user.contact.address.house}" />
 									</span> <span class="span-2"><input name="flat"
 										style="width: 85px;" value="${user.contact.address.flat}" />
 									</span>
 								</div>
-								<div class=myrow>
+								<div class="myrow">
 									<span class="span-2"><input name="zipCode"
 										value="${user.contact.address.zipCode}" /> </span>
 								</div>
-								<div class=myrow style="padding-top: 40px;">
+								<div class="myrow" style="padding-top: 40px;">
 									<span class="span-2"><input name="phone"
 										value="${user.contact.phone}" /> </span>
 									<button type="submit" style="margin-left: 40px; width: 120px;"
 										class="btn btn-mini btn-success">Apply changes</button>
 								</div>
-								<div class=myrow>
+								<div class="myrow">
 									<span class="span-2"><input name="email"
 										value="${user.contact.email}" /> </span> <input type="button"
 										id="btn-back" style="margin-left: 40px; width: 120px;"
@@ -206,6 +215,9 @@
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
+	<script src="themes/assets/js/jquery.validate.js"></script>
+	<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
+	<script src="themes/assets/js/update.validate.js"></script>
 	<script src="bootstrap/js/userPage.js"></script>
 	<script src="bootstrap/js/search.js"></script>
 </body>

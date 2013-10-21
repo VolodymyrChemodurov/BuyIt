@@ -40,4 +40,12 @@ public class UserValidation {
 		}
 		return result;
 	}
+	
+	public static boolean checkingPassword(String password, String confirmPassword) {
+		boolean result = true;
+		result = Validator.PASSWORD.validate(password);
+		result = result
+				&& password.equals(confirmPassword);
+		return result;
+	}
 }
