@@ -98,23 +98,23 @@
                                                                         <div id="gallery" class="span3" style="text-align: center">
                                                                                 <a
                                                                                         href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-                                                                                        title="<c:out value="${product.name }" />"> <img
+                                                                                        title="<c:out value="${product.name }" />"> <img class="my-image"
                                                                                         src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-                                                                                        style="height: 250px"
+                                                                                       
                                                                                         alt="<c:out value="${product.name }" />">
 
                                                                                 </a>
+
                                                                         </div>
                                                                 </c:if>
                                                                 <c:if
                                                                         test="${(fn:length(product.description.itemPhotos) gt 1) && (fn:length(product.description.itemPhotos) le 3)}">
-                                                                        <div id="gallery" class="span3" style="text-align: center">
+                                                                        <div id="gallery" class="span3" style="text-align: center ">
                                                                                 <a
                                                                                         href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-                                                                                        title="<c:out value="${product.name }" />"> <img
+                                                                                        title="<c:out value="${product.name }" />"><div style="height: 250px; text-align: center"><img class="my-image"
                                                                                         src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-                                                                                        style="height: 250px"
-                                                                                        alt="<c:out value="${product.name }" />">
+                                                                                        alt="<c:out value="${product.name }" />"></div>
 
                                                                                 </a>
 
@@ -123,7 +123,7 @@
                                                                                         <div class="carousel-inner">
 
                                                                                                 <div class="item active">
-                                                                                                        <c:forEach var="image"
+                                                                                                        <c:forEach var="image" begin="1"
                                                                                                                 items="${product.description.itemPhotos }">
                                                                                                                 <a href="${image.path}"> <img
                                                                                                                         style="width: 81px; height: 65px" src="${image.path}"
@@ -136,18 +136,16 @@
 
 
                                                                                 </div>
-                                                                                Photos in Gallery:
-                                                                                <c:out value="${fn:length(product.description.itemPhotos)}"></c:out>
+                                                                          
                                                                         </div>
                                                                 </c:if>
 
                                                                 <c:if test="${(fn:length(product.description.itemPhotos) >= 4)}">
-                                                                        <div id="gallery" class="span3" style="text-align: center">
+                                                                        <div id="gallery" class="span3" style="text-align: center; height: 250px">
                                                                                 <a
                                                                                         href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-                                                                                        title="<c:out value="${product.name }" />"> <img
+                                                                                        title="<c:out value="${product.name }" />"> <img class="my-image"
                                                                                         src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-                                                                                        style="height: 250px"
                                                                                         alt="<c:out value="${product.name }" />">
 
                                                                                 </a>
@@ -157,7 +155,7 @@
                                                                                         <div class="carousel-inner">
 
                                                                                                 <div class="item active">
-                                                                                                        <c:forEach var="image" begin="0" end="2"
+                                                                                                        <c:forEach var="image" begin="1" end="3"
                                                                                                                 items="${product.description.itemPhotos }">
                                                                                                                 <a href="${image.path}"> <img style="width: 29%"
                                                                                                                         src="${image.path}" alt="" /></a>
@@ -165,15 +163,14 @@
                                                                                                 </div>
 
                                                                                                 <div class="item">
-                                                                                                        <c:forEach var="image" begin="3"
+                                                                                                        <c:forEach var="image" begin="4"
                                                                                                                 items="${product.description.itemPhotos }">
                                                                                                                 <a href="${image.path}"> <img style="width: 29%"
                                                                                                                         src="${image.path}" alt="" /></a>
                                                                                                         </c:forEach>
 
                                                                                                 </div>
-                                                                                                Photos in Gallery:
-                                                                                                <c:out value="${fn:length(product.description.itemPhotos)}"></c:out>
+                                                                                             
                                                                                         </div>
 
 
@@ -189,6 +186,8 @@
 
                                                                 <!-- -------------------------CENTRAL CONTROL PANEL (place a bid , Buy it now )-------------------- -->
                                                                 <div class="span6">
+                                                                		<input type="hidden" id="userIdProduct" value="${product.userId}" />
+                                                                		<input type="hidden" id="userId" value="${user.idUser}" />
                                                                         <font size="5"> <c:out value="${product.name}"></c:out>
                                                                         </font> <br>
                                                                         <dir class="form-horizontal qtyFrm" style="padding: 10px">
@@ -207,18 +206,20 @@
 
                                                                         <!--                                                 ----------------------        PLACE A BID------------------------- -->
                                                                         <c:if test="${product.auction.currentPrice != 0 }">
-                                                                                <form class="form-horizontal qtyFrm">
+                                                                                <form class="form-horizontal qtyFrm" method="get" action="bid_serve?id_product">
+                                                                                        <input type="hidden" name="id_product" value="${product.idProduct}" />
+                                                                              
                                                                                         <div class="control-group">
                                                                                                 <label class="control-label"><span>Current
                                                                                                                 Price: <c:out value="${product.auction.currentPrice}"></c:out>$
                                                                                                 </span></label>
                                                                                                 <div class="controls">
                                                                                                         <label class="control-label"><span> You Bid:</span></label>
-                                                                                                        <input type="number" id="placeBidInput"
+                                                                                                        <input type="number" name="bid" id="placeBidInput" min ="${product.auction.currentPrice+1}"
                                                                                                                 value="<c:out value="${product.auction.currentPrice+1}"></c:out>"
                                                                                                                 class="span1" placeholder="Your Bid" />
                                                                                                         <button type="submit" id="placeBidButton"
-                                                                                                                class="btn btn-large btn-primary pull-right">
+                                                                                                                class="btn btn-default btn-primary pull-right">
                                                                                                                 Place a Bid</button>
                                                                                                 </div>
                                                                                         </div>
@@ -230,7 +231,7 @@
                                                                         <!-- ---------------------------------------------BUY IT NOW------------------------ -->
 
                                                                         <c:if test="${product.auction.buyItNow != 0 }">
-                                                                                <form class="form-horizontal qtyFrm" action="buyItServe"
+                                                                                <form class="form-horizontal qtyFrm" action="buyItServe" 
                                                                                         method="POST">
                                                                                         <div class="control-group">
                                                                                                 <input type="hidden" name="id_product"
@@ -242,10 +243,10 @@
                                                                                                         <input type="hidden" name="count" id="count"
                                                                                                                 value="${product.auction.count}" /> <label
                                                                                                                 class="control-label" text-align="right"><span>
-                                                                                                                        Quantity:</span></label> <input type="number" id="quantity"
+                                                                                                                        Quantity:</span></label> <input type="number" min="1" id="quantity"
                                                                                                                 name="quantity" class="span1" value="1" />
                                                                                                         <button type="submit" id="buyItButton"
-                                                                                                                class="btn btn-large btn-primary pull-right">Buy
+                                                                                                                class="btn btn-default btn-primary pull-right">Buy
                                                                                                                 it now</button>
                                                                                                 </div>
                                                                                         </div>
@@ -259,9 +260,7 @@
                                                                         </h4>
 
                                                                         <hr class="soft clr" />
-                                                                        <p>
-                                                                                ${product.description.features}
-                                                                        </p>
+                                                                       
                                                                         <br class="clr" /> <a href="#" name="detail"></a>
 
                                                                 </div>
@@ -273,6 +272,7 @@
                                                                                                         Details</a></li>
                                                                                         <li><a href="#history" data-toggle="tab">Bid History</a></li>
                                                                                         <li><a href="#delivery" data-toggle="tab">Delivery</a></li>
+                                                                                        <li><a href="#features" data-toggle="tab">Features</a></li>
                                                                                 </ul>
                                                                                 <div id="myTabContent" class="tab-content">
                                                                                         <div class="tab-pane fade active in" id="home">
@@ -301,7 +301,7 @@
                                                                                                                 </tr>
                                                                                                                 <c:forEach var="userItem" items="${userList}">
                                                                                                                         <tr class="techSpecRow">
-                                                                                                                                <td class="techSpecTD1">${userItem.login}"</td>
+                                                                                                                                <td class="techSpecTD1">${userItem.login}</td>
                                                                                                                                 <c:forEach var="bid" items="${userItem.bidList}">
                                                                                                                                         <td class="techSpecTD1">${bid.time}</td>
                                                                                                                                         <td class="techSpecTD1">${bid.amount}</td>
@@ -324,6 +324,16 @@
                                                                                                 <hr class="soft" />
                                                                                                 <br class="clr">
                                                                                         </div>
+                                                                                        
+                                                                                        <div class="tab-pane fade" id="features">
+                                                                                                <h4>Features</h4>
+
+                                                                                                <hr class="soft" />
+                                                                                                ${product.description.features }"
+                                                                                                <hr class="soft" />
+                                                                                                <br class="clr">
+                                                                                        </div>
+                                                                                        
 
                                                                                 </div>
                                                                         </div>
@@ -349,21 +359,51 @@
                         <script src="themes/assets_timer/countdown/jquery.countdown.js"></script>
                         <script src="themes/assets_timer/js/script.js"></script>
                         <script src="bootstrap/js/search.js"></script>
+                        <script src="bootstrap/js/thumbnail-image-large.js" type="text/javascript"></script>
 
                         <script type="text/javascript">
                                 $(document)
-                                                .ready(
-                                                                function() {
-                                                                        $('#placeBidInput')
-                                                                                        .focusout(
-                                                                                                        function() {
-                                                                                                                var placeBidButton = $('#placeBidButton');
-                                                                                                                var currentPrice = document
-                                                                                                                                .getElementById("currentBid").value;
-                                                                                                                var bid = $(
-                                                                                                                                '#placeBidInput')
-                                                                                                                                .attr('value');
-                                                                                                                if (parseInt(currentPrice) > parseInt(bid)) {
+                                            .ready(
+                                                   function() {
+                                                	   $(window).load(function(){
+                                                		   console.log("session user:"+$('#userId').val() + "  product userId:"+$('#userIdProduct').val() );
+                                                    	   if ($('#userId').val() == $('#userIdProduct').val()){
+                                                    		   $('#buyItButton')
+                                                               .attr(
+                                                                               "disabled",
+                                                                               "disabled");
+                                                    		   
+                                                               $('#placeBidButton')
+                                                               .attr(
+                                                                               "disabled",
+                                                                               "disabled");
+                                                               $(
+                                                               '#quantity').attr(
+                                                                       			"disabled",
+                                                               					"disabled");
+                                                               $(
+                                                               '#placeBidInput').attr(
+                                                              					"disabled",
+                                              									"disabled");
+                                                    	   }
+                                                   		});
+                                                	   
+                                                	   
+                                                	   
+                                                	  
+                                                	   
+                                                	   
+                                                	   
+                                                              $('#placeBidInput')
+                                                                               .change(
+                                                                                               function() {
+                                                                                                       var placeBidButton = $('#placeBidButton');
+                                                                                                        var currentPrice = document
+                                                                                                                        .getElementById("currentBid").value;
+                                                                                                         var bid = $(
+                                                                                                                            '#placeBidInput')
+                                                                                                                            .attr('value');
+                                                                                                               if (parseInt(currentPrice) >= parseInt(bid)) {
                                                                                                                         placeBidButton
                                                                                                                                         .attr(
                                                                                                                                                         "disabled",
@@ -376,7 +416,7 @@
                                                                                                         });
 
                                                                         $('#quantity')
-                                                                                        .focusout(
+                                                                                        .change(
                                                                                                         function() {
                                                                                                                 var count = $('#count')
                                                                                                                                 .val();
@@ -391,13 +431,20 @@
                                                                                                                                                         "disabled",
                                                                                                                                                         "disabled");
                                                                                                                 } else {
+                                                                                                                	
                                                                                                                         $('#buyItButton')
                                                                                                                                         .removeAttr(
                                                                                                                                                         "disabled");
                                                                                                                 }
 
                                                                                                         });
+                                                                        
+                                                                          
+                                                                   
+                                                                        
                                                                 });
+                              
+                                
                         </script>
                 </div>
                 <!--                 ----------------footer--------------------------------------- -->

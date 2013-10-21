@@ -1,7 +1,7 @@
 $(window).load(function() {
         $('.my-image').each(function() {
-                var maxWidth = 200;
-                var maxHeight = 160;
+                var maxWidth = 250;
+                var maxHeight = 250;
                 var ratio = 0;
                 var width = $(this).width();
                 var height = $(this).height();
@@ -24,6 +24,7 @@ $(window).load(function() {
                         flag = true;
                 }
                 if(!flag)
-                        $(this).css('margin-top', 260 - height - 100);
+                	alert("Flag");
+                        $(this).css('margin-top', parseInt((250 - height)/2) );
         });
 });

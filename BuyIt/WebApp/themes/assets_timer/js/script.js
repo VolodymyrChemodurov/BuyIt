@@ -7,14 +7,30 @@ $(function(){
 				newYear = true;
 			
 			if(((new Date()) > ts)||(status =='closed')){
-				// The new year is here! Count towards something else.
-				// Notice the *1000 at the end - time must be in milliseconds
-				//ts = (new Date()).getTime() + 10*24*60*60*1000;
 				newYear = false;
 				message = "Closed";
 				
 				note.attr("style","color:red");
 				note.html(message);
+				
+				$('#buyItButton')
+              .attr(
+                              "disabled",
+                              "disabled");
+   		   
+              $('#placeBidButton')
+              .attr(
+                              "disabled",
+                              "disabled");
+              $(
+              '#quantity').attr(
+                      			"disabled",
+              					"disabled");
+              $(
+              '#placeBidInput').attr(
+             					"disabled",
+									"disabled");
+				
 				
 			}
 			else {
@@ -23,15 +39,18 @@ $(function(){
 					callback	: function(days, hours, minutes, seconds){
 						
 						var message = "";
+						message += " Auction end time: ";
 						message +=ts.getDate() +"/ ";
 						message +=(ts.getMonth()+1) +"/ ";
 						message += ts.getFullYear() + "   ";
 						message += ts.getHours() +  ": ";
-						message += ts.getMinutes() +( ts.getMinutes()==0 ? '0':'' )+ ", ";
-						message += " auction finished!";
+						message += ts.getMinutes() +( ts.getMinutes()==0 ? '0':'' );
+						
 						
 						
 						note.html(message);
+						
+						
 					}
 				});
 			}
