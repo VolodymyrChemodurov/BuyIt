@@ -43,25 +43,22 @@ public class BuyItServeServlet extends HttpServlet {
 		serve(request, response);
 	}
 
-	private void serve(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void serve(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 
 		int idProduct = Integer.parseInt(request.getParameter("id_product"));
 		int count = Integer.parseInt(request.getParameter("quantity"));
 		try {
-			if (auctionService.buyItServe(idProduct, count)) {
-				LOGGER.info("Successful purchase");
-				Auction auction = auctionService.getByProductId(idProduct);
-				User user = (User) request.getSession(false).getAttribute("user");
-				Bid bid = BidBuilder.build(auction.getIdAuction(), user.getIdUser(), auction.getBuyItNow());
-				bidService.createItem(bid);
+			if (!successServe(idProduct, count, request)) {
+				int realCount = auctionService.getByProductId(idProduct)
+						.getCount();
+				if (realCount == 0 || realCount < count) {
+					LOGGER.warn("Buy It query was failed");
+					request.setAttribute("queryFail", true);
+				} else {
+					successServe(idProduct, realCount, request);
+				}
 
-				request.setAttribute("product", productService.getItemById(idProduct));
-				request.setAttribute("actionMessage", "You bought");
-				request.setAttribute("bidAmount", bid.getAmount());
-				request.setAttribute("count", count);
-			} else {
-				LOGGER.warn("Buy It query was failed");
-				request.setAttribute("queryFail", true);
 			}
 		} catch (AuctionAllreadyClosedException e) {
 			LOGGER.warn(e);
@@ -70,8 +67,34 @@ public class BuyItServeServlet extends HttpServlet {
 			LOGGER.warn(e);
 			request.setAttribute("wrongCountException", true);
 		} finally {
-			request.getRequestDispatcher("deal_information").forward(request, response);
+			request.getRequestDispatcher("deal_information").forward(request,
+					response);
 		}
+	}
+
+	private boolean successServe(int idProduct, int count,
+			HttpServletRequest request) throws AuctionAllreadyClosedException,
+			WrongProductCountException {
+		boolean result = false;
+		if (auctionService.buyItServe(idProduct, count)) {
+			LOGGER.info("Successful purchase");
+			Auction auction = auctionService.getByProductId(idProduct);
+			User user = (User) request.getSession(false).getAttribute("user");
+			Bid bid = BidBuilder.build(auction.getIdAuction(),
+					user.getIdUser(), auction.getBuyItNow());
+			bidService.createItem(bid);
+
+			request.setAttribute("product",
+					productService.getItemById(idProduct));
+			request.setAttribute("actionMessage", "You bought");
+			request.setAttribute("bidAmount", bid.getAmount());
+			request.setAttribute("count", count);
+			result = true;
+			return result;
+		} else {
+			return result;
+		}
+
 	}
 
 }
