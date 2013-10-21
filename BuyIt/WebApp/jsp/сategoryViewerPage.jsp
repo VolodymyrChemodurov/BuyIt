@@ -60,7 +60,7 @@
 				
 					<ul class="breadcrumb">
 						<li><a href="homePageServlet">Home</a> <span class="divider">/</span></li>
-<%-- 						<li class="active"><c:out value="${subCategory.name}"></c:out></li> --%>
+ 						<li class="active"><c:out value="${category.name}"></c:out></li>
 					</ul>
 			<c:forEach var="subCategory" items="${category.listSubCategories}" >
 					<c:if test="${not empty subCategory.products}">
@@ -77,31 +77,7 @@
 							</ul>
 						</div>
 						<hr class="soft" />
-						<div class="pagination">
-							<ul>
-								<c:if test="${page != 1}">
-									<li><a
-										href="select_category?page=${page - 1}&id=${subCategory.idSubCategory}">&lsaquo;</a></li>
-								</c:if>
-
-								<c:forEach begin="1" end="${noOfPages}" var="i">
-									<c:choose>
-										<c:when test="${page eq i}">
-											<li  class="active"><a href="#">${i}</a></li>
-										</c:when>
-										<c:otherwise>
-											<li><a 
-												href="select_category?page=${i}&id=${subCategory.idSubCategory}">${i}</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-
-								<c:if test="${page lt noOfPages}">
-									<li><a
-										href="select_category?page=${page + 1}&id=${subCategory.idSubCategory}">&rsaquo;</a></li>
-								</c:if>
-							</ul>
-						</div>
+						
 					</c:if>
 				</c:forEach>
 
