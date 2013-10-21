@@ -41,7 +41,7 @@ public class AdminPageServlet extends HttpServlet {
 
 	protected void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
 		if (request.getParameter("idUsr") != null
 				&& request.getParameter("button") != null) {
 

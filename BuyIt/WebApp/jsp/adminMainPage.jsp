@@ -34,7 +34,31 @@
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
 
+<style>
+	thead { display:block; margin:0px; cell-spacing:0px; left:0px; }
+	tbody { display:block; overflow:auto; height:200px; }
+	th { height:50px; width:60px; }
+	td { height:50px; width:80px; margin:0px; cell-spacing:0px;}
+</style>
 
+<script src="themes/js/jquery.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+
+$( document ).ready(function() {
+	$("input").each(function(){
+		if(this.id == "banned"){
+			this.disabled = true; 
+			this.type = "hidden";
+			};
+		if(this.id == "uunbanned"){
+			this.disabled = true; 
+			this.type = "hidden";
+			};
+			});
+		});
+</script>
 </head>
 
 <body data-spy="scroll" data-target=".navbar">
@@ -62,8 +86,8 @@
 					<!-- class="mycontent" -->
 					<h2>General information about users</h2>
 						<br class="clr"/>
-<!-- 						<form method="post" action="adminPageServlet"> -->
 						<table cellpadding="1">
+						<thead>
 							<tr class="success">
 								<th colspan="4"><h3>General information</h3></th>
 								<th colspan="3"><h3>Adress</h3></th>
@@ -100,9 +124,15 @@
 								<th>
 									Email 
 								</th>
+								<th>
+								</th>
+								<th>
+								</th>
+								
 							</tr>
-							
-			
+							</thead>
+
+							<tbody>
 							<c:forEach items="${onlyUsers}" var="user">
 							
 								<tr>
@@ -138,50 +168,17 @@
 									</td>
 									<td>
 										 <form method="post" action="adminPageServlet">
-										 	
-										 	<c:if test="${user.ban=='banned'}">
-										 				
-												<c:choose>
-													<c:when test="${user.ban=='banned'}">
-														<span class="input-xlarge uneditable-input">
-															<input type="hidden" value="${user.idUser}" name="idUsr" />
-										            		<input class="btn btn-success" style="padding: 0 4px 0 4px;" type="submit" name="button" value="bann"/>
-														</span>
-													</c:when>
-													<c:otherwise>
-														<input type="hidden" value="${user.idUser}" name="idUsr" />
-										            	<input class="btn btn-success" style="padding: 0 4px 0 4px;" type="submit" name="button" value="bann"/>
-													</c:otherwise>
-												</c:choose>
-											</c:if>
-								            
-								         </form>
-									</td>
-									<td>
-										<form method="post" action="adminPageServlet">
-										
-											<c:if test="${user.ban=='unbanned'}">
-												<c:choose>
-													<c:when test="${user.ban=='unbanned'}">
-														<span class="input-xlarge uneditable-input">
-															<input type="hidden" value="${user.idUser}" name="idUsr" />
-								             			<input class="btn btn-danger" style="padding: 0 4px 0 4px;" type="submit" name="button" value="unbann"/>
-														</span>
-													</c:when>
-													<c:otherwise>
-														<input type="hidden" value="${user.idUser}" name="idUsr" />
-								             			<input class="btn btn-danger" style="padding: 0 4px 0 4px;" type="submit" name="button" value="unbann"/>
-													</c:otherwise>
-												</c:choose>
-											</c:if>
-										
+												<input type="hidden" value="${user.idUser}" name="idUsr"/>
+									            <input class="btn btn-success" style="padding: 0 4px 0 4px;" id="${user.ban}" type="submit" name="button" value="bann"/>
+									            <input type="hidden" value="${user.idUser}" name="idUsr"/>
+								            	<input class="btn btn-danger" style="padding: 0 4px 0 4px;" id="u${user.ban}" type="submit" name="button" value="unbann"/>
 								         </form>
 									</td>
 								</tr>
 							
 							</c:forEach>
+							</tbody>
 						</table>
-<!-- 						</form> -->
 					</div>
 				</div>
 

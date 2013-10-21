@@ -9,7 +9,7 @@ public interface AuctionDAOInterface extends GenericDAO<Auction> {
 
 	Auction getByProductId(int productId);
 
-	List<Auction> getLatestAuctions(int number);
+	List<Auction> getLatestAuctions(int number, long time);
 
 	List<Auction> getSoonEndingAuctions(long currentTime, long endTime);
 
