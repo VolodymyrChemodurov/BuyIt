@@ -1,7 +1,13 @@
 package com.epam.lab.buyit.model;
 
-public class Message {
+import java.io.Serializable;
 
+public class Message implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idMessage;
 	private String message;
 	private int fromUserId;

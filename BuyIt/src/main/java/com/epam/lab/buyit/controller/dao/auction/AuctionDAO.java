@@ -116,8 +116,8 @@ public class AuctionDAO implements AuctionDAOInterface {
 		ResultSet result = null;
 		try {
 			statement = connection.prepareStatement(GET_LATEST);
-			statement.setInt(1, number);
-			statement.setTimestamp(2, new Timestamp(time));
+			statement.setInt(2, number);
+			statement.setTimestamp(1, new Timestamp(time));
 			result = statement.executeQuery();
 			while (result.next()) {
 				Auction currentAuction = transformer.fromRSToObject(result);
