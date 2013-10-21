@@ -61,6 +61,26 @@
 			
 			// Scheduling another call of this function in 1s
 			setTimeout(tick, 1000);
+			
+			if((d == 0)&&(h == 0)&&(m == 0)&&(s == 0)){
+				$('#buyItButton')
+	              .attr(
+	                              "disabled",
+	                              "disabled");
+	   		   
+	              $('#placeBidButton')
+	              .attr(
+	                              "disabled",
+	                              "disabled");
+	              $(
+	              '#quantity').attr(
+	                      			"disabled",
+	              					"disabled");
+	              $(
+	              '#placeBidInput').attr(
+	             					"disabled",
+										"disabled");
+			}
 		})();
 		
 		// This function updates two digit positions at once
