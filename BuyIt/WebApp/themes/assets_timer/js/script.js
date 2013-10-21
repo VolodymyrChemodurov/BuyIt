@@ -39,12 +39,13 @@ $(function(){
 					callback	: function(days, hours, minutes, seconds){
 						
 						var message = "";
+						message += " Auction end time: ";
 						message +=ts.getDate() +"/ ";
 						message +=(ts.getMonth()+1) +"/ ";
 						message += ts.getFullYear() + "   ";
 						message += ts.getHours() +  ": ";
-						message += ts.getMinutes() +( ts.getMinutes()==0 ? '0':'' )+ ", ";
-						message += " auction finished!";
+						message += ts.getMinutes() +( ts.getMinutes()==0 ? '0':'' );
+						
 						
 						
 						note.html(message);

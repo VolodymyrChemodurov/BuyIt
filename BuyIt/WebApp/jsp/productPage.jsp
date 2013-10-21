@@ -123,7 +123,7 @@
                                                                                         <div class="carousel-inner">
 
                                                                                                 <div class="item active">
-                                                                                                        <c:forEach var="image"
+                                                                                                        <c:forEach var="image" begin="1"
                                                                                                                 items="${product.description.itemPhotos }">
                                                                                                                 <a href="${image.path}"> <img
                                                                                                                         style="width: 81px; height: 65px" src="${image.path}"
@@ -136,8 +136,7 @@
 
 
                                                                                 </div>
-                                                                                Photos in Gallery:
-                                                                                <c:out value="${fn:length(product.description.itemPhotos)}"></c:out>
+                                                                          
                                                                         </div>
                                                                 </c:if>
 
@@ -156,7 +155,7 @@
                                                                                         <div class="carousel-inner">
 
                                                                                                 <div class="item active">
-                                                                                                        <c:forEach var="image" begin="0" end="2"
+                                                                                                        <c:forEach var="image" begin="1" end="3"
                                                                                                                 items="${product.description.itemPhotos }">
                                                                                                                 <a href="${image.path}"> <img style="width: 29%"
                                                                                                                         src="${image.path}" alt="" /></a>
@@ -164,15 +163,14 @@
                                                                                                 </div>
 
                                                                                                 <div class="item">
-                                                                                                        <c:forEach var="image" begin="3"
+                                                                                                        <c:forEach var="image" begin="4"
                                                                                                                 items="${product.description.itemPhotos }">
                                                                                                                 <a href="${image.path}"> <img style="width: 29%"
                                                                                                                         src="${image.path}" alt="" /></a>
                                                                                                         </c:forEach>
 
                                                                                                 </div>
-                                                                                                Photos in Gallery:
-                                                                                                <c:out value="${fn:length(product.description.itemPhotos)}"></c:out>
+                                                                                             
                                                                                         </div>
 
 
@@ -208,18 +206,18 @@
 
                                                                         <!--                                                 ----------------------        PLACE A BID------------------------- -->
                                                                         <c:if test="${product.auction.currentPrice != 0 }">
-                                                                                <form class="form-horizontal qtyFrm">
+                                                                                <form class="form-horizontal qtyFrm" action="bid_serve?id_product=${product.idProduct}&bid=">
                                                                                         <div class="control-group">
                                                                                                 <label class="control-label"><span>Current
                                                                                                                 Price: <c:out value="${product.auction.currentPrice}"></c:out>$
                                                                                                 </span></label>
                                                                                                 <div class="controls">
                                                                                                         <label class="control-label"><span> You Bid:</span></label>
-                                                                                                        <input type="number" id="placeBidInput"
+                                                                                                        <input type="number" id="placeBidInput" min ="${product.auction.currentPrice+1}"
                                                                                                                 value="<c:out value="${product.auction.currentPrice+1}"></c:out>"
                                                                                                                 class="span1" placeholder="Your Bid" />
                                                                                                         <button type="submit" id="placeBidButton"
-                                                                                                                class="btn btn-large btn-primary pull-right">
+                                                                                                                class="btn btn-default btn-primary pull-right">
                                                                                                                 Place a Bid</button>
                                                                                                 </div>
                                                                                         </div>
@@ -243,10 +241,10 @@
                                                                                                         <input type="hidden" name="count" id="count"
                                                                                                                 value="${product.auction.count}" /> <label
                                                                                                                 class="control-label" text-align="right"><span>
-                                                                                                                        Quantity:</span></label> <input type="number" id="quantity"
+                                                                                                                        Quantity:</span></label> <input type="number" min="1" id="quantity"
                                                                                                                 name="quantity" class="span1" value="1" />
                                                                                                         <button type="submit" id="buyItButton"
-                                                                                                                class="btn btn-large btn-primary pull-right">Buy
+                                                                                                                class="btn btn-default btn-primary pull-right">Buy
                                                                                                                 it now</button>
                                                                                                 </div>
                                                                                         </div>
@@ -425,7 +423,7 @@
                                                                                                                 var quantity = $(
                                                                                                                                 '#quantity')
                                                                                                                                 .val();
-                                                                                                                if ((parseInt(quantity) > parseInt(count))||(parseInt(quantity) < 1)) {
+                                                                                                                if (parseInt(quantity) > parseInt(count)) {
                                                                                                                         $('#buyItButton')
                                                                                                                                         .attr(
                                                                                                                                                         "disabled",
