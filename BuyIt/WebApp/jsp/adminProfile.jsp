@@ -43,16 +43,38 @@
 		<div id="maWrapper" class="corAll5">
 			<ul id="vMenu">
 				<li><a href="adminMainPage">Ban Users</a></li>
-				<li><a href="#">Create Category</a></li>
-				<li><a href="#">Register Administrator</a></li>
+				<li><a href="categoryCreator">Create Category</a></li>
+				<li><a href="adminRegistration">Register Administrator</a></li>
 				<li id="active"><strong>Profile</strong></li>
 			</ul>
 			<!-- / #vMenu -->
 			<div style="overflow: hidden;">
+<!-- 				<div width="200" class="left-menu"> -->
+<!-- 					<div class="avatar-wrapper"> -->
+<%-- 						<img src="${user.avatar}"> --%>
+<!-- 					</div> -->
+<!-- 				</div> -->
+				
 				<div width="200" class="left-menu">
 					<div class="avatar-wrapper">
 						<img src="${user.avatar}">
 					</div>
+					<a style="color:white; padding-left: 20px;"><i class="icon-user"></i>Change avatar</a>
+					<br>
+					<a onclick="showPasswordBlock()" id="passwordLink"style="color:white; padding-left: 20px;"><i class="icon-user"></i>Change password</a>
+					<div id="changePasswordBlock" style="display:none;">
+						<form action="changePasswordServlet" method="post">
+							<span style="color:green; font-size: 14px;">Change password block</span>
+							<input id="login" style="display: none; color:green;" name="login" value="${user.login}"/>
+							<input id="oldPassword" type="password" placeholder="Old password" name="oldPassword"/>
+							<input id="newPassword" type="password" placeholder="New password" name="newPassword"/>
+							<input id="confirmPassword" type="password" placeholder="Confirm password" name="confirmPassword"/>
+							<div id="passwordChangeResult" style="display: none; color:green;"><b>Password changed</b></div>
+							<button id="passwordBlockApply" type="submit" style="width: 92px; margin-top:2px;" class="btn btn-success">Apply</button>
+							<button id="passwordBlockCancel"style="width: 92px; margin-top:2px;" class="btn btn-danger">Cancel</button>
+						</form>
+					</div>	
+						
 				</div>
 
 				<div id="maContent" class="corAll5">
