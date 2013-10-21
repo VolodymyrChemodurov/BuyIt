@@ -53,7 +53,14 @@
 				<!-- Sidebar end=============================================== -->
 				<div class="span9">
 					<ul class="breadcrumb">
-						<li><a href="homePageServlet">Home</a> <span class="divider">/</span></li>
+						<li>
+							<a href="homePageServlet">Home</a>
+							<span class="divider">/</span>
+						</li>
+						<li>
+							<a href="categoryViewer?id=${categoryId}">${categoryName}</a>
+							<span class="divider">/</span>
+						</li>
 						<li class="active"><c:out value="${subCategory.name}"></c:out></li>
 					</ul>
 
