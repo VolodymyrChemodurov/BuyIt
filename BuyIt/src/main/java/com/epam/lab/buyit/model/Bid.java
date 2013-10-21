@@ -1,9 +1,14 @@
 package com.epam.lab.buyit.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Bid {
+public class Bid implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idBid;
 	private int auctionId;
 	private int userId;

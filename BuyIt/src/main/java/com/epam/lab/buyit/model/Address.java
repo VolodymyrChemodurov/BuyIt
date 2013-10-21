@@ -1,7 +1,13 @@
 package com.epam.lab.buyit.model;
 
-public class Address {
+import java.io.Serializable;
 
+public class Address implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int contactId;
 	private String region;
 	private String city;

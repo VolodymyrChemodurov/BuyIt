@@ -1,9 +1,15 @@
 package com.epam.lab.buyit.model;
 
+import java.io.Serializable;
 
-public class Contact {
+
+public class Contact implements Serializable {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idContact;
 	private int userId; 
 	private String email;
