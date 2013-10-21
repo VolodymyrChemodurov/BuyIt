@@ -339,4 +339,28 @@
 		<filter-name>sideMenuFilter</filter-name>
 		<url-pattern>*</url-pattern>
 	</filter-mapping>
+	<servlet>
+		<servlet-name>ActiveSalesContent</servlet-name>
+		<jsp-file>/jsp/activeSalesContent.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ActiveSalesContent</servlet-name>
+		<url-pattern>/activeSalesContent</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EndedSalesContent</servlet-name>
+		<jsp-file>/jsp/endedSalesContent.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EndedSalesContent</servlet-name>
+		<url-pattern>/endedSalesContent</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>AddSalesContent</servlet-name>
+		<jsp-file>/jsp/addSalesContent.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddSalesContent</servlet-name>
+		<url-pattern>/addSalesContent</url-pattern>
+	</servlet-mapping>
 </web-app>

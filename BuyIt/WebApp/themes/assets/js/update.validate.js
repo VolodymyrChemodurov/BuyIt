@@ -41,7 +41,7 @@ $(document).ready(
 		        return this.optional(element) || /^\d{5}$/i.test(value);
 		    }, "ZIP_CODE");
 			
-			$('#registration-form').validate(
+			$('#form-container').validate(
 					{
 						rules : {
 							lastName : {
@@ -89,7 +89,7 @@ $(document).ready(
 							}
 						},
 						highlight : function(element) {
-							$(element).closest('.control-group').removeClass(
+							$(element).closest('.myrow').removeClass(
 									'success').addClass('error');
 						},
 						success : function(element) {
