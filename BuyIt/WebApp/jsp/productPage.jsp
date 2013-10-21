@@ -206,14 +206,16 @@
 
                                                                         <!--                                                 ----------------------        PLACE A BID------------------------- -->
                                                                         <c:if test="${product.auction.currentPrice != 0 }">
-                                                                                <form class="form-horizontal qtyFrm" action="bid_serve?id_product=${product.idProduct}&bid=">
+                                                                                <form class="form-horizontal qtyFrm" method="get" action="bid_serve?id_product">
+                                                                                        <input type="hidden" name="id_product" value="${product.idProduct}" />
+                                                                              
                                                                                         <div class="control-group">
                                                                                                 <label class="control-label"><span>Current
                                                                                                                 Price: <c:out value="${product.auction.currentPrice}"></c:out>$
                                                                                                 </span></label>
                                                                                                 <div class="controls">
                                                                                                         <label class="control-label"><span> You Bid:</span></label>
-                                                                                                        <input type="number" id="placeBidInput" min ="${product.auction.currentPrice+1}"
+                                                                                                        <input type="number" name="bid" id="placeBidInput" min ="${product.auction.currentPrice+1}"
                                                                                                                 value="<c:out value="${product.auction.currentPrice+1}"></c:out>"
                                                                                                                 class="span1" placeholder="Your Bid" />
                                                                                                         <button type="submit" id="placeBidButton"
