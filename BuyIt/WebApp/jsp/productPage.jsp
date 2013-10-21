@@ -299,7 +299,7 @@
                                                                                                                 </tr>
                                                                                                                 <c:forEach var="userItem" items="${userList}">
                                                                                                                         <tr class="techSpecRow">
-                                                                                                                                <td class="techSpecTD1">${userItem.login}"</td>
+                                                                                                                                <td class="techSpecTD1">${userItem.login}</td>
                                                                                                                                 <c:forEach var="bid" items="${userItem.bidList}">
                                                                                                                                         <td class="techSpecTD1">${bid.time}</td>
                                                                                                                                         <td class="techSpecTD1">${bid.amount}</td>
