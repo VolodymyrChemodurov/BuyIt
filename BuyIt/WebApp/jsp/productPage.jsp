@@ -122,12 +122,13 @@
 
                                                                                         <div class="carousel-inner">
 
-                                                                                                <div class="item active">
+                                                                                                <div class="item active" style = "display: inline-block;">
                                                                                                         <c:forEach var="image" begin="1"
                                                                                                                 items="${product.description.itemPhotos }">
-                                                                                                                <a href="${image.path}"> <img
-                                                                                                                        style="width: 81px; height: 65px" src="${image.path}"
-                                                                                                                        alt="" /></a>
+                                                                                                                
+                                                                                                                <a href="${image.path}"> <div style="display:inline; width:81px"> <img class="my-image-mini"
+                                                                                                                         src="${image.path}"
+                                                                                                                        alt="" /></div></a>
                                                                                                         </c:forEach>
                                                                                                 </div>
 
@@ -157,7 +158,7 @@
                                                                                                 <div class="item active">
                                                                                                         <c:forEach var="image" begin="1" end="3"
                                                                                                                 items="${product.description.itemPhotos }">
-                                                                                                                <a href="${image.path}"> <img style="width: 29%"
+                                                                                                                <a href="${image.path}"> <img 
                                                                                                                         src="${image.path}" alt="" /></a>
                                                                                                         </c:forEach>
                                                                                                 </div>
@@ -360,6 +361,7 @@
                         <script src="themes/assets_timer/js/script.js"></script>
                         <script src="bootstrap/js/search.js"></script>
                         <script src="bootstrap/js/thumbnail-image-large.js" type="text/javascript"></script>
+                        <script src="bootstrap/js/thumbnail-image-mini.js" type="text/javascript"></script>
 
                         <script type="text/javascript">
                                 $(document)

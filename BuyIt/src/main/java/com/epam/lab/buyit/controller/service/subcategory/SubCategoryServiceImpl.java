@@ -84,4 +84,15 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 		return subCategory;
 	}
 
+	@Override
+	public List<SubCategory> getNotClosedByCategoryId(int id_category,
+			int productNumber) {
+		List<SubCategory> subCategories = subCategoryDAO
+				.getAllSubCategoriesByIdCategory(id_category);
+		for (SubCategory subCategory : subCategories) {
+		subCategory.setProducts(productService.getNotClosedBySubCategoryId(subCategory.getIdSubCategory(), productNumber));
+		}
+		return subCategories;
+	}
+
 }

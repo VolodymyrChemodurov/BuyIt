@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.apache.tomcat.jni.Time;
 
 import com.epam.lab.buyit.controller.dao.utils.DAOUtils;
 import com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager;
@@ -29,7 +32,7 @@ public class ProductDAO implements ProductDAOInterface {
 	private final static String GET_SELECTION = "SELECT SQL_CALC_FOUND_ROWS * FROM products JOIN auctions ON products.id_product = auctions.product_id WHERE sub_category_id = ? AND status = 'inProgress'"
 			+ "LIMIT ?, ?";
 	private final static String GET_ROWS_COUNT_BY_SYBCATEGORY_ID = "SELECT COUNT(id_product) FROM products WHERE sub_category_id = ?";
-	
+	private final static String GET_NOT_CLOSED = "SELECT * FROM products JOIN auctions ON id_product = product_id WHERE status ='inProgress' AND sub_category_id=? AND end_time > ? LIMIT ?";
 	
 	private ProductTransformer transformer;
 	public ProductDAO() {
@@ -331,6 +334,31 @@ public class ProductDAO implements ProductDAOInterface {
 		try {
 			statement = connection.prepareStatement(GET_ACTIVE_BY_USER_ID);
 			statement.setInt(1, id);
+			result = statement.executeQuery();
+			while (result.next()) {
+				Product currentProduct = transformer.fromRSToObject(result);
+				products.add(currentProduct);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return products;
+	}
+
+	@Override
+	public List<Product> getNotClosedListBySubCategoryId(int subCategoryId, int number) {
+		List<Product> products = new ArrayList<Product>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		Date currentTime = new Date();
+		try {
+			statement = connection.prepareStatement(GET_NOT_CLOSED);
+			statement.setInt(1, subCategoryId);
+			statement.setTimestamp(2, new Timestamp(currentTime.getTime()));
+			statement.setInt(3, number);
 			result = statement.executeQuery();
 			while (result.next()) {
 				Product currentProduct = transformer.fromRSToObject(result);

@@ -11,4 +11,5 @@ public interface SubCategoryService extends GenericService<SubCategory> {
 	
 	SubCategory getWithProductSelection(int subCategoryId, int offset, int numberOfRecords);
 
+	List<SubCategory> getNotClosedByCategoryId(int id_category,int productNumber);
 }

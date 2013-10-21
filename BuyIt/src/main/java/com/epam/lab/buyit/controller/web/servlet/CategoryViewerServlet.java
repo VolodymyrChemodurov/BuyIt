@@ -31,10 +31,9 @@ public class CategoryViewerServlet extends HttpServlet {
 		int page = 1;
 		
 		
-		Category category = categoryService.getItemById(category_id);
+		Category category = categoryService.getNotClosedById(category_id, 4);
 		
 		request.setAttribute("category", category);
-		request.setAttribute("page", page);
 		request.getRequestDispatcher("categoryViewerPage").forward(request, response);
 	}
 
