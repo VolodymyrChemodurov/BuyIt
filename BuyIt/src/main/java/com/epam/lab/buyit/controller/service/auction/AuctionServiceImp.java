@@ -45,7 +45,7 @@ public class AuctionServiceImp implements AuctionService {
 
 	@Override
 	public List<Auction> getLatestAuctions(int number) {
-		return auctionDAO.getLatestAuctions(number);
+		return auctionDAO.getLatestAuctions(number, System.currentTimeMillis());
 	}
 
 	@Override
