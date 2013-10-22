@@ -199,6 +199,14 @@
     <url-pattern>/createCategoryServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>ForgetPasswordServlet</servlet-name>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.ForgetPasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ForgetPasswordServlet</servlet-name>
+    <url-pattern>/forgetPasswordServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Error</servlet-name>
     <jsp-file>/jsp/error404.jsp</jsp-file>
   </servlet>
@@ -480,12 +488,12 @@
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
   <filter>
-  	<filter-name>banFilter</filter-name>
-  	<filter-class>com.epam.lab.buyit.controller.web.filter.BanFilter</filter-class>
+    <filter-name>banFilter</filter-name>
+    <filter-class>com.epam.lab.buyit.controller.web.filter.BanFilter</filter-class>
   </filter>
   <filter-mapping>
-  	<filter-name>banFilter</filter-name>
-  	<url-pattern>/buyItServe</url-pattern>
+    <filter-name>banFilter</filter-name>
+    <url-pattern>/buyItServe</url-pattern>
     <url-pattern>/userPageServlet</url-pattern>
     <url-pattern>/userProfile</url-pattern>
     <url-pattern>/userSales</url-pattern>

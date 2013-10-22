@@ -16,10 +16,8 @@ import com.epam.lab.buyit.model.User;
 public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		Map<String, String[]> inputRegistrationValues = request
-				.getParameterMap();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Map<String, String[]> inputRegistrationValues = request.getParameterMap();
 		UserServiceImpl userService = new UserServiceImpl();
 		if (UserValidation.checkingInput(inputRegistrationValues)) {
 			if ((request.getParameter("adminRole") != null)
@@ -27,20 +25,18 @@ public class RegistrationServlet extends HttpServlet {
 				User user = new UserCreator().create(inputRegistrationValues);
 				user.setRole(true);
 				userService.createItem(user);
-				request.setAttribute("message",
-						"Congratulations! Registration was successful");
-				request.getRequestDispatcher("adminRegistration").forward(request,
-						response);
+				request.setAttribute("message", "Congratulations! Registration was successful");
+				request.getRequestDispatcher("adminRegistration").forward(request, response);
 			} else {
 				User user = new UserCreator().create(inputRegistrationValues);
 				userService.createItem(user);
-				request.setAttribute("message",
-						"Congratulations! Registration was successful");
-				request.getRequestDispatcher("login_form").forward(request,
-						response);
+				request.setAttribute("message", "Congratulations! Registration was successful");
+				request.getRequestDispatcher("login_form").forward(request, response);
 			}
 		} else {
-			response.sendRedirect("error404");
+			request.setAttribute("messageHeader", "Fail");
+			request.setAttribute("message", "Sorry, validation fail");
+			request.getRequestDispatcher("message_page").forward(request, response);
 		}
 
 	}

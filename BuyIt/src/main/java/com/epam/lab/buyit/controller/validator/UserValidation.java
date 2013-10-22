@@ -14,6 +14,7 @@ public class UserValidation {
 		for (Validator currentElement : Validator.values()) {
 			String name = currentElement.getField();
 			result = currentElement.validate(inputMap.get(name)[0]);
+			LOGGER.info(name + " validation " + (result? "successful":"fail"));
 			if (!result) {
 				break;
 			}

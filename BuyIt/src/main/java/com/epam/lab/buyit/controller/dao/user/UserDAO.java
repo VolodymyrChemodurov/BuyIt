@@ -20,6 +20,7 @@ public class UserDAO implements UserDAOInterface {
 	private final static String GET_ALL_USERS = "SELECT * FROM users";
 	private final static String GET_USER_BY_LOGIN = "SELECT * FROM users WHERE login = ?";
 	private final static String GET_USER = "SELECT * FROM users WHERE login = ? AND password = ?";
+	private final static String CHANGE_PASSWORD = "UPDATE users SET password=? WHERE id_user=?";
 	private UserTransformer transformer = new UserTransformer();
 
 	@Override
@@ -95,7 +96,7 @@ public class UserDAO implements UserDAOInterface {
 		try {
 			statement = connection.prepareStatement(GET_ALL_USERS);
 			result = statement.executeQuery();
-			while(result.next()) {
+			while (result.next()) {
 				User currentUser = transformer.fromRSToObject(result);
 				users.add(currentUser);
 			}
@@ -117,7 +118,7 @@ public class UserDAO implements UserDAOInterface {
 			statement = connection.prepareStatement(GET_USER_BY_LOGIN);
 			statement.setString(1, login);
 			result = statement.executeQuery();
-			if(result.next())
+			if (result.next())
 				checkResult = true;
 		} catch (SQLException e) {
 			LOGGER.error(e);
@@ -148,6 +149,47 @@ public class UserDAO implements UserDAOInterface {
 			DAOUtils.close(result, statement, connection);
 		}
 		return user;
+	}
+
+	@Override
+	public User getUserByLogin(String login) {
+		User user = null;
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_USER_BY_LOGIN);
+			statement.setString(1, login);
+			result = statement.executeQuery();
+			if (result.next())
+				user = transformer.fromRSToObject(result);
+			return user;
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return user;
+	}
+
+	@Override
+	public boolean changePasswordByUserId(int id, String newPassword) {
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(CHANGE_PASSWORD);
+			statement.setString(1, newPassword);
+			statement.setInt(2, id);
+			int rows = statement.executeUpdate();
+			if (rows == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
+		return false;
 	}
 
 }
