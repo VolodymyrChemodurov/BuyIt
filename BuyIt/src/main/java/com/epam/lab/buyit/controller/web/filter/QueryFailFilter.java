@@ -21,7 +21,7 @@ public class QueryFailFilter implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		
 		if(httpRequest.getAttribute("queryFail") != null) {
-			httpRequest.setAttribute("message", "Sorry, some error with query.");
+			httpRequest.setAttribute("message", httpRequest.getAttribute("queryFail"));
 			httpRequest.setAttribute("alert", "error");
 			httpRequest.getRequestDispatcher("message_page").forward(httpRequest, httpResponse);
 		} else chain.doFilter(request, response);

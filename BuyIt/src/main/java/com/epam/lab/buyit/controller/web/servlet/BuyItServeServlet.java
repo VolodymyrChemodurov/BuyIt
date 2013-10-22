@@ -50,15 +50,13 @@ public class BuyItServeServlet extends HttpServlet {
 		int count = Integer.parseInt(request.getParameter("quantity"));
 		try {
 			if (!successServe(idProduct, count, request)) {
-				int realCount = auctionService.getByProductId(idProduct)
-						.getCount();
+				int realCount = auctionService.getByProductId(idProduct).getCount();
 				if (realCount == 0 || realCount < count) {
 					LOGGER.warn("Buy It query was failed");
-					request.setAttribute("queryFail", true);
+					request.setAttribute("queryFail", "Sorry, someone ahead you");
 				} else {
 					successServe(idProduct, realCount, request);
 				}
-
 			}
 		} catch (AuctionAllreadyClosedException e) {
 			LOGGER.warn(e);
@@ -67,25 +65,21 @@ public class BuyItServeServlet extends HttpServlet {
 			LOGGER.warn(e);
 			request.setAttribute("wrongCountException", true);
 		} finally {
-			request.getRequestDispatcher("deal_information").forward(request,
-					response);
+			request.getRequestDispatcher("deal_information").forward(request, response);
 		}
 	}
 
 	private boolean successServe(int idProduct, int count,
-			HttpServletRequest request) throws AuctionAllreadyClosedException,
-			WrongProductCountException {
+			HttpServletRequest request) throws AuctionAllreadyClosedException, WrongProductCountException {
 		boolean result = false;
 		if (auctionService.buyItServe(idProduct, count)) {
 			LOGGER.info("Successful purchase");
 			Auction auction = auctionService.getByProductId(idProduct);
 			User user = (User) request.getSession(false).getAttribute("user");
-			Bid bid = BidBuilder.build(auction.getIdAuction(),
-					user.getIdUser(), auction.getBuyItNow());
+			Bid bid = BidBuilder.build(auction.getIdAuction(), user.getIdUser(), auction.getBuyItNow());
 			bidService.createItem(bid);
 
-			request.setAttribute("product",
-					productService.getItemById(idProduct));
+			request.setAttribute("product",productService.getItemById(idProduct));
 			request.setAttribute("actionMessage", "You bought");
 			request.setAttribute("bidAmount", bid.getAmount());
 			request.setAttribute("count", count);
@@ -94,7 +88,6 @@ public class BuyItServeServlet extends HttpServlet {
 		} else {
 			return result;
 		}
-
 	}
 
 }

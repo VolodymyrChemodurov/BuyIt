@@ -51,7 +51,7 @@ public class BidServeServlet extends HttpServlet {
 				request.setAttribute("actionMessage", "You place a bid on");
 			} else {
 				LOGGER.error("Place a bid query was failed");
-				request.setAttribute("queryFail", true);
+				request.setAttribute("queryFail", "Sorry, someone have just exceeded your bid");
 			}
 		} catch (BidAmountException e) {
 			LOGGER.error(e);
