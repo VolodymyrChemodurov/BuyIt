@@ -14,6 +14,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.epam.lab.buyit.controller.creator.UserCreator;
@@ -118,6 +119,7 @@ public class UserWebService {
 		LOGGER.info("try to register user");
 		if (authentication(login, password)) {
 			User user = new UserCreator().create(json);
+			System.out.println(json);
 			if (UserValidation.checkingInput(json)) {
 				if (!userService.checkLogin(user.getLogin())) {
 					user = userService.createItem(user);
@@ -129,6 +131,26 @@ public class UserWebService {
 		return new JSONObject();
 	}
 
+	@GET
+	@Path("/check")
+	@Produces(MediaType.APPLICATION_JSON)
+	public JSONObject checkLogin(
+			@QueryParam("userLogin") String userLogin,
+			@QueryParam("login") String login,
+			@QueryParam("password") String password) {
+		
+		JSONObject result = new JSONObject();
+		if(authentication(login, password)) {
+			boolean checkResult = userService.checkLogin(userLogin);
+			try {
+				result.put("result", checkResult? "true": "false");
+			} catch (JSONException e) {
+				LOGGER.error(e);
+			}
+		}
+		return result;
+	}
+	
 	private boolean authentication(String login, String password) {
 		LOGGER.info("starting authentication...");
 		boolean authenticationResult = false;

@@ -19,11 +19,11 @@ public class AuctionDAO implements AuctionDAOInterface {
 	private static final Logger LOGGER = Logger.getLogger(AuctionDAO.class);
 	private final static String GET_BY_ID = "SELECT * FROM auctions WHERE id_auction = ?";
 	private final static String GET_BY_PRODUCT_ID = "SELECT * FROM auctions WHERE product_id = ?";
-	private final static String GET_LATEST = "SELECT * FROM auctions WHERE status='inProgress' ORDER BY end_time LIMIT ?";
+	private final static String GET_LATEST = "SELECT * FROM auctions WHERE status='inProgress' AND end_time > ? ORDER BY end_time LIMIT ?";
 	private final static String GET_SOON_ENDING = "SELECT * FROM auctions WHERE end_time > ? AND end_time < ? AND  status='inProgress'";
 	private final static String CLOSE = "UPDATE auctions SET status='closed' WHERE id_auction = ?";
 	private final static String BUY_IT_SERVE = "UPDATE auctions SET count=?, status=? WHERE id_auction=? AND count=? AND status=?";
-
+	private final static String BID_SERVE = "UPDATE auctions SET current_price = ? WHERE id_auction = ? AND status = ? AND current_price = ?";
 	private AuctionTransformer transformer;
 
 	public AuctionDAO() {
@@ -109,14 +109,15 @@ public class AuctionDAO implements AuctionDAOInterface {
 	}
 
 	@Override
-	public List<Auction> getLatestAuctions(int number) {
+	public List<Auction> getLatestAuctions(int number, long time) {
 		List<Auction> auctions = new ArrayList<Auction>();
 		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		try {
 			statement = connection.prepareStatement(GET_LATEST);
-			statement.setInt(1, number);
+			statement.setTimestamp(1, new Timestamp(time));
+			statement.setInt(2, number);
 			result = statement.executeQuery();
 			while (result.next()) {
 				Auction currentAuction = transformer.fromRSToObject(result);
@@ -182,6 +183,26 @@ public class AuctionDAO implements AuctionDAOInterface {
 			statement.setInt(3, id);
 			statement.setInt(4, oldCount);
 			statement.setString(5, oldStatus);
+			affectedRows = statement.executeUpdate();
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
+		return affectedRows;
+	}
+
+	@Override
+	public int bidServe(int auctionId, double newCurrentPrice, double oldCurrentPrice, String status) {
+		int affectedRows = 0;
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(BID_SERVE);
+			statement.setDouble(1, newCurrentPrice);
+			statement.setInt(2, auctionId);
+			statement.setString(3, status);
+			statement.setDouble(4, oldCurrentPrice);
 			affectedRows = statement.executeUpdate();
 		} catch (SQLException e) {
 			LOGGER.error(e);

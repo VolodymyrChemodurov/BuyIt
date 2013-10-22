@@ -53,7 +53,14 @@
 				<!-- Sidebar end=============================================== -->
 				<div class="span9">
 					<ul class="breadcrumb">
-						<li><a href="homePageServlet">Home</a> <span class="divider">/</span></li>
+						<li>
+							<a href="homePageServlet">Home</a>
+							<span class="divider">/</span>
+						</li>
+						<li>
+							<a href="categoryViewer?id=${categoryId}">${categoryName}</a>
+							<span class="divider">/</span>
+						</li>
 						<li class="active"><c:out value="${subCategory.name}"></c:out></li>
 					</ul>
 
@@ -111,5 +118,6 @@
 		<script src="bootstrap/js/bootstrap-tooltip.js"></script>
 		<script src="themes/js/jquery.lightbox-0.5.js"></script>
 		<script src="bootstrap/js/tooltip.js" type="text/javascript"></script>
+		<script src="bootstrap/js/thumbnail-image-small.js" type="text/javascript"></script>
 </body>
 </html>

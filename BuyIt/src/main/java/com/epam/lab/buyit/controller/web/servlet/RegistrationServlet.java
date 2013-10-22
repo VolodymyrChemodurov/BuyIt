@@ -18,14 +18,28 @@ public class RegistrationServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		Map<String, String[]> inputRegistrationValues = request.getParameterMap();
+		Map<String, String[]> inputRegistrationValues = request
+				.getParameterMap();
 		UserServiceImpl userService = new UserServiceImpl();
 		if (UserValidation.checkingInput(inputRegistrationValues)) {
-			User user = new UserCreator().create(inputRegistrationValues);
-			userService.createItem(user);
-			response.sendRedirect("homePageServlet");
+			if ((request.getParameter("adminRole") != null)
+					&& (request.getParameter("adminRole").equalsIgnoreCase("1"))) {
+				User user = new UserCreator().create(inputRegistrationValues);
+				user.setRole(true);
+				userService.createItem(user);
+				request.setAttribute("message",
+						"Congratulations! Registration was successful");
+				request.getRequestDispatcher("adminRegistration").forward(request,
+						response);
+			} else {
+				User user = new UserCreator().create(inputRegistrationValues);
+				userService.createItem(user);
+				request.setAttribute("message",
+						"Congratulations! Registration was successful");
+				request.getRequestDispatcher("login_form").forward(request,
+						response);
+			}
 		} else {
-			// TODO change
 			response.sendRedirect("error404");
 		}
 

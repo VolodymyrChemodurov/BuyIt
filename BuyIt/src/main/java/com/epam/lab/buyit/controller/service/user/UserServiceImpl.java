@@ -27,6 +27,22 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void setBann(String id) {
+			int tmpId = Integer.parseInt(id);
+			User currentUser = userDAO.getElementById(tmpId);
+			currentUser.setBan(true);
+			userDAO.updateElement(currentUser);
+	}
+
+	@Override
+	public void setUnbann(String id) {
+			int tmpId = Integer.parseInt(id);
+			User currentUser = userDAO.getElementById(tmpId);
+			currentUser.setBan(false);
+			userDAO.updateElement(currentUser);
+	}
+	
+	@Override
 	public User getItemById(int id) {
 		User user = userDAO.getElementById(id);
 		configUser(user);

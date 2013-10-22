@@ -12,4 +12,8 @@ public interface UserService extends GenericService<User> {
 	User getUser(String login, String password);
 	
 	List<User> getWhoMakeBidInAuction(int auctionId);
+	
+	void setBann(String id);
+	
+	void setUnbann(String id);
 }

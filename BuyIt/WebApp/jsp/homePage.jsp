@@ -79,33 +79,31 @@
 				<!-- Sidebar ================================================== -->
 				<jsp:include page="sidebarMenu"></jsp:include>
 				<!-- Sidebar end=============================================== -->
-				
+
 				<div class="span9">
 					<ul class="breadcrumb">
-						<li class="active">
-							<a href="homePageServlet">Home</a>
-						</li>
+						<li class="active"><a href="homePageServlet">Home</a></li>
 					</ul>
 
-					<h3>
-						Latest Auctions
-					</h3>
+					<h3>Soon Ending Auctions</h3>
+
+					<c:if test="${not empty latestProducts}">
+						<div class="item">
+							<ul class="thumbnails">
+								<c:forEach var="product" items="${latestProducts}">
+									<c:set var="product" value="${product}" scope="request"></c:set>
+									<jsp:include page="item_preview"></jsp:include>
+								</c:forEach>
+							</ul>
+						</div>
+					</c:if>
 				</div>
-				
-				<c:if test="${not empty latestProducts}">
-					<div class="item">
-						<ul class="thumbnails">
-							<c:forEach var="product" items="${latestProducts}">
-								<c:set var="product" value="${product}" scope="request"></c:set>
-								<jsp:include page="item_preview"></jsp:include>
-							</c:forEach>
-						</ul>
-					</div>
-				</c:if>
+
+
 			</div>
 		</div>
 	</div>
-	
+
 	<jsp:include page="footer"></jsp:include>
 	<!-- Placed at the end of the document so the pages load faster ============================================= -->
 	<script src="themes/js/jquery.js" type="text/javascript"></script>
@@ -114,7 +112,8 @@
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
 	<script src="bootstrap/js/search.js"></script>
-	
+	<script src="bootstrap/js/thumbnail-image-small.js"
+		type="text/javascript"></script>
 
 </body>
 </html>

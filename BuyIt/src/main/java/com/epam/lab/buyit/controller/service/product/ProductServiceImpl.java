@@ -182,4 +182,22 @@ public class ProductServiceImpl implements ProductService {
 		productDAO.deleteElementById(id);
 	}
 
+	@Override
+	public List<Product> getNotClosedBySubCategoryId(int subCategoryId,
+			int number) {
+		List<Product> productList = productDAO
+				.getNotClosedListBySubCategoryId(subCategoryId, number);
+		for (Product product : productList) {
+			int productId = product.getIdProduct();
+			Auction auction = auctionService.getByProductId(productId);
+			Description description = descriptionServiceImpl
+					.getByProductId(productId);
+
+			product.setDescription(description);
+			product.setAuction(auction);
+		}
+
+		return productList;
+	}
+
 }

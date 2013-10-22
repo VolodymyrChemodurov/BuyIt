@@ -1,60 +1,100 @@
 package com.epam.lab.buyit.controller.web.servlet;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
+import com.epam.lab.buyit.controller.builder.BidBuilder;
+import com.epam.lab.buyit.controller.exception.AuctionAllreadyClosedException;
+import com.epam.lab.buyit.controller.exception.WrongProductCountException;
 import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
 import com.epam.lab.buyit.controller.service.bid.BidServiceImp;
+import com.epam.lab.buyit.controller.service.product.ProductService;
+import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
 import com.epam.lab.buyit.model.Auction;
 import com.epam.lab.buyit.model.Bid;
 import com.epam.lab.buyit.model.User;
 
 public class BuyItServeServlet extends HttpServlet {
+	private static Logger LOGGER = Logger.getLogger(BuyItServeServlet.class);
 	private static final long serialVersionUID = 1L;
+	private AuctionServiceImp auctionService;
+	private BidServiceImp bidService;
+	private ProductService productService;
+
+	public void init() {
+		auctionService = new AuctionServiceImp();
+		bidService = new BidServiceImp();
+		productService = new ProductServiceImpl();
+	}
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		serve(request, response);
+	}
+
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		serve(request, response);
+	}
+
+	private void serve(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+
 		int idProduct = Integer.parseInt(request.getParameter("id_product"));
 		int count = Integer.parseInt(request.getParameter("quantity"));
-		User user = (User) request.getSession(false).getAttribute("user");
+		try {
+			if (!successServe(idProduct, count, request)) {
+				int realCount = auctionService.getByProductId(idProduct)
+						.getCount();
+				if (realCount == 0 || realCount < count) {
+					LOGGER.warn("Buy It query was failed");
+					request.setAttribute("queryFail", true);
+				} else {
+					successServe(idProduct, realCount, request);
+				}
 
-		AuctionServiceImp auctionService = new AuctionServiceImp();
-		BidServiceImp bidService = new BidServiceImp();
-		Auction auction = auctionService.getByProductId(idProduct);
-		int realCount = auction.getCount();
-		String status = null;
-
-		if (auction.getStatus().equals("inProgress")) {
-			if (realCount < count) {
-				response.sendRedirect("cfxgc");
-			} else if (realCount - count == 0) {
-				status = "closed";
-			} else {
-				status = "inProgress";
 			}
-			int affectedRows = auctionService.buyItServe(
-					auction.getIdAuction(), realCount - count, status,
-					realCount, auction.getStatus());
-			if (affectedRows == 1) {
-				Bid bid = new Bid();
-				bid.setTime(new Timestamp(System.currentTimeMillis()));
-				bid.setAmount(auction.getBuyItNow());
-				bid.setAuctionId(auction.getIdAuction());
-				System.out.println(user.toString());
-				bid.setUserId(user.getIdUser());
-				bidService.createItem(bid);
-
-				response.sendRedirect("homePageServlet");
-			} else {
-				response.sendRedirect("cfxgc");
-			}
-
+		} catch (AuctionAllreadyClosedException e) {
+			LOGGER.warn(e);
+			request.setAttribute("auctionCloseException", true);
+		} catch (WrongProductCountException e) {
+			LOGGER.warn(e);
+			request.setAttribute("wrongCountException", true);
+		} finally {
+			request.getRequestDispatcher("deal_information").forward(request,
+					response);
 		}
+	}
+
+	private boolean successServe(int idProduct, int count,
+			HttpServletRequest request) throws AuctionAllreadyClosedException,
+			WrongProductCountException {
+		boolean result = false;
+		if (auctionService.buyItServe(idProduct, count)) {
+			LOGGER.info("Successful purchase");
+			Auction auction = auctionService.getByProductId(idProduct);
+			User user = (User) request.getSession(false).getAttribute("user");
+			Bid bid = BidBuilder.build(auction.getIdAuction(),
+					user.getIdUser(), auction.getBuyItNow());
+			bidService.createItem(bid);
+
+			request.setAttribute("product",
+					productService.getItemById(idProduct));
+			request.setAttribute("actionMessage", "You bought");
+			request.setAttribute("bidAmount", bid.getAmount());
+			request.setAttribute("count", count);
+			result = true;
+			return result;
+		} else {
+			return result;
+		}
+
 	}
 
 }

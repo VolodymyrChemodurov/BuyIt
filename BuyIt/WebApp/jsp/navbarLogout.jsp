@@ -6,7 +6,7 @@
 	<ul id="topMenu" class="nav pull-right">
 		<c:if test="${user.role=='true'}">
 			<li style="color: white;">
-				<a href="adminMainPage"role="text">
+				<a href="adminPageServlet"role="text">
 					<h4><jsp:getProperty property="login" name="user" />
 					</h4>
 			</a>

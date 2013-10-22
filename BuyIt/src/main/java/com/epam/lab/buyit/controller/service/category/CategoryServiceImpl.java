@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.epam.lab.buyit.controller.dao.category.CategoryDAO;
 import com.epam.lab.buyit.controller.dao.subcategory.SubCategoryDAO;
-import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
 import com.epam.lab.buyit.controller.service.subcategory.SubCategoryServiceImpl;
 import com.epam.lab.buyit.model.Category;
 import com.epam.lab.buyit.model.SubCategory;
@@ -12,13 +11,11 @@ import com.epam.lab.buyit.model.SubCategory;
 public class CategoryServiceImpl implements CategoryService {
 	private CategoryDAO categoryDAO;
 	private SubCategoryDAO subCategoryDAO;
-	private ProductServiceImpl productService;
 	private SubCategoryServiceImpl subCategoryService;
 
 	public CategoryServiceImpl() {
 		categoryDAO = new CategoryDAO();
 		subCategoryDAO = new SubCategoryDAO();
-		productService = new ProductServiceImpl();
 		subCategoryService = new SubCategoryServiceImpl();
 	}
 
@@ -60,6 +57,14 @@ public class CategoryServiceImpl implements CategoryService {
 		category = categoryDAO.getElementById(subCategory.getCategoryId());
 		category.getListSubCategories().add(subCategory);
 		
+		return category;
+	}
+
+	@Override
+	public Category getNotClosedById(int id,
+			int productNumber) {
+		Category category = categoryDAO.getElementById(id);
+		category.setListSubCategories(subCategoryService.getNotClosedByCategoryId(id, productNumber));
 		return category;
 	}
 

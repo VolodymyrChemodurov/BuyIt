@@ -38,6 +38,7 @@ public class ProductDetailsServlet extends HttpServlet {
 		request.setAttribute("userList", userlist);
 		request.setAttribute("product", product);
 		request.setAttribute("category", category);
+		request.setAttribute("categoryId", category.getIdCategory());
 		
 		long diffInMillis =(product.getAuction().getEndTime().getTime() - product.getAuction().getStartTime().getTime()) ;
 		Long diffInDays = (diffInMillis / 1000 ) / 60 / 60 / 24;

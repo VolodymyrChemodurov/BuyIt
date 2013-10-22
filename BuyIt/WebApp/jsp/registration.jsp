@@ -82,7 +82,7 @@
 								<div class="controls">
 									<input type="text" id="alogin" name="login" placeholder="Login"
 										class="tip" data-toggle="tooltip" data-placement="right"
-										title="More then 4 characters Only number, small letters and '-' '_'">
+										title="More then 4 characters Only number, small letters and dashes">
 									<div id="logindiv"></div>
 								</div>
 							</div>
@@ -124,7 +124,7 @@
 									<input type="password" id="password2" name="password"
 										placeholder="Password" class="tip" data-toggle="tooltip"
 										data-placement="right"
-										title="More then 6 characters Only number, small letters and '-' '_'">
+										title="More then 6 characters. Only numbers, small letters and dashes">
 								</div>
 							</div>
 
@@ -168,7 +168,7 @@
 								<div class="controls">
 									<input type="text" id="street" name="street"
 										placeholder="Street" class="tip" data-toggle="tooltip"
-										data-placement="right" title="Please enter you street">
+										data-placement="right" title="Please enter your street">
 								</div>
 							</div>
 
