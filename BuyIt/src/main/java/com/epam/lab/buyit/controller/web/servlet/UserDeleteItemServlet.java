@@ -29,13 +29,13 @@ public class UserDeleteItemServlet extends HttpServlet {
 		productService.deleteItemById(Integer.parseInt(id));
 		User user = (User) request.getSession().getAttribute("user");
 		List<Product> productList = productService.getItemsByUserId(user.getIdUser());
-		List<Product> activeList = new ArrayList<Product>();
+		List<Product> endedList = new ArrayList<Product>();
 		for(Product current : productList){
-			if (current.getAuction().getStatus().equals("inProgress")){
-				activeList.add(current);
+			if (current.getAuction().getStatus().equals("closed")){
+				endedList.add(current);
 			} 
 		}
-		request.getSession().setAttribute("userActiveSales", activeList);
+		request.getSession().setAttribute("userEndedSales", endedList);
 
 	}
 

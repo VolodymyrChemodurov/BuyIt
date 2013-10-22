@@ -35,12 +35,14 @@
 <link rel="apple-touch-icon-precomposed"
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
+<link href="themes/assets/css/assets_style.css" rel="stylesheet">
+
 </head>
 <body>
 	<jsp:include page="navbar"></jsp:include>
 	<!-- Header End====================================================================== -->
 
-	<div class="container">
+	<div id="userProfile-container" class="container">
 		<div id="maWrapper" class="corAll5">
 			<ul id="vMenu">
 				<li id="active"><strong>Profile</strong></li>
@@ -140,7 +142,7 @@
 						<div id="form-container" style="display: none">
 							<form action="userPageServlet" method="post">
 								<div class=myrow style="padding-top: 40px;">
-									<span class="span-2"><input name="firstName"
+									<span class="span-2"><input id="firstName" name="firstName"
 										value="${user.firstName}" /> </span>
 								</div>
 								<div class=myrow>

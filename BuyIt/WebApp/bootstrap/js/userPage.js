@@ -35,17 +35,17 @@ $("#category").change(function() {
 
 }).change();
 
-$('.oleg').click(function () {
-	$.ajax( {
-		type: 'POST',
-		url: 'userDeleteItemServlet',
-		data: {'itemId': $(this).val()},
-		success: function(){
-			alert("in success");
-		}
-	});
-	$('#salesTabs li:eq(1) a').click();
-});
+
+function deleteEndedSales(id){
+		$.ajax( {
+			type: 'POST',
+			url: 'userDeleteItemServlet',
+			data: {'itemId': id},
+			success: function(){
+				$('#salesTabs li:eq(1) a').click();
+			}
+		});
+}
 
 $("#auctionCheck").change(function(){
 	if ($("#auctionCheck").prop("checked")) {
@@ -117,6 +117,10 @@ function showPasswordBlock(){
 	$('#changePasswordBlock').show();
 }
 
+$(document).ready(function(){
+	$('#salesTabs li:eq(1) a').click();
+});
+
 
 $('#salesTabs li:eq(4) a').click(function() {
 	$(this).tab('show');
@@ -128,30 +132,25 @@ $('#salesTabs li:eq(4) a').click(function() {
 
 });
 
+
 $('#salesTabs li:eq(1) a').click(function() {
 	$(this).tab('show');
-	$('#activeSales').show();
-	$('#endedSales').hide();
-	$('#addNewSale').hide();
-	$('#editTab').hide();
-	$('#editPage').hide();
+	$("#maContent").empty();
+	$("#maContent").load("activeSalesContent");
+
+	
 
 });
 $('#salesTabs li:eq(2) a').click(function() {
 	$(this).tab('show');
-	$('#activeSales').hide();
-	$('#endedSales').show();
-	$('#addNewSale').hide();
-	$('#editTab').hide();
-	$('#editPage').hide();
+	$("#maContent").empty();
+	$("#maContent").load("endedSalesContent");
+	
 });
 $('#salesTabs li:eq(3) a').click(function() {
 	$(this).tab('show');
-	$('#activeSales').hide();
-	$('#endedSales').hide();
-	$('#addNewSale').show();
-	$('#editTab').hide();
-	$('#editPage').hide();
+	$("#maContent").empty();
+	$("#maContent").load("addSalesContent");
 });
 
 $('#shoppingTabs li:eq(1) a').click(function() {
@@ -174,7 +173,6 @@ $('#shoppingTabs li:eq(3) a').click(function() {
 });
 
 function editProduct(id) {
-
 	$('#salesTabs li:eq(3) a').trigger("click");
-	
+	return false;
 }

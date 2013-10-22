@@ -398,6 +398,50 @@
     <servlet-name>loginForm</servlet-name>
     <url-pattern>/login_form</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>UserSales</servlet-name>
+    <jsp-file>/jsp/userSales.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserSales</servlet-name>
+    <url-pattern>/userSales</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UserShopping</servlet-name>
+    <jsp-file>/jsp/userShopping.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserShopping</servlet-name>
+    <url-pattern>/userShopping</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ActiveSalesContent</servlet-name>
+    <jsp-file>/jsp/activeSalesContent.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActiveSalesContent</servlet-name>
+    <url-pattern>/activeSalesContent</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EndedSalesContent</servlet-name>
+    <jsp-file>/jsp/endedSalesContent.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EndedSalesContent</servlet-name>
+    <url-pattern>/endedSalesContent</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddSalesContent</servlet-name>
+    <jsp-file>/jsp/addSalesContent.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddSalesContent</servlet-name>
+    <url-pattern>/addSalesContent</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
   <filter>
     <filter-name>sideMenuFilter</filter-name>
     <filter-class>com.epam.lab.buyit.controller.web.filter.SideMenuFilter</filter-class>
