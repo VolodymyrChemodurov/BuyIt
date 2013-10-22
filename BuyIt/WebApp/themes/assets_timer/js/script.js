@@ -8,8 +8,6 @@ $(function(){
 			
 			ts = new Date(newTime),
 				newYear = true;
-			console.log(ts);
-			//alert(time+"----"+ts);
 			if(((new Date()) > ts)||(status =='closed')){
 				newYear = false;
 				message = "Closed";
