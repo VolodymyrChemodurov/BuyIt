@@ -6,12 +6,12 @@ $(document).ready(
 		    }, "Username must contain only letters, numbers, or dashes.");
 			
 			$.validator.addMethod("firstNameRegex", function(value, element) {
-		        return this.optional(element) || /^[A-Z][a-zA-Z ]+$/i.test(value);
-		    }, "Start only from capital letter");
+		        return this.optional(element) || /^[A-Z][a-zA-Z ]{2,15}$/i.test(value);
+		    }, "More then 2 characters");
 			
 			$.validator.addMethod("lastNameRegex", function(value, element) {
-		        return this.optional(element) || /^[A-Z][a-zA-Z ]+$/i.test(value);
-		    }, "Start only from capital letter");
+		        return this.optional(element) || /^[A-Z][a-zA-Z ]{3,15}$/i.test(value);
+		    }, "More then 3 characters");
 			
 			$.validator.addMethod("passwordRegex", function(value, element) {
 		        return this.optional(element) || /^[\w_-]{6,15}$/i.test(value);
