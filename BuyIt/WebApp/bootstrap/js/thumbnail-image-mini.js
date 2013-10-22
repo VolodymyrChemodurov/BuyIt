@@ -1,4 +1,4 @@
-$(window).load(function() {
+$(document).ready(function() {
 		console.log("mini");
         $('.my-image-mini').each(function() {
                 var maxWidth = 81;
