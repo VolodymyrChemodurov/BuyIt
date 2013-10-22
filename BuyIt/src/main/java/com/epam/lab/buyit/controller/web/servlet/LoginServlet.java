@@ -36,6 +36,9 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("message_page").forward(request, response);
 			} else
 				response.sendRedirect("homePageServlet");
+		} else {
+			request.setAttribute("message", "Wrong login or password");
+			request.getRequestDispatcher("login_form").forward(request, response);
 		}
 
 	}

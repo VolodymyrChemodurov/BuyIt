@@ -31,7 +31,7 @@
 		</c:if>
 		<li class=""><a href="registration" role="button"
 			style="padding-right: 0">
-				<button class="btn btn-large btn-warning" type="submit">Log
+				<button class="btn btn-default btn-warning" type="submit">Log
 					Out</button>
 		</a></li>
 	</ul>
