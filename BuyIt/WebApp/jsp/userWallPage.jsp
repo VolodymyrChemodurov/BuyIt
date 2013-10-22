@@ -52,39 +52,10 @@
 				<!-- Sidebar ================================================== -->
 				<jsp:include page="sidebarMenu"></jsp:include>
 				<!-- Sidebar end=============================================== -->
-				<div class="span9">
-					<ul class="breadcrumb">
-						<li><a href="homePageServlet">Home</a> <span class="divider">/</span></li>
-						<li class="active">Forget password?</li>
-					</ul>
-					<h3>FORGET YOUR PASSWORD?</h3>
-					<hr class="soft">
 
-					<div class="row">
-						<div class="span9" style="min-height: 900px">
-							<div class="well">
-								<h5>Reset your password</h5>
-								<br> Please enter your login. A password will be sent to
-								you. Once you have received the password, you will be able to
-								choose a new password for your account.<br> <br> <br>
-								<form action="forgetPasswordServlet" method="post">
-									<div class="control-group">
-										<label class="control-label" for="inputLogin">Your
-											login</label>
-										<div class="controls">
-											<input class="span3" type="text" id="inputLogin" name="login"
-												placeholder="Login">
-										</div>
-									</div>
-									<div class="controls">
-										<button type="submit" class="btn block">Submit</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
 
-				</div>
+
+
 			</div>
 		</div>
 	</div>
