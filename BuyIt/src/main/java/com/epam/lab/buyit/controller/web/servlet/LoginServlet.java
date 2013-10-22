@@ -33,6 +33,7 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("message",
 						"Sorry, you are banned. Write email to administrator for more information");
 				request.setAttribute("alert", "error");
+				request.setAttribute("messageHeader", "Banned");
 				request.getRequestDispatcher("message_page").forward(request, response);
 			} else
 				response.sendRedirect("homePageServlet");

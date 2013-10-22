@@ -2,10 +2,12 @@ $(function(){
 			
 			var note = $('#note');
 			var status = document.getElementById("status").value;
-			var time = document.getElementById("time").value,
-				ts = new Date(time),
-				newYear = true;
+			var time = document.getElementById("time").value;
+			var newTime = time.replace(' ','T')+'Z';
 			
+			
+			ts = new Date(newTime),
+				newYear = true;
 			if(((new Date()) > ts)||(status =='closed')){
 				newYear = false;
 				message = "Closed";

@@ -23,6 +23,7 @@ public class QueryFailFilter implements Filter {
 		if(httpRequest.getAttribute("queryFail") != null) {
 			httpRequest.setAttribute("message", httpRequest.getAttribute("queryFail"));
 			httpRequest.setAttribute("alert", "error");
+			request.setAttribute("messageHeader", "Error!");
 			httpRequest.getRequestDispatcher("message_page").forward(httpRequest, httpResponse);
 		} else chain.doFilter(request, response);
 	}

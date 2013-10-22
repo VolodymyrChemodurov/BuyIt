@@ -29,6 +29,7 @@ public class BanFilter implements Filter {
 			httpRequest	.setAttribute("message",
 							"Sorry, you are banned. Write email to administrator for more information");
 			httpRequest.setAttribute("alert", "error");
+			httpRequest.setAttribute("messageHeader", "Banned!");
 			httpRequest.getRequestDispatcher("message_page").forward(
 					httpRequest, httpResponse);
 		} else

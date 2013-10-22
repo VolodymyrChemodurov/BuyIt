@@ -57,7 +57,7 @@
 						<li class="active">Message</li>
 					</ul>
 					<div class="alert alert-${alert}">
-						<h4>Warning!</h4>
+						<h4>${messageHeader}</h4>
 						${message}
 					</div>
 				</div>

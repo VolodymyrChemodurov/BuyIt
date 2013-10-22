@@ -5,7 +5,6 @@ $(document).ready(function() {
                 var ratio = 0;
                 var width = $(this).width();
                 var height = $(this).height();
-                var flag = false;
                 if (width > maxWidth) {
                         ratio = maxWidth / width;
                         $(this).css("width", maxWidth);
@@ -23,8 +22,6 @@ $(document).ready(function() {
                         height = height * ratio;
                         flag = true;
                 }
-                if(!flag)
-                	alert("Flag");
                         $(this).css('margin-top', parseInt((250 - height)/2) );
         });
 });

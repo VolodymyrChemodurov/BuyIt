@@ -36,6 +36,7 @@ public class BuyItFilter implements Filter {
 			HttpServletResponse response) throws ServletException, IOException {
 		LOGGER.error(message);
 		request.setAttribute("message", "Sorry, some internal error occured.");
+		request.setAttribute("messageHeader", "Error!");
 		request.setAttribute("alert", "error");
 		request.getRequestDispatcher("message_page").forward(request, response);
 	}
