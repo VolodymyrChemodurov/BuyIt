@@ -46,7 +46,7 @@ $(function(){
 						message +=(ts.getMonth()+1) +"/ ";
 						message += ts.getFullYear() + "   ";
 						message += ts.getHours() +  ": ";
-						message += ts.getMinutes() +( ts.getMinutes()==0 ? '0':'' );
+						message += ( ts.getMinutes()<10 ? '0':'')+ts.getMinutes();
 						
 						
 						
