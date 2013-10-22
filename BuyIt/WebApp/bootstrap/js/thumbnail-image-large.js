@@ -1,4 +1,4 @@
-$(window).load(function() {
+$(document).ready(function() {
         $('.my-image').each(function() {
                 var maxWidth = 250;
                 var maxHeight = 250;
