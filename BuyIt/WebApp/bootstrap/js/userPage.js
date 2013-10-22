@@ -1,5 +1,5 @@
 jQuery('document').ready(function() {
-	jQuery('#olko').click(function() {
+	jQuery('#userEditImage').click(function() {
 		jQuery('#form-container').show();
 		jQuery('#image-container').hide();
 	});
@@ -35,21 +35,49 @@ $("#category").change(function() {
 
 }).change();
 
-function deleteActiveSales(id){
-	
-	
-		$.ajax( {
-			type: 'POST',
-			url: 'userDeleteItemServlet',
-			data: {'itemId': id},
-			success: function(){
-				alert("in success");
-				$('#salesTabs li:eq(1) a').click();
-			}
-		});
-	
+$('.oleg').click(function () {
+	$.ajax( {
+		type: 'POST',
+		url: 'userDeleteItemServlet',
+		data: {'itemId': $(this).val()},
+		success: function(){
+			alert("in success");
+		}
+	});
+	$('#salesTabs li:eq(1) a').click();
+});
 
-}
+$("#auctionCheck").change(function(){
+	if ($("#auctionCheck").prop("checked")) {
+		$("#startPrice").attr('disabled', false);
+		$("#count").attr('disabled', true);
+		$("#count").val("1");
+	} else {
+		$("#startPrice").attr('disabled', true);
+		if($("#buyNowCheck").prop("checked")){
+			$("#count").attr('disabled', false);
+		} else{
+			$("#count").attr('disabled', true);
+			$("#count").val("");
+		}
+	}
+});
+
+$("#buyNowCheck").change(function(){
+	if ($("#buyNowCheck").prop("checked")) {
+		$("#buyNowPrice").attr('disabled', false);
+		$("#count").val("1");
+		if(!$("#auctionCheck").prop("checked")){
+			$("#count").attr('disabled', false);
+		}
+	} else {
+		$("#buyNowPrice").attr('disabled', true);
+		$("#count").attr('disabled', true);
+		if(!$("#auctionCheck").prop("checked")){
+			$("#count").val("");
+		}
+	}
+});
 
 $('#passwordBlockCancel').click(function() {
 	$('#changePasswordBlock').hide();
@@ -84,10 +112,6 @@ $('#oldPassword').change(function() {
 	}
 });
 
-$(document).ready(function(){
-	$('#salesTabs li:eq(1) a').click();
-});
-
 
 function showPasswordBlock(){
 	$('#changePasswordBlock').show();
@@ -106,22 +130,28 @@ $('#salesTabs li:eq(4) a').click(function() {
 
 $('#salesTabs li:eq(1) a').click(function() {
 	$(this).tab('show');
-	$("#maContent").empty();
-	$("#maContent").load("activeSalesContent");
-
-	
+	$('#activeSales').show();
+	$('#endedSales').hide();
+	$('#addNewSale').hide();
+	$('#editTab').hide();
+	$('#editPage').hide();
 
 });
 $('#salesTabs li:eq(2) a').click(function() {
 	$(this).tab('show');
-	$("#maContent").empty();
-	$("#maContent").load("endedSalesContent");
-	
+	$('#activeSales').hide();
+	$('#endedSales').show();
+	$('#addNewSale').hide();
+	$('#editTab').hide();
+	$('#editPage').hide();
 });
 $('#salesTabs li:eq(3) a').click(function() {
 	$(this).tab('show');
-	$("#maContent").empty();
-	$("#maContent").load("addSalesContent");
+	$('#activeSales').hide();
+	$('#endedSales').hide();
+	$('#addNewSale').show();
+	$('#editTab').hide();
+	$('#editPage').hide();
 });
 
 $('#shoppingTabs li:eq(1) a').click(function() {
@@ -146,6 +176,5 @@ $('#shoppingTabs li:eq(3) a').click(function() {
 function editProduct(id) {
 
 	$('#salesTabs li:eq(3) a').trigger("click");
-	return false;
 	
 }
