@@ -33,12 +33,14 @@ public class ProductDetailsServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Product product = productService.getItemById(id);
 		List<User> userlist = userService.getWhoMakeBidInAuction(product.getAuction().getIdAuction());
+		User seller = userService.getItemById(product.getUserId());
 		Category category = categoryService.getBySubCategoryId(product.getSubCategoryId()); 
 		
 		request.setAttribute("userList", userlist);
 		request.setAttribute("product", product);
 		request.setAttribute("category", category);
 		request.setAttribute("categoryId", category.getIdCategory());
+		request.setAttribute("seller", seller);
 		
 		long diffInMillis =(product.getAuction().getEndTime().getTime() - product.getAuction().getStartTime().getTime()) ;
 		Long diffInDays = (diffInMillis / 1000 ) / 60 / 60 / 24;
