@@ -207,6 +207,16 @@
     <url-pattern>/forgetPasswordServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>userWallServlet</servlet-name>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.UserWallServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userWallServlet</servlet-name>
+    <url-pattern>/user_wall</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
     <servlet-name>Error</servlet-name>
     <jsp-file>/jsp/error404.jsp</jsp-file>
   </servlet>
@@ -405,6 +415,14 @@
   <servlet-mapping>
     <servlet-name>loginForm</servlet-name>
     <url-pattern>/login_form</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>userWall</servlet-name>
+    <jsp-file>/jsp/user_wall.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userWall</servlet-name>
+    <url-pattern>/user_wall.jsp</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>sideMenuFilter</filter-name>

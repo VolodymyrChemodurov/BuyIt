@@ -35,6 +35,7 @@ public class ForgetPasswordServlet extends HttpServlet {
 				emailMessageBuilder.sendPasswordRecoveryForm(name, newPassword, email);
 				request.setAttribute("message", "Your password change, please check your e-mail");
 				request.setAttribute("messageHeader", "Success");
+				request.setAttribute("alert", "success");
 				request.getRequestDispatcher("message_page").forward(request, response);
 			} else {
 				LOGGER.warn("BAG");
