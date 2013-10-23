@@ -47,6 +47,7 @@
 				<li><a href="userSalesServlet">Sales</a></li>
 				<li id="active"><strong>Shopping</strong></li>
 				<li><a href="#">Comments</a></li>
+				<li><a href="userAddProductServlet">Product</a></li>
 			</ul>
 			<!-- / #vMenu -->
 			<div style="overflow: hidden;">

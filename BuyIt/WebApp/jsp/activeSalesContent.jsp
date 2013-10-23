@@ -27,8 +27,11 @@
 						<td>${product.auction.endTime}</td>
 
 						<td>
-								<button class="btn btn-success" style="padding: 0 4px 0 4px;"
+						<form action="userEditProduct" method="get">
+							<input class="text" style="display: none" name="productId" value="${product.idProduct}">				
+								<button type="submit" class="btn btn-success" style="padding: 0 4px 0 4px;"
 									onclick="editProduct(${product.idProduct})">edit</button>
+						</form>
 						</td>
 						<td>
 							<button class="btn btn-danger" style="padding: 0 4px 0 4px;"

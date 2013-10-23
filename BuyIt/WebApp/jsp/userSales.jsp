@@ -36,12 +36,16 @@
 <link rel="apple-touch-icon-precomposed"
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
-<link rel="stylesheet" type="text/css"
-	href="bootstrap/css/bootstrap-wysihtml5.css"></link>
-<link rel="stylesheet" type="text/css"
-	href="bootstrap/css/bootstrap-datetimepicker.css"></link>
+
 </head>
 <body>
+	<script src="themes/js/jquery.js" type="text/javascript"></script>
+	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="themes/js/google-code-prettify/prettify.js"></script>
+	<script src="themes/js/bootshop.js"></script>
+	<script src="themes/js/jquery.lightbox-0.5.js"></script>
+	<script src="bootstrap/js/search.js"></script>
+	<script src="bootstrap/js/userPage.js"></script>
 	<jsp:include page="navbar"></jsp:include>
 	<!-- Header End====================================================================== -->
 
@@ -52,6 +56,7 @@
 				<li id="active"><strong>Sales</strong></li>
 				<li><a href="userShoppingServlet">Shopping</a></li>
 				<li><a href="#">Comments</a></li>
+				<li><a href="userAddProductServlet">Product</a></li>
 			</ul>
 			<!-- / #vMenu -->
 			<div style="overflow: hidden;">
@@ -60,9 +65,6 @@
 						<li class="nav-header">My sales</li>
 						<li class="active"><a href="#">Active</a></li>
 						<li><a href="#">Ended</a></li>
-						<li><a href="#">Add new sale</a></li>
-						<li id="editTab" style="display: none;"><a href="#">Edit
-								auction</a>
 					</ul>
 				</div>
 				<!-- /left-menu -->
@@ -82,6 +84,7 @@
 
 	<jsp:include page="footer"></jsp:include>
 	<!-- Placed at the end of the document so the pages load faster ============================================= -->
+
 	<script src="themes/js/jquery.js" type="text/javascript"></script>
 	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="themes/js/google-code-prettify/prettify.js"></script>

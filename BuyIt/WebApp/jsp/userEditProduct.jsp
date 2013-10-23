@@ -22,9 +22,6 @@
 <link href="themes/css/font-awesome.css" rel="stylesheet"
 	type="text/css">
 
-<link rel="stylesheet" type="text/css"
-	href="/css/bootstrap-wysihtml5.css"></link>
-
 <!-- Google-code-prettify -->
 <link href="themes/js/google-code-prettify/prettify.css"
 	rel="stylesheet">
@@ -52,123 +49,26 @@
 		<div id="maWrapper" class="corAll5">
 			<ul id="vMenu">
 				<li><a href="userProfile">Profile</a></li>
-				<li id="active"><strong>Sales</strong></li>
+				<li><a href="userSalesServlet">Sales</a></li>
 				<li><a href="userShoppingServlet">Shopping</a></li>
 				<li><a href="#">Comments</a></li>
+				<li id="active"><strong>Product</strong></li>
+				
 			</ul>
 			<!-- / #vMenu -->
 			<div style="overflow: hidden;">
 				<div width="200" class="left-menu">
-					<ul class="nav nav-list" id="salesTabs">
-						<li class="nav-header">My sales</li>
-						<li class="active"><a href="#">Active</a></li>
-						<li><a href="#">Ended</a></li>
-						<li><a href="#">Add new sale</a></li>
-						<li id="editTab" style="display: none;"><a href="#">Edit
-								auction</a>
+					<ul class="nav nav-list" id="productTabs">
+						<li class="nav-header">Product</li>
+						<li><a href="userAddProductServlet">Create New</a></li>
+						<li class="active"><a href="#">Edit</a></li>
 					</ul>
 				</div>
 				<!-- /left-menu -->
 
 				<div id="maContent" class="corAll5">
-					<div id="activeSales">
-						<c:if test="${empty userActiveSales}">
-							<h1 style="text-align: center;">Sorry, but you have not any
-								active sales!</h1>
-							<h3 style="text-align: center;">You can add new sale, to
-								preview it here</h3>
-						</c:if>
-						<c:if test="${not empty userActiveSales}">
-							<h1>Active sales</h1>
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>Product Name</th>
-										<th>Start Time</th>
-										<th>End Time</th>
-
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="product" items="${userActiveSales}">
-										<tr>
-											<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
-											<td>${product.auction.startTime}</td>
-											<td>${product.auction.endTime}</td>
-
-											<td>
-												<form>
-													<input type="hidden" value="${product.idProduct}" name="id" />
-													<button class="btn btn-success"
-														style="padding: 0 4px 0 4px;"
-														onclick="editProduct(${product.idProduct})">edit</button>
-												</form>
-											</td>
-											<td><input type="hidden" value="${product.idProduct}"
-												name="id" />
-												<button class="oleg btn btn-danger"
-													style="padding: 0 4px 0 4px;" value="${product.idProduct}">delete</button>
-
-											</td>
-										</tr>
-									</c:forEach>
-
-
-								</tbody>
-							</table>
-
-						</c:if>
-					</div>
-					<div id="endedSales" style="display: none;">
-						<c:if test="${empty userEndedSales}">
-							<h1 style="text-align: center;">Sorry, but you have not any
-								ended sales!</h1>
-							<h3 style="text-align: center;">You can add new sale, and
-								when it will ended you can see it here</h3>
-						</c:if>
-						<c:if test="${not empty userEndedSales}">
-							<h1>Ended sales</h1>
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>Product Name</th>
-										<th>Start Time</th>
-										<th>End Time</th>
-
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="product" items="${userEndedSales}">
-										<tr>
-											<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
-											<td>${product.auction.startTime}</td>
-											<td>${product.auction.endTime}</td>
-
-											<td>
-												<form>
-													<input type="hidden" value="${product.idProduct}" name="id" />
-													<button class="btn btn-success"
-														style="padding: 0 4px 0 4px;"
-														onclick="editProduct(${product.idProduct})">restore</button>
-												</form>
-											</td>
-											<td>
-												<form action="userCardsS" method="post">
-													<input type="hidden" value="${product.idProduct}" name="id" />
-													<button class="btn btn-danger"
-														style="padding: 0 4px 0 4px;" type="submit">delete</button>
-												</form>
-											</td>
-										</tr>
-									</c:forEach>
-
-
-								</tbody>
-							</table>
-
-						</c:if>
-					</div>
-					<div id="addNewSale" style="display: none;">
+					<form action="userAddProductServlet" method="post">
+					<div id="addNewSale">
 						<div class="mycontent">
 							<h3>Create new auction</h3>
 							<div class="myrow">
@@ -194,16 +94,16 @@
 								</select>
 								</span>
 							</div>
-							<br>
+							
 
-							<div class="myrow">
-								<span class="span-1" style="width: 160px">End time</span>
+							<div id="endedTime" class="myrow" style="display: none; padding-top:20px;">
+								<span class="span-1">End time</span>
 								<div style="padding-left: 40px; padding-bottom: 20px;"
 									class="input-append date form_datetime"
-									data-date="2013-02-21T15:25:00Z">
-									<input size="16" type="text" value="" readonly style="border-radius:0; padding: 2px;"> <span
-										class="add-on" style="padding: 2px;"><i class="icon-remove"></i></span> <span
-										class="add-on" style="border-radius:0; padding: 2px;"><i class="icon-calendar"></i></span>
+									data-date="2013-10-23T15:25:00Z">
+									<input name="endTime" size="16" type="text" value="" readonly style="height:20px; width:163px; border-radius:0; padding: 2px;"> <span
+										class="add-on" style="height:20px; padding: 2px;"><i class="icon-remove"></i></span> <span
+										class="add-on" style="height:20px; border-radius:0; padding: 2px;"><i class="icon-calendar"></i></span>
 								</div>
 							</div>
 
@@ -215,33 +115,33 @@
 							<div id="form-container" style="padding-top: 40px">
 								<div class="myrow-sales">
 									<span style="margin-left: 0px; margin-right: 5px; width: 20px;"
-										class="span-3"> <input id="auctionCheck"
+										class="span-3"> <input id="auctionCheck" name="auctionCheck"
 										type="checkbox">
 									</span> <span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 110px;"><b>Auction</b></span>
 									<span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 100px;">Start
 										price</span> <span class="span-2"><input id="startPrice"
-										disabled="disabled" style="width: 100px;" name="startPrice"
+										readonly="readonly" style="width: 100px;" name="startPrice"
 										value="" /></span>
 
 								</div>
 								<div class="myrow-sales">
 									<span style="margin-left: 0px; margin-right: 5px; width: 20px;"
-										class="span-3"> <input id="buyNowCheck" type="checkbox">
+										class="span-3"> <input id="buyNowCheck" name="buyNowCheck" type="checkbox">
 									</span> <span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 110px;"><b>Buy
 											it now</b></span> <span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 100px;">Price</span>
 									<span class="span-2"><input id="buyNowPrice"
-										disabled="disabled" style="width: 100px;" name="buyNowPrice"
+										readonly="readonly" style="width: 100px;" name="buyNowPrice"
 										value="" /></span>
 								</div>
 								<div class="myrow-sales">
 									<span class="span-2"
 										style="padding-left: 140px; margin-left: 0px; margin-right: 5px; width: 100px;">Count</span>
 									<span class="span-2"><input id="count"
-										disabled="disabled" style="width: 100px;" name="count"
+										readonly="readonly" style="width: 100px;" name="count"
 										value="" /></span>
 								</div>
 
@@ -264,7 +164,7 @@
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
-												style="width: 850px; height: 200px"></textarea>
+												style="width: 850px; height: 200px" name="delivery"></textarea>
 
 										</div>
 
@@ -283,7 +183,7 @@
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
-												style="width: 850px; height: 200px"></textarea>
+												style="width: 850px; height: 200px" name="features"></textarea>
 
 										</div>
 									</div>
@@ -302,30 +202,21 @@
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
-												style="width: 850px; height: 200px"></textarea>
+												style="width: 850px; height: 200px" name="description"></textarea>
 
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
-
-
-
 					</div>
-
-					<div id="editPage" style="display: none;">
-						<c:if test="${empty userActiveSales}">
-							<h1 style="text-align: center;">Sorry, but you can not add
-								new sale, because you are BLOKED</h1>
-							<h3 style="text-align: center;">Contact with admin.</h3>
-
-						</c:if>
+					
+					
+					<div id="submitButtonWrapper">
+						<input style="display: none;" name="userId" value="${user.idUser}">
+						<button disabled="disabled" id="addProductSubmitButton" class="btn btn-success" type="submit">Create Auction</button>
 					</div>
-
-
-
+				</form>
 				</div>
 				<!-- /maContent -->
 			</div>
@@ -356,7 +247,7 @@
 
 	<script type="text/javascript">
     $(".form_datetime").datetimepicker({
-        format: "dd MM yyyy - hh:ii",
+        format: "yyyy-mm-dd hh:mm:ss",
         autoclose: true,
         todayBtn: true,
         startDate: "2013-02-14 10:00",

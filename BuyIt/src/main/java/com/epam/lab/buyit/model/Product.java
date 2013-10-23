@@ -16,6 +16,7 @@ public class Product implements Serializable {
 
 	public Product() {
 		description = new Description();
+		auction = new Auction();
 	}
 
 	public int getIdProduct() {

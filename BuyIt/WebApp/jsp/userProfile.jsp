@@ -49,6 +49,7 @@
 				<li><a href="userSalesServlet">Sales</a></li>
 				<li><a href="userShoppingServlet">Shopping</a></li>
 				<li><a href="#">Comments</a></li>
+				<li><a href="userAddProductServlet">Product</a></li>
 			</ul>
 			<!-- / #vMenu -->
 			<div style="overflow: hidden;">
@@ -172,9 +173,9 @@
 								</div>
 								<div class=myrow>
 									<span class="span-2"><input name="house"
-										style="width: 84px;" value="${user.contact.address.house}" />
+										style="width: 85px;" value="${user.contact.address.house}" />
 									</span> <span class="span-2"><input name="flat"
-										style="width: 85px;" value="${user.contact.address.flat}" />
+										style="width: 86px;" value="${user.contact.address.flat}" />
 									</span>
 								</div>
 								<div class=myrow>
@@ -189,10 +190,9 @@
 								</div>
 								<div class=myrow>
 									<span class="span-2"><input name="email"
-										value="${user.contact.email}" /> </span> <input type="button"
+										value="${user.contact.email}" /> </span> <button
 										id="btn-back" style="margin-left: 40px; width: 120px;"
-										class="btn btn-mini btn-danger" value="Cancel">
-									</button>
+										class="btn btn-mini btn-danger" >Cancel	</button>
 								</div>
 							</form>
 						</div>

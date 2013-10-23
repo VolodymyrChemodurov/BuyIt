@@ -10,10 +10,8 @@ jQuery('document').ready(function() {
 });
 
 $("#category").change(function() {
-	var str = "";
 	$("#category option:selected").each(function() {
 		if ($(this).text() != "") {
-			str += $(this).text() + " ";
 			$("#subCategory").prop('disabled', false);
 			$("#subCategory").empty();
 			$.ajax( {
@@ -23,7 +21,7 @@ $("#category").change(function() {
 				success: function(data) {
 					$.each(data, function(index, value) {
 						a=value;
-					  $("#subCategory").append('<option value="">'+value.name+'</option>');
+					  $("#subCategory").append('<option value="'+value.categoryId+'">'+value.name+'</option>');
 					});
 				}
 			});
@@ -49,32 +47,38 @@ function deleteEndedSales(id){
 
 $("#auctionCheck").change(function(){
 	if ($("#auctionCheck").prop("checked")) {
-		$("#startPrice").attr('disabled', false);
-		$("#count").attr('disabled', true);
+		$("#startPrice").attr('readonly', false);
+		$("#count").attr('readonly', true);
 		$("#count").val("1");
+		$("#endedTime").show();
+		$("#addProductSubmitButton").attr('disabled', false);
 	} else {
-		$("#startPrice").attr('disabled', true);
+		$("#endedTime").hide();
+		$("#startPrice").attr('readonly', true);
 		if($("#buyNowCheck").prop("checked")){
-			$("#count").attr('disabled', false);
+			$("#count").attr('readonly', false);
 		} else{
-			$("#count").attr('disabled', true);
+			$("#count").attr('readonly', true);
 			$("#count").val("");
+			$("#addProductSubmitButton").attr('disabled', true);
 		}
 	}
 });
 
 $("#buyNowCheck").change(function(){
 	if ($("#buyNowCheck").prop("checked")) {
-		$("#buyNowPrice").attr('disabled', false);
+		$("#buyNowPrice").attr('readonly', false);
 		$("#count").val("1");
+		$("#addProductSubmitButton").attr('disabled', false);
 		if(!$("#auctionCheck").prop("checked")){
-			$("#count").attr('disabled', false);
+			$("#count").attr('readonly', false);
 		}
 	} else {
-		$("#buyNowPrice").attr('disabled', true);
-		$("#count").attr('disabled', true);
+		$("#buyNowPrice").attr('readonly', true);
+		$("#count").attr('readonly', true);
 		if(!$("#auctionCheck").prop("checked")){
 			$("#count").val("");
+			$("#addProductSubmitButton").attr('disabled', true);
 		}
 	}
 });
@@ -121,18 +125,6 @@ $(document).ready(function(){
 	$('#salesTabs li:eq(1) a').click();
 });
 
-
-$('#salesTabs li:eq(4) a').click(function() {
-	$(this).tab('show');
-	$('#activeSales').hide();
-	$('#endedSales').hide();
-	$('#addNewSale').hide();
-	$('#editTab').show();
-	$('#editPage').show();
-
-});
-
-
 $('#salesTabs li:eq(1) a').click(function() {
 	$(this).tab('show');
 	$("#maContent").empty();
@@ -146,11 +138,6 @@ $('#salesTabs li:eq(2) a').click(function() {
 	$("#maContent").empty();
 	$("#maContent").load("endedSalesContent");
 	
-});
-$('#salesTabs li:eq(3) a').click(function() {
-	$(this).tab('show');
-	$("#maContent").empty();
-	$("#maContent").load("addSalesContent");
 });
 
 $('#shoppingTabs li:eq(1) a').click(function() {
