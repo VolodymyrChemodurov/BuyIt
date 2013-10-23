@@ -270,15 +270,15 @@
 									</h4>
 
 									<hr class="soft clr" />
-									<h4>
+									<h5>
 										Seller:
-										<c:out value="${seller.login}"></c:out>
+										<a href="user_wall?id=${seller.idUser}" class="btn btn-link"><c:out value="${seller.login}"></c:out></a>
 										<c:if test="${seller.ban != 'unbanned' }">
 										<font style="color: red">
 											(<c:out value="${seller.ban}"></c:out>)
 										</font>
 									</c:if>
-									</h4>
+									</h5>
 
 									
 

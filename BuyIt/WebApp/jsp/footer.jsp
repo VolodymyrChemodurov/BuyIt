@@ -20,7 +20,7 @@
 					src="themes/images/youtube.png" title="youtube" alt="youtube"></a>
 			</div>
 		</div>
-		<p class="pull-right">© BuyIt</p>
+		<p class="pull-right">© 2013 BuyIt</p>
 	</div>
 	<!-- Container End -->
 </div>

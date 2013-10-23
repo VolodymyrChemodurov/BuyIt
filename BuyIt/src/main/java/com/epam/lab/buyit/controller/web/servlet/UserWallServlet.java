@@ -9,12 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.epam.lab.buyit.model.Contact;
+import com.epam.lab.buyit.controller.service.user.UserService;
+import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
 import com.epam.lab.buyit.model.Message;
 import com.epam.lab.buyit.model.User;
 
 public class UserWallServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private UserService userService;
+	
+	public void init() {
+		userService = new UserServiceImpl();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<User, Message> comments = new LinkedHashMap<User, Message>();
@@ -26,10 +32,8 @@ public class UserWallServlet extends HttpServlet {
 			user.setLogin("user" + i).setIdUser(i);
 			comments.put(user, message);
 		}
-		User user = new User();
-		user.setFirstName("Volodymyr").setLastName("Chemodurov");
-		user.setContact(new Contact().setEmail("fdsjkas@gmail.com"));
-		request.setAttribute("user", user.setAvatar("bootstrap/img/avatars/user-icon.png"));
+		int userId = Integer.parseInt(request.getParameter("id"));
+		request.setAttribute("userInfo", userService.getItemById(userId));
 		request.setAttribute("messages", comments);
 		request.getRequestDispatcher("user_wall.jsp").forward(request, response);
 	}

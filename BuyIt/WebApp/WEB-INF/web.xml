@@ -446,6 +446,7 @@
     <url-pattern>/userSalesServlet</url-pattern>
     <url-pattern>/userShoppingServlet</url-pattern>
     <url-pattern>/bid_serve</url-pattern>
+    <url-pattern>/user_wall</url-pattern>
   </filter-mapping>
   <filter>
     <filter-name>bidFilter</filter-name>
@@ -519,6 +520,7 @@
     <url-pattern>/userSalesServlet</url-pattern>
     <url-pattern>/userShoppingServlet</url-pattern>
     <url-pattern>/bid_serve</url-pattern>
+    <url-pattern>/user_wall</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>

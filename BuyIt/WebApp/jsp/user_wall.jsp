@@ -79,17 +79,17 @@
 					<div class="row">
 						<div class="span2">
 							<div class="thumbnail">
-								<img src="${user.avatar}">
+								<img src="${userInfo.avatar}">
 							</div>
 						</div>
 						<div class="span7">
 							<legend>User information</legend>
-							<span class="label label-info">First name: ${user.firstName}</span> 
-							<span class="label label-info">Last name: ${user.lastName}</span>
-							<span class="label label-info">e-mail: ${user.contact.email}</span>
+							<span class="label label-info">First name: ${userInfo.firstName}</span> 
+							<span class="label label-info">Last name: ${userInfo.lastName}</span>
+							<span class="label label-info">e-mail: ${userInfo.contact.email}</span>
 							
 							<row>
-								<form class="form-inline">
+								<form class="form-inline" action="#" method="POST">
 									<legend>You can leave your message here</legend>
 									<input type="text" style='width: 85%' class="input-small"
 										placeholder="Message">
