@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+        pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv="Content-Type" content="text/html; charset="utf-8">
-<html lang="en">
+<html>
 <head>
 <meta charset="utf-8">
 <title>BuyIt</title>
@@ -70,41 +70,46 @@
 					<form action="userAddProductServlet" method="post">
 					<div id="addNewSale">
 						<div class="mycontent">
-							<h3>Create new auction</h3>
+							<h3>Edit Auction</h3>
 							<div class="myrow">
-								<span class="span-1">Product name:</span> <span class="span-2"><input
-									name="productName" value="" /></span>
+								<span class="span-1">Product name:</span> <span class="span-2"><input disabled="disabled"
+									name="productName" value="${currentProduct.name}" /></span>
 							</div>
 							<div class="myrow">
 								<span class="span-1">Category:</span> <span class="span-2">
-									<select id="category" name="category">
-										<option value=""></option>
+									<select id="category" name="category" disabled="disabled">
 										<c:forEach var="category" items="${categories}">
-											<option value="${category.idCategory}">${category.name}</option>
+											<c:forEach var="sub" items="${category.listSubCategories}">
+											<c:out value="${sub}"></c:out>
+												<c:if test="${sub.idSubCategory eq currentProduct.subCategoryId}">
+													<option value="${category.idCategory}">${category.name}</option>
+												</c:if>
+											</c:forEach>
+											
 										</c:forEach>
 								</select>
 								</span>
 							</div>
 							<div class="myrow">
 								<span class="span-1">Sub Category:</span> <span class="span-2">
-									<c:if test=""></c:if> <select disabled="disabled"
-									id="subCategory" name="subCategory">
-										<option value=""></option>
-
+									<select disabled="disabled" id="subCategory1" name="subCategory">
+											<c:forEach var="category" items="${categories}">
+											<c:out value="${category}"></c:out>
+											<c:forEach var="sub" items="${category.listSubCategories}">
+												<c:out value="${sub}"></c:out>
+												<c:if test="${sub.idSubCategory eq currentProduct.subCategoryId}">
+													<option value="${sub.idSubCategory}">${sub.name}</option>
+												</c:if>
+											</c:forEach>
+									</c:forEach>
 								</select>
 								</span>
 							</div>
 							
 
-							<div id="endedTime" class="myrow" style="display: none; padding-top:20px;">
+							<div id="endedTime" class="myrow" style="padding-top:20px;">
 								<span class="span-1">End time</span>
-								<div style="padding-left: 40px; padding-bottom: 20px;"
-									class="input-append date form_datetime"
-									data-date="2013-10-23T15:25:00Z">
-									<input name="endTime" size="16" type="text" value="" readonly style="height:20px; width:163px; border-radius:0; padding: 2px;"> <span
-										class="add-on" style="height:20px; padding: 2px;"><i class="icon-remove"></i></span> <span
-										class="add-on" style="height:20px; border-radius:0; padding: 2px;"><i class="icon-calendar"></i></span>
-								</div>
+									<input name="endTime" size="16" type="text" value="${currentProduct.auction.endTime}" readonly style="height:20px; width:206px; border-radius:0; padding: 2px;">
 							</div>
 
 
@@ -115,34 +120,56 @@
 							<div id="form-container" style="padding-top: 40px">
 								<div class="myrow-sales">
 									<span style="margin-left: 0px; margin-right: 5px; width: 20px;"
-										class="span-3"> <input id="auctionCheck" name="auctionCheck"
-										type="checkbox">
+										class="span-3">
+										<c:if test="${currentProduct.auction.startPrice ne 0.0}">
+										 	<input disabled="disabled" checked="checked" id="auctionCheck" name="auctionCheck" type="checkbox">
+										</c:if>
+										<c:if test="${currentProduct.auction.startPrice eq 0.0}">
+										 	<input disabled="disabled" id="auctionCheck" name="auctionCheck" type="checkbox">
+										</c:if>
 									</span> <span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 110px;"><b>Auction</b></span>
 									<span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 100px;">Start
-										price</span> <span class="span-2"><input id="startPrice"
-										readonly="readonly" style="width: 100px;" name="startPrice"
-										value="" /></span>
+										price</span> <span class="span-2">
+										<c:if test="${currentProduct.auction.startPrice ne 0.0}">
+										 	<input disabled="disabled" id="startPrice" readonly="readonly" style="width: 100px;" name="startPrice" value="${currentProduct.auction.startPrice}" />
+										</c:if>
+										<c:if test="${currentProduct.auction.startPrice eq 0.0}">
+										 	<input disabled="disabled" id="startPrice" readonly="readonly" style="width: 100px;" name="startPrice" value="" />
+										</c:if>
+										
+										</span>
 
 								</div>
 								<div class="myrow-sales">
 									<span style="margin-left: 0px; margin-right: 5px; width: 20px;"
-										class="span-3"> <input id="buyNowCheck" name="buyNowCheck" type="checkbox">
+										class="span-3">
+										<c:if test="${currentProduct.auction.buyItNow ne 0.0}">
+										 	<input disabled="disabled" checked="checked" id="buyNowCheck" name="buyNowCheck" type="checkbox">
+										</c:if>
+										<c:if test="${currentProduct.auction.buyItNow eq 0.0}">
+										 	<input disabled="disabled" id="buyNowCheck" name="buyNowCheck" type="checkbox">
+										</c:if>
 									</span> <span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 110px;"><b>Buy
 											it now</b></span> <span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 100px;">Price</span>
-									<span class="span-2"><input id="buyNowPrice"
-										readonly="readonly" style="width: 100px;" name="buyNowPrice"
-										value="" /></span>
+									<span class="span-2">
+									<c:if test="${currentProduct.auction.buyItNow ne 0.0}">
+										 	<input disabled="disabled" id="buyNowPrice" readonly="readonly" style="width: 100px;" name="buyNowPrice" value="${currentProduct.auction.buyItNow}" />
+										</c:if>
+										<c:if test="${currentProduct.auction.buyItNow eq 0.0}">
+										 	<input disabled="disabled" id="buyNowPrice" readonly="readonly" style="width: 100px;" name="buyNowPrice" value="" />
+										</c:if>
+									</span>
 								</div>
 								<div class="myrow-sales">
 									<span class="span-2"
 										style="padding-left: 140px; margin-left: 0px; margin-right: 5px; width: 100px;">Count</span>
-									<span class="span-2"><input id="count"
+									<span class="span-2"><input id="count" disabled="disabled"
 										readonly="readonly" style="width: 100px;" name="count"
-										value="" /></span>
+										value="${currentProduct.auction.count}" /></span>
 								</div>
 
 
@@ -164,7 +191,7 @@
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
-												style="width: 850px; height: 200px" name="delivery"></textarea>
+												style="width: 850px; height: 200px" name="delivery" >${currentProduct.delivery}</textarea>
 
 										</div>
 
@@ -183,7 +210,7 @@
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
-												style="width: 850px; height: 200px" name="features"></textarea>
+												style="width: 850px; height: 200px" name="features" >${currentProduct.description.features}</textarea>
 
 										</div>
 									</div>
@@ -202,7 +229,7 @@
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
-												style="width: 850px; height: 200px" name="description"></textarea>
+												style="width: 850px; height: 200px" name="description">${currentProduct.description.descText}</textarea>
 
 										</div>
 									</div>

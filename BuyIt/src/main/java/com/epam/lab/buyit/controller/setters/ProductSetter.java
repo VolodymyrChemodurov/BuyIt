@@ -51,7 +51,7 @@ public enum ProductSetter {
 			if (value != null && !value.isEmpty()){
 				product.getAuction().setStartPrice(Double.parseDouble(value));
 			} else {
-				product.getAuction().setBuyItNow(0);
+				product.getAuction().setStartPrice(0);
 			}
 		}
 	},
