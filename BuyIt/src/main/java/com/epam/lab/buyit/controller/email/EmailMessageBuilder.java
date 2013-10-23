@@ -33,7 +33,8 @@ public class EmailMessageBuilder {
 	private String placeABidHtmlPath = getPath("/html/placeABidForm.html");
 	private String yourBidKillHtmlPath = getPath("/html/yourBidKilledForm.html");
 	private String winLotHtmlPath = getPath("/html/winLotForm.html");
-	private String productSoldHtml = getPath("/html/productSold.html");
+	private String productSoldOnAuctionHtml = getPath("/html/productSoldOnAuction.html");
+	private String productSoldOnBuyItNowHtml = getPath("/html/productSoldOnBuyItNow.html");
 	private String noBodyBuyProductHtml = getPath("/html/noBodyByYouProductForm.html");
 	private String buyItNowHtml = getPath("/html/buyItNowForm.html");
 
@@ -57,7 +58,7 @@ public class EmailMessageBuilder {
 		lineList.add(new CountLine());
 	}
 
-	public void sendSuccessRegistrationForm(User user, String email) {
+	public void sendSuccessRegistrationForm(User user) {
 
 		String text = "";
 		BufferedReader br = null;
@@ -89,12 +90,11 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("You have successfully registered", text, email);
+		EmailSender.sendHtml("You have successfully registered", text, user.getContact().getEmail());
 
 	}
 
-	public void sendPasswordRecoveryForm(User user, String password,
-			String email) {
+	public void sendPasswordRecoveryForm(User user, String password) {
 		String text = "";
 		TextLineConteiner conteiner = new TextLineConteiner();
 		conteiner.setBuyer(user).setPassword(password);
@@ -125,11 +125,11 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Password recovery...", text, email);
+		EmailSender.sendHtml("Password recovery...", text, user.getContact().getEmail());
 
 	}
 
-	public void sendPlaceABidForm(User buyer, Product product, String email) {
+	public void sendPlaceABidForm(User buyer, Product product) {
 		String text = "";
 		TextLineConteiner conteiner = new TextLineConteiner();
 		conteiner.setBuyer(buyer).setProduct(product);
@@ -159,11 +159,11 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Place a bid...", text, email);
+		EmailSender.sendHtml("Place a bid...", text, buyer.getContact().getEmail());
 
 	}
 
-	public void sendYourBidKilldForm(User buyer, Product product, String email) {
+	public void sendYourBidKilldForm(User buyer, Product product) {
 		String text = "";
 		TextLineConteiner conteiner = new TextLineConteiner();
 		conteiner.setBuyer(buyer).setProduct(product);
@@ -193,11 +193,10 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Your lot was killd", text, email);
+		EmailSender.sendHtml("Your lot was killd", text, buyer.getContact().getEmail());
 	}
 
-	public void sendWinLotForm(User buyer, Product product, User seller,
-			String email) {
+	public void sendWinLotForm(User buyer, Product product, User seller) {
 		String text = "";
 		TextLineConteiner conteiner = new TextLineConteiner();
 		conteiner.setBuyer(buyer).setProduct(product).setSeller(seller);
@@ -227,10 +226,10 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("You win a lot...", text, email);
+		EmailSender.sendHtml("You win a lot...", text, buyer.getContact().getEmail());
 	}
 
-	public void sendProductSoldForm(User seller, Product product,
+	public void sendProductSoldOnAuctionForm(User seller, Product product,
 			User buyer, String email) {
 		String text = "";
 		TextLineConteiner conteiner = new TextLineConteiner();
@@ -238,7 +237,7 @@ public class EmailMessageBuilder {
 		BufferedReader br = null;
 		try {
 			String currentLine = null;
-			br = new BufferedReader(new FileReader(productSoldHtml));
+			br = new BufferedReader(new FileReader(productSoldOnAuctionHtml));
 			while ((currentLine = br.readLine()) != null) {
 				text += currentLine;
 				text += "\n";
@@ -261,11 +260,43 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Your product sold...", text, email);
+		EmailSender.sendHtml("Your product sold...", text, seller.getContact().getEmail());
+	}
+	public void sendProductSoldOnBuyItNowForm(User seller, Product product,
+			User buyer,int count) {
+		String text = "";
+		TextLineConteiner conteiner = new TextLineConteiner();
+		conteiner.setBuyer(buyer).setSeller(seller).setProduct(product).setCount(count);
+		BufferedReader br = null;
+		try {
+			String currentLine = null;
+			br = new BufferedReader(new FileReader(productSoldOnBuyItNowHtml));
+			while ((currentLine = br.readLine()) != null) {
+				text += currentLine;
+				text += "\n";
+				for (TextLineItem textLine : lineList) {
+					if (currentLine.contains(textLine.getId())) {
+						textLine.setTextLineContainer(conteiner);
+						text += textLine.execute() + "\n";
+						break;
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			LOGGER.error(e);
+		} catch (IOException e) {
+			LOGGER.error(e);
+		} finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+				LOGGER.warn(e);
+			}
+		}
+		EmailSender.sendHtml("Your product sold...", text, seller.getContact().getEmail());
 	}
 
-	public void sendNoBodyBuyYourProductForm(User seller, Product product,
-			String email) {
+	public void sendNoBodyBuyYourProductForm(User seller, Product product) {
 		String text = "";
 		TextLineConteiner conteiner = new TextLineConteiner();
 		conteiner.setSeller(seller).setProduct(product);
@@ -295,11 +326,10 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Sorry nobody buy your product", text, email);
+		EmailSender.sendHtml("Sorry nobody buy your product", text, seller.getContact().getEmail());
 	}
 
-	public void sendBuyItNowForm(User seller, Product product,int count,
-			String email) {
+	public void sendBuyItNowForm(User seller, Product product,int count) {
 		String text = "";
 		TextLineConteiner conteiner = new TextLineConteiner();
 		conteiner.setSeller(seller).setProduct(product).setCount(count);
@@ -329,7 +359,7 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("You buy product", text, email);
+		EmailSender.sendHtml("You buy product", text, seller.getContact().getEmail());
 	}
 
 	private static String getPath(String relativePath) {
