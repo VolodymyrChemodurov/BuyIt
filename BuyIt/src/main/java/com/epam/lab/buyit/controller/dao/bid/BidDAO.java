@@ -14,26 +14,27 @@ import com.epam.lab.buyit.controller.dao.utils.connection.ConnectionManager;
 import com.epam.lab.buyit.controller.dao.utils.transformers.BidTransformer;
 import com.epam.lab.buyit.model.Bid;
 
-public class BidDAO implements BidDAOInterface{
+public class BidDAO implements BidDAOInterface {
 
 	private static final Logger LOGGER = Logger.getLogger(BidDAO.class);
 	private final static String GET_BY_ID = "SELECT * FROM bids WHERE id_bid = ?";
-	private final static String GET_BY_AUCTION_ID ="SELECT * FROM bids WHERE auction_id = ?";
-	private final static String GET_BY_USER_ID ="SELECT * FROM bids WHERE user_id = ?";
-	private final static String GET_ALL_BIDS ="SELECT * FROM bids";
+	private final static String GET_BY_AUCTION_ID = "SELECT * FROM bids WHERE auction_id = ?";
+	private final static String GET_BY_USER_ID = "SELECT * FROM bids WHERE user_id = ?";
+	private final static String GET_ALL_BIDS = "SELECT * FROM bids";
 	private final static String GET_USER_BID = "SELECT * FROM bids WHERE auction_id = ? AND user_id = ?";
+	private final static String GET_WIN_USER_ID = "SELECT user_id FROM bids WHERE auction_id=? AND amount=(SELECT MAX(amount) FROM bids WHERE auction_id=?)";
 	private BidTransformer transformer;
 
 	public BidDAO() {
 		transformer = new BidTransformer();
 	}
-	
+
 	@Override
 	public int createElement(Bid elem) {
 		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
 		ResultSet generatedKeys = null;
-		try {	
+		try {
 			statement = transformer.fromObjectToCreatePS(elem, connection);
 			if (statement != null) {
 				statement.executeUpdate();
@@ -87,13 +88,13 @@ public class BidDAO implements BidDAOInterface{
 		} finally {
 			DAOUtils.close(statement, connection);
 		}
-		
+
 	}
 
 	@Override
 	public void deleteElementById(int id) {
 		throw new UnsupportedOperationException();
-		
+
 	}
 
 	@Override
@@ -188,6 +189,29 @@ public class BidDAO implements BidDAOInterface{
 			DAOUtils.close(result, statement, connection);
 		}
 		return currentBid;
+	}
+
+	@Override
+	public int getWinUserIdByAuctionId(int id) {
+		int winUserId = 0;
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_WIN_USER_ID);
+			statement.setInt(1, id);
+			statement.setInt(2, id);
+			result = statement.executeQuery();
+			if (result.next()) {
+				winUserId = result.getInt("user_id");
+				return winUserId;
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return winUserId;
 	}
 
 }
