@@ -68,6 +68,10 @@ public class ProductServiceImpl implements ProductService {
 		Description description = item.getDescription();
 		description.setProductId(generated_product_id);
 		descriptionServiceImpl.createItem(description);
+		
+		Auction auction = item.getAuction();
+		auction.setProductId(generated_product_id);
+		auctionService.createItem(auction);
 
 		return item;
 	}
@@ -81,9 +85,13 @@ public class ProductServiceImpl implements ProductService {
 	public Product updateByProductId(Product item) {
 		productDAO.updateElement(item);
 
-		Description description = item.getDescription();
-		description.setIdDescription(item.getIdProduct());
-		descriptionServiceImpl.updateItem(description);
+//		Description description = item.getDescription();
+//		description.setIdDescription(item.getIdProduct());
+//		descriptionServiceImpl.updateItem(description);
+//		
+//		Auction auction = item.getAuction();
+//		auction.setIdDescription(item.getIdProduct());
+//		descriptionServiceImpl.updateItem(auction);
 
 		return item;
 	}

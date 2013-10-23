@@ -28,8 +28,9 @@ public class AuctionServiceImp implements AuctionService {
 
 	@Override
 	public Auction createItem(Auction item) {
-		// TODO Auto-generated method stub
-		return null;
+		int id = auctionDAO.createElement(item);
+		item.setIdAuction(id);
+		return item;
 	}
 
 	@Override

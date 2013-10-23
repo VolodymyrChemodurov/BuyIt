@@ -5,6 +5,7 @@ import java.util.List;
 import com.epam.lab.buyit.controller.dao.description.DescriptionDAO;
 import com.epam.lab.buyit.controller.dao.image.ImageDAO;
 import com.epam.lab.buyit.model.Description;
+import com.epam.lab.buyit.model.Image;
 
 public class DescriptionServiceImpl implements DescriptionService {
 	private DescriptionDAO descriptionDAO;
@@ -29,12 +30,23 @@ public class DescriptionServiceImpl implements DescriptionService {
 	public Description createItem(Description item) {
 		int id = descriptionDAO.createElement(item);
 		item.setIdDescription(id);
+		
+		List<Image> imageList = item.getItemPhotos();
+		for(Image image: imageList){
+			image.setDescriptionId(id);
+			imageDAO.createElement(image);
+		}
 		return item;
 	}
 
 	@Override
 	public Description updateItem(Description item) {
 		descriptionDAO.updateElement(item);
+		List<Image> imageList = item.getItemPhotos();
+		for(Image image: imageList){
+			image.setDescriptionId(item.getIdDescription());
+			imageDAO.createElement(image);
+		}
 		return item;
 	}
 

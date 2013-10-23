@@ -1,5 +1,5 @@
 jQuery('document').ready(function() {
-	jQuery('#olko').click(function() {
+	jQuery('#userEditImage').click(function() {
 		jQuery('#form-container').show();
 		jQuery('#image-container').hide();
 	});
@@ -10,10 +10,8 @@ jQuery('document').ready(function() {
 });
 
 $("#category").change(function() {
-	var str = "";
 	$("#category option:selected").each(function() {
 		if ($(this).text() != "") {
-			str += $(this).text() + " ";
 			$("#subCategory").prop('disabled', false);
 			$("#subCategory").empty();
 			$.ajax( {
@@ -23,7 +21,7 @@ $("#category").change(function() {
 				success: function(data) {
 					$.each(data, function(index, value) {
 						a=value;
-					  $("#subCategory").append('<option value="">'+value.name+'</option>');
+					  $("#subCategory").append('<option value="'+value.categoryId+'">'+value.name+'</option>');
 					});
 				}
 			});
@@ -35,21 +33,55 @@ $("#category").change(function() {
 
 }).change();
 
-function deleteActiveSales(id){
-	
-	
+
+function deleteEndedSales(id){
 		$.ajax( {
 			type: 'POST',
 			url: 'userDeleteItemServlet',
 			data: {'itemId': id},
 			success: function(){
-				alert("in success");
 				$('#salesTabs li:eq(1) a').click();
 			}
 		});
-	
-
 }
+
+$("#auctionCheck").change(function(){
+	if ($("#auctionCheck").prop("checked")) {
+		$("#startPrice").attr('readonly', false);
+		$("#count").attr('readonly', true);
+		$("#count").val("1");
+		$("#endedTime").show();
+		$("#addProductSubmitButton").attr('disabled', false);
+	} else {
+		$("#endedTime").hide();
+		$("#startPrice").attr('readonly', true);
+		if($("#buyNowCheck").prop("checked")){
+			$("#count").attr('readonly', false);
+		} else{
+			$("#count").attr('readonly', true);
+			$("#count").val("");
+			$("#addProductSubmitButton").attr('disabled', true);
+		}
+	}
+});
+
+$("#buyNowCheck").change(function(){
+	if ($("#buyNowCheck").prop("checked")) {
+		$("#buyNowPrice").attr('readonly', false);
+		$("#count").val("1");
+		$("#addProductSubmitButton").attr('disabled', false);
+		if(!$("#auctionCheck").prop("checked")){
+			$("#count").attr('readonly', false);
+		}
+	} else {
+		$("#buyNowPrice").attr('readonly', true);
+		$("#count").attr('readonly', true);
+		if(!$("#auctionCheck").prop("checked")){
+			$("#count").val("");
+			$("#addProductSubmitButton").attr('disabled', true);
+		}
+	}
+});
 
 $('#passwordBlockCancel').click(function() {
 	$('#changePasswordBlock').hide();
@@ -84,24 +116,13 @@ $('#oldPassword').change(function() {
 	}
 });
 
-$(document).ready(function(){
-	$('#salesTabs li:eq(1) a').click();
-});
-
 
 function showPasswordBlock(){
 	$('#changePasswordBlock').show();
 }
 
-
-$('#salesTabs li:eq(4) a').click(function() {
-	$(this).tab('show');
-	$('#activeSales').hide();
-	$('#endedSales').hide();
-	$('#addNewSale').hide();
-	$('#editTab').show();
-	$('#editPage').show();
-
+$(document).ready(function(){
+	$('#salesTabs li:eq(1) a').click();
 });
 
 $('#salesTabs li:eq(1) a').click(function() {
@@ -117,11 +138,6 @@ $('#salesTabs li:eq(2) a').click(function() {
 	$("#maContent").empty();
 	$("#maContent").load("endedSalesContent");
 	
-});
-$('#salesTabs li:eq(3) a').click(function() {
-	$(this).tab('show');
-	$("#maContent").empty();
-	$("#maContent").load("addSalesContent");
 });
 
 $('#shoppingTabs li:eq(1) a').click(function() {
@@ -144,8 +160,6 @@ $('#shoppingTabs li:eq(3) a').click(function() {
 });
 
 function editProduct(id) {
-
 	$('#salesTabs li:eq(3) a').trigger("click");
 	return false;
-	
 }

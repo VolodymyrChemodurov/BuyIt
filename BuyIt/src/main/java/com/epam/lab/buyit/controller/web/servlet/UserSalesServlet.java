@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
+import com.epam.lab.buyit.model.Auction;
 import com.epam.lab.buyit.model.Product;
 import com.epam.lab.buyit.model.User;
 
@@ -29,7 +30,9 @@ public class UserSalesServlet extends HttpServlet {
 		List<Product> activeList = new ArrayList<Product>();
 		List<Product> endedList = new ArrayList<Product>();
 		for(Product current : productList){
-			if (current.getAuction().getStatus().equals("closed")){
+			Auction au = current.getAuction();
+			String st = au.getStatus();
+			if (st.equals("closed")){
 				endedList.add(current);
 			} else {
 				activeList.add(current);

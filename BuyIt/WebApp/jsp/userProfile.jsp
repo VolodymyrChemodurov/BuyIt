@@ -35,18 +35,21 @@
 <link rel="apple-touch-icon-precomposed"
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
+<link href="themes/assets/css/assets_style.css" rel="stylesheet">
+
 </head>
 <body>
 	<jsp:include page="navbar"></jsp:include>
 	<!-- Header End====================================================================== -->
 
-	<div class="container">
+	<div id="userProfile-container" class="container">
 		<div id="maWrapper" class="corAll5">
 			<ul id="vMenu">
 				<li id="active"><strong>Profile</strong></li>
 				<li><a href="userSalesServlet">Sales</a></li>
 				<li><a href="userShoppingServlet">Shopping</a></li>
 				<li><a href="#">Comments</a></li>
+				<li><a href="userAddProductServlet">Product</a></li>
 			</ul>
 			<!-- / #vMenu -->
 			<div style="overflow: hidden;">
@@ -135,15 +138,15 @@
 					</div>
 					<div id="right-menu" class="my-right-content">
 						<div id="image-container" style="display: block">
-							<img id="olko" src="bootstrap/img/edit.png" />
+							<img id="userEditImage" src="bootstrap/img/edit.png" />
 						</div>
 						<div id="form-container" style="display: none">
 							<form action="userPageServlet" method="post">
-								<div class="myrow" style="padding-top: 40px;">
-									<span class="span-2"><input name="firstName"
+								<div class=myrow style="padding-top: 40px;">
+									<span class="span-2"><input id="firstName" name="firstName"
 										value="${user.firstName}" /> </span>
 								</div>
-								<div class="myrow">
+								<div class=myrow>
 									<span class="span-2"><input name="lastName"
 										value="${user.lastName}" /> </span>
 								</div>
@@ -152,7 +155,7 @@
 										value="${user.contact.address.city}" />
 									</span>
 								</div>
-								<div class="myrow">
+								<div class=myrow>
 									<span class="span-2">
 										<select id="region" name="region">
 											<option value="${user.contact.address.region}">${user.contact.address.region}</option>
@@ -164,33 +167,32 @@
 										</select>
 									</span>
 								</div>
-								<div class="myrow">
+								<div class=myrow>
 									<span class="span-2"><input name="street"
 										value="${user.contact.address.street}" /> </span>
 								</div>
-								<div class="myrow">
+								<div class=myrow>
 									<span class="span-2"><input name="house"
-										style="width: 84px;" value="${user.contact.address.house}" />
+										style="width: 85px;" value="${user.contact.address.house}" />
 									</span> <span class="span-2"><input name="flat"
-										style="width: 85px;" value="${user.contact.address.flat}" />
+										style="width: 86px;" value="${user.contact.address.flat}" />
 									</span>
 								</div>
-								<div class="myrow">
+								<div class=myrow>
 									<span class="span-2"><input name="zipCode"
 										value="${user.contact.address.zipCode}" /> </span>
 								</div>
-								<div class="myrow" style="padding-top: 40px;">
+								<div class=myrow style="padding-top: 40px;">
 									<span class="span-2"><input name="phone"
 										value="${user.contact.phone}" /> </span>
 									<button type="submit" style="margin-left: 40px; width: 120px;"
 										class="btn btn-mini btn-success">Apply changes</button>
 								</div>
-								<div class="myrow">
+								<div class=myrow>
 									<span class="span-2"><input name="email"
-										value="${user.contact.email}" /> </span> <input type="button"
+										value="${user.contact.email}" /> </span> <button
 										id="btn-back" style="margin-left: 40px; width: 120px;"
-										class="btn btn-mini btn-danger" value="Cancel">
-									</button>
+										class="btn btn-mini btn-danger" >Cancel	</button>
 								</div>
 							</form>
 						</div>

@@ -41,7 +41,7 @@ $(document).ready(
 		        return this.optional(element) || /^\d{5}$/i.test(value);
 		    }, "ZIP_CODE");
 			
-			$('#form-container').validate(
+			$('#userProfile-container').validate(
 					{
 						rules : {
 							lastName : {
