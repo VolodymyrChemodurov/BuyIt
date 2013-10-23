@@ -253,7 +253,7 @@
 													<input type="hidden" name="count" id="count"
 														value="${product.auction.count}" /> <label
 														class="control-label" text-align="right"><span>
-															Quantity:</span></label> <input type="number" min="1" id="quantity"
+															Quantity:</span></label> <input type="number" min="1" id="quantity" max="${product.auction.count}"
 														name="quantity" class="span1" value="1" />
 													<button type="submit" id="buyItButton"
 														class="btn btn-default btn-primary pull-right">Buy
