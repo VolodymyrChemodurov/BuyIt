@@ -49,11 +49,6 @@
 			</ul>
 			<!-- / #vMenu -->
 			<div style="overflow: hidden;">
-<!-- 				<div width="200" class="left-menu"> -->
-<!-- 					<div class="avatar-wrapper"> -->
-<%-- 						<img src="${user.avatar}"> --%>
-<!-- 					</div> -->
-<!-- 				</div> -->
 				
 				<div width="200" class="left-menu">
 					<div class="avatar-wrapper">
@@ -195,6 +190,7 @@
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
-	<script src="bootstrap/js/userPage.js"></script>
+	<script src="bootstrap/js/admin.js"></script>
+<!-- 	<script src="bootstrap/js/userPage.js"></script> -->
 </body>
 </html>

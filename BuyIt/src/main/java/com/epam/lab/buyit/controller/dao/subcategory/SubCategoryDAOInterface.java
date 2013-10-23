@@ -8,5 +8,6 @@ import com.epam.lab.buyit.model.SubCategory;
 public interface SubCategoryDAOInterface extends GenericDAO<SubCategory> {
 
 	List<SubCategory> getAllSubCategoriesByIdCategory(int id_category);
+	List<SubCategory> getAllSubCategories();
 
 }
