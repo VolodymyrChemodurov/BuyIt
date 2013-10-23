@@ -5,7 +5,14 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import com.epam.lab.buyit.controller.email.EmailMessageBuilder;
 import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
+import com.epam.lab.buyit.controller.service.bid.BidServiceImp;
+import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
+import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
+import com.epam.lab.buyit.model.Auction;
+import com.epam.lab.buyit.model.Product;
+import com.epam.lab.buyit.model.User;
 
 public class ServeAuctionJob implements Job {
 
@@ -14,14 +21,36 @@ public class ServeAuctionJob implements Job {
 
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+		
+		AuctionServiceImp auctionService = new AuctionServiceImp();
+		ProductServiceImpl productService = new ProductServiceImpl();
+		UserServiceImpl userService = new UserServiceImpl();
+		BidServiceImp bidService = new BidServiceImp();
+		EmailMessageBuilder emailMessageBuilder = new EmailMessageBuilder();
+		
 		int auctionId = (int) arg0.getTrigger().getJobDataMap()
 				.get("auctionId");
-		AuctionServiceImp auctionService = new AuctionServiceImp();
+		
 		LOGGER.info("Serving auction with id = " + auctionId);
-		if (auctionService.getItemById(auctionId).getStatus().equals("inProgress")) {
+		
+		Auction auction = auctionService.getItemById(auctionId);
+		if (auction.getStatus().equals("inProgress")) {
 			auctionService.closeAuction(auctionId);
+
+			Product product = productService
+					.getItemById(auction.getProductId());
+			User seller = userService.getItemById(product.getUserId());
+			User buyer = userService.getItemById(bidService
+					.getWinUserIdByAuctionId(auctionId));
+
+			// emailMessageBuilder.sendWinLotForm(buyerUserName, product,
+			// seller,
+			// buyerEmail);
+			//
+			// emailMessageBuilder.sendProductSoldForm(sellerUserName, product,
+			// buyer, sellerEmail);
+
 			LOGGER.info("Serve auction with id = " + auctionId);
 		}
 	}
-
 }

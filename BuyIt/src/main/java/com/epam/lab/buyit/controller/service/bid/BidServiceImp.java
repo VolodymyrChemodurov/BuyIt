@@ -71,4 +71,8 @@ public class BidServiceImp implements BidService {
 		
 	}
 
+	@Override
+	public int getWinUserIdByAuctionId(int id) {
+		return bidDAO.getWinUserIdByAuctionId(id);
+	}
 }

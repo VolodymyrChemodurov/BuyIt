@@ -39,4 +39,11 @@ public class Message implements Serializable {
 		return this;
 	}
 
+	public String toString() {
+		StringBuilder string = new StringBuilder();
+		string.append("message: ").append(message).append(" fromUserId: ")
+				.append(fromUserId).append(" toUserId: ").append(toUserId);
+		return string.toString();
+	}
+
 }
