@@ -18,11 +18,35 @@ public class SubCategoryDAO implements SubCategoryDAOInterface {
 
 	private final static String GET_BY_ID = "SELECT * FROM sub_categories WHERE id_sub_category = ?";
 	private final static String GET_ALL_SUBCATEGORIES_BY_CATEGORY_ID = "SELECT * FROM sub_categories WHERE category_id=?";
+	private final static String GET_ALL_SUBCATEGORIES = "SELECT * FROM sub_categories";
 	private static final Logger LOGGER = Logger.getLogger(SubCategoryDAO.class);
 	private SubCategoryTransformer transformer;
 
 	public SubCategoryDAO() {
 		transformer = new SubCategoryTransformer();
+	}
+	
+	@Override
+	public List<SubCategory> getAllSubCategories() {
+		List<SubCategory> subCategories = new ArrayList<SubCategory>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection
+					.prepareStatement(GET_ALL_SUBCATEGORIES);
+			result = statement.executeQuery();
+			while (result.next()) {
+				SubCategory currentSubCategory = transformer
+						.fromRSToObject(result);
+				subCategories.add(currentSubCategory);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return subCategories;
 	}
 
 	@Override

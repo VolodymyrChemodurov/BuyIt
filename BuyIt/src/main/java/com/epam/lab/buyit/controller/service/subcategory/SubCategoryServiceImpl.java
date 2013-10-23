@@ -7,6 +7,7 @@ import com.epam.lab.buyit.controller.dao.product.ProductDAO;
 import com.epam.lab.buyit.controller.dao.subcategory.SubCategoryDAO;
 import com.epam.lab.buyit.controller.service.description.DescriptionServiceImpl;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
+import com.epam.lab.buyit.model.Category;
 import com.epam.lab.buyit.model.Product;
 import com.epam.lab.buyit.model.SubCategory;
 
@@ -42,7 +43,12 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 
 	@Override
 	public List<SubCategory> getAllItems() {
-		throw new UnsupportedOperationException();
+		List<SubCategory> subCategories = subCategoryDAO.getAllSubCategories();
+//		for (SubCategory category : subCategories) {
+//			category.setListSubCategories(subCategoryDAO
+//					.getAllSubCategoriesByIdCategory(category.getIdCategory()));
+//		}
+		return subCategories;
 	}
 
 	@Override

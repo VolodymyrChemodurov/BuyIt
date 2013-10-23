@@ -22,11 +22,20 @@ public class ChangePasswordServlet extends HttpServlet {
 		String newPassword = (String) request.getParameter("newPassword");
 		String confirmPassword = (String) request.getParameter("confirmPassword");
 		User user = (User) session.getAttribute("user");
-		if(UserValidation.checkingPassword(newPassword, confirmPassword)){
-			userService.updateItem(user.setPassword(MD5Encryptor.encrypt(newPassword)));
-			session.setAttribute("user", user);
+		if(user.getRole()==true){
+			if(UserValidation.checkingPassword(newPassword, confirmPassword)){
+				userService.updateItem(user.setPassword(MD5Encryptor.encrypt(newPassword)));
+				session.setAttribute("user", user);
+			}
+			response.sendRedirect("adminProfile");
+		}else{
+			if(UserValidation.checkingPassword(newPassword, confirmPassword)){
+				userService.updateItem(user.setPassword(MD5Encryptor.encrypt(newPassword)));
+				session.setAttribute("user", user);
+			}
+			response.sendRedirect("userProfile");
 		}
-		response.sendRedirect("userProfile");
+		
 	
 	}
 

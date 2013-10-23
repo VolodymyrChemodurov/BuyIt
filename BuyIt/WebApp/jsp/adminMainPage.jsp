@@ -84,22 +84,6 @@ $( document ).ready(function() {
 					<div class="avatar-wrapper">
 						<img src="${user.avatar}">
 					</div>
-					<a style="color:white; padding-left: 20px;"><i class="icon-user"></i>Change avatar</a>
-					<br>
-					<a onclick="showPasswordBlock()" id="passwordLink"style="color:white; padding-left: 20px;"><i class="icon-user"></i>Change password</a>
-					<div id="changePasswordBlock" style="display:none;">
-						<form action="changePasswordServlet" method="post">
-							<span style="color:green; font-size: 14px;">Change password block</span>
-							<input id="login" style="display: none; color:green;" name="login" value="${user.login}"/>
-							<input id="oldPassword" type="password" placeholder="Old password" name="oldPassword"/>
-							<input id="newPassword" type="password" placeholder="New password" name="newPassword"/>
-							<input id="confirmPassword" type="password" placeholder="Confirm password" name="confirmPassword"/>
-							<div id="passwordChangeResult" style="display: none; color:green;"><b>Password changed</b></div>
-							<button id="passwordBlockApply" type="submit" style="width: 92px; margin-top:2px;" class="btn btn-success">Apply</button>
-							<button id="passwordBlockCancel"style="width: 92px; margin-top:2px;" class="btn btn-danger">Cancel</button>
-						</form>
-					</div>	
-						
 				</div>
 				
 				<!-- /left-menu -->
@@ -221,6 +205,5 @@ $( document ).ready(function() {
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
-	<script src="bootstrap/js/userPage.js"></script>
 </body>
 </html>
