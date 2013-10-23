@@ -213,7 +213,7 @@
 
 									<!--                                                 ----------------------        PLACE A BID------------------------- -->
 									<c:if test="${product.auction.currentPrice != 0 }">
-										<form class="form-horizontal qtyFrm" method="get"
+										<form class="form-horizontal qtyFrm"  method="get"
 											action="bid_serve?id_product">
 											<input type="hidden" name="id_product"
 												value="${product.idProduct}" />
@@ -339,7 +339,7 @@
 												<h4>Information for Buyers</h4>
 
 												<hr class="soft" />
-												<c:out value="${product.delivery }"></c:out>
+												${product.delivery }
 												<hr class="soft" />
 												<br class="clr">
 											</div>

@@ -27,12 +27,11 @@ public class ForgetPasswordServlet extends HttpServlet {
 
 		if (user != null) {
 			EmailMessageBuilder emailMessageBuilder = new EmailMessageBuilder();
-			String name = user.getFirstName() + " " + user.getLastName();
 			String newPassword = Integer.toString(new Random(System
 					.currentTimeMillis()).nextInt(999999 - 100000) + 100000);
 			String email = user.getContact().getEmail();
 			if (userService.changePasswordByUserId(user.getIdUser(), newPassword)) {
-				emailMessageBuilder.sendPasswordRecoveryForm(name, newPassword, email);
+				emailMessageBuilder.sendPasswordRecoveryForm(user, newPassword, email);
 				request.setAttribute("message", "Your password change, please check your e-mail");
 				request.setAttribute("messageHeader", "Success");
 				request.setAttribute("alert", "success");

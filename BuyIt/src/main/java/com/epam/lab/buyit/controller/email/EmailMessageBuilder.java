@@ -4,38 +4,78 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
+import com.epam.lab.buyit.controller.email.textlines.TextLineConteiner;
+import com.epam.lab.buyit.controller.email.textlines.TextLineItem;
+import com.epam.lab.buyit.controller.email.textlines.impl.AuctionPriceLine;
+import com.epam.lab.buyit.controller.email.textlines.impl.BuyItNowPrice;
+import com.epam.lab.buyit.controller.email.textlines.impl.BuyerGreatingLine;
+import com.epam.lab.buyit.controller.email.textlines.impl.BuyerLine;
+import com.epam.lab.buyit.controller.email.textlines.impl.BuyerLink;
+import com.epam.lab.buyit.controller.email.textlines.impl.CountLine;
+import com.epam.lab.buyit.controller.email.textlines.impl.PasswordLine;
+import com.epam.lab.buyit.controller.email.textlines.impl.ProductLink;
+import com.epam.lab.buyit.controller.email.textlines.impl.ProductNameLine;
+import com.epam.lab.buyit.controller.email.textlines.impl.SellerGreatingLine;
+import com.epam.lab.buyit.controller.email.textlines.impl.SellerLine;
+import com.epam.lab.buyit.controller.email.textlines.impl.SellerLink;
 import com.epam.lab.buyit.model.Product;
 import com.epam.lab.buyit.model.User;
 
 public class EmailMessageBuilder {
 	private static final Logger LOGGER = Logger
 			.getLogger(EmailMessageBuilder.class);
-	String registrationHtmlPath = getPath("/html/registrationForm.html");
-	String passwordRecoveryHtmlPath = getPath("/html/passwordRecoveryForm.html");
-	String placeABidHtmlPath = getPath("/html/placeABidForm.html");
-	String yourBidKillHtmlPath = getPath("/html/yourBidKilledForm.html");
-	String winLotHtmlPath = getPath("/html/winLotForm.html");
-	String productSoldHtml = getPath("/html/productSold.html");
+	private String registrationHtmlPath = getPath("/html/registrationForm.html");
+	private String passwordRecoveryHtmlPath = getPath("/html/passwordRecoveryForm.html");
+	private String placeABidHtmlPath = getPath("/html/placeABidForm.html");
+	private String yourBidKillHtmlPath = getPath("/html/yourBidKilledForm.html");
+	private String winLotHtmlPath = getPath("/html/winLotForm.html");
+	private String productSoldHtml = getPath("/html/productSold.html");
+	private String noBodyBuyProductHtml = getPath("/html/noBodyByYouProductForm.html");
+	private String buyItNowHtml = getPath("/html/buyItNowForm.html");
 
-	public void sendSuccessRegistrationForm(String userName, String email) {
+	private ArrayList<TextLineItem> lineList = new ArrayList<TextLineItem>();
+	
+	{
+		lineList.add(new BuyerGreatingLine());
+		lineList.add(new BuyerLine());
+		lineList.add(new BuyerLink());
+
+		lineList.add(new SellerGreatingLine());
+		lineList.add(new SellerLine());
+		lineList.add(new SellerLink());
+
+		lineList.add(new PasswordLine());
+		lineList.add(new ProductLink());
+		lineList.add(new ProductNameLine());
+
+		lineList.add(new BuyItNowPrice());
+		lineList.add(new AuctionPriceLine());
+		lineList.add(new CountLine());
+	}
+
+	public void sendSuccessRegistrationForm(User user, String email) {
+
 		String text = "";
-		String greatingLine = "Hello " + userName + " !!!";
 		BufferedReader br = null;
+		TextLineConteiner conteiner = new TextLineConteiner();
+		conteiner.setBuyer(user);
 		try {
 			String currentLine = null;
-			br = new BufferedReader(new FileReader(
-					registrationHtmlPath));
+			br = new BufferedReader(new FileReader(registrationHtmlPath));
 			while ((currentLine = br.readLine()) != null) {
 				text += currentLine;
 				text += "\n";
-				if (currentLine.contains("greatingLine")) {
-					text += greatingLine + "\n";
-
+				for (TextLineItem textLine : lineList) {
+					if (currentLine.contains(textLine.getId())) {
+						textLine.setTextLineContainer(conteiner);
+						text += textLine.execute() + "\n";
+						break;
+					}
 				}
-
 			}
 
 		} catch (FileNotFoundException e) {
@@ -43,37 +83,34 @@ public class EmailMessageBuilder {
 		} catch (IOException e) {
 			LOGGER.error(e);
 		} finally {
-			if(br != null)
-				try {
-					br.close();
-				} catch (IOException e) {
-					LOGGER.error(e);
-				}
+			try {
+				br.close();
+			} catch (IOException e) {
+				LOGGER.warn(e);
+			}
 		}
-		// System.out.println(text);
 		EmailSender.sendHtml("You have successfully registered", text, email);
 
 	}
 
-	public void sendPasswordRecoveryForm(String userName, String password,
+	public void sendPasswordRecoveryForm(User user, String password,
 			String email) {
 		String text = "";
-		String greatingLine = "Hello " + userName + " !!!";
-
+		TextLineConteiner conteiner = new TextLineConteiner();
+		conteiner.setBuyer(user).setPassword(password);
+		BufferedReader br = null;
 		try {
 			String currentLine = null;
-			BufferedReader br = new BufferedReader(new FileReader(
-					passwordRecoveryHtmlPath));
+			br = new BufferedReader(new FileReader(passwordRecoveryHtmlPath));
 			while ((currentLine = br.readLine()) != null) {
 				text += currentLine;
 				text += "\n";
-				if (currentLine.contains("greatingLine")) {
-					text += greatingLine + "\n";
-
-				}
-				if (currentLine.contains("password")) {
-					text += password + "\n";
-
+				for (TextLineItem textLine : lineList) {
+					if (currentLine.contains(textLine.getId())) {
+						textLine.setTextLineContainer(conteiner);
+						text += textLine.execute() + "\n";
+						break;
+					}
 				}
 			}
 
@@ -81,167 +118,223 @@ public class EmailMessageBuilder {
 			LOGGER.error(e);
 		} catch (IOException e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+				LOGGER.warn(e);
+			}
 		}
 		EmailSender.sendHtml("Password recovery...", text, email);
 
 	}
 
-	public void sendPlaceABidForm(String userName, Product product, String email) {
+	public void sendPlaceABidForm(User buyer, Product product, String email) {
 		String text = "";
-		String greatingLine = "Hello " + userName + " !!!";
-		String productLink = "http://localhost:8080/BuyIt/productDetails?id="
-				+ product.getIdProduct();
+		TextLineConteiner conteiner = new TextLineConteiner();
+		conteiner.setBuyer(buyer).setProduct(product);
+		BufferedReader br = null;
 		try {
 			String currentLine = null;
-			BufferedReader br = new BufferedReader(new FileReader(
-					placeABidHtmlPath));
+			br = new BufferedReader(new FileReader(placeABidHtmlPath));
 			while ((currentLine = br.readLine()) != null) {
 				text += currentLine;
 				text += "\n";
-				if (currentLine.contains("greatingLine")) {
-					text += greatingLine + "\n";
-					continue;
-				}
-				if (currentLine.contains("productName")) {
-					text += product.getName() + "\n";
-					continue;
-				}
-				if (currentLine.contains("productLink")) {
-					text += productLink + "\n";
-					continue;
-				}
-				if (currentLine.contains("endTime")) {
-					text += product.getAuction().getEndTime() + "\n";
+				for (TextLineItem textLine : lineList) {
+					if (currentLine.contains(textLine.getId())) {
+						textLine.setTextLineContainer(conteiner);
+						text += textLine.execute() + "\n";
+						break;
+					}
 				}
 			}
 		} catch (FileNotFoundException e) {
 			LOGGER.error(e);
 		} catch (IOException e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+				LOGGER.warn(e);
+			}
 		}
 		EmailSender.sendHtml("Place a bid...", text, email);
 
 	}
 
-	public void sendYourBidKilldForm(String userName, Product product,
-			String email) {
+	public void sendYourBidKilldForm(User buyer, Product product, String email) {
 		String text = "";
-		String greatingLine = "Hello " + userName + " !!!";
-		String productLink = "http://localhost:8080/BuyIt/productDetails?id="
-				+ product.getIdProduct();
+		TextLineConteiner conteiner = new TextLineConteiner();
+		conteiner.setBuyer(buyer).setProduct(product);
+		BufferedReader br = null;
 		try {
 			String currentLine = null;
-			BufferedReader br = new BufferedReader(new FileReader(
-					yourBidKillHtmlPath));
+			br = new BufferedReader(new FileReader(yourBidKillHtmlPath));
 			while ((currentLine = br.readLine()) != null) {
 				text += currentLine;
 				text += "\n";
-				if (currentLine.contains("greatingLine")) {
-					text += greatingLine + "\n";
-
-				}
-				if (currentLine.contains("productName")) {
-					text += product.getName() + "\n";
-				}
-				if (currentLine.contains("productLink")) {
-					text += productLink + "\n";
+				for (TextLineItem textLine : lineList) {
+					if (currentLine.contains(textLine.getId())) {
+						textLine.setTextLineContainer(conteiner);
+						text += textLine.execute() + "\n";
+						break;
+					}
 				}
 			}
 		} catch (FileNotFoundException e) {
 			LOGGER.error(e);
 		} catch (IOException e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+				LOGGER.warn(e);
+			}
 		}
 		EmailSender.sendHtml("Your lot was killd", text, email);
 	}
 
-	public void sendWinLotForm(String userName, Product product, User seller,
+	public void sendWinLotForm(User buyer, Product product, User seller,
 			String email) {
 		String text = "";
-		String greatingLine = "Hello " + userName + " !!!";
-		String productLink = "http://localhost:8080/BuyIt/productDetails?id="
-				+ product.getIdProduct();
-		String sellerLine = "Name: " + seller.getFirstName() + ";<br>  Email: "
-				+ seller.getContact().getEmail()+";<br> ";
-		if(!seller.getContact().getPhone().equals("") ){
-			sellerLine+="Phone: "+ seller.getContact().getPhone()+"<br>"; 
-		}
+		TextLineConteiner conteiner = new TextLineConteiner();
+		conteiner.setBuyer(buyer).setProduct(product).setSeller(seller);
+		BufferedReader br = null;
 		try {
 			String currentLine = null;
-			BufferedReader br = new BufferedReader(new FileReader(
-					winLotHtmlPath));
+			br = new BufferedReader(new FileReader(winLotHtmlPath));
 			while ((currentLine = br.readLine()) != null) {
 				text += currentLine;
 				text += "\n";
-				if (currentLine.contains("greatingLine")) {
-					text += greatingLine + "\n";
-					continue;
-				}
-				if (currentLine.contains("productName")) {
-					text += product.getName() + "\n";
-					continue;
-				}
-				if (currentLine.contains("productLink")) {
-					text += productLink + "\n";
-					continue;
-				}
-				if (currentLine.contains("SellerLine")) {
-					text += sellerLine + "\n";
+				for (TextLineItem textLine : lineList) {
+					if (currentLine.contains(textLine.getId())) {
+						textLine.setTextLineContainer(conteiner);
+						text += textLine.execute() + "\n";
+						break;
+					}
 				}
 			}
 		} catch (FileNotFoundException e) {
 			LOGGER.error(e);
 		} catch (IOException e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+				LOGGER.warn(e);
+			}
 		}
 		EmailSender.sendHtml("You win a lot...", text, email);
 	}
-	public void sendProductSoldForm(String userName, Product product, User buyer,
-			String email) {
+
+	public void sendProductSoldForm(User seller, Product product,
+			User buyer, String email) {
 		String text = "";
-		String greatingLine = "Hello " + userName + " !!!";
-		String productLink = "http://localhost:8080/BuyIt/productDetails?id="
-				+ product.getIdProduct();
-		String sellerLine = "Name: " + buyer.getFirstName() + ";<br>  Email: "
-				+ buyer.getContact().getEmail()+";<br> ";
-		if(!buyer.getContact().getPhone().equals("") ){
-			sellerLine+="Phone: "+ buyer.getContact().getPhone()+"<br>"; 
-		}
+		TextLineConteiner conteiner = new TextLineConteiner();
+		conteiner.setBuyer(buyer).setSeller(seller).setProduct(product);
+		BufferedReader br = null;
 		try {
 			String currentLine = null;
-			BufferedReader br = new BufferedReader(new FileReader(
-					productSoldHtml));
+			br = new BufferedReader(new FileReader(productSoldHtml));
 			while ((currentLine = br.readLine()) != null) {
 				text += currentLine;
 				text += "\n";
-				if (currentLine.contains("greatingLine")) {
-					text += greatingLine + "\n";
-					continue;
-				}
-				if (currentLine.contains("productName")) {
-					text += product.getName() + "\n";
-					continue;
-				}
-				if (currentLine.contains("productLink")) {
-					text += productLink + "\n";
-					continue;
-				}
-				if (currentLine.contains("BuyerLine")) {
-					text += sellerLine + "\n";
+				for (TextLineItem textLine : lineList) {
+					if (currentLine.contains(textLine.getId())) {
+						textLine.setTextLineContainer(conteiner);
+						text += textLine.execute() + "\n";
+						break;
+					}
 				}
 			}
 		} catch (FileNotFoundException e) {
 			LOGGER.error(e);
 		} catch (IOException e) {
 			LOGGER.error(e);
+		} finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+				LOGGER.warn(e);
+			}
 		}
 		EmailSender.sendHtml("Your product sold...", text, email);
+	}
+
+	public void sendNoBodyBuyYourProductForm(User seller, Product product,
+			String email) {
+		String text = "";
+		TextLineConteiner conteiner = new TextLineConteiner();
+		conteiner.setSeller(seller).setProduct(product);
+		BufferedReader br = null;
+		try {
+			String currentLine = null;
+			br = new BufferedReader(new FileReader(noBodyBuyProductHtml));
+			while ((currentLine = br.readLine()) != null) {
+				text += currentLine;
+				text += "\n";
+				for (TextLineItem textLine : lineList) {
+					if (currentLine.contains(textLine.getId())) {
+						textLine.setTextLineContainer(conteiner);
+						text += textLine.execute() + "\n";
+						break;
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			LOGGER.error(e);
+		} catch (IOException e) {
+			LOGGER.error(e);
+		} finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+				LOGGER.warn(e);
+			}
+		}
+		EmailSender.sendHtml("Sorry nobody buy your product", text, email);
+	}
+
+	public void sendBuyItNowForm(User seller, Product product,int count,
+			String email) {
+		String text = "";
+		TextLineConteiner conteiner = new TextLineConteiner();
+		conteiner.setSeller(seller).setProduct(product).setCount(count);
+		BufferedReader br = null;
+		try {
+			String currentLine = null;
+			br = new BufferedReader(new FileReader(buyItNowHtml));
+			while ((currentLine = br.readLine()) != null) {
+				text += currentLine;
+				text += "\n";
+				for (TextLineItem textLine : lineList) {
+					if (currentLine.contains(textLine.getId())) {
+						textLine.setTextLineContainer(conteiner);
+						text += textLine.execute() + "\n";
+						break;
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			LOGGER.error(e);
+		} catch (IOException e) {
+			LOGGER.error(e);
+		} finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+				LOGGER.warn(e);
+			}
+		}
+		EmailSender.sendHtml("You buy product", text, email);
 	}
 
 	private static String getPath(String relativePath) {
 		String oldPath = EmailMessageBuilder.class.getProtectionDomain()
 				.getCodeSource().getLocation().getPath();
-		// System.out.println(oldPath);
 		String newPath = oldPath.replaceAll("%5Bepam%5D", "[epam]");
 		newPath = newPath
 				.replaceAll(

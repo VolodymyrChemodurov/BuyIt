@@ -52,7 +52,7 @@ public class EmailSender {
 
 			Transport.send(message);
 
-			System.out.println("Ok");
+			LOGGER.info("send to "+toEmail);
 		} catch (MessagingException e) {
 			LOGGER.warn(e);
 		}
