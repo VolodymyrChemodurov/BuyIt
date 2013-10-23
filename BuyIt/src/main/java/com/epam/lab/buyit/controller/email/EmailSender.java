@@ -1,7 +1,5 @@
 package com.epam.lab.buyit.controller.email;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -54,7 +52,7 @@ public class EmailSender {
 
 			Transport.send(message);
 
-			System.out.println("Ok");
+			LOGGER.info("send to "+toEmail);
 		} catch (MessagingException e) {
 			LOGGER.warn(e);
 		}
