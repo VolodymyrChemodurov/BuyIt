@@ -29,7 +29,9 @@ public class ProductCreator {
 	private void setDefaultValues(Product product) {
 		Date date = new Date();
 		product.setDeleted(false);
-		if (product.getAuction().getBuyItNow() == 0){
+		if (product.getAuction().getBuyItNow() != 0 && product.getAuction().getStartPrice() == 0){
+			product.getAuction().setCurrentPrice(0);
+		} else {			
 			product.getAuction().setCurrentPrice(product.getAuction().getStartPrice());
 		}
 		product.getAuction().setStatus("inProgress");

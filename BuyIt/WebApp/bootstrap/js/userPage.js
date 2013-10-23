@@ -27,6 +27,7 @@ $("#category").change(function() {
 			});
 			
 		} else {
+			$("#subCategory").append('<option value=""></option>');
 			$("#subCategory").prop('disabled', true);
 		}
 	});
@@ -53,13 +54,14 @@ $("#auctionCheck").change(function(){
 		$("#endedTime").show();
 		$("#addProductSubmitButton").attr('disabled', false);
 	} else {
-		$("#endedTime").hide();
 		$("#startPrice").attr('readonly', true);
+		$("#startPrice").val("");
 		if($("#buyNowCheck").prop("checked")){
 			$("#count").attr('readonly', false);
 		} else{
 			$("#count").attr('readonly', true);
 			$("#count").val("");
+			$("#endedTime").hide();
 			$("#addProductSubmitButton").attr('disabled', true);
 		}
 	}
@@ -67,6 +69,7 @@ $("#auctionCheck").change(function(){
 
 $("#buyNowCheck").change(function(){
 	if ($("#buyNowCheck").prop("checked")) {
+		$("#endedTime").show();
 		$("#buyNowPrice").attr('readonly', false);
 		$("#count").val("1");
 		$("#addProductSubmitButton").attr('disabled', false);
@@ -75,13 +78,16 @@ $("#buyNowCheck").change(function(){
 		}
 	} else {
 		$("#buyNowPrice").attr('readonly', true);
+		$("#buyNowPrice").val("");
 		$("#count").attr('readonly', true);
 		if(!$("#auctionCheck").prop("checked")){
 			$("#count").val("");
 			$("#addProductSubmitButton").attr('disabled', true);
+			$("#endedTime").hide();
 		}
 	}
 });
+
 
 $('#passwordBlockCancel').click(function() {
 	$('#changePasswordBlock').hide();
@@ -163,3 +169,5 @@ function editProduct(id) {
 	$('#salesTabs li:eq(3) a').trigger("click");
 	return false;
 }
+
+

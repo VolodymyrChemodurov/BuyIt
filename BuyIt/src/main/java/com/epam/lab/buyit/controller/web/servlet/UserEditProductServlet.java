@@ -20,7 +20,6 @@ public class UserEditProductServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("in servlet");
 		ProductServiceImpl productService = new ProductServiceImpl();
 		int id = Integer.parseInt(request.getParameter("productId"));
 		Product product = productService.getItemById(id);
