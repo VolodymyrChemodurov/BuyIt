@@ -8,7 +8,7 @@ import com.epam.lab.buyit.controller.setters.UserSetter;
 public enum Validator {
 	FIRST_NAME(UserSetter.FIRST_NAME.getField(), "^[A-Za-z]+{2,15}$", true),
 	LAST_NAME(UserSetter.LAST_NAME.getField(), "^[A-Za-z-]+{3,15}$", true),
-	LOGIN(UserSetter.LOGIN.getField(), "^[a-z0-9_-]{4,15}$", true),
+	LOGIN(UserSetter.LOGIN.getField(), "^[A-Za-z0-9_-]{4,15}$", true),
 	PASSWORD(UserSetter.PASSWORD.getField(), "^[\\w_-]{6,15}$", true),
 	CONFIRM_PASSWORD("confirmPassword", "^[\\w_-]{6,15}$", false),
 	EMAIL(UserSetter.EMAIL.getField(), "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
