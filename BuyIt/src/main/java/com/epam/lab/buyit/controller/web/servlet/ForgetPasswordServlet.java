@@ -16,7 +16,8 @@ import com.epam.lab.buyit.model.User;
 
 public class ForgetPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger LOGGER = Logger.getLogger(ForgetPasswordServlet.class);
+	private static final Logger LOGGER = Logger
+			.getLogger(ForgetPasswordServlet.class);
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -29,12 +30,15 @@ public class ForgetPasswordServlet extends HttpServlet {
 			EmailMessageBuilder emailMessageBuilder = new EmailMessageBuilder();
 			String newPassword = Integer.toString(new Random(System
 					.currentTimeMillis()).nextInt(999999 - 100000) + 100000);
-			if (userService.changePasswordByUserId(user.getIdUser(), newPassword)) {
+			if (userService.changePasswordByUserId(user.getIdUser(),
+					newPassword)) {
 				emailMessageBuilder.sendPasswordRecoveryForm(user, newPassword);
-				request.setAttribute("message", "Your password change, please check your e-mail");
+				request.setAttribute("message",
+						"Your password change, please check your e-mail");
 				request.setAttribute("messageHeader", "Success");
 				request.setAttribute("alert", "success");
-				request.getRequestDispatcher("message_page").forward(request, response);
+				request.getRequestDispatcher("message_page").forward(request,
+						response);
 			} else {
 				LOGGER.warn("BAG");
 			}

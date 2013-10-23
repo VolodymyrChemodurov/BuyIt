@@ -39,7 +39,7 @@ public class EmailMessageBuilder {
 	private String buyItNowHtml = getPath("/html/buyItNowForm.html");
 
 	private ArrayList<TextLineItem> lineList = new ArrayList<TextLineItem>();
-	
+
 	{
 		lineList.add(new BuyerGreatingLine());
 		lineList.add(new BuyerLine());
@@ -90,7 +90,8 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("You have successfully registered", text, user.getContact().getEmail());
+		EmailSender.sendHtml("You have successfully registered", text, user
+				.getContact().getEmail());
 
 	}
 
@@ -125,7 +126,8 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Password recovery...", text, user.getContact().getEmail());
+		EmailSender.sendHtml("Password recovery...", text, user.getContact()
+				.getEmail());
 
 	}
 
@@ -159,7 +161,8 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Place a bid...", text, buyer.getContact().getEmail());
+		EmailSender.sendHtml("Place a bid...", text, buyer.getContact()
+				.getEmail());
 
 	}
 
@@ -193,7 +196,8 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Your lot was killd", text, buyer.getContact().getEmail());
+		EmailSender.sendHtml("Your lot was killd", text, buyer.getContact()
+				.getEmail());
 	}
 
 	public void sendWinLotForm(User buyer, Product product, User seller) {
@@ -226,11 +230,12 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("You win a lot...", text, buyer.getContact().getEmail());
+		EmailSender.sendHtml("You win a lot...", text, buyer.getContact()
+				.getEmail());
 	}
 
 	public void sendProductSoldOnAuctionForm(User seller, Product product,
-			User buyer, String email) {
+			User buyer) {
 		String text = "";
 		TextLineConteiner conteiner = new TextLineConteiner();
 		conteiner.setBuyer(buyer).setSeller(seller).setProduct(product);
@@ -260,13 +265,16 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Your product sold...", text, seller.getContact().getEmail());
+		EmailSender.sendHtml("Your product sold...", text, seller.getContact()
+				.getEmail());
 	}
+
 	public void sendProductSoldOnBuyItNowForm(User seller, Product product,
-			User buyer,int count) {
+			User buyer, int count) {
 		String text = "";
 		TextLineConteiner conteiner = new TextLineConteiner();
-		conteiner.setBuyer(buyer).setSeller(seller).setProduct(product).setCount(count);
+		conteiner.setBuyer(buyer).setSeller(seller).setProduct(product)
+				.setCount(count);
 		BufferedReader br = null;
 		try {
 			String currentLine = null;
@@ -293,7 +301,8 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Your product sold...", text, seller.getContact().getEmail());
+		EmailSender.sendHtml("Your product sold...", text, seller.getContact()
+				.getEmail());
 	}
 
 	public void sendNoBodyBuyYourProductForm(User seller, Product product) {
@@ -326,13 +335,16 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Sorry nobody buy your product", text, seller.getContact().getEmail());
+		EmailSender.sendHtml("Sorry nobody buy your product", text, seller
+				.getContact().getEmail());
 	}
 
-	public void sendBuyItNowForm(User seller, Product product,int count) {
+	public void sendBuyItNowForm(User seller, Product product, User buyer,
+			int count) {
 		String text = "";
 		TextLineConteiner conteiner = new TextLineConteiner();
-		conteiner.setSeller(seller).setProduct(product).setCount(count);
+		conteiner.setSeller(seller).setProduct(product).setBuyer(buyer)
+				.setCount(count);
 		BufferedReader br = null;
 		try {
 			String currentLine = null;
@@ -359,7 +371,8 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("You buy product", text, seller.getContact().getEmail());
+		EmailSender.sendHtml("You buy product", text, buyer.getContact()
+				.getEmail());
 	}
 
 	private static String getPath(String relativePath) {
