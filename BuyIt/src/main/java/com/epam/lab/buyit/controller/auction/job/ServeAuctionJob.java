@@ -21,18 +21,18 @@ public class ServeAuctionJob implements Job {
 
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
-		
+
 		AuctionServiceImp auctionService = new AuctionServiceImp();
 		ProductServiceImpl productService = new ProductServiceImpl();
 		UserServiceImpl userService = new UserServiceImpl();
 		BidServiceImp bidService = new BidServiceImp();
 		EmailMessageBuilder emailMessageBuilder = new EmailMessageBuilder();
-		
+
 		int auctionId = (int) arg0.getTrigger().getJobDataMap()
 				.get("auctionId");
-		
+
 		LOGGER.info("Serving auction with id = " + auctionId);
-		
+
 		Auction auction = auctionService.getItemById(auctionId);
 		if (auction.getStatus().equals("inProgress")) {
 			auctionService.closeAuction(auctionId);
@@ -43,13 +43,14 @@ public class ServeAuctionJob implements Job {
 			User buyer = userService.getItemById(bidService
 					.getWinUserIdByAuctionId(auctionId));
 
-			// emailMessageBuilder.sendWinLotForm(buyerUserName, product,
-			// seller,
-			// buyerEmail);
-			//
-			// emailMessageBuilder.sendProductSoldForm(sellerUserName, product,
-			// buyer, sellerEmail);
-
+			if (buyer != null) {
+				emailMessageBuilder.sendWinLotForm(buyer, product, seller);
+				emailMessageBuilder.sendProductSoldOnAuctionForm(seller,
+						product, buyer);
+			} else {
+				emailMessageBuilder.sendNoBodyBuyYourProductForm(seller,
+						product);
+			}
 			LOGGER.info("Serve auction with id = " + auctionId);
 		}
 	}
