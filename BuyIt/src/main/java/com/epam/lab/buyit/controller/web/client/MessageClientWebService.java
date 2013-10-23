@@ -29,7 +29,7 @@ public class MessageClientWebService {
 		baseUri = UriBuilder.fromUri("http://localhost:8080/").build();
 	}
 
-	public List<Message> getMessagesByUserId(int id) throws JSONException {
+	public List<Message> getMessagesByUserId(int id) {
 
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
