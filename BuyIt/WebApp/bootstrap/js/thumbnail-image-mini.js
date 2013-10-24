@@ -23,5 +23,6 @@ $(window).load(function() {
 			flag = true;
 		}
 		$(this).css('margin-top', parseInt((65 - height) / 2));
+		$(this).css('visibility', 'visible');
 	});
 });

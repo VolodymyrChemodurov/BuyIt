@@ -119,5 +119,6 @@
 		<script src="themes/js/jquery.lightbox-0.5.js"></script>
 		<script src="bootstrap/js/tooltip.js" type="text/javascript"></script>
 		<script src="bootstrap/js/thumbnail-image-small.js" type="text/javascript"></script>
+		<script src="bootstrap/js/search.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <link href="themes/css/item-preview.css" rel="stylesheet">
 
 <li class="span3-my">
-        <div class="thumbnail-my">
+        <div class="thumbnail-my" style="visibility: hidden">
                 <a href="productDetails?id=${product.idProduct}"> 
                 <c:if test="${fn:length(product.description.itemPhotos) eq 0}">
                 <img class="my-image"

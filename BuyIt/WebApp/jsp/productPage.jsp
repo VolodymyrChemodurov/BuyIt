@@ -129,7 +129,7 @@
 
 														<a href="${image.path}">
 															<div style="display: inline; width: 81px">
-																<img class="my-image-mini" src="${image.path}" alt="" />
+																<img class="my-image-mini" src="${image.path}" alt="" style="visibility: hidden"/>
 															</div>
 														</a>
 													</c:forEach>
