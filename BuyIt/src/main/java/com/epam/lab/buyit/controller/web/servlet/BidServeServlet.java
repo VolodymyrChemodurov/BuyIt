@@ -82,6 +82,7 @@ public class BidServeServlet extends HttpServlet {
 			request.setAttribute("auctionCloseException", true);
 			LOGGER.error(e);
 		} finally {
+			LOGGER.info("Sending from servlet");
 			request.getRequestDispatcher("bid_information").forward(request,
 					response);
 		}

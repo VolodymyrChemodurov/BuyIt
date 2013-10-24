@@ -25,9 +25,7 @@ public class BidAmountFilter implements Filter {
 			httpRequest.setAttribute("alert", "block");
 			httpRequest.getRequestDispatcher("message_page").forward(httpRequest, httpResponse);
 		}
-		else chain.doFilter(request, response);
-		
-		chain.doFilter(request, response);
+		else chain.doFilter(request, response);		
 	}
 	
 	public void init(FilterConfig fConfig) throws ServletException {
