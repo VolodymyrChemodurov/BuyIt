@@ -5,24 +5,24 @@ import java.util.List;
 
 //import com.epam.lab.buyit.controller.dao.auction.AuctionDAO;
 //import com.epam.lab.buyit.controller.dao.description.DescriptionDAO;
-import com.epam.lab.buyit.controller.dao.image.ImageDAO;
 import com.epam.lab.buyit.controller.dao.product.ProductDAO;
 import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
 import com.epam.lab.buyit.controller.service.description.DescriptionServiceImpl;
+import com.epam.lab.buyit.controller.service.image.ImageServiceImpl;
 import com.epam.lab.buyit.model.Auction;
 import com.epam.lab.buyit.model.Description;
 import com.epam.lab.buyit.model.Product;
 
 public class ProductServiceImpl implements ProductService {
 	private ProductDAO productDAO;
-	private ImageDAO imageDAO;
-	private DescriptionServiceImpl descriptionServiceImpl;
+	private ImageServiceImpl imageService;
+	private DescriptionServiceImpl descriptionService;
 	private AuctionServiceImp auctionService;
 
 	public ProductServiceImpl() {
 		productDAO = new ProductDAO();
-		imageDAO = new ImageDAO();
-		descriptionServiceImpl = new DescriptionServiceImpl();
+		imageService = new ImageServiceImpl();
+		descriptionService = new DescriptionServiceImpl();
 		auctionService = new AuctionServiceImp();
 	}
 
@@ -31,8 +31,7 @@ public class ProductServiceImpl implements ProductService {
 		Product currentProduct = productDAO.getElementById(id);
 		int productId = currentProduct.getIdProduct();
 		Auction auction = auctionService.getByProductId(productId);
-		Description description = descriptionServiceImpl
-				.getByProductId(productId);
+		Description description = descriptionService.getByProductId(productId);
 
 		currentProduct.setDescription(description);
 		currentProduct.setAuction(auction);
@@ -42,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> getAllItems() {
 		List<Product> products = productDAO.getAllProducts();
-		List<Description> descriptions = descriptionServiceImpl.getAllItems();
+		List<Description> descriptions = descriptionService.getAllItems();
 		for (Product currentProduct : products) {
 			setProductDescription(currentProduct, descriptions);
 		}
@@ -67,8 +66,8 @@ public class ProductServiceImpl implements ProductService {
 
 		Description description = item.getDescription();
 		description.setProductId(generated_product_id);
-		descriptionServiceImpl.createItem(description);
-		
+		descriptionService.createItem(description);
+
 		Auction auction = item.getAuction();
 		auction.setProductId(generated_product_id);
 		auctionService.createItem(auction);
@@ -85,13 +84,13 @@ public class ProductServiceImpl implements ProductService {
 	public Product updateByProductId(Product item) {
 		productDAO.updateElement(item);
 
-//		Description description = item.getDescription();
-//		description.setIdDescription(item.getIdProduct());
-//		descriptionServiceImpl.updateItem(description);
-//		
-//		Auction auction = item.getAuction();
-//		auction.setIdDescription(item.getIdProduct());
-//		descriptionServiceImpl.updateItem(auction);
+		// Description description = item.getDescription();
+		// description.setIdDescription(item.getIdProduct());
+		// descriptionServiceImpl.updateItem(description);
+		//
+		// Auction auction = item.getAuction();
+		// auction.setIdDescription(item.getIdProduct());
+		// descriptionServiceImpl.updateItem(auction);
 
 		return item;
 	}
@@ -101,7 +100,7 @@ public class ProductServiceImpl implements ProductService {
 		for (Description currentDescription : descriptions) {
 			if (currentDescription.getProductId() == currentProduct
 					.getIdProduct()) {
-				currentDescription.setItemPhotos(imageDAO
+				currentDescription.setItemPhotos(imageService
 						.getImagesByDescriptionId(currentDescription
 								.getIdDescription()));
 				currentProduct.setDescription(currentDescription);
@@ -127,7 +126,7 @@ public class ProductServiceImpl implements ProductService {
 			latestProducts.add(currProduct);
 
 		}
-		List<Description> descriptions = descriptionServiceImpl.getAllItems();
+		List<Description> descriptions = descriptionService.getAllItems();
 		for (Product currentProduct : latestProducts) {
 			setProductDescription(currentProduct, descriptions);
 		}
@@ -142,7 +141,7 @@ public class ProductServiceImpl implements ProductService {
 		for (Product product : productList) {
 			int productId = product.getIdProduct();
 			Auction auction = auctionService.getByProductId(productId);
-			Description description = descriptionServiceImpl
+			Description description = descriptionService
 					.getByProductId(productId);
 
 			product.setDescription(description);
@@ -185,20 +184,20 @@ public class ProductServiceImpl implements ProductService {
 
 		return products;
 	}
-	
-	public void deleteItemById(int id){
+
+	public void deleteItemById(int id) {
 		productDAO.deleteElementById(id);
 	}
 
 	@Override
 	public List<Product> getNotClosedBySubCategoryId(int subCategoryId,
 			int number) {
-		List<Product> productList = productDAO
-				.getNotClosedListBySubCategoryId(subCategoryId, number);
+		List<Product> productList = productDAO.getNotClosedListBySubCategoryId(
+				subCategoryId, number);
 		for (Product product : productList) {
 			int productId = product.getIdProduct();
 			Auction auction = auctionService.getByProductId(productId);
-			Description description = descriptionServiceImpl
+			Description description = descriptionService
 					.getByProductId(productId);
 
 			product.setDescription(description);

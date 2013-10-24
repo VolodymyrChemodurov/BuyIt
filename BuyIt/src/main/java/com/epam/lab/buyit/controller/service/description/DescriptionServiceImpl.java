@@ -3,17 +3,17 @@ package com.epam.lab.buyit.controller.service.description;
 import java.util.List;
 
 import com.epam.lab.buyit.controller.dao.description.DescriptionDAO;
-import com.epam.lab.buyit.controller.dao.image.ImageDAO;
+import com.epam.lab.buyit.controller.service.image.ImageServiceImpl;
 import com.epam.lab.buyit.model.Description;
 import com.epam.lab.buyit.model.Image;
 
 public class DescriptionServiceImpl implements DescriptionService {
 	private DescriptionDAO descriptionDAO;
-	private ImageDAO imageDAO;
+	private ImageServiceImpl imageService;
 
 	public DescriptionServiceImpl() {
 		descriptionDAO = new DescriptionDAO();
-		imageDAO = new ImageDAO();
+		imageService = new ImageServiceImpl();
 	}
 
 	@Override
@@ -30,11 +30,11 @@ public class DescriptionServiceImpl implements DescriptionService {
 	public Description createItem(Description item) {
 		int id = descriptionDAO.createElement(item);
 		item.setIdDescription(id);
-		
+
 		List<Image> imageList = item.getItemPhotos();
-		for(Image image: imageList){
+		for (Image image : imageList) {
 			image.setDescriptionId(id);
-			imageDAO.createElement(image);
+			imageService.createItem(image);
 		}
 		return item;
 	}
@@ -43,9 +43,9 @@ public class DescriptionServiceImpl implements DescriptionService {
 	public Description updateItem(Description item) {
 		descriptionDAO.updateElement(item);
 		List<Image> imageList = item.getItemPhotos();
-		for(Image image: imageList){
+		for (Image image : imageList) {
 			image.setDescriptionId(item.getIdDescription());
-			imageDAO.createElement(image);
+			imageService.createItem(image);
 		}
 		return item;
 	}
@@ -54,8 +54,8 @@ public class DescriptionServiceImpl implements DescriptionService {
 	public Description getByProductId(int productId) {
 		Description description = descriptionDAO
 				.getDescriptionByProductId(productId);
-		description.setItemPhotos(imageDAO.getImagesByDescriptionId(description
-				.getIdDescription()));
+		description.setItemPhotos(imageService
+				.getImagesByDescriptionId(description.getIdDescription()));
 		return description;
 	}
 

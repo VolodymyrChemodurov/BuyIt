@@ -7,8 +7,9 @@ import com.epam.lab.buyit.model.Category;
 import com.epam.lab.buyit.model.SubCategory;
 
 public interface CreatorService extends GenericService<Category> {
-	
+
 	SubCategory createSubCategory(SubCategory item);
+
 	List<SubCategory> getAllSubItems();
 
 }
