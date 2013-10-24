@@ -230,16 +230,14 @@
     <servlet-name>UserEditProductServlet</servlet-name>
     <url-pattern>/userEditProduct</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  	<servlet-name>leaveMessageServlet</servlet-name>
-  	<servlet-class>com.epam.lab.buyit.controller.web.servlet.LeaveMessageServlet</servlet-class>
+    <servlet-name>leaveMessageServlet</servlet-name>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.LeaveMessageServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>leaveMessageServlet</servlet-name>
-  	<url-pattern>/leave_message</url-pattern>
+    <servlet-name>leaveMessageServlet</servlet-name>
+    <url-pattern>/leave_message</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Error</servlet-name>
     <jsp-file>/jsp/error404.jsp</jsp-file>
@@ -596,6 +594,20 @@
     <url-pattern>/user_wall</url-pattern>
     <url-pattern>/leave_message</url-pattern>
     <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+  <filter>
+  	<filter-name>encodingSetterFilter</filter-name>
+  	<filter-class>com.epam.lab.buyit.controller.web.filter.EncodingSetterFilter</filter-class>
+  	<init-param>
+        <param-name>encoding</param-name>
+        <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>encodingSetterFilter</filter-name>
+  	<url-pattern>*</url-pattern>
+  	<dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
 </web-app>
