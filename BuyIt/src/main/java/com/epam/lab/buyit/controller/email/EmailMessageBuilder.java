@@ -1,9 +1,11 @@
 package com.epam.lab.buyit.controller.email;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
@@ -37,6 +39,8 @@ public class EmailMessageBuilder {
 	private String productSoldOnBuyItNowHtml = getPath("/html/productSoldOnBuyItNow.html");
 	private String noBodyBuyProductHtml = getPath("/html/noBodyByYouProductForm.html");
 	private String buyItNowHtml = getPath("/html/buyItNowForm.html");
+
+	private String test = getPath("/html/test.html");
 
 	private ArrayList<TextLineItem> lineList = new ArrayList<TextLineItem>();
 
@@ -90,8 +94,9 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("You have successfully registered", text, user
-				.getContact().getEmail());
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("You have successfully registered", text, user.getContact()
+				.getEmail());
 
 	}
 
@@ -126,7 +131,8 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Password recovery...", text, user.getContact()
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("Password recovery...", text, user.getContact()
 				.getEmail());
 
 	}
@@ -161,7 +167,8 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Place a bid...", text, buyer.getContact()
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("Place a bid...", text, buyer.getContact()
 				.getEmail());
 
 	}
@@ -196,7 +203,8 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Your lot was killd", text, buyer.getContact()
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("Your lot was killd", text, buyer.getContact()
 				.getEmail());
 	}
 
@@ -230,7 +238,9 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("You win a lot...", text, buyer.getContact()
+		
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("You win a lot...", text, buyer.getContact()
 				.getEmail());
 	}
 
@@ -265,7 +275,9 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Your product sold...", text, seller.getContact()
+		
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("Your product sold...", text, seller.getContact()
 				.getEmail());
 	}
 
@@ -301,8 +313,11 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Your product sold...", text, seller.getContact()
+		
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("Your product sold...", text, seller.getContact()
 				.getEmail());
+		
 	}
 
 	public void sendNoBodyBuyYourProductForm(User seller, Product product) {
@@ -334,9 +349,11 @@ public class EmailMessageBuilder {
 			} catch (IOException e) {
 				LOGGER.warn(e);
 			}
+		
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("Sorry nobody buy your product", text, seller.getContact()
+				.getEmail());
 		}
-		EmailSender.sendHtml("Sorry nobody buy your product", text, seller
-				.getContact().getEmail());
 	}
 
 	public void sendBuyItNowForm(User seller, Product product, User buyer,
@@ -371,8 +388,40 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("You buy product", text, buyer.getContact()
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("You buy product", text, buyer.getContact()
 				.getEmail());
+
+
+	}
+
+	public void sendTest(String toEmail) {
+		String text = "";
+		BufferedReader br = null;
+		try {
+			String currentLine = null;
+			br =  new BufferedReader(new InputStreamReader(
+				    new FileInputStream(test), "UTF-8"));
+			while ((currentLine = br.readLine()) != null) {
+				text += currentLine;
+				text += "\n";
+			}
+		} catch (FileNotFoundException e) {
+			LOGGER.error(e);
+		} catch (IOException e) {
+			LOGGER.error(e);
+		} finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+				LOGGER.warn(e);
+			}
+		}
+		System.out.println(text);
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("Test", text, toEmail);
+
+		
 	}
 
 	private static String getPath(String relativePath) {
