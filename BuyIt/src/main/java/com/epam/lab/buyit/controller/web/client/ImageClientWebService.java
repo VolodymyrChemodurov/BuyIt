@@ -17,12 +17,12 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 public class ImageClientWebService {
 
-	private static final Logger LOGGER = Logger
-			.getLogger(ImageClientWebService.class);
+	private static final Logger LOGGER = Logger.getLogger(ImageClientWebService.class);
 
 	private static URI baseUri;
 
-	static {		baseUri = UriBuilder.fromUri("http://localhost:8080/").build();
+	static {		
+		baseUri = UriBuilder.fromUri("http://localhost:8080/").build();
 	}
 
 	public String createImage(Image image) {
