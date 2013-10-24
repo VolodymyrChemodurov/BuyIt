@@ -113,7 +113,7 @@
 									<tbody>
 										<c:forEach items="${messages}" var="message">
 											<tr>
-												<td style="width: 20%"><a href="user_wall?id=${message.key.idUser}" class="btn btn-link"/>user${message.key.login}</td>
+												<td style="width: 20%"><a href="user_wall?id=${message.key.idUser}" class="btn btn-link"/>${message.key.login}</td>
 												<td>${message.value.message}</td>
 											</tr>
 										</c:forEach>
