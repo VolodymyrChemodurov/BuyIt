@@ -83,11 +83,10 @@
 							</div>
 						</div>
 						<div class="span7">
-							<legend>User information</legend>
-							<span class="label label-info">First name: ${userInfo.firstName}</span> 
-							<span class="label label-info">Last name: ${userInfo.lastName}</span>
+							<legend>${userInfo.login} information</legend>
+							<span class="label label-info">Full name: ${userInfo.firstName} ${userInfo.lastName}</span> 
 							<span class="label label-info">e-mail: ${userInfo.contact.email}</span>
-							
+							<c:if test="${userInfo.idUser ne user.idUser}">
 							<row>
 								<form class="form-inline" action="leave_message" method="POST">
 									<legend>You can leave your message here</legend>
@@ -98,7 +97,7 @@
 									<button type="submit" style='width: 10%' class="btn btn-primary">Leave</button>
 								</form>
 							</row>
-
+							</c:if>
 						</div>
 					</div>
 
