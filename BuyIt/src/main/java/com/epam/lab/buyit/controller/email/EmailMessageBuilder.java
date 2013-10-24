@@ -94,10 +94,9 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSenderThread sender = new EmailSenderThread();
-		sender.setProperties("You have successfully registered", text, user.getContact()
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("You have successfully registered", text, user.getContact()
 				.getEmail());
-		sender.run();
 
 	}
 
@@ -132,10 +131,9 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSenderThread sender = new EmailSenderThread();
-		sender.setProperties("Password recovery...", text, user.getContact()
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("Password recovery...", text, user.getContact()
 				.getEmail());
-		sender.run();
 
 	}
 
@@ -169,10 +167,9 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSenderThread sender = new EmailSenderThread();
-		sender.setProperties("Place a bid...", text, buyer.getContact()
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("Place a bid...", text, buyer.getContact()
 				.getEmail());
-		sender.run();
 
 	}
 
@@ -206,10 +203,9 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSenderThread sender = new EmailSenderThread();
-		sender.setProperties("Your lot was killd", text, buyer.getContact()
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("Your lot was killd", text, buyer.getContact()
 				.getEmail());
-		sender.run();
 	}
 
 	public void sendWinLotForm(User buyer, Product product, User seller) {
@@ -243,10 +239,9 @@ public class EmailMessageBuilder {
 			}
 		}
 		
-		EmailSenderThread sender = new EmailSenderThread();
-		sender.setProperties("You win a lot...", text, buyer.getContact()
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("You win a lot...", text, buyer.getContact()
 				.getEmail());
-		sender.run();
 	}
 
 	public void sendProductSoldOnAuctionForm(User seller, Product product,
@@ -281,10 +276,9 @@ public class EmailMessageBuilder {
 			}
 		}
 		
-		EmailSenderThread sender = new EmailSenderThread();
-		sender.setProperties("Your product sold...", text, seller.getContact()
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("Your product sold...", text, seller.getContact()
 				.getEmail());
-		sender.run();
 	}
 
 	public void sendProductSoldOnBuyItNowForm(User seller, Product product,
@@ -320,10 +314,9 @@ public class EmailMessageBuilder {
 			}
 		}
 		
-		EmailSenderThread sender = new EmailSenderThread();
-		sender.setProperties("Your product sold...", text, seller.getContact()
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("Your product sold...", text, seller.getContact()
 				.getEmail());
-		sender.run();
 		
 	}
 
@@ -357,10 +350,9 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		
-		EmailSenderThread sender = new EmailSenderThread();
-		sender.setProperties("Sorry nobody buy your product", text, seller.getContact()
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("Sorry nobody buy your product", text, seller.getContact()
 				.getEmail());
-		sender.run();
 		}
 	}
 
@@ -396,10 +388,10 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSenderThread sender = new EmailSenderThread();
-		sender.setProperties("You buy product", text, buyer.getContact()
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("You buy product", text, buyer.getContact()
 				.getEmail());
-		sender.run();
+
 
 	}
 
@@ -426,9 +418,9 @@ public class EmailMessageBuilder {
 			}
 		}
 		System.out.println(text);
-		EmailSenderThread sender = new EmailSenderThread();
-		sender.setProperties("Test", text, toEmail);
-		sender.run();
+		EmailSender sender = new EmailSender();
+		sender.sendEmail("Test", text, toEmail);
+
 		
 	}
 
