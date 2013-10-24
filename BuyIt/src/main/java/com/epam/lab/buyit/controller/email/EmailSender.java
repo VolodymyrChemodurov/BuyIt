@@ -14,8 +14,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.log4j.Logger;
 
-import sun.rmi.runtime.NewThreadAction;
-
 public class EmailSender implements Runnable {
 	private static final Logger LOGGER = Logger.getLogger(EmailSender.class);
 	private static final String username;
