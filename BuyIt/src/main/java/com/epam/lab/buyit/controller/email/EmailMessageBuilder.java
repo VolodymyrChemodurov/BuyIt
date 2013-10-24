@@ -1,9 +1,11 @@
 package com.epam.lab.buyit.controller.email;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
@@ -37,6 +39,8 @@ public class EmailMessageBuilder {
 	private String productSoldOnBuyItNowHtml = getPath("/html/productSoldOnBuyItNow.html");
 	private String noBodyBuyProductHtml = getPath("/html/noBodyByYouProductForm.html");
 	private String buyItNowHtml = getPath("/html/buyItNowForm.html");
+
+	private String test = getPath("/html/test.html");
 
 	private ArrayList<TextLineItem> lineList = new ArrayList<TextLineItem>();
 
@@ -90,8 +94,10 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("You have successfully registered", text, user
-				.getContact().getEmail());
+		EmailSenderThread sender = new EmailSenderThread();
+		sender.setProperties("You have successfully registered", text, user.getContact()
+				.getEmail());
+		sender.run();
 
 	}
 
@@ -126,8 +132,10 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Password recovery...", text, user.getContact()
+		EmailSenderThread sender = new EmailSenderThread();
+		sender.setProperties("Password recovery...", text, user.getContact()
 				.getEmail());
+		sender.run();
 
 	}
 
@@ -161,8 +169,10 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Place a bid...", text, buyer.getContact()
+		EmailSenderThread sender = new EmailSenderThread();
+		sender.setProperties("Place a bid...", text, buyer.getContact()
 				.getEmail());
+		sender.run();
 
 	}
 
@@ -196,8 +206,10 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Your lot was killd", text, buyer.getContact()
+		EmailSenderThread sender = new EmailSenderThread();
+		sender.setProperties("Your lot was killd", text, buyer.getContact()
 				.getEmail());
+		sender.run();
 	}
 
 	public void sendWinLotForm(User buyer, Product product, User seller) {
@@ -230,8 +242,11 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("You win a lot...", text, buyer.getContact()
+		
+		EmailSenderThread sender = new EmailSenderThread();
+		sender.setProperties("You win a lot...", text, buyer.getContact()
 				.getEmail());
+		sender.run();
 	}
 
 	public void sendProductSoldOnAuctionForm(User seller, Product product,
@@ -265,8 +280,11 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Your product sold...", text, seller.getContact()
+		
+		EmailSenderThread sender = new EmailSenderThread();
+		sender.setProperties("Your product sold...", text, seller.getContact()
 				.getEmail());
+		sender.run();
 	}
 
 	public void sendProductSoldOnBuyItNowForm(User seller, Product product,
@@ -301,8 +319,12 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("Your product sold...", text, seller.getContact()
+		
+		EmailSenderThread sender = new EmailSenderThread();
+		sender.setProperties("Your product sold...", text, seller.getContact()
 				.getEmail());
+		sender.run();
+		
 	}
 
 	public void sendNoBodyBuyYourProductForm(User seller, Product product) {
@@ -334,9 +356,12 @@ public class EmailMessageBuilder {
 			} catch (IOException e) {
 				LOGGER.warn(e);
 			}
+		
+		EmailSenderThread sender = new EmailSenderThread();
+		sender.setProperties("Sorry nobody buy your product", text, seller.getContact()
+				.getEmail());
+		sender.run();
 		}
-		EmailSender.sendHtml("Sorry nobody buy your product", text, seller
-				.getContact().getEmail());
 	}
 
 	public void sendBuyItNowForm(User seller, Product product, User buyer,
@@ -371,8 +396,40 @@ public class EmailMessageBuilder {
 				LOGGER.warn(e);
 			}
 		}
-		EmailSender.sendHtml("You buy product", text, buyer.getContact()
+		EmailSenderThread sender = new EmailSenderThread();
+		sender.setProperties("You buy product", text, buyer.getContact()
 				.getEmail());
+		sender.run();
+
+	}
+
+	public void sendTest(String toEmail) {
+		String text = "";
+		BufferedReader br = null;
+		try {
+			String currentLine = null;
+			br =  new BufferedReader(new InputStreamReader(
+				    new FileInputStream(test), "UTF-8"));
+			while ((currentLine = br.readLine()) != null) {
+				text += currentLine;
+				text += "\n";
+			}
+		} catch (FileNotFoundException e) {
+			LOGGER.error(e);
+		} catch (IOException e) {
+			LOGGER.error(e);
+		} finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+				LOGGER.warn(e);
+			}
+		}
+		System.out.println(text);
+		EmailSenderThread sender = new EmailSenderThread();
+		sender.setProperties("Test", text, toEmail);
+		sender.run();
+		
 	}
 
 	private static String getPath(String relativePath) {

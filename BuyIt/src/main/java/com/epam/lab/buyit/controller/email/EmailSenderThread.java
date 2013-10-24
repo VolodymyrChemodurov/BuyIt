@@ -14,18 +14,22 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.log4j.Logger;
 
-public class EmailSender {
-
-	private static final Logger LOGGER = Logger.getLogger(EmailSender.class);
+public class EmailSenderThread implements Runnable {
+	private static final Logger LOGGER = Logger.getLogger(EmailSenderThread.class);
 	private static final String username;
 	private static final String password;
 	private static final Properties props;
 	private static final String emailPropFilePath = "email.properties";
+	
+
+	private String subject = null;
+	private String text = null;
+	private String toEmail = null;
 
 	static {
 		props = new Properties();
 		try {
-			props.load(EmailSender.class.getClassLoader().getResourceAsStream(emailPropFilePath));
+			props.load(EmailSenderThread.class.getClassLoader().getResourceAsStream(emailPropFilePath));
 		} catch (IOException e) {
 			LOGGER.error(e);
 		}
@@ -33,8 +37,8 @@ public class EmailSender {
 		username = props.getProperty("mail.user");
 
 	}
-
-	public static void sendHtml(String subject, String text, String toEmail) {
+	@Override
+	public void run() {
 		Session session = Session.getInstance(props, new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(username, password);
@@ -51,11 +55,21 @@ public class EmailSender {
 			message.setContent(text, "text/html");
 
 			Transport.send(message);
-
+			
+			System.out.println(text);
+			
 			LOGGER.info("send to "+toEmail);
 		} catch (MessagingException e) {
 			LOGGER.warn(e);
 		}
+		
 	}
+	public void setProperties(String subject, String text, String toEmail){
+		this.subject = subject;
+		this.text = text;
+		this.toEmail = toEmail;
+	}
+
+		
 
 }
