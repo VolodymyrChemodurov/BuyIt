@@ -30,10 +30,10 @@
 					<li><a href="userAddProductServlet">Product</a></li>
 				</ul></li>
 		</c:if>
-		<li class=""><a href="registration" role="button"
-			style="padding-right: 0">
-				<button class="btn btn-default btn-warning" type="submit">Log
-					Out</button>
+		<li class=""><a role="button" style="padding-right: 0">
+				<button class="btn btn-default btn-warning" type="submit">
+					Log Out
+				</button>
 		</a></li>
 	</ul>
 </form>

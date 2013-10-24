@@ -1,9 +1,12 @@
 <ul id="topMenu" class="nav pull-right">
-	<li class=""><a href="registration" role="button"
-		style="padding-right: 0"><button class="btn btn-default btn-warning"
-				type="submit">Registration</button></a>
-	<li class=""><a href="#login" role="button" data-toggle="modal"
-		style="padding-right: 0"><span class="btn btn-default btn-success">Login</span></a>
+	<li class="">
+		<a href="registration" role="button" style="padding-right: 0">
+			<button class="btn btn-default btn-warning" type="submit">Registration</button>
+		</a>
+	<li class="">
+		<a href="#login" role="button" data-toggle="modal" style="padding-right: 0">
+			<span class="btn btn-default btn-success">Login</span>
+		</a>
 		<div id="login" class="modal hide fade in" tabindex="-1" role="dialog"
 			aria-labelledby="login" aria-hidden="false">
 			<div class="modal-header">
