@@ -7,7 +7,6 @@ import com.epam.lab.buyit.controller.dao.product.ProductDAO;
 import com.epam.lab.buyit.controller.dao.subcategory.SubCategoryDAO;
 import com.epam.lab.buyit.controller.service.description.DescriptionServiceImpl;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
-import com.epam.lab.buyit.model.Category;
 import com.epam.lab.buyit.model.Product;
 import com.epam.lab.buyit.model.SubCategory;
 
