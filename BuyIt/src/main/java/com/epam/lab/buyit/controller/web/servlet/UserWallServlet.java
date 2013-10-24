@@ -38,5 +38,5 @@ public class UserWallServlet extends HttpServlet {
 		request.setAttribute("messages", comments);
 		request.getRequestDispatcher("user_wall.jsp").forward(request, response);
 	}
-
+	
 }

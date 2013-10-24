@@ -89,10 +89,12 @@
 							<span class="label label-info">e-mail: ${userInfo.contact.email}</span>
 							
 							<row>
-								<form class="form-inline" action="#" method="POST">
+								<form class="form-inline" action="leave_message" method="POST">
 									<legend>You can leave your message here</legend>
 									<input type="text" style='width: 85%' class="input-small"
-										placeholder="Message">
+										placeholder="Message" name="message">
+									<input type="hidden" name="fromId" value="${user.idUser}">
+									<input type="hidden" name="toId" value="${userInfo.idUser}">
 									<button type="submit" style='width: 10%' class="btn btn-primary">Leave</button>
 								</form>
 							</row>

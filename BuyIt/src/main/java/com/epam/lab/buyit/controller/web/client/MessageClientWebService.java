@@ -23,7 +23,7 @@ public class MessageClientWebService {
 	private static URI baseUri;
 
 	static {
-		baseUri = UriBuilder.fromUri("http://localhost:8080/").build();
+		baseUri = UriBuilder.fromUri("http://localhost:8080/RESTfulWebService/rest/message/test").build();
 	}
 
 	public List<Message> getMessagesByUserId(int id) {
