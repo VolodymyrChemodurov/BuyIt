@@ -87,8 +87,8 @@ public class ProductServiceImpl implements ProductService {
 
 //		Description description = item.getDescription();
 //		description.setIdDescription(item.getIdProduct());
-//		descriptionServiceImpl.updateItem(description);
-//		
+		descriptionServiceImpl.updateItem(item.getDescription());
+		
 //		Auction auction = item.getAuction();
 //		auction.setIdDescription(item.getIdProduct());
 //		descriptionServiceImpl.updateItem(auction);

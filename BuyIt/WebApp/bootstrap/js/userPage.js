@@ -89,9 +89,6 @@ $("#buyNowCheck").change(function(){
 });
 
 
-$('#passwordBlockCancel').click(function() {
-	$('#changePasswordBlock').hide();
-});
 
 $('#oldPassword').change(function() {
 	var password = $("#oldPassword").val();

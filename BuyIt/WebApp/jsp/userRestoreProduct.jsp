@@ -60,38 +60,48 @@
 				<div width="200" class="left-menu">
 					<ul class="nav nav-list" id="productTabs">
 						<li class="nav-header">Product</li>
-						<li class="active"><a href="#">Create New</a></li>
+						<li class="active"><a href="#">Restore</a></li>
 						
 					</ul>
 				</div>
 				<!-- /left-menu -->
 
 				<div id="maContent" class="corAll5">
-					<form action="userAddProductServlet" method="post">
+					<form action="userRestoreProduct" method="post">
 					<div id="addNewProduct">
 						<div class="mycontent">
 							<h3>Create new auction</h3>
 							<div class="myrow">
 								<span class="span-1">Product name:</span> <span class="span-2"><input
-									name="productName" value="" /></span>
+									name="productName" value="${currentProduct.name}" /></span>
 							</div>
 							<div class="myrow">
 								<span class="span-1">Category:</span> <span class="span-2">
-									<select id="category" name="category">
-										<option value=""></option>
+									<select id="category" name="category" disabled="disabled">
 										<c:forEach var="category" items="${categories}">
-											<option value="${category.idCategory}">${category.name}</option>
+											<c:forEach var="sub" items="${category.listSubCategories}">
+												<c:if test="${sub.idSubCategory eq currentProduct.subCategoryId}">
+													<option value="${category.idCategory}">${category.name}</option>
+												</c:if>
+											</c:forEach>
+											
 										</c:forEach>
 								</select>
 								</span>
 							</div>
 							<div class="myrow">
 								<span class="span-1">Sub Category:</span> <span class="span-2">
-									<c:if test=""></c:if> <select disabled="disabled"
-									id="subCategory" name="subCategory">
-										<option value=""></option>
-
-								</select>
+									<c:forEach var="category" items="${categories}">
+											<c:forEach var="sub" items="${category.listSubCategories}">
+												<c:if test="${sub.idSubCategory eq currentProduct.subCategoryId}">
+												<select disabled="disabled" id="subCategory1" name="subCategory">
+													<option value="${sub.idSubCategory}">${sub.name}</option>
+												</select>
+												<input name="subCategory" style="display:none" value="${sub.idSubCategory}"/>
+												</c:if>
+											</c:forEach>
+									</c:forEach>
+								
 								</span>
 							</div>
 							
@@ -101,7 +111,7 @@
 								<div style="padding-left: 40px; padding-bottom: 20px;"
 									class="input-append date form_datetime"
 									data-format="yyyy-mm-dd hh:mm:ss">
-									<input name="endTime" size="16" type="text" value="" readonly style="height:20px; width:163px; border-radius:0; padding: 2px;"> <span
+									<input name="endTime" size="16" type="text" value="${currentProduct.auction.endTime}" readonly style="height:20px; width:163px; border-radius:0; padding: 2px;"> <span
 										class="add-on" style="height:20px; padding: 2px;"><i class="icon-remove"></i></span> <span
 										class="add-on" style="height:20px; border-radius:0; padding: 2px;"><i class="icon-calendar"></i></span>
 								</div>
@@ -115,34 +125,64 @@
 							<div id="form-container" style="padding-top: 40px">
 								<div class="myrow-sales">
 									<span style="margin-left: 0px; margin-right: 5px; width: 20px;"
-										class="span-3"> <input style="height: 14px;" id="auctionCheck" name="auctionCheck"
-										type="checkbox">
+										class="span-3">
+										<c:if test="${currentProduct.auction.startPrice ne 0.0}">
+										 	<input style="height: 14px;" checked="checked" id="auctionCheck" name="auctionCheck" type="checkbox">
+										</c:if>
+										<c:if test="${currentProduct.auction.startPrice eq 0.0}">
+										 	<input style="height: 14px;" id="auctionCheck" name="auctionCheck" type="checkbox">
+										</c:if>
 									</span> <span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 110px;"><b>Auction</b></span>
 									<span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 100px;">Start
-										price</span> <span class="span-2"><input type="text" id="startPrice"
-										readonly="readonly" style="width: 100px;" name="startPrice"
-										value="" /></span>
+										price</span> <span class="span-2">
+										<c:if test="${currentProduct.auction.startPrice ne 0.0}">
+										 	<input  id="startPrice" style="width: 100px;" name="startPrice" value="${currentProduct.auction.startPrice}" />
+										</c:if>
+										<c:if test="${currentProduct.auction.startPrice eq 0.0}">
+										 	<input id="startPrice" readonly="readonly" style="width: 100px;" name="startPrice" value="" />
+										</c:if>
+										
+										</span>
 
 								</div>
-								<div class="myrow-sales">
+									<div class="myrow-sales">
 									<span style="margin-left: 0px; margin-right: 5px; width: 20px;"
-										class="span-3"> <input style="height: 14px;" id="buyNowCheck" name="buyNowCheck" type="checkbox">
+										class="span-3">
+										<c:if test="${currentProduct.auction.buyItNow ne 0.0}">
+										 	<input style="height: 14px;" checked="checked" id="buyNowCheck" name="buyNowCheck" type="checkbox">
+										</c:if>
+										<c:if test="${currentProduct.auction.buyItNow eq 0.0}">
+										 	<input style="height: 14px;" id="buyNowCheck" name="buyNowCheck" type="checkbox">
+										</c:if>
 									</span> <span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 110px;"><b>Buy
 											it now</b></span> <span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 100px;">Price</span>
-									<span class="span-2"><input type="text" id="buyNowPrice"
-										readonly="readonly" style="width: 100px;" name="buyNowPrice"
-										value="" /></span>
+									<span class="span-2">
+									<c:if test="${currentProduct.auction.buyItNow ne 0.0}">
+										 	<input id="buyNowPrice" style="width: 100px;" name="buyNowPrice" value="${currentProduct.auction.buyItNow}" />
+										</c:if>
+										<c:if test="${currentProduct.auction.buyItNow eq 0.0}">
+										 	<input id="buyNowPrice" readonly="readonly" style="width: 100px;" name="buyNowPrice" value="" />
+										</c:if>
+									</span>
 								</div>
 								<div class="myrow-sales">
 									<span class="span-2"
 										style="padding-left: 140px; margin-left: 0px; margin-right: 5px; width: 100px;">Count</span>
-									<span class="span-2"><input type="text" id="count"
+									<c:if test="${currentProduct.auction.buyItNow ne 0.0 && currentProduct.auction.startPrice eq 0.0}">
+									<span class="span-2"><input id="count" 
+										style="width: 100px;" name="count"
+										value="${currentProduct.auction.count}" /></span>
+									</c:if>
+									<c:if test="${currentProduct.auction.startPrice ne 0.0}">
+									<span class="span-2"><input id="count" 
 										readonly="readonly" style="width: 100px;" name="count"
-										value="" /></span>
+										value="${currentProduct.auction.count}" /></span>
+									</c:if>
+									
 								</div>
 
 							</div>
@@ -231,7 +271,7 @@
 					
 					<div id="submitButtonWrapper">
 						<input style="display: none;" name="userId" value="${user.idUser}">
-						<button disabled="disabled" id="addProductSubmitButton" class="btn btn-success" type="submit">Create Auction</button>
+						<button disabled="disabled" id="addProductSubmitButton" class="btn btn-success" type="submit">Restore</button>
 					</div>
 				</form>
 				</div>

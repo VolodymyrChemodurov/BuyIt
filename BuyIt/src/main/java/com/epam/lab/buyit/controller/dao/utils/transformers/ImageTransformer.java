@@ -16,6 +16,8 @@ public class ImageTransformer implements TransformerInterface<Image> {
 			.getLogger(ImageTransformer.class);
 	private static final String CREATE_STATEMENT = "INSERT INTO images"
 			+ "(description_id, path) VALUES(?, ?)";
+	private static final String UPDATE_STATEMENT = "UPDATE images SET "
+			+ "description_id =?, path=? WHERE id_image=?";
 
 	@Override
 	public PreparedStatement fromObjectToCreatePS(Image elem,
@@ -35,8 +37,17 @@ public class ImageTransformer implements TransformerInterface<Image> {
 	@Override
 	public PreparedStatement fromObjectToUpdatePS(Image elem,
 			Connection connection) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(UPDATE_STATEMENT,
+					Statement.RETURN_GENERATED_KEYS);
+			statement.setInt(1, elem.getDescriptionId());
+			statement.setString(2, elem.getPath());
+			statement.setInt(3, elem.getIdImage());
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		}
+		return statement;
 	}
 
 	@Override

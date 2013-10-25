@@ -46,7 +46,7 @@
 				<li><a href="userProfile">Profile</a></li>
 				<li><a href="userSalesServlet">Sales</a></li>
 				<li id="active"><strong>Shopping</strong></li>
-				<li><a href="#">Comments</a></li>
+				<li><a href="userCommentsServlet">Comments</a></li>
 				<li><a href="userAddProductServlet">Product</a></li>
 			</ul>
 			<!-- / #vMenu -->
@@ -68,15 +68,17 @@
 						</c:if>
 						<c:if test="${not empty userActiveShopping}">
 							<h1>Active auctions in which you participate</h1>
+							<div id="table-wrapper">
+							<div id="table-scroll">
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th>Product Name</th>
-										<th>Start Time</th>
-										<th>End Time</th>
-										<th>Current price</th>
-										<th>Buy it now</th>
-										<th>My bid</th>
+										<th><span class="text">Product Name</span></th>
+										<th><span class="text">Start Time</span></th>
+										<th><span class="text">End Time</span></th>
+										<th><span class="text">Price</span></th>
+										<th><span class="text">My bid</span></th>
+										<th><span class="text">Buy</span></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -85,39 +87,52 @@
 											<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
 											<td>${product.auction.startTime}</td>
 											<td>${product.auction.endTime}</td>
+										 	<c:if test="${product.auction.currentPrice == 0}">
+											 	<td>---</td>
+											 	<td>---</td>
+										 	</c:if>
+											<c:if test="${product.auction.currentPrice != 0}">
 											<td>${product.auction.currentPrice}</td>
-											<td>${product.auction.buyItNow}</td>
 											<td>
-												<form action="" method="">
-														<c:forEach var="bids" items="${bids}">
-															<c:if test="${bids.auctionId eq product.auction.idAuction}">
-																<c:out value="${bids.amount}"/>
-															</c:if>
-														</c:forEach>
-												</form>
+												<c:forEach var="bids" items="${bids}">
+													<c:if test="${bids.auctionId eq product.auction.idAuction}">
+														<c:out value="${bids.amount}"/>
+													</c:if>
+												</c:forEach>
 											</td>
+											</c:if>
+											<c:if test="${product.auction.buyItNow == 0}">
+												<td>---</td>
+											</c:if>
+											<c:if test="${product.auction.buyItNow != 0}">
+												<td>${product.auction.buyItNow}</td>
+											</c:if>
 											
-
+											<c:if test="${product.auction.currentPrice != 0}">
 											<td>
 												<form>
 													<input type="hidden" value="${product.idProduct}" name="id" />
 													<button class="btn btn-primary"
-														style="padding: 0 4px 0 4px;"
+														style="width:100px;padding: 0 4px 0 4px;"
 														onclick="editProduct(${product.idProduct})">Plase a bid</button>
 												</form>
 											</td>
+											</c:if>
+											<c:if test="${product.auction.currentPrice == 0}">
 											<td>
 												<form action="" method="">
 													<input type="hidden" value="${product.idProduct}" name="id" />
 													<button class="btn btn-success"
-														style="padding: 0 4px 0 4px;" type="submit">Buy it Now</button>
+														style="width:100px;padding: 0 4px 0 4px;" type="submit">Buy it Now</button>
 												</form>
 											</td>
+											</c:if>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-
+							</div>
+							</div>
 						</c:if>
 					</div>
 					<div id="purchasedShopping"style="display: none;">
@@ -128,13 +143,17 @@
 						</c:if>
 						<c:if test="${not empty userPurchasedShopping}">
 							<h1>Auctions which you WON</h1>
+							<div id="table-wrapper">
+							<div id="table-scroll">
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th>Product Name</th>
-										<th>Start Time</th>
-										<th>End Time</th>
-										<th>Current price</th>
+										<th><span class="text">Product Name</span></th>
+										<th><span class="text">Start Time</span></th>
+										<th><span class="text">End Time</span></th>
+										<th><span class="text">Price</span></th>
+										<th><span class="text">My bid</span></th>
+										<th><span class="text">Buy</span></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -143,10 +162,32 @@
 											<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
 											<td>${product.auction.startTime}</td>
 											<td>${product.auction.endTime}</td>
+											<c:if test="${product.auction.currentPrice == 0}">
+											 	<td>---</td>
+											 	<td>---</td>
+										 	</c:if>
+											<c:if test="${product.auction.currentPrice != 0}">
 											<td>${product.auction.currentPrice}</td>
+											<td>
+												<c:forEach var="bids" items="${bids}">
+													<c:if test="${bids.auctionId eq product.auction.idAuction}">
+														<c:out value="${bids.amount}"/>
+													</c:if>
+												</c:forEach>
+											</td>
+											</c:if>
+											<c:if test="${product.auction.buyItNow == 0}">
+												<td>---</td>
+											</c:if>
+											<c:if test="${product.auction.buyItNow != 0}">
+												<td>${product.auction.buyItNow}</td>
+											</c:if>
+
 									</c:forEach>
 								</tbody>
 							</table>
+							</div>
+							</div>
 
 						</c:if>
 						
@@ -158,15 +199,17 @@
 						</c:if>
 						<c:if test="${not empty userLostShopping}">
 							<h1>Active auctions in which you participate</h1>
+							<div id="table-wrapper">
+							<div id="table-scroll">
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th>Product Name</th>
-										<th>Start Time</th>
-										<th>End Time</th>
-										<th>Current price</th>
-										<th>Buy it now</th>
-										<th>My bid</th>
+										<th><span class="text">Product Name</span>Product Name</th>
+										<th><span class="text">Start Time</span>Start Time</th>
+										<th><span class="text">End Time</span></th>
+										<th><span class="text">Price</span></th>
+										<th><span class="text">My bid</span></th>
+										<th><span class="text">Buy</span></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -175,22 +218,32 @@
 											<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
 											<td>${product.auction.startTime}</td>
 											<td>${product.auction.endTime}</td>
+											 <c:if test="${product.auction.currentPrice == 0}">
+											 	<td>---</td>
+											 	<td>---</td>
+										 	</c:if>
+											<c:if test="${product.auction.currentPrice != 0}">
 											<td>${product.auction.currentPrice}</td>
-											<td>${product.auction.buyItNow}</td>
 											<td>
-												<form action="" method="">
-														<c:forEach var="bids" items="${bids}">
-															<c:if test="${bids.auctionId eq product.auction.idAuction}">
-																<c:out value="${bids.amount}"/>
-															</c:if>
-														</c:forEach>
-												</form>
+												<c:forEach var="bids" items="${bids}">
+													<c:if test="${bids.auctionId eq product.auction.idAuction}">
+														<c:out value="${bids.amount}"/>
+													</c:if>
+												</c:forEach>
 											</td>
+											</c:if>
+											<c:if test="${product.auction.buyItNow == 0}">
+												<td>---</td>
+											</c:if>
+											<c:if test="${product.auction.buyItNow != 0}">
+												<td>${product.auction.buyItNow}</td>
+											</c:if>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-
+							</div>
+							</div>
 						</c:if>						
 					</div>
 

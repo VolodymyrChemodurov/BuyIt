@@ -10,35 +10,43 @@
 	</c:if>
 	<c:if test="${not empty userEndedSales}">
 		<h1>Ended sales</h1>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Product Name</th>
-					<th>Start Time</th>
-					<th>End Time</th>
+		<div id="table-wrapper">
+			<div id="table-scroll">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th><span class="text">Product Name</span></th>
+							<th><span class="text">Start Time</span></th>
+							<th><span class="text">End Time</span></th>
 
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="product" items="${userEndedSales}">
-					<tr>
-						<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
-						<td>${product.auction.startTime}</td>
-						<td>${product.auction.endTime}</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="product" items="${userEndedSales}">
+							<tr>
+								<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
+								<td>${product.auction.startTime}</td>
+								<td>${product.auction.endTime}</td>
 
-						<td>
-								<button class="btn btn-success" style="padding: 0 4px 0 4px;"
-									onclick="restoreProduct(${product.idProduct})">restore</button>
-						</td>
-						<td>
-							<button class="btn btn-danger" style="padding: 0 4px 0 4px;"
-								 onclick="deleteEndedSales(${product.idProduct})">delete</button></td>
-					</tr>
-				</c:forEach>
+								<td>
+									<form action="userRestoreProduct" method="get">
+										<input class="text" style="display: none" name="productId" value="${product.idProduct}">
+										<button type="submit" class="btn btn-success" style="width:60px; padding: 0 4px 0 4px;"
+											onclick="editProduct(${product.idProduct})">restore</button>
+									</form>
+								</td>
+								<td>
+									<button class="btn btn-danger" style="width:60px; padding: 0 4px 0 4px;"
+										onclick="deleteEndedSales(${product.idProduct})">delete</button>
+								</td>
+							</tr>
+						</c:forEach>
 
 
-			</tbody>
-		</table>
+					</tbody>
+				</table>
+			</div>
+		</div>
 
 	</c:if>
 </div>

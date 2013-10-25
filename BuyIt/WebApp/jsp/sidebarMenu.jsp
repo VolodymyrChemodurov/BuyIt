@@ -10,7 +10,7 @@
 					<c:forEach var="sub" items="${category.listSubCategories}">
 					<li>
 						<a href="select_category?id=${sub.idSubCategory}&categoryId=${category.idCategory}">
-							<i class="icon-chevron-right"></i>${sub.name}
+							<i style="vertical-align: middle;" class="icon-chevron-right"></i>${sub.name}
 						</a>
 					</li>
 					</c:forEach>
@@ -21,7 +21,7 @@
 					<c:forEach var="sub" items="${category.listSubCategories}">
 					<li>
 						<a href="select_category?id=${sub.idSubCategory}&categoryId=${category.idCategory}">
-							<i class="icon-chevron-right"></i>${sub.name}
+							<i style="vertical-align: middle;" class="icon-chevron-right"></i>${sub.name}
 						</a>
 					</li>
 					</c:forEach>

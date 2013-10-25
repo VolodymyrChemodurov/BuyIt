@@ -218,6 +218,23 @@
 		<servlet-name>UserEditProductServlet</servlet-name>
 		<url-pattern>/userEditProduct</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserCommentsServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserCommentsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserCommentsServlet</servlet-name>
+		<url-pattern>/userCommentsServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserRestoreProductServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserRestoreProductServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserRestoreProductServlet</servlet-name>
+		<url-pattern>/userRestoreProduct</url-pattern>
+	</servlet-mapping>
+
 	
 	
 	
@@ -471,7 +488,22 @@
 		<servlet-name>UserEditProduct</servlet-name>
 		<url-pattern>/userEditProductJsp</url-pattern>
 	</servlet-mapping>
-
+	<servlet>
+		<servlet-name>UserComments</servlet-name>
+		<jsp-file>/jsp/userComments.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserComments</servlet-name>
+		<url-pattern>/userComments</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserRestoreProduct</servlet-name>
+		<jsp-file>/jsp/userRestoreProduct.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserRestoreProduct</servlet-name>
+		<url-pattern>/userRestoreProductJsp</url-pattern>
+	</servlet-mapping>
 
 
 

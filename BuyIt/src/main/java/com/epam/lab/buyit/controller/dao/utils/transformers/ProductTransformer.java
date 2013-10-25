@@ -16,7 +16,7 @@ public class ProductTransformer implements TransformerInterface<Product> {
 	private static final String CREATE_STATEMENT = "INSERT INTO products"
 			+ "(name, sub_category_id, user_id, delivery, deleted) VALUES(?, ?, ?, ?, ?)";
 	private static final String UPDATE_STATEMENT = "UPDATE products SET "
-			+ "name=?, sub_category_id=?, user_id=?, delivery=? deleted=? WHERE id_product=?";
+			+ "name=?, sub_category_id=?, user_id=?, delivery=?, deleted=? WHERE id_product=?";
 
 	@Override
 	public PreparedStatement fromObjectToCreatePS(Product elem,

@@ -6,10 +6,20 @@ label.valid {
 	text-indent: -9999px;
 
 }
-
 label.error, #logindiv {
+	heigth:24px;
 	font-weight: italic;
 	color: red;
-	padding: 2px 8px;
-	margin-top: 2px;
+	display: inline-block;
+	padding-left: 5px;
+	margin-top: 0;
 }
+
+label.valid1 {
+	heigth:24px;
+	width: 20px;
+	font-weight: italic;
+	display: inline-block;
+}
+
+

@@ -17,6 +17,11 @@ public class ChangePasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UserServiceImpl userService = new UserServiceImpl();
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.sendRedirect("userProfile");
+	
+	}	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String newPassword = (String) request.getParameter("newPassword");
@@ -25,9 +30,12 @@ public class ChangePasswordServlet extends HttpServlet {
 		if(UserValidation.checkingPassword(newPassword, confirmPassword)){
 			userService.updateItem(user.setPassword(MD5Encryptor.encrypt(newPassword)));
 			session.setAttribute("user", user);
+			request.setAttribute("passwordSuccess", "Password changed");
+		} else {
+			request.setAttribute("passwordFailed", "Incorrect new password");
 		}
-		response.sendRedirect("userProfile");
-	
-	}
+		request.getRequestDispatcher("userProfile").forward(request,
+				response);
+		}
 
 }

@@ -48,7 +48,7 @@
 				<li id="active"><strong>Profile</strong></li>
 				<li><a href="userSalesServlet">Sales</a></li>
 				<li><a href="userShoppingServlet">Shopping</a></li>
-				<li><a href="#">Comments</a></li>
+				<li><a href="userCommentsServlet">Comments</a></li>
 				<li><a href="userAddProductServlet">Product</a></li>
 			</ul>
 			<!-- / #vMenu -->
@@ -57,26 +57,42 @@
 					<div class="avatar-wrapper">
 						<img src="${user.avatar}">
 					</div>
-					<a style="color:white; padding-left: 20px;"><i class="icon-user"></i>Change avatar</a>
+					<a style="cursor:pointer;color:white; padding-left: 20px;"><i class="icon-user"></i>Change avatar</a>
 					<br>
-					<a onclick="showPasswordBlock()" id="passwordLink"style="color:white; padding-left: 20px;"><i class="icon-user"></i>Change password</a>
-					<div id="changePasswordBlock" style="display:none;">
-						<form action="changePasswordServlet" method="post">
+					<a onclick="showPasswordBlock()" id="passwordLink"style="cursor:pointer; color:white; padding-left: 20px;"><i class="icon-user"></i>Change password</a>
+					<c:if test="${(not empty passwordFailed) || (not empty passwordSuccess)}">
+						<div id="changePasswordBlock">
+					</c:if>
+					<c:if test="${(empty passwordFailed) && (empty passwordSuccess)}">
+						<div id="changePasswordBlock" style="display:none">
+					</c:if>
+					
+						<form id="changePasswordForm"action="changePasswordServlet" method="post">
 							<span style="color:green; font-size: 14px;">Change password block</span>
 							<input id="login" style="display: none; color:green;" name="login" value="${user.login}"/>
 							<input id="oldPassword" type="password" placeholder="Old password" name="oldPassword"/>
 							<input id="newPassword" type="password" placeholder="New password" name="newPassword"/>
 							<input id="confirmPassword" type="password" placeholder="Confirm password" name="confirmPassword"/>
 							<div id="passwordChangeResult" style="display: none; color:green;"><b>Password changed</b></div>
-							<button id="passwordBlockApply" type="submit" style="width: 92px; margin-top:2px;" class="btn btn-success">Apply</button>
-							<button id="passwordBlockCancel"style="width: 92px; margin-top:2px;" class="btn btn-danger">Cancel</button>
+							<c:if test="${(not empty passwordFailed)}">
+								<div id="passwordChangeResult" style="color:red;"><b>${passwordFailed}</b></div>
+							</c:if>
+							<c:if test="${(not empty passwordSuccess)}">
+								<div id="passwordChangeResult" style="color:green;"><b>${passwordSuccess}</b></div>
+							</c:if>
+							<c:if test="${(empty passwordFailed) && (empty passwordSuccess)}">
+								<div id="passwordChangeResult" style="display: none; color:green;"><b>Password changed</b></div>
+							</c:if>
+									
+						</form>	
+						<form id="exitPasswordBlock" action="changePasswordServlet" method="get">
 						</form>
+						<button form="changePasswordForm"id="passwordBlockApply" disabled="disabled" type="submit" style="width: 92px; margin-top:2px;" class="btn btn-success">Apply</button>
+						<button form="exitPasswordBlock"style="width: 92px; margin-top:2px;" class="btn btn-danger">Cancel</button>
 					</div>	
 						
 				</div>
 				<!-- /left-menu -->
-
-
 
 
 				<div id="maContent" class="corAll5">
@@ -141,21 +157,21 @@
 							<img id="userEditImage" src="bootstrap/img/edit.png" />
 						</div>
 						<div id="form-container" style="display: none">
-							<form action="userPageServlet" method="post">
-								<div class=myrow style="padding-top: 40px;">
-									<span class="span-2"><input id="firstName" name="firstName"
+							<form id="userUpdateContainer" action="userPageServlet" method="post">
+								<div class="myrow" style="padding-top: 40px;">
+									<span class="span-2"><input id="firstName" type="text" name="firstName"
 										value="${user.firstName}" /> </span>
 								</div>
-								<div class=myrow>
-									<span class="span-2"><input name="lastName"
+								<div class="myrow">
+									<span class="span-2"><input type="text" name="lastName"
 										value="${user.lastName}" /> </span>
 								</div>
-								<div class=myrow style="padding-top: 70px;">
+								<div class="myrow" style="padding-top: 70px;">
 									<span class="span-2"><input name="city"
 										value="${user.contact.address.city}" />
 									</span>
 								</div>
-								<div class=myrow>
+								<div class="myrow">
 									<span class="span-2">
 										<select id="region" name="region">
 											<option value="${user.contact.address.region}">${user.contact.address.region}</option>
@@ -167,31 +183,31 @@
 										</select>
 									</span>
 								</div>
-								<div class=myrow>
-									<span class="span-2"><input name="street"
+								<div class="myrow">
+									<span class="span-2"><input type="text" name="street"
 										value="${user.contact.address.street}" /> </span>
 								</div>
-								<div class=myrow>
-									<span class="span-2"><input name="house"
+								<div class="myrow">
+									<span class="span-2"style="width:120px;"><input type="text" name="house"
 										style="width: 85px;" value="${user.contact.address.house}" />
-									</span> <span class="span-2"><input name="flat"
+									</span> <span class="span-2" style="margin-left:0;"><input type="text" name="flat"
 										style="width: 86px;" value="${user.contact.address.flat}" />
 									</span>
 								</div>
-								<div class=myrow>
-									<span class="span-2"><input name="zipCode"
+								<div class="myrow">
+									<span class="span-2"><input type="text" name="zipCode"
 										value="${user.contact.address.zipCode}" /> </span>
 								</div>
-								<div class=myrow style="padding-top: 40px;">
-									<span class="span-2"><input name="phone"
+								<div class="myrow" style="padding-top: 40px;">
+									<span class="span-2"><input type="text" name="phone"
 										value="${user.contact.phone}" /> </span>
-									<button type="submit" style="margin-left: 40px; width: 120px;"
+									<button type="submit" style="float:right; margin-right: 8px; width: 120px;"
 										class="btn btn-mini btn-success">Apply changes</button>
 								</div>
-								<div class=myrow>
-									<span class="span-2"><input name="email"
+								<div class="myrow">
+									<span class="span-2"><input type="text" name="email"
 										value="${user.contact.email}" /> </span> <button
-										id="btn-back" style="margin-left: 40px; width: 120px;"
+										id="btn-back" style="float: right; margin-right: 8px; width: 120px;"
 										class="btn btn-mini btn-danger" >Cancel	</button>
 								</div>
 							</form>
