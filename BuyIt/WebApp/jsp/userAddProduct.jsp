@@ -155,14 +155,14 @@
 								<div class="panel-heading">
 									<h4 style="padding-left: 40px;" class="panel-title">
 										<a class="accordion-toggle" data-toggle="collapse"
-											data-parent="#accordion" href="#collapseTwo">Images <i style="vertical-align: middle;" class="icon-arrow-down"></i></a>
+											data-parent="#accordion" href="#collapseOne">Images <i style="vertical-align: middle;" class="icon-arrow-down"></i></a>
 									</h4>
 								</div>
-								<div id="collapseTwo" class="panel-collapse collapse">
+								<div id="collapseOne" class="panel-collapse collapse">
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
-											
-
+											asdasdasdasd
+											asdsad
 										</div>
 									</div>
 								</div>
@@ -172,11 +172,11 @@
 								<div class="panel-heading">
 									<h4 style="padding-left: 40px;" class="panel-title">
 										<a class="accordion-toggle" data-toggle="collapse"
-											data-parent="#accordion" href="#collapseOne">Delivery
+											data-parent="#accordion" href="#collapseTwo">Delivery
 											<i style="vertical-align: middle;" class="icon-arrow-down"></i></a>
 									</h4>
 								</div>
-								<div id="collapseOne" class="panel-collapse collapse">
+								<div id="collapseTwo" class="panel-collapse collapse">
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
@@ -192,11 +192,11 @@
 								<div class="panel-heading">
 									<h4 style="padding-left: 40px;" class="panel-title">
 										<a class="accordion-toggle" data-toggle="collapse"
-											data-parent="#accordion" href="#collapseTwo">Features
+											data-parent="#accordion" href="#collapseThree">Features
 											<i style="vertical-align: middle;" class="icon-arrow-down"></i></a>
 									</h4>
 								</div>
-								<div id="collapseTwo" class="panel-collapse collapse">
+								<div id="collapseThree" class="panel-collapse collapse">
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
@@ -211,11 +211,11 @@
 								<div class="panel-heading">
 									<h4 style="padding-left: 40px;" class="panel-title">
 										<a class="accordion-toggle" data-toggle="collapse"
-											data-parent="#accordion" href="#collapseThree">
+											data-parent="#accordion" href="#collapseFour">
 											Description <i style="vertical-align: middle;" class="icon-arrow-down"></i></a>
 									</h4>
 								</div>
-								<div id="collapseThree" class="panel-collapse collapse">
+								<div id="collapseFour" class="panel-collapse collapse">
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
