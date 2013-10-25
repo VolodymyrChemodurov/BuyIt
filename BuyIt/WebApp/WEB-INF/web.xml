@@ -243,6 +243,27 @@
 		<url-pattern>/leave_message</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>UserRestoreProductServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserRestoreProductServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserRestoreProductServlet</servlet-name>
+		<url-pattern>/userRestoreProduct</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserCommentsServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserCommentsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserCommentsServlet</servlet-name>
+		<url-pattern>/userCommentsServlet</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	
+	<servlet>
 		<servlet-name>Error</servlet-name>
 		<jsp-file>/jsp/error404.jsp</jsp-file>
 	</servlet>
