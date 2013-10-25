@@ -199,4 +199,16 @@ public class ProductServiceImpl implements ProductService {
 		return productList;
 	}
 
+	public List<Product> getBuyItemsByUserId(int id) {
+		List<Product> products = productDAO.getBuyElementsByUserId(id);
+		for (Product currentProduct : products) {
+			Auction auction = auctionService.getByProductId(currentProduct
+					.getIdProduct());
+			currentProduct.setAuction(auction);
+		}
+
+		return products;
+	}
+	
+
 }

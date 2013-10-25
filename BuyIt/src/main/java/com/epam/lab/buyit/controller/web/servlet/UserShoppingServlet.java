@@ -28,9 +28,11 @@ public class UserShoppingServlet extends HttpServlet {
 		List<Product> wonList = productService.getWonItemsByUserId(user.getIdUser());
 		List<Product> lostList = productService.getLostItemsByUserId(user.getIdUser());
 		List<Product> activeList = productService.getActiveItemsByUserId(user.getIdUser());
+		List<Product> buyList = productService.getBuyItemsByUserId(user.getIdUser());
 		request.getSession().setAttribute("userActiveShopping", activeList);
 		request.getSession().setAttribute("userPurchasedShopping", wonList);
 		request.getSession().setAttribute("userLostShopping", lostList);
+		request.getSession().setAttribute("userBuyShopping", buyList);
 		request.getSession().setAttribute("bids", bidService.getItemByUserId(user.getIdUser()));
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher("userShopping");

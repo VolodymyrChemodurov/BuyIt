@@ -23,8 +23,9 @@ public class ProductDAO implements ProductDAOInterface {
 	private final static String GET_PRD_BY_NAME_CATEGORY = "SELECT * FROM products WHERE deleted=false AND sub_category_id IN (SELECT id_sub_category FROM sub_categories WHERE category_id = (SELECT id_category FROM categories WHERE categories.name = ?)) AND products.name LIKE ? ORDER BY products.name";
 	private final static String GET_BY_USER_ID = "SELECT * FROM products WHERE deleted=false AND user_id = ?";
 	private final static String GET_WON_BY_USER_ID = "SELECT * FROM products WHERE deleted=false AND id_product IN (SELECT product_id	FROM (auctions A JOIN (SELECT * FROM bids WHERE user_id = ?) B  ON B.auction_id=A.id_auction) WHERE (amount = current_price)AND(status='closed'))";
-	private final static String GET_ACTIVE_BY_USER_ID = "SELECT * FROM products WHERE id_product IN (SELECT product_id	FROM (auctions A JOIN (SELECT * FROM bids WHERE user_id = ?) B  ON B.auction_id=A.id_auction) WHERE status='inProgress')";
+	private final static String GET_ACTIVE_BY_USER_ID = "SELECT * FROM products WHERE id_product IN (SELECT product_id	FROM (auctions A JOIN (SELECT * FROM bids WHERE user_id = ?) B  ON B.auction_id=A.id_auction) WHERE (amount <> buy_it_now)AND(status='inProgress'))";
 	private final static String GET_LOST_BY_USER_ID = "SELECT * FROM products WHERE deleted=false AND id_product IN (SELECT product_id FROM (auctions A JOIN (SELECT * FROM bids WHERE user_id = ?) B  ON B.auction_id=A.id_auction) WHERE (amount < current_price)AND(status='closed'))";
+	private final static String GET_BUY_BY_USER_ID = "SELECT * FROM products WHERE deleted=false AND id_product IN (SELECT product_id FROM (auctions A JOIN (SELECT * FROM bids WHERE user_id = ?) B  ON B.auction_id=A.id_auction) WHERE (amount = buy_it_now)AND(status='closed'))";
 	private final static String GET_BY_ID = "SELECT * FROM products WHERE deleted=false AND id_product = ?";
 	private final static String GET_ALL_PRODUCTS = "SELECT * FROM products WHERE deleted=false";
 	private final static String GET_BY_SUBCATEGORY_ID = "SELECT * FROM products WHERE deleted=false AND sub_category_id = ?";
@@ -373,6 +374,27 @@ public class ProductDAO implements ProductDAOInterface {
 			statement.setInt(1, subCategoryId);
 			statement.setTimestamp(2, new Timestamp(currentTime.getTime()));
 			statement.setInt(3, number);
+			result = statement.executeQuery();
+			while (result.next()) {
+				Product currentProduct = transformer.fromRSToObject(result);
+				products.add(currentProduct);
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return products;
+	}
+
+	public List<Product> getBuyElementsByUserId(int id) {
+		List<Product> products = new ArrayList<Product>();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_BUY_BY_USER_ID);
+			statement.setInt(1, id);
 			result = statement.executeQuery();
 			while (result.next()) {
 				Product currentProduct = transformer.fromRSToObject(result);
