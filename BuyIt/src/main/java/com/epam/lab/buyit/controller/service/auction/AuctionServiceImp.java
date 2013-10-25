@@ -63,22 +63,26 @@ public class AuctionServiceImp implements AuctionService {
 	@Override
 	public boolean buyItServe(int id, int count)
 			throws AuctionAllreadyClosedException, WrongProductCountException {
-		
+
 		Auction auction = getByProductId(id);
 		String oldStatus = auction.getStatus();
 		if (oldStatus.equals("closed"))
 			throw new AuctionAllreadyClosedException(
-					"Try to bought allready closed auction with id = " + auction.getIdAuction());
-		
+					"Try to bought allready closed auction with id = "
+							+ auction.getIdAuction());
+
 		int oldCount = auction.getCount();
 		if (oldCount < count || count <= 0)
-			throw new WrongProductCountException("Try to bought product with count "
-					+ oldCount + " < requested count" + count);
+			throw new WrongProductCountException(
+					"Try to bought product with count " + oldCount
+							+ " < requested count" + count);
 
-		String newStatus = "InProgress";
-		if(oldCount == count) newStatus = "closed";
-		
-		int result = auctionDAO.buyItServe(auction.getIdAuction(), oldCount - count, newStatus, oldCount, oldStatus);
+		String newStatus = "inProgress";
+		if (oldCount == count)
+			newStatus = "closed";
+
+		int result = auctionDAO.buyItServe(auction.getIdAuction(), oldCount
+				- count, newStatus, oldCount, oldStatus);
 		if (result == 1) {
 			return true;
 		} else
@@ -87,18 +91,25 @@ public class AuctionServiceImp implements AuctionService {
 	}
 
 	@Override
-	public int placeBidServe(int idProduct, double bidAmount) throws AuctionAllreadyClosedException, BidAmountException {
+	public int placeBidServe(int idProduct, double bidAmount)
+			throws AuctionAllreadyClosedException, BidAmountException {
 		Auction auction = auctionDAO.getByProductId(idProduct);
-		
-		double currentPrice = auction.getCurrentPrice(); 
-		if(bidAmount <= currentPrice) throw new BidAmountException("Bid amount is to small");
-		
+
+		double currentPrice = auction.getCurrentPrice();
+		if (bidAmount <= currentPrice)
+			throw new BidAmountException("Bid amount is to small");
+
 		String status = auction.getStatus();
-		if(status.equalsIgnoreCase("closed")) 
-			throw new AuctionAllreadyClosedException("Try to palce a bid on allready closed auction with id = " + auction.getIdAuction());
-		
-		int result = auctionDAO.bidServe(auction.getIdAuction(), bidAmount, currentPrice, status);
-		if(result == 1) return auction.getIdAuction();
-		else return 0;
+		if (status.equalsIgnoreCase("closed"))
+			throw new AuctionAllreadyClosedException(
+					"Try to palce a bid on allready closed auction with id = "
+							+ auction.getIdAuction());
+
+		int result = auctionDAO.bidServe(auction.getIdAuction(), bidAmount,
+				currentPrice, status);
+		if (result == 1)
+			return auction.getIdAuction();
+		else
+			return 0;
 	}
 }

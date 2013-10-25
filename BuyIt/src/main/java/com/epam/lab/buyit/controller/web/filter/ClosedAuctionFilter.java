@@ -21,6 +21,7 @@ public class ClosedAuctionFilter implements Filter {
 		if(httpRequest.getAttribute("auctionCloseException") != null) {
 			httpRequest.setAttribute("message", "Sorry, this auction allready closed.");
 			httpRequest.setAttribute("alert", "block");
+			request.setAttribute("messageHeader", "Closed");
 			httpRequest.getRequestDispatcher("message_page").forward(httpRequest, httpResponse);
 		}
 		else chain.doFilter(request, response);

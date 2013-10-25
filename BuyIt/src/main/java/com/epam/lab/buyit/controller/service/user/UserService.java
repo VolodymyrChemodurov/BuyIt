@@ -16,4 +16,8 @@ public interface UserService extends GenericService<User> {
 	void setBann(String id);
 	
 	void setUnbann(String id);
+	
+	User getUserByLogin(String login);
+
+    boolean changePasswordByUserId(int id, String newPassword);
 }

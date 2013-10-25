@@ -6,9 +6,9 @@ import java.util.regex.Pattern;
 import com.epam.lab.buyit.controller.setters.UserSetter;
 
 public enum Validator {
-	FIRST_NAME(UserSetter.FIRST_NAME.getField(), "^[A-Z][a-z]+{2,15}$", true),
-	LAST_NAME(UserSetter.LAST_NAME.getField(), "^[A-Z][a-z-]+{3,15}$", true),
-	LOGIN(UserSetter.LOGIN.getField(), "^[a-z0-9_-]{4,15}$", true),
+	FIRST_NAME(UserSetter.FIRST_NAME.getField(), "^[A-Za-z]+{2,15}$", true),
+	LAST_NAME(UserSetter.LAST_NAME.getField(), "^[A-Za-z-]+{3,15}$", true),
+	LOGIN(UserSetter.LOGIN.getField(), "^[A-Za-z0-9_-]{4,15}$", true),
 	PASSWORD(UserSetter.PASSWORD.getField(), "^[\\w_-]{6,15}$", true),
 	CONFIRM_PASSWORD("confirmPassword", "^[\\w_-]{6,15}$", false),
 	EMAIL(UserSetter.EMAIL.getField(), "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -16,8 +16,8 @@ public enum Validator {
 	PHONE(UserSetter.PHONE.getField(), "^\\d{10}$", false),
 	CITY(UserSetter.CITY.getField(), "^[A-Za-z]+$", false),
 	STREET(UserSetter.STREET.getField(), "^[A-Za-z]+$", false),
-	HOUSE(UserSetter.HOUSE.getField(), "^[\\d]{1,3}[a-z]?$", false),
-	FLAT(UserSetter.FLAT.getField(), "^[\\d]{1,3}[a-z]?$", false),
+	HOUSE(UserSetter.HOUSE.getField(), "^[\\d]{1,3}[A-Za-z]?$", false),
+	FLAT(UserSetter.FLAT.getField(), "^[\\d]{1,3}[A-Za-z]?$", false),
 	ZIP_CODE(UserSetter.ZIP_CODE.getField(),"^\\d{5}$", false);
 
 	private String rule;

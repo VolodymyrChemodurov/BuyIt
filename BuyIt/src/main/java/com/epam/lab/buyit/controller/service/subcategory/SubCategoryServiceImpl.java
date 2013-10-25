@@ -17,7 +17,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 	// implement getBySubCategoryId method that configure products with auctions
 	private DescriptionServiceImpl descriptionService;
 	private ProductServiceImpl productService;
-	
+
 	public SubCategoryServiceImpl() {
 		subCategoryDAO = new SubCategoryDAO();
 		productDAO = new ProductDAO();
@@ -42,7 +42,12 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 
 	@Override
 	public List<SubCategory> getAllItems() {
-		throw new UnsupportedOperationException();
+		List<SubCategory> subCategories = subCategoryDAO.getAllSubCategories();
+		// for (SubCategory category : subCategories) {
+		// category.setListSubCategories(subCategoryDAO
+		// .getAllSubCategoriesByIdCategory(category.getIdCategory()));
+		// }
+		return subCategories;
 	}
 
 	@Override
@@ -63,7 +68,8 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 		List<SubCategory> subCategories = subCategoryDAO
 				.getAllSubCategoriesByIdCategory(id_category);
 		for (SubCategory subCategory : subCategories) {
-		subCategory.setProducts(productService.getBySubCategoryId(subCategory.getIdSubCategory()));
+			subCategory.setProducts(productService
+					.getBySubCategoryId(subCategory.getIdSubCategory()));
 		}
 		return subCategories;
 	}
@@ -90,7 +96,8 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 		List<SubCategory> subCategories = subCategoryDAO
 				.getAllSubCategoriesByIdCategory(id_category);
 		for (SubCategory subCategory : subCategories) {
-		subCategory.setProducts(productService.getNotClosedBySubCategoryId(subCategory.getIdSubCategory(), productNumber));
+			subCategory.setProducts(productService.getNotClosedBySubCategoryId(
+					subCategory.getIdSubCategory(), productNumber));
 		}
 		return subCategories;
 	}

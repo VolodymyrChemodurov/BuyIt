@@ -53,11 +53,12 @@ public class BidServiceImp implements BidService {
 	}
 
 	@Override
-	public boolean serveBid(int userId, int productId, double bidAmount) throws BidAmountException, AuctionAllreadyClosedException{
+	public boolean serveBid(int userId, int productId, double bidAmount)
+			throws BidAmountException, AuctionAllreadyClosedException {
 		int auctionId = 0;
-		if((auctionId = auctionService.placeBidServe(productId, bidAmount)) > 0) {
+		if ((auctionId = auctionService.placeBidServe(productId, bidAmount)) > 0) {
 			Bid userBid = bidDAO.getUserBid(userId, auctionId);
-			if(userBid != null) {
+			if (userBid != null) {
 				userBid.setAmount(bidAmount);
 				userBid.setTime(new Timestamp(System.currentTimeMillis()));
 				updateItem(userBid);
@@ -66,9 +67,13 @@ public class BidServiceImp implements BidService {
 				createItem(userBid);
 			}
 			return true;
-		}
-		else return false;
-		
+		} else
+			return false;
+
 	}
 
+	@Override
+	public int getWinUserIdByAuctionId(int id) {
+		return bidDAO.getWinUserIdByAuctionId(id);
+	}
 }

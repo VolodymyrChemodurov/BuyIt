@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.lab.buyit.controller.creator.UserCreator;
+import com.epam.lab.buyit.controller.email.EmailMessageBuilder;
 import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
 import com.epam.lab.buyit.controller.validator.UserValidation;
 import com.epam.lab.buyit.model.User;
@@ -21,6 +22,7 @@ public class RegistrationServlet extends HttpServlet {
 		Map<String, String[]> inputRegistrationValues = request
 				.getParameterMap();
 		UserServiceImpl userService = new UserServiceImpl();
+		EmailMessageBuilder emailMessageBuilder = new EmailMessageBuilder();
 		if (UserValidation.checkingInput(inputRegistrationValues)) {
 			if ((request.getParameter("adminRole") != null)
 					&& (request.getParameter("adminRole").equalsIgnoreCase("1"))) {
@@ -29,18 +31,22 @@ public class RegistrationServlet extends HttpServlet {
 				userService.createItem(user);
 				request.setAttribute("message",
 						"Congratulations! Registration was successful");
-				request.getRequestDispatcher("adminRegistration").forward(request,
-						response);
+				request.getRequestDispatcher("adminRegistration").forward(
+						request, response);
 			} else {
 				User user = new UserCreator().create(inputRegistrationValues);
 				userService.createItem(user);
 				request.setAttribute("message",
 						"Congratulations! Registration was successful");
+				emailMessageBuilder.sendSuccessRegistrationForm(user);
 				request.getRequestDispatcher("login_form").forward(request,
 						response);
 			}
 		} else {
-			response.sendRedirect("error404");
+			request.setAttribute("messageHeader", "Fail");
+			request.setAttribute("message", "Sorry, validation fail");
+			request.getRequestDispatcher("message_page").forward(request,
+					response);
 		}
 
 	}

@@ -203,6 +203,22 @@
 		<url-pattern>/createCategoryServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>ForgetPasswordServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.ForgetPasswordServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ForgetPasswordServlet</servlet-name>
+		<url-pattern>/forgetPasswordServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>userWallServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserWallServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>userWallServlet</servlet-name>
+		<url-pattern>/user_wall</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>UserAddProductServlet</servlet-name>
 		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserAddProductServlet</servlet-class>
 	</servlet>
@@ -219,27 +235,13 @@
 		<url-pattern>/userEditProduct</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>UserCommentsServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserCommentsServlet</servlet-class>
+		<servlet-name>leaveMessageServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.LeaveMessageServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>UserCommentsServlet</servlet-name>
-		<url-pattern>/userCommentsServlet</url-pattern>
+		<servlet-name>leaveMessageServlet</servlet-name>
+		<url-pattern>/leave_message</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>UserRestoreProductServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.UserRestoreProductServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UserRestoreProductServlet</servlet-name>
-		<url-pattern>/userRestoreProduct</url-pattern>
-	</servlet-mapping>
-
-	
-	
-	
-	
-	
 	<servlet>
 		<servlet-name>Error</servlet-name>
 		<jsp-file>/jsp/error404.jsp</jsp-file>
@@ -441,6 +443,14 @@
 		<url-pattern>/login_form</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>userWall</servlet-name>
+		<jsp-file>/jsp/user_wall.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>userWall</servlet-name>
+		<url-pattern>/user_wall.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>UserSales</servlet-name>
 		<jsp-file>/jsp/userSales.jsp</jsp-file>
 	</servlet>
@@ -504,9 +514,6 @@
 		<servlet-name>UserRestoreProduct</servlet-name>
 		<url-pattern>/userRestoreProductJsp</url-pattern>
 	</servlet-mapping>
-
-
-
 	<filter>
 		<filter-name>sideMenuFilter</filter-name>
 		<filter-class>com.epam.lab.buyit.controller.web.filter.SideMenuFilter</filter-class>
@@ -529,6 +536,7 @@
 		<url-pattern>/userSalesServlet</url-pattern>
 		<url-pattern>/userShoppingServlet</url-pattern>
 		<url-pattern>/bid_serve</url-pattern>
+		<url-pattern>/user_wall</url-pattern>
 	</filter-mapping>
 	<filter>
 		<filter-name>bidFilter</filter-name>
@@ -602,6 +610,22 @@
 		<url-pattern>/userSalesServlet</url-pattern>
 		<url-pattern>/userShoppingServlet</url-pattern>
 		<url-pattern>/bid_serve</url-pattern>
+		<url-pattern>/user_wall</url-pattern>
+		<url-pattern>/leave_message</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter>
+		<filter-name>encodingSetterFilter</filter-name>
+		<filter-class>com.epam.lab.buyit.controller.web.filter.EncodingSetterFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingSetterFilter</filter-name>
+		<url-pattern>*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>

@@ -10,14 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.epam.lab.buyit.controller.builder.BidBuilder;
+import com.epam.lab.buyit.controller.email.EmailMessageBuilder;
 import com.epam.lab.buyit.controller.exception.AuctionAllreadyClosedException;
 import com.epam.lab.buyit.controller.exception.WrongProductCountException;
 import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
 import com.epam.lab.buyit.controller.service.bid.BidServiceImp;
-import com.epam.lab.buyit.controller.service.product.ProductService;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
+import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
 import com.epam.lab.buyit.model.Auction;
 import com.epam.lab.buyit.model.Bid;
+import com.epam.lab.buyit.model.Product;
 import com.epam.lab.buyit.model.User;
 
 public class BuyItServeServlet extends HttpServlet {
@@ -25,12 +27,14 @@ public class BuyItServeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AuctionServiceImp auctionService;
 	private BidServiceImp bidService;
-	private ProductService productService;
+	private ProductServiceImpl productService;
+	private UserServiceImpl userService;
 
 	public void init() {
 		auctionService = new AuctionServiceImp();
 		bidService = new BidServiceImp();
 		productService = new ProductServiceImpl();
+		userService = new UserServiceImpl();
 	}
 
 	protected void doPost(HttpServletRequest request,
@@ -54,11 +58,11 @@ public class BuyItServeServlet extends HttpServlet {
 						.getCount();
 				if (realCount == 0 || realCount < count) {
 					LOGGER.warn("Buy It query was failed");
-					request.setAttribute("queryFail", true);
+					request.setAttribute("queryFail",
+							"Sorry, someone ahead you");
 				} else {
 					successServe(idProduct, realCount, request);
 				}
-
 			}
 		} catch (AuctionAllreadyClosedException e) {
 			LOGGER.warn(e);
@@ -77,15 +81,21 @@ public class BuyItServeServlet extends HttpServlet {
 			WrongProductCountException {
 		boolean result = false;
 		if (auctionService.buyItServe(idProduct, count)) {
+			EmailMessageBuilder emailMessageBuilder = new EmailMessageBuilder();
 			LOGGER.info("Successful purchase");
+			Product product = productService.getItemById(idProduct);
 			Auction auction = auctionService.getByProductId(idProduct);
-			User user = (User) request.getSession(false).getAttribute("user");
+			User seller = userService.getItemById(product.getUserId());
+			User buyer = (User) request.getSession(false).getAttribute("user");
 			Bid bid = BidBuilder.build(auction.getIdAuction(),
-					user.getIdUser(), auction.getBuyItNow());
+					buyer.getIdUser(), auction.getBuyItNow());
 			bidService.createItem(bid);
 
-			request.setAttribute("product",
-					productService.getItemById(idProduct));
+			emailMessageBuilder.sendProductSoldOnBuyItNowForm(seller, product,
+					buyer, count);
+			emailMessageBuilder.sendBuyItNowForm(seller, product, buyer, count);
+
+			request.setAttribute("product", product);
 			request.setAttribute("actionMessage", "You bought");
 			request.setAttribute("bidAmount", bid.getAmount());
 			request.setAttribute("count", count);
@@ -94,7 +104,6 @@ public class BuyItServeServlet extends HttpServlet {
 		} else {
 			return result;
 		}
-
 	}
 
 }

@@ -16,26 +16,34 @@ import com.epam.lab.buyit.model.User;
 public class ChangePasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UserServiceImpl userService = new UserServiceImpl();
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("userProfile");
-	
-	}	
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String newPassword = (String) request.getParameter("newPassword");
-		String confirmPassword = (String) request.getParameter("confirmPassword");
+		String confirmPassword = (String) request
+				.getParameter("confirmPassword");
 		User user = (User) session.getAttribute("user");
-		if(UserValidation.checkingPassword(newPassword, confirmPassword)){
-			userService.updateItem(user.setPassword(MD5Encryptor.encrypt(newPassword)));
-			session.setAttribute("user", user);
-			request.setAttribute("passwordSuccess", "Password changed");
+		if (user.getRole() == true) {
+			if (UserValidation.checkingPassword(newPassword, confirmPassword)) {
+				userService.updateItem(user.setPassword(MD5Encryptor
+						.encrypt(newPassword)));
+				session.setAttribute("user", user);
+			}
+			response.sendRedirect("adminProfile");
 		} else {
-			request.setAttribute("passwordFailed", "Incorrect new password");
+			if (UserValidation.checkingPassword(newPassword, confirmPassword)) {
+				userService.updateItem(user.setPassword(MD5Encryptor
+						.encrypt(newPassword)));
+				session.setAttribute("user", user);
+				request.setAttribute("passwordSuccess", "Password changed");
+			} else {
+				request.setAttribute("passwordFailed", "Incorrect new password");
+			}
+			request.getRequestDispatcher("userProfile").forward(request,
+					response);
 		}
-		request.getRequestDispatcher("userProfile").forward(request,
-				response);
-		}
+
+	}
 
 }

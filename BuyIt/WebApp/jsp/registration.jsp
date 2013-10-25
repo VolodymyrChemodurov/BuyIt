@@ -92,7 +92,7 @@
 								<div class="controls">
 									<input type="text" id="firstName" name="firstName"
 										placeholder="First Name" class="tip" data-toggle="tooltip"
-										data-placement="right" title="Start only from capital letter">
+										data-placement="right" title="More than 2 characters">
 								</div>
 							</div>
 							<div class="control-group">
@@ -100,7 +100,7 @@
 								<div class="controls">
 									<input type="text" id="lastName" name="lastName"
 										placeholder="Last Name" class="tip" data-toggle="tooltip"
-										data-placement="right" title="Start only from capital letter">
+										data-placement="right" title="More than 3 characters">
 								</div>
 							</div>
 

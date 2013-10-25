@@ -56,22 +56,6 @@
 					<div class="avatar-wrapper">
 						<img src="${user.avatar}">
 					</div>
-					<a style="color:white; padding-left: 20px;"><i class="icon-user"></i>Change avatar</a>
-					<br>
-					<a onclick="showPasswordBlock()" id="passwordLink"style="color:white; padding-left: 20px;"><i class="icon-user"></i>Change password</a>
-					<div id="changePasswordBlock" style="display:none;">
-						<form action="changePasswordServlet" method="post">
-							<span style="color:green; font-size: 14px;">Change password block</span>
-							<input id="login" style="display: none; color:green;" name="login" value="${user.login}"/>
-							<input id="oldPassword" type="password" placeholder="Old password" name="oldPassword"/>
-							<input id="newPassword" type="password" placeholder="New password" name="newPassword"/>
-							<input id="confirmPassword" type="password" placeholder="Confirm password" name="confirmPassword"/>
-							<div id="passwordChangeResult" style="display: none; color:green;"><b>Password changed</b></div>
-							<button id="passwordBlockApply" type="submit" style="width: 92px; margin-top:2px;" class="btn btn-success">Apply</button>
-							<button id="passwordBlockCancel"style="width: 92px; margin-top:2px;" class="btn btn-danger">Cancel</button>
-						</form>
-					</div>	
-						
 				</div>
 				
 				<!-- /left-menu -->
@@ -80,69 +64,92 @@
 					<div class="span9">
 						<h3>Registration</h3>
 						<div class="well">
-						
-	                            	<form class="form-horizontal" method="post" id="createCategory-form"
+							<div class="row">
+								<div class="span3">
+									<form class="form-horizontal" method="post" id="createCategory-form"
 										action="createCategoryServlet">
 
 										<h4>Create new category</h4>
 										
 										<div class="control-group">
-											<label class="control-label" for="category">Category name </label>
+											<label class="control-label" for="categoryCreate">Category name </label>
 											<div class="controls">
-												<input type="text" id="category" name="categoryName" placeholder="Category name"
+												<input type="text" id="categoryCreate" name="categoryName" placeholder="Category name"
 													class="tip" data-toggle="tooltip" data-placement="right"
-													title="More then 4 characters Only number, small letters and '-' '_'">
+													title="More then 4 characters, only characters">
 											</div>
 										</div>
 										
 										<div class="control-group">
 											<div class="controls">
-												<button class="btn btn-large btn-success" type="submit"	id="register">Create</button>
+												<button class="btn btn-large btn-success" type="submit"	id="createButton">Create</button>
 											</div>
 										</div>
 										
 									</form>
-									
-									<hr class="soft" />
-										
+								</div>
+								
+								<div class="span3" style="float:right">
+									<c:if test="${(messageHeader!=null) && (message!=null)}">
+										<div class="alert alert-${alert}">
+											<h4>${messageHeader}</h4>
+											${message}
+										</div>
+									</c:if>
+								</div>
+							</div>
+								
+								<hr class="soft" />
+								
+							<div class="row">
+								
+								<div class="span3">
 									<form class="form-horizontal" method="post" id="createCategory-form"
 										action="createCategoryServlet">
 										
 										<h4>Create new Sub-category</h4>
 										
-										<h4>Select category</h4>
+										<h5>Select category</h5>
 										<div class="control-group">
-											<label class="control-label" for="categoryView">State</label>
+											<label class="control-label" for="categoryView">Category</label>
 											<div class="controls">
-												<select id="categoryView" name="selectedCategory">
-													<option value="">Select...</option>
-<%-- 													<c:forEach var="cat" items="${category}"> --%>
-<%-- 															<option value="${role}">${role}</option> --%>
-<%-- 													</c:forEach> --%>
+												<select id="categoryView1" name="selectedCategory">
+													<option>Select...</option>
+													<c:forEach var="category" items="${categories}">
+														<option value="${category.idCategory}">${category.name}</option>
+													</c:forEach>
 												</select>
 											</div>
 										</div>
 										
 										<div class="control-group">
-											<label class="control-label" for="firstName">First name
-											</label>
+											<label class="control-label" for="subCategoryCreate">Sub-category name </label>
 											<div class="controls">
-												<input type="text" id="firstName" name="firstName"
-													placeholder="First Name" class="tip" data-toggle="tooltip"
-													data-placement="right" title="Start only from capital letter">
+												<input type="text" id="subCategoryCreate" name="subCategoryCreate" placeholder="Sub-category name"
+													class="tip" data-toggle="tooltip" data-placement="right"
+													title="More then 4 characters, only characters">
 											</div>
 										</div>
 										
-										
-			
 										<div class="control-group">
 											<div class="controls">
-												
-												<button class="btn btn-large btn-success" type="submit" name="adminRole" value="1"
-													id="register">Create</button>
+												<button class="btn btn-large btn-success" type="submit"	id="createButton">Create</button>
 											</div>
 										</div>
+										
 									</form>
+								</div>
+								<div class="span3" style="float:right">
+									<c:if test="${(messageHeader1!=null) && (message1!=null)}">
+										<div class="alert alert-${alert1}">
+											<h4>${messageHeader1}</h4>
+											${message1}
+										</div>
+									</c:if>
+								</div>
+
+								
+							</div>
 						</div>
 					</div>
 				</div>
@@ -158,6 +165,7 @@
 
 	<jsp:include page="footer"></jsp:include>
 	<!-- Placed at the end of the document so the pages load faster ============================================= -->
+	
 	<script src="themes/js/jquery.js" type="text/javascript"></script>
 	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
@@ -167,7 +175,6 @@
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
 	<script src="themes/assets/js/jquery.validate.js"></script>
 	<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
-	<script src="themes/assets/js/script.js"></script>
 	<script src="bootstrap/js/search.js"></script>
 </body>
 </html>

@@ -28,20 +28,20 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void setBann(String id) {
-			int tmpId = Integer.parseInt(id);
-			User currentUser = userDAO.getElementById(tmpId);
-			currentUser.setBan(true);
-			userDAO.updateElement(currentUser);
+		int tmpId = Integer.parseInt(id);
+		User currentUser = userDAO.getElementById(tmpId);
+		currentUser.setBan(true);
+		userDAO.updateElement(currentUser);
 	}
 
 	@Override
 	public void setUnbann(String id) {
-			int tmpId = Integer.parseInt(id);
-			User currentUser = userDAO.getElementById(tmpId);
-			currentUser.setBan(false);
-			userDAO.updateElement(currentUser);
+		int tmpId = Integer.parseInt(id);
+		User currentUser = userDAO.getElementById(tmpId);
+		currentUser.setBan(false);
+		userDAO.updateElement(currentUser);
 	}
-	
+
 	@Override
 	public User getItemById(int id) {
 		User user = userDAO.getElementById(id);
@@ -106,10 +106,10 @@ public class UserServiceImpl implements UserService {
 	public boolean checkLogin(String login) {
 		return userDAO.checkLogin(login);
 	}
-	
+
 	public boolean checkPassword(String login, String password) {
 		boolean checkResult = false;
-		if (getUser(login, password)== null){
+		if (getUser(login, password) == null) {
 			checkResult = true;
 		}
 		return checkResult;
@@ -139,7 +139,8 @@ public class UserServiceImpl implements UserService {
 		if (user != null) {
 			Contact contact = contactDAO.getElementById(user.getIdUser());
 			user.setContact(contact);
-			contact.setAddress(addressDAO.getElementByUserId(contact.getIdContact()));
+			contact.setAddress(addressDAO.getElementByUserId(contact
+					.getIdContact()));
 		}
 	}
 
@@ -147,17 +148,33 @@ public class UserServiceImpl implements UserService {
 	public List<User> getWhoMakeBidInAuction(int auctionId) {
 		List<Bid> bidList = new ArrayList<Bid>();
 		List<User> userList = new ArrayList<User>();
-		
+
 		bidList = bidService.getByAuctionId(auctionId);
 		User currentUser = null;
 		for (Bid bid : bidList) {
 			currentUser = userDAO.getElementById(bid.getUserId());
 			currentUser.setBidList(new ArrayList<Bid>());
 			currentUser.getBidList().add(bid);
-			
+
 			userList.add(currentUser);
-			
+
 		}
 		return userList;
+	}
+
+	@Override
+	public User getUserByLogin(String login) {
+		User user = userDAO.getUserByLogin(login);
+		configUser(user);
+		return user;
+	}
+
+	@Override
+	public boolean changePasswordByUserId(int id, String newPassword) {
+		if (userDAO.changePasswordByUserId(id,
+				MD5Encryptor.encrypt(newPassword))) {
+			return true;
+		}
+		return false;
 	}
 }

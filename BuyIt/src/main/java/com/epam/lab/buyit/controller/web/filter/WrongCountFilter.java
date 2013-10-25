@@ -22,6 +22,7 @@ public class WrongCountFilter implements Filter {
 		if(httpRequest.getAttribute("wrongCountException") != null) {
 			httpRequest.setAttribute("message", "Sorry, you count exceeds the existing.");
 			httpRequest.setAttribute("alert", "block");
+			request.setAttribute("messageHeader", "Wrong count");
 			httpRequest.getRequestDispatcher("message_page").forward(httpRequest, httpResponse);
 		} else chain.doFilter(request, response);
 	}

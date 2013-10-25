@@ -12,4 +12,8 @@ public interface UserDAOInterface extends GenericDAO<User> {
 	boolean checkLogin(String login);
 	
 	User getUser(String login, String password);
+	
+	User getUserByLogin(String login);
+
+    boolean changePasswordByUserId(int id, String newPassword);
 }

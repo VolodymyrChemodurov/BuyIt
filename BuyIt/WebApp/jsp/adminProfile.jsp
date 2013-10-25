@@ -17,7 +17,7 @@
 	href="themes/bootshop/bootstrap.min.css" media="screen">
 <link href="themes/css/base.css" rel="stylesheet" media="screen">
 <!-- Bootstrap style responsive -->
-<link href="bootstrap/css/userpage.css" rel="stylesheet">
+<link href="bootstrap/css/adminpage.css" rel="stylesheet">
 <link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="themes/css/font-awesome.css" rel="stylesheet"
 	type="text/css">
@@ -49,11 +49,6 @@
 			</ul>
 			<!-- / #vMenu -->
 			<div style="overflow: hidden;">
-<!-- 				<div width="200" class="left-menu"> -->
-<!-- 					<div class="avatar-wrapper"> -->
-<%-- 						<img src="${user.avatar}"> --%>
-<!-- 					</div> -->
-<!-- 				</div> -->
 				
 				<div width="200" class="left-menu">
 					<div class="avatar-wrapper">
@@ -195,6 +190,7 @@
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
-	<script src="bootstrap/js/userPage.js"></script>
+	<script src="bootstrap/js/admin.js"></script>
+<!-- 	<script src="bootstrap/js/userPage.js"></script> -->
 </body>
 </html>

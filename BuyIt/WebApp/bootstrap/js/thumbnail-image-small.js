@@ -25,5 +25,6 @@ $(window).load(function() {
                 }
                 if(!flag)
                         $(this).css('margin-top', 260 - height - 100);
+                $(this).parent().parent().css('visibility','visible');
         });
 });

@@ -12,12 +12,12 @@
 <meta name="author" content="">
 <!--Less styles -->
 <!-- Other Less css file //different less files has different color scheam
-	<link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
-	<link rel="stylesheet/less" type="text/css" href="themes/less/classified.less">
-	<link rel="stylesheet/less" type="text/css" href="themes/less/amelia.less">  MOVE DOWN TO activate
-	-->
+        <link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
+        <link rel="stylesheet/less" type="text/css" href="themes/less/classified.less">
+        <link rel="stylesheet/less" type="text/css" href="themes/less/amelia.less">  MOVE DOWN TO activate
+        -->
 <!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
-	<script src="themes/js/less.js" type="text/javascript"></script> -->
+        <script src="themes/js/less.js" type="text/javascript"></script> -->
 
 <!-- Bootstrap style -->
 <link id="callCss" rel="stylesheet"
@@ -64,17 +64,16 @@
 						<div class="span9" style="min-height: 900px">
 							<div class="well">
 								<h5>Reset your password</h5>
-								<br> Please enter the email address for your account. A
-								verification code will be sent to you. Once you have received
-								the verification code, you will be able to choose a new password
-								for your account.<br> <br> <br>
-								<form>
+								<br> Please enter your login. A password will be sent to
+								you. Once you have received the password, you will be able to
+								choose a new password for your account.<br> <br> <br>
+								<form action="forgetPasswordServlet" method="post">
 									<div class="control-group">
-										<label class="control-label" for="inputEmail1">E-mail
-											address</label>
+										<label class="control-label" for="inputLogin">Your
+											login</label>
 										<div class="controls">
-											<input class="span3" type="text" id="inputEmail1"
-												placeholder="Email">
+											<input class="span3" type="text" id="inputLogin" name="login"
+												placeholder="Login">
 										</div>
 									</div>
 									<div class="controls">

@@ -21,12 +21,11 @@ public class BidAmountFilter implements Filter {
 		
 		if(httpRequest.getAttribute("bidAmountException") != null) {
 			httpRequest.setAttribute("message", "Sorry, your bid is to small.");
+			httpRequest.setAttribute("messageHeader", "Warning");
 			httpRequest.setAttribute("alert", "block");
 			httpRequest.getRequestDispatcher("message_page").forward(httpRequest, httpResponse);
 		}
-		else chain.doFilter(request, response);
-		
-		chain.doFilter(request, response);
+		else chain.doFilter(request, response);		
 	}
 	
 	public void init(FilterConfig fConfig) throws ServletException {

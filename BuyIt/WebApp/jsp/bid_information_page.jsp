@@ -47,7 +47,6 @@
 	<div id="mainBody">
 		<div class="container">
 			<div class="row">
-
 				<!-- Sidebar ================================================== -->
 				<jsp:include page="sidebarMenu"></jsp:include>
 				<!-- Sidebar end=============================================== -->
