@@ -15,4 +15,6 @@ public interface BidDAOInterface extends GenericDAO<Bid> {
 	Bid getUserBid(int userId, int auctionId);
 
 	int getWinUserIdByAuctionId(int id);
+
+	boolean updateBid(double amount, int userId, int auctionId);
 }

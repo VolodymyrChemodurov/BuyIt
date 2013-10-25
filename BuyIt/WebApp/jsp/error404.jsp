@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>ERROR 404</title>
 <link href="css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
 
-<style>
+	<style>
 .center {
 	text-align: center;
 	margin-left: auto;
@@ -17,26 +17,21 @@
 	margin-bottom: auto;
 	margin-top: auto;
 }
+
+body {
+	background: black;
+	color: #fc0;
+}
 </style>
 	<title>Error 404</title>
 <body>
 	<div class="hero-unit center">
-    <h1>
-    	Page Not Found 
-    	<br />
-   		<small>
-   			<font face="Tahoma" color="#EF5166" size="20">Error 404</font>
-   		</small>
-	</h1>
-    <br />
-    <p>The page you requested could not be found, either contact your webmaster or try again.</p>
-    <p>
-			<b>Or you could just press this neat little button:</b>
-		</p>
-    <a href="homePage" class="btn btn-large btn-info"><i
-			class="icon-home icon-white"></i> Take Me Home</a>
-  </div>
-  <br />
+		<a href="homePage"> <img alt="404" src="themes/images/404.jpg"
+			width="90%" height="100%">
+		</a>
+
+	</div>
+	<br />
 
 </body>
 

@@ -86,7 +86,7 @@ public class BuyItServeServlet extends HttpServlet {
 		boolean result = false;
 		
 		if (auctionService.buyItServe(idProduct, count)) {
-			LOGGER.info("Successful purchase");
+			
 			Product product = productService.getItemById(idProduct);
 			
 			User user = (User) request.getSession(false).getAttribute("user");
@@ -106,7 +106,7 @@ public class BuyItServeServlet extends HttpServlet {
 			request.setAttribute("actionMessage", "You bought");
 			request.setAttribute("bidAmount", bid.getAmount());
 			request.setAttribute("count", count);
-			
+			LOGGER.info("Successful purchase");
 			result = true;
 		}
 		return result;

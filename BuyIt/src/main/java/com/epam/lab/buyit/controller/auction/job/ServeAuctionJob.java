@@ -34,14 +34,10 @@ public class ServeAuctionJob implements Job {
 		LOGGER.info("Serving auction with id = " + auctionId);
 
 		Auction auction = auctionService.getItemById(auctionId);
-		LOGGER.info("Get " + auction);
 		if (auction.getStatus().equalsIgnoreCase("inProgress")) {
-			LOGGER.info("Closing " + auction);
 			auctionService.closeAuction(auctionId);
-			LOGGER.info("Closed " + auction);
 			Product product = productService
 					.getItemById(auction.getProductId());
-			LOGGER.info("GET product " + product);
 			User seller = userService.getItemById(product.getUserId());
 			User buyer = userService.getItemById(bidService
 					.getWinUserIdByAuctionId(auctionId));
