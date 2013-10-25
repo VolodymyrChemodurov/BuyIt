@@ -13,9 +13,7 @@ import com.epam.lab.buyit.controller.email.EmailMessageBuilder;
 import com.epam.lab.buyit.controller.exception.AuctionAllreadyClosedException;
 import com.epam.lab.buyit.controller.exception.BidAmountException;
 import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
-import com.epam.lab.buyit.controller.service.bid.BidService;
 import com.epam.lab.buyit.controller.service.bid.BidServiceImp;
-import com.epam.lab.buyit.controller.service.product.ProductService;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
 import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
 import com.epam.lab.buyit.model.Auction;
@@ -26,8 +24,8 @@ public class BidServeServlet extends HttpServlet {
 	private static final Logger LOGGER = Logger
 			.getLogger(BidServeServlet.class);
 	private static final long serialVersionUID = 1L;
-	private BidService bidService;
-	private ProductService productService;
+	private BidServiceImp bidService;
+	private ProductServiceImpl productService;
 	private AuctionServiceImp auctionService;
 	private UserServiceImpl userService;
 

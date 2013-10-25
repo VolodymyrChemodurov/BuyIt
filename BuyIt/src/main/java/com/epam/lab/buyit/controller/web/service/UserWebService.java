@@ -1,6 +1,7 @@
 package com.epam.lab.buyit.controller.web.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -14,6 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -57,7 +59,7 @@ public class UserWebService {
 	public JSONObject getUserById(@PathParam("id") int id,
 			@QueryParam("login") String login,
 			@QueryParam("password") String password) {
-		
+
 		LOGGER.info("getting user by id " + id);
 		if (authentication(login, password)) {
 			User user = userService.getItemById(id);
@@ -66,6 +68,31 @@ public class UserWebService {
 				LOGGER.info("sending user data");
 				return JSONBuilder.buildJSONObject(user, adapter);
 			}
+		}
+		return new JSONObject();
+	}
+
+	@GET
+	@Path("/bandle")
+	@Produces(MediaType.APPLICATION_JSON)
+	public JSONObject getUsersBundle(
+			@QueryParam("usersArray") String usersArray,
+			@QueryParam("login") String login,
+			@QueryParam("password") String password) throws JSONException {
+
+		LOGGER.info("getting users bundle");
+
+		List<User> usersBundle = new ArrayList<User>();
+		JSONObject jsonObject = new JSONObject(usersArray);
+		JSONArray jsonArray = jsonObject.getJSONArray("usersArray");
+		if (authentication(login, password)) {
+			for (int i = 0; i < jsonArray.length(); i++) {
+				int id = jsonArray.getInt(i);
+				User user = userService.getItemById(id);
+				usersBundle.add(user);
+			}
+			UserListSerializationAdapter adapter = new UserListSerializationAdapter();
+			return JSONBuilder.buildbuildJSONObject(usersBundle, adapter);
 		}
 		return new JSONObject();
 	}
@@ -92,12 +119,11 @@ public class UserWebService {
 			@QueryParam("login") String login,
 			@QueryParam("password") String password) {
 
-		StringBuilder infoString = new StringBuilder("try to login user with login = ")
-				.append(userLogin)
-				.append(" password = ")
-				.append(userPassword);
+		StringBuilder infoString = new StringBuilder(
+				"try to login user with login = ").append(userLogin)
+				.append(" password = ").append(userPassword);
 		LOGGER.info(infoString);
-		
+
 		if (authentication(login, password)) {
 			User user = userService.getUser(userLogin, userPassword);
 			if (user != null) {
@@ -115,7 +141,7 @@ public class UserWebService {
 	public JSONObject registerUser(JSONObject json,
 			@QueryParam("login") String login,
 			@QueryParam("password") String password) {
-		
+
 		LOGGER.info("try to register user");
 		if (authentication(login, password)) {
 			User user = new UserCreator().create(json);
@@ -134,35 +160,35 @@ public class UserWebService {
 	@GET
 	@Path("/check")
 	@Produces(MediaType.APPLICATION_JSON)
-	public JSONObject checkLogin(
-			@QueryParam("userLogin") String userLogin,
+	public JSONObject checkLogin(@QueryParam("userLogin") String userLogin,
 			@QueryParam("login") String login,
 			@QueryParam("password") String password) {
-		
+
 		JSONObject result = new JSONObject();
-		if(authentication(login, password)) {
+		if (authentication(login, password)) {
 			boolean checkResult = userService.checkLogin(userLogin);
 			try {
-				result.put("result", checkResult? "true": "false");
+				result.put("result", checkResult ? "true" : "false");
 			} catch (JSONException e) {
 				LOGGER.error(e);
 			}
 		}
 		return result;
 	}
-	
+
 	private boolean authentication(String login, String password) {
 		LOGGER.info("starting authentication...");
 		boolean authenticationResult = false;
 		if (login != null && password != null) {
 			if (login.equals(LOGIN) && password.equals(PASSWORD))
 				authenticationResult = true;
-		} 
-		
-		if(authenticationResult) {
+		}
+
+		if (authenticationResult) {
 			LOGGER.info("successful authentication");
-		} else LOGGER.info("authentication fails");
-		
+		} else
+			LOGGER.info("authentication fails");
+
 		return authenticationResult;
 	}
 

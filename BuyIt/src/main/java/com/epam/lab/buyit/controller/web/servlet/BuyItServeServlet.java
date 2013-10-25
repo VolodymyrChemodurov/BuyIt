@@ -82,14 +82,20 @@ public class BuyItServeServlet extends HttpServlet {
 		boolean result = false;
 		if (auctionService.buyItServe(idProduct, count)) {
 			EmailMessageBuilder emailMessageBuilder = new EmailMessageBuilder();
-			LOGGER.info("Successful purchase");
 			Product product = productService.getItemById(idProduct);
 			Auction auction = auctionService.getByProductId(idProduct);
 			User seller = userService.getItemById(product.getUserId());
 			User buyer = (User) request.getSession(false).getAttribute("user");
 			Bid bid = BidBuilder.build(auction.getIdAuction(),
 					buyer.getIdUser(), auction.getBuyItNow());
-			bidService.createItem(bid);
+
+			if (bidService
+					.getUserBid(buyer.getIdUser(), auction.getIdAuction()) == null) {
+				bidService.createItem(bid);
+			} else {
+				bidService.updateBid(auction.getBuyItNow(), buyer.getIdUser(),
+						auction.getIdAuction());
+			}
 
 			emailMessageBuilder.sendProductSoldOnBuyItNowForm(seller, product,
 					buyer, count);
@@ -99,6 +105,7 @@ public class BuyItServeServlet extends HttpServlet {
 			request.setAttribute("actionMessage", "You bought");
 			request.setAttribute("bidAmount", bid.getAmount());
 			request.setAttribute("count", count);
+			LOGGER.info("Successful purchase");
 			result = true;
 			return result;
 		} else {

@@ -23,6 +23,7 @@ public class BidDAO implements BidDAOInterface {
 	private final static String GET_ALL_BIDS = "SELECT * FROM bids";
 	private final static String GET_USER_BID = "SELECT * FROM bids WHERE auction_id = ? AND user_id = ?";
 	private final static String GET_WIN_USER_ID = "SELECT user_id FROM bids WHERE auction_id=? AND amount=(SELECT MAX(amount) FROM bids WHERE auction_id=?)";
+	private final static String UPDATE_BID = "UPDATE bids SET amount=? WHERE auction_id=? AND user_id=?";
 	private BidTransformer transformer;
 
 	public BidDAO() {
@@ -212,6 +213,27 @@ public class BidDAO implements BidDAOInterface {
 			DAOUtils.close(result, statement, connection);
 		}
 		return winUserId;
+	}
+
+	@Override
+	public boolean updateBid(double amount, int userId, int auctionId) {
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(UPDATE_BID);
+			statement.setDouble(1, amount);
+			statement.setInt(2, userId);
+			statement.setInt(3, auctionId);
+			int rows = statement.executeUpdate();
+			if (rows == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
+		return false;
 	}
 
 }

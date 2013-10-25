@@ -14,4 +14,8 @@ public interface BidService extends GenericService<Bid> {
 			throws BidAmountException, AuctionAllreadyClosedException;
 
 	int getWinUserIdByAuctionId(int id);
+
+	Bid getUserBid(int userId, int auctionId);
+
+	boolean updateBid(double amount, int userId, int auctionId);
 }
