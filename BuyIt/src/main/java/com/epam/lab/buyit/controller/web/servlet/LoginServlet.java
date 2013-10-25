@@ -24,7 +24,6 @@ public class LoginServlet extends HttpServlet {
 		String login = request.getParameter("login").trim();
 		String password = request.getParameter("password").trim();
 		User user = userService.getUser(login, password);
-
 		if (user != null) {
 			LOGGER.info(user.getLogin() + " sign in");
 			HttpSession session = request.getSession(true);
@@ -35,8 +34,10 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("alert", "error");
 				request.setAttribute("messageHeader", "Banned");
 				request.getRequestDispatcher("message_page").forward(request, response);
-			} else
-				response.sendRedirect("homePageServlet");
+			} else {
+				String returnTo = request.getParameter("returnTo");
+				response.sendRedirect(returnTo);
+			}
 		} else {
 			request.setAttribute("message", "Wrong login or password");
 			request.getRequestDispatcher("login_form").forward(request, response);

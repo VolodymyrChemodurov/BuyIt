@@ -73,6 +73,8 @@
 								style="text-decoration: none"><h5>Forget password?</h5></a>
 						</div>
 						<div class="control-group">
+							<input type="hidden" value="${returnTo}" name="returnTo">
+							${returnTo}
 							<button type="submit" class="btn btn-success">Sign in</button>
 						</div>
 					</form>

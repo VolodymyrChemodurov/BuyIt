@@ -1,6 +1,7 @@
 package com.epam.lab.buyit.controller.web.filter;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -25,6 +26,7 @@ public class LoginFilter implements Filter {
 		User user = (User) httpRequest.getSession(false).getAttribute("user");
 		if (user == null) {
 			httpRequest.setAttribute("message", "You must login first");
+			createReturnLink(httpRequest);
 			httpRequest.getRequestDispatcher("login_form").forward(httpRequest, httpResponse);
 		} else {
 			chain.doFilter(request, response);
@@ -35,4 +37,13 @@ public class LoginFilter implements Filter {
 
 	}
 
+	private void createReturnLink(HttpServletRequest request) {
+		StringBuffer link = request.getRequestURL();
+		if(request.getQueryString() != null) {
+			link.append("?").append(request.getQueryString());
+		}
+		request.setAttribute("returnTo", link);
+		//	Map<String, String[]> parameters = request.getParameterMap();
+		
+	}
 }
