@@ -51,7 +51,7 @@
 				<li><a href="userProfile">Profile</a></li>
 				<li><a href="userSalesServlet">Sales</a></li>
 				<li><a href="userShoppingServlet">Shopping</a></li>
-				<li><a href="#">Comments</a></li>
+				<li><a href="userCommentsServlet">Comments</a></li>
 				<li id="active"><strong>Product</strong></li>
 				
 			</ul>
@@ -100,7 +100,7 @@
 								<span class="span-1">End time</span>
 								<div style="padding-left: 40px; padding-bottom: 20px;"
 									class="input-append date form_datetime"
-									data-date="2013-10-23T15:25:00Z">
+									data-format="yyyy-mm-dd hh:mm:ss">
 									<input name="endTime" size="16" type="text" value="" readonly style="height:20px; width:163px; border-radius:0; padding: 2px;"> <span
 										class="add-on" style="height:20px; padding: 2px;"><i class="icon-remove"></i></span> <span
 										class="add-on" style="height:20px; border-radius:0; padding: 2px;"><i class="icon-calendar"></i></span>
@@ -115,52 +115,68 @@
 							<div id="form-container" style="padding-top: 40px">
 								<div class="myrow-sales">
 									<span style="margin-left: 0px; margin-right: 5px; width: 20px;"
-										class="span-3"> <input id="auctionCheck" name="auctionCheck"
+										class="span-3"> <input style="height: 14px;" id="auctionCheck" name="auctionCheck"
 										type="checkbox">
 									</span> <span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 110px;"><b>Auction</b></span>
 									<span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 100px;">Start
-										price</span> <span class="span-2"><input id="startPrice"
+										price</span> <span class="span-2"><input type="text" id="startPrice"
 										readonly="readonly" style="width: 100px;" name="startPrice"
 										value="" /></span>
 
 								</div>
 								<div class="myrow-sales">
 									<span style="margin-left: 0px; margin-right: 5px; width: 20px;"
-										class="span-3"> <input id="buyNowCheck" name="buyNowCheck" type="checkbox">
+										class="span-3"> <input style="height: 14px;" id="buyNowCheck" name="buyNowCheck" type="checkbox">
 									</span> <span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 110px;"><b>Buy
 											it now</b></span> <span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 100px;">Price</span>
-									<span class="span-2"><input id="buyNowPrice"
+									<span class="span-2"><input type="text" id="buyNowPrice"
 										readonly="readonly" style="width: 100px;" name="buyNowPrice"
 										value="" /></span>
 								</div>
 								<div class="myrow-sales">
 									<span class="span-2"
 										style="padding-left: 140px; margin-left: 0px; margin-right: 5px; width: 100px;">Count</span>
-									<span class="span-2"><input id="count"
+									<span class="span-2"><input type="text" id="count"
 										readonly="readonly" style="width: 100px;" name="count"
 										value="" /></span>
 								</div>
-
-
 
 							</div>
 						</div>
 
 
 						<div class="panel-group" id="accordion">
-							<div style="background-color: #eeeeee; margin-top:40px; padding-top: 3px;"
+							<div style="background-color: #eeeeee;  margin-top:40px;  padding-top: 3px;"
 								class="panel panel-default">
 								<div class="panel-heading">
 									<h4 style="padding-left: 40px;" class="panel-title">
 										<a class="accordion-toggle" data-toggle="collapse"
-											data-parent="#accordion" href="#collapseOne">Delivery</a>
+											data-parent="#accordion" href="#collapseOne">Images <i style="vertical-align: middle;" class="icon-arrow-down"></i></a>
 									</h4>
 								</div>
 								<div id="collapseOne" class="panel-collapse collapse">
+									<div class="panel-body">
+										<div class="container" style="margin-left: 40px;">
+											
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<div style="background-color: #eeeeee;padding-top: 3px;"
+								class="panel panel-default">
+								<div class="panel-heading">
+									<h4 style="padding-left: 40px;" class="panel-title">
+										<a class="accordion-toggle" data-toggle="collapse"
+											data-parent="#accordion" href="#collapseTwo">Delivery
+											<i style="vertical-align: middle;" class="icon-arrow-down"></i></a>
+									</h4>
+								</div>
+								<div id="collapseTwo" class="panel-collapse collapse">
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
@@ -176,10 +192,11 @@
 								<div class="panel-heading">
 									<h4 style="padding-left: 40px;" class="panel-title">
 										<a class="accordion-toggle" data-toggle="collapse"
-											data-parent="#accordion" href="#collapseTwo">Features</a>
+											data-parent="#accordion" href="#collapseThree">Features
+											<i style="vertical-align: middle;" class="icon-arrow-down"></i></a>
 									</h4>
 								</div>
-								<div id="collapseTwo" class="panel-collapse collapse">
+								<div id="collapseThree" class="panel-collapse collapse">
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
@@ -194,11 +211,11 @@
 								<div class="panel-heading">
 									<h4 style="padding-left: 40px;" class="panel-title">
 										<a class="accordion-toggle" data-toggle="collapse"
-											data-parent="#accordion" href="#collapseThree">
-											Description</a>
+											data-parent="#accordion" href="#collapseFour">
+											Description <i style="vertical-align: middle;" class="icon-arrow-down"></i></a>
 									</h4>
 								</div>
-								<div id="collapseThree" class="panel-collapse collapse">
+								<div id="collapseFour" class="panel-collapse collapse">
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
@@ -239,21 +256,28 @@
 	<script src="bootstrap/js/wysihtml5-0.3.0.js"></script>
 	<script src="bootstrap/js/bootstrap-wysihtml5.js"></script>
 	<script src="bootstrap/js/bootstrap-datetimepicker.js"></script>
+	<script src="themes/assets/js/jquery.validate.js"></script>
+	<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
+	<script src="themes/assets/js/product.validate.js"></script>
 	<script src="bootstrap/js/userPage.js"></script>
+<script type="text/javascript">
+	var currentTime = new Date() ;
+	$(".form_datetime").datetimepicker({
+        format: "yyyy-mm-dd hh:mm:ss",
+        autoclose: true,
+        todayBtn: true,
+        startDate: currentTime,
+        minDate: 0, 
+        maxDate: "+10d",
+        firstDay:"1",
+        minuteStep: 10
+    });
+</script>
 
 	<script>
 		$('.textarea').wysihtml5();
 	</script>
 
-	<script type="text/javascript">
-    $(".form_datetime").datetimepicker({
-        format: "yyyy-mm-dd hh:mm:ss",
-        autoclose: true,
-        todayBtn: true,
-        startDate: "2013-02-14 10:00",
-        minuteStep: 5
-    });
-</script>
 
 </body>
 </html>

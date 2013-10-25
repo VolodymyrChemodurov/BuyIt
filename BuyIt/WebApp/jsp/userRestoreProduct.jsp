@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-        pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv="Content-Type" content="text/html; charset="utf-8">
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>BuyIt</title>
@@ -61,18 +61,19 @@
 					<ul class="nav nav-list" id="productTabs">
 						<li class="nav-header">Product</li>
 						<li><a href="userAddProductServlet">Create New</a></li>
-						<li class="active"><a href="#">Edit</a></li>
+						<li class="active"><a href="#">Restore</a></li>
+						
 					</ul>
 				</div>
 				<!-- /left-menu -->
 
 				<div id="maContent" class="corAll5">
-					<form action="userEditProduct" method="post">
-					<div id="addNewSale">
+					<form action="userRestoreProduct" method="post">
+					<div id="addNewProduct">
 						<div class="mycontent">
-							<h3>Edit Auction</h3>
+							<h3>Create new auction</h3>
 							<div class="myrow">
-								<span class="span-1">Product name:</span> <span class="span-2"><input disabled="disabled"
+								<span class="span-1">Product name:</span> <span class="span-2"><input
 									name="productName" value="${currentProduct.name}" /></span>
 							</div>
 							<div class="myrow">
@@ -91,22 +92,30 @@
 							</div>
 							<div class="myrow">
 								<span class="span-1">Sub Category:</span> <span class="span-2">
-									<select disabled="disabled" id="subCategory1" name="subCategory">
-											<c:forEach var="category" items="${categories}">
+									<c:forEach var="category" items="${categories}">
 											<c:forEach var="sub" items="${category.listSubCategories}">
 												<c:if test="${sub.idSubCategory eq currentProduct.subCategoryId}">
+												<select disabled="disabled" id="subCategory1" name="subCategory">
 													<option value="${sub.idSubCategory}">${sub.name}</option>
+												</select>
+												<input name="subCategory" style="display:none" value="${sub.idSubCategory}"/>
 												</c:if>
 											</c:forEach>
 									</c:forEach>
-								</select>
+								
 								</span>
 							</div>
 							
 
-							<div id="endedTime" class="myrow" style="padding-top:20px;">
+							<div id="endedTime" class="myrow" style="display: none; padding-top:20px;">
 								<span class="span-1">End time</span>
-									<input disabled="disabled" name="endTime" size="16" type="text" value="${currentProduct.auction.endTime}" readonly style="height:20px; width:206px; border-radius:0; padding: 2px;">
+								<div style="padding-left: 40px; padding-bottom: 20px;"
+									class="input-append date form_datetime"
+									data-format="yyyy-mm-dd hh:mm:ss">
+									<input name="endTime" size="16" type="text" value="${currentProduct.auction.endTime}" readonly style="height:20px; width:163px; border-radius:0; padding: 2px;"> <span
+										class="add-on" style="height:20px; padding: 2px;"><i class="icon-remove"></i></span> <span
+										class="add-on" style="height:20px; border-radius:0; padding: 2px;"><i class="icon-calendar"></i></span>
+								</div>
 							</div>
 
 
@@ -119,10 +128,10 @@
 									<span style="margin-left: 0px; margin-right: 5px; width: 20px;"
 										class="span-3">
 										<c:if test="${currentProduct.auction.startPrice ne 0.0}">
-										 	<input style="height: 14px;" disabled="disabled" checked="checked" id="auctionCheck" name="auctionCheck" type="checkbox">
+										 	<input style="height: 14px;" checked="checked" id="auctionCheck" name="auctionCheck" type="checkbox">
 										</c:if>
 										<c:if test="${currentProduct.auction.startPrice eq 0.0}">
-										 	<input style="height: 14px;" disabled="disabled" id="auctionCheck" name="auctionCheck" type="checkbox">
+										 	<input style="height: 14px;" id="auctionCheck" name="auctionCheck" type="checkbox">
 										</c:if>
 									</span> <span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 110px;"><b>Auction</b></span>
@@ -130,23 +139,23 @@
 										style="margin-left: 0px; margin-right: 5px; width: 100px;">Start
 										price</span> <span class="span-2">
 										<c:if test="${currentProduct.auction.startPrice ne 0.0}">
-										 	<input disabled="disabled" id="startPrice" readonly="readonly" style="width: 100px;" name="startPrice" value="${currentProduct.auction.startPrice}" />
+										 	<input  id="startPrice" style="width: 100px;" name="startPrice" value="${currentProduct.auction.startPrice}" />
 										</c:if>
 										<c:if test="${currentProduct.auction.startPrice eq 0.0}">
-										 	<input disabled="disabled" id="startPrice" readonly="readonly" style="width: 100px;" name="startPrice" value="" />
+										 	<input id="startPrice" readonly="readonly" style="width: 100px;" name="startPrice" value="" />
 										</c:if>
 										
 										</span>
 
 								</div>
-								<div class="myrow-sales">
+									<div class="myrow-sales">
 									<span style="margin-left: 0px; margin-right: 5px; width: 20px;"
 										class="span-3">
 										<c:if test="${currentProduct.auction.buyItNow ne 0.0}">
-										 	<input style="height: 14px;" disabled="disabled" checked="checked" id="buyNowCheck" name="buyNowCheck" type="checkbox">
+										 	<input style="height: 14px;" checked="checked" id="buyNowCheck" name="buyNowCheck" type="checkbox">
 										</c:if>
 										<c:if test="${currentProduct.auction.buyItNow eq 0.0}">
-										 	<input style="height: 14px;" disabled="disabled" id="buyNowCheck" name="buyNowCheck" type="checkbox">
+										 	<input style="height: 14px;" id="buyNowCheck" name="buyNowCheck" type="checkbox">
 										</c:if>
 									</span> <span class="span-2"
 										style="margin-left: 0px; margin-right: 5px; width: 110px;"><b>Buy
@@ -154,22 +163,28 @@
 										style="margin-left: 0px; margin-right: 5px; width: 100px;">Price</span>
 									<span class="span-2">
 									<c:if test="${currentProduct.auction.buyItNow ne 0.0}">
-										 	<input disabled="disabled" id="buyNowPrice" readonly="readonly" style="width: 100px;" name="buyNowPrice" value="${currentProduct.auction.buyItNow}" />
+										 	<input id="buyNowPrice" style="width: 100px;" name="buyNowPrice" value="${currentProduct.auction.buyItNow}" />
 										</c:if>
 										<c:if test="${currentProduct.auction.buyItNow eq 0.0}">
-										 	<input disabled="disabled" id="buyNowPrice" readonly="readonly" style="width: 100px;" name="buyNowPrice" value="" />
+										 	<input id="buyNowPrice" readonly="readonly" style="width: 100px;" name="buyNowPrice" value="" />
 										</c:if>
 									</span>
 								</div>
 								<div class="myrow-sales">
 									<span class="span-2"
 										style="padding-left: 140px; margin-left: 0px; margin-right: 5px; width: 100px;">Count</span>
-									<span class="span-2"><input id="count" disabled="disabled"
+									<c:if test="${currentProduct.auction.buyItNow ne 0.0 && currentProduct.auction.startPrice eq 0.0}">
+									<span class="span-2"><input id="count" 
+										style="width: 100px;" name="count"
+										value="${currentProduct.auction.count}" /></span>
+									</c:if>
+									<c:if test="${currentProduct.auction.startPrice ne 0.0}">
+									<span class="span-2"><input id="count" 
 										readonly="readonly" style="width: 100px;" name="count"
 										value="${currentProduct.auction.count}" /></span>
+									</c:if>
+									
 								</div>
-
-
 
 							</div>
 						</div>
@@ -193,19 +208,20 @@
 									</div>
 								</div>
 							</div>
-							<div style="background-color: #eeeeee;  padding-top: 3px;"
+							<div style="background-color: #eeeeee;padding-top: 3px;"
 								class="panel panel-default">
 								<div class="panel-heading">
 									<h4 style="padding-left: 40px;" class="panel-title">
 										<a class="accordion-toggle" data-toggle="collapse"
-											data-parent="#accordion" href="#collapseTwo">Delivery <i style="vertical-align: middle;" class="icon-arrow-down"></i></a>
+											data-parent="#accordion" href="#collapseTwo">Delivery
+											<i style="vertical-align: middle;" class="icon-arrow-down"></i></a>
 									</h4>
 								</div>
 								<div id="collapseTwo" class="panel-collapse collapse">
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
-												style="width: 850px; height: 200px" name="delivery" >${currentProduct.delivery}</textarea>
+												style="width: 850px; height: 200px" name="delivery"></textarea>
 
 										</div>
 
@@ -217,14 +233,15 @@
 								<div class="panel-heading">
 									<h4 style="padding-left: 40px;" class="panel-title">
 										<a class="accordion-toggle" data-toggle="collapse"
-											data-parent="#accordion" href="#collapseThree">Features <i style="vertical-align: middle;" class="icon-arrow-down"></i></a>
+											data-parent="#accordion" href="#collapseThree">Features
+											<i style="vertical-align: middle;" class="icon-arrow-down"></i></a>
 									</h4>
 								</div>
 								<div id="collapseThree" class="panel-collapse collapse">
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
-												style="width: 850px; height: 200px" name="features" >${currentProduct.description.features}</textarea>
+												style="width: 850px; height: 200px" name="features"></textarea>
 
 										</div>
 									</div>
@@ -243,7 +260,7 @@
 									<div class="panel-body">
 										<div class="container" style="margin-left: 40px;">
 											<textarea class="textarea" placeholder="Enter text ..."
-												style="width: 850px; height: 200px" name="description">${currentProduct.description.descText}</textarea>
+												style="width: 850px; height: 200px" name="description"></textarea>
 
 										</div>
 									</div>
@@ -254,8 +271,8 @@
 					
 					
 					<div id="submitButtonWrapper">
-						<input style="display: none;" name="productId" value="${currentProduct.idProduct}">
-						<button id="editProductSubmitButton" class="btn btn-success" type="submit">Update Auction</button>
+						<input style="display: none;" name="userId" value="${user.idUser}">
+						<button disabled="disabled" id="addProductSubmitButton" class="btn btn-success" type="submit">Restore</button>
 					</div>
 				</form>
 				</div>
@@ -279,7 +296,24 @@
 	<script src="bootstrap/js/search.js"></script>
 	<script src="bootstrap/js/wysihtml5-0.3.0.js"></script>
 	<script src="bootstrap/js/bootstrap-wysihtml5.js"></script>
+	<script src="bootstrap/js/bootstrap-datetimepicker.js"></script>
+	<script src="themes/assets/js/jquery.validate.js"></script>
+	<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
+	<script src="themes/assets/js/product.validate.js"></script>
 	<script src="bootstrap/js/userPage.js"></script>
+<script type="text/javascript">
+	var currentTime = new Date() ;
+	$(".form_datetime").datetimepicker({
+        format: "yyyy-mm-dd hh:mm:ss",
+        autoclose: true,
+        todayBtn: true,
+        startDate: currentTime,
+        minDate: 0, 
+        maxDate: "+10d",
+        firstDay:"1",
+        minuteStep: 10
+    });
+</script>
 
 	<script>
 		$('.textarea').wysihtml5();

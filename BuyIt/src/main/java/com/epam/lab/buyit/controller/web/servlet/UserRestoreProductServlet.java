@@ -12,7 +12,7 @@ import com.epam.lab.buyit.controller.creator.ProductCreator;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
 import com.epam.lab.buyit.model.Product;
 
-public class UserAddProductServlet extends HttpServlet {
+public class UserRestoreProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
@@ -20,7 +20,12 @@ public class UserAddProductServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("userAddProduct");
+		ProductServiceImpl productService = new ProductServiceImpl();
+		int id = Integer.parseInt(request.getParameter("productId"));
+		Product product = productService.getItemById(id);
+		request.setAttribute("currentProduct", product);
+		request.getRequestDispatcher("userRestoreProductJsp").forward(request,
+				response);
 	}
 
 	/**
@@ -28,13 +33,13 @@ public class UserAddProductServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductServiceImpl productService = new ProductServiceImpl();
+		request.setCharacterEncoding("utf-8");
 		Map<String, String[]> inputValues = request
 				.getParameterMap();
-		
 		Product product = new ProductCreator().create(inputValues);
 		int id = productService.createItem(product).getIdProduct();
 		response.sendRedirect("productDetails?id="+id);
-
+		
 	}
 
 }

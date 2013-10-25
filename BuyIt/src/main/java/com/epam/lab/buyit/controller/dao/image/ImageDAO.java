@@ -70,7 +70,19 @@ public class ImageDAO implements ImageDAOInterface {
 
 	@Override
 	public void updateElement(Image elem) {
-		throw new UnsupportedOperationException();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet generatedKeys = null;
+		try {
+			statement = transformer.fromObjectToUpdatePS(elem, connection);
+			if (statement != null) {
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(generatedKeys, statement, connection);
+		}
 	}
 
 	@Override

@@ -33,13 +33,15 @@ public class UserEditProductServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductServiceImpl productService = new ProductServiceImpl();
+		request.setCharacterEncoding("utf-8");
 		Map<String, String[]> inputValues = request
 				.getParameterMap();
-		Product product = (Product) request.getAttribute("currentProduct");
+		int id = Integer.parseInt(request.getParameter("productId"));
+		Product product = productService.getItemById(id);
 		product = ProductSetter.setDescriptionFields(product, inputValues);
 		productService.updateByProductId(product);
 		response.sendRedirect("productDetails?id="+product.getIdProduct());
-		
+//		System.out.println(inputValues.keySet());
 		
 	}
 

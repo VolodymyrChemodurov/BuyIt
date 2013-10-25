@@ -78,8 +78,9 @@
 
 					<div class="row">
 						<div class="span2">
-							<div class="thumbnail">
+							<div class="thumbnail" style="text-align:center">
 								<img src="${userInfo.avatar}">
+								<input type="number" name="your_awesome_parameter" id="some_id" class="rating" />
 							</div>
 						</div>
 						<div class="span7">
@@ -138,5 +139,6 @@
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
 	<script src="bootstrap/js/search.js"></script>
+	<script src="bootstrap/js/bootstrap-rating-input.min.js" type="text/javascript"></script>
 </body>
 </html>

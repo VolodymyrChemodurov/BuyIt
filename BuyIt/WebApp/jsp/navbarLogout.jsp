@@ -26,7 +26,7 @@
 					<li class="divider"></li>
 					<li><a href="userSalesServlet">Sales</a></li>
 					<li><a href="userShoppingServlet">Shopping</a></li>
-					<li><a href="#">Comments</a></li>
+					<li><a href="userCommentsServlet">Comments</a></li>
 					<li><a href="userAddProductServlet">Product</a></li>
 				</ul></li>
 		</c:if>

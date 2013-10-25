@@ -92,7 +92,9 @@ public enum ProductSetter {
 	public static Product setDescriptionFields(Product product, Map<String, String[]> inputValues) {
 		for (String current : inputValues.keySet()) {
 			ProductSetter setter = ProductSetter.getSetter(current);
-			setter.setField(product, inputValues.get(current)[0]);
+			if (setter != null){
+				setter.setField(product, inputValues.get(current)[0]);
+			}
 		}
 		return product;
 	}

@@ -83,15 +83,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product updateByProductId(Product item) {
 		productDAO.updateElement(item);
-
-		// Description description = item.getDescription();
-		// description.setIdDescription(item.getIdProduct());
-		// descriptionServiceImpl.updateItem(description);
-		//
-		// Auction auction = item.getAuction();
-		// auction.setIdDescription(item.getIdProduct());
-		// descriptionServiceImpl.updateItem(auction);
-
+		descriptionService.updateItem(item.getDescription());
 		return item;
 	}
 

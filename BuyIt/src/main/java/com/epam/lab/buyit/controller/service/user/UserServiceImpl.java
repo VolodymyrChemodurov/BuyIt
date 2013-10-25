@@ -59,6 +59,12 @@ public class UserServiceImpl implements UserService {
 		}
 		return users;
 	}
+	
+	public List<User> getAllItemsWeek() {
+		List<User> users = userDAO.getAllUsers();
+		return users;
+	}
+	
 
 	@Override
 	public User createItem(User item) {
