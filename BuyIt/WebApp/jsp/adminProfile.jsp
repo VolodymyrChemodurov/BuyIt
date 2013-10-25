@@ -17,7 +17,7 @@
 	href="themes/bootshop/bootstrap.min.css" media="screen">
 <link href="themes/css/base.css" rel="stylesheet" media="screen">
 <!-- Bootstrap style responsive -->
-<link href="bootstrap/css/adminpage.css" rel="stylesheet">
+<link href="bootstrap/css/userpage.css" rel="stylesheet">
 <link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="themes/css/font-awesome.css" rel="stylesheet"
 	type="text/css">
@@ -49,27 +49,38 @@
 			</ul>
 			<!-- / #vMenu -->
 			<div style="overflow: hidden;">
-				
+
 				<div width="200" class="left-menu">
 					<div class="avatar-wrapper">
 						<img src="${user.avatar}">
 					</div>
-					<a style="color:white; padding-left: 20px;"><i class="icon-user"></i>Change avatar</a>
-					<br>
-					<a onclick="showPasswordBlock()" id="passwordLink"style="color:white; padding-left: 20px;"><i class="icon-user"></i>Change password</a>
-					<div id="changePasswordBlock" style="display:none;">
+					<a style="color: white; padding-left: 20px;"><i
+						class="icon-user"></i>Change avatar</a> <br> <a
+						onclick="showPasswordBlock()" id="passwordLink"
+						style="color: white; padding-left: 20px;"><i class="icon-user"></i>Change
+						password</a>
+					<div id="changePasswordBlock" style="display: none;">
 						<form action="changePasswordServlet" method="post">
-							<span style="color:green; font-size: 14px;">Change password block</span>
-							<input id="login" style="display: none; color:green;" name="login" value="${user.login}"/>
-							<input id="oldPassword" type="password" placeholder="Old password" name="oldPassword"/>
-							<input id="newPassword" type="password" placeholder="New password" name="newPassword"/>
-							<input id="confirmPassword" type="password" placeholder="Confirm password" name="confirmPassword"/>
-							<div id="passwordChangeResult" style="display: none; color:green;"><b>Password changed</b></div>
-							<button id="passwordBlockApply" type="submit" style="width: 92px; margin-top:2px;" class="btn btn-success">Apply</button>
-							<button id="passwordBlockCancel"style="width: 92px; margin-top:2px;" class="btn btn-danger">Cancel</button>
+							<span style="color: green; font-size: 14px;">Change
+								password block</span> <input id="login"
+								style="display: none; color: green;" name="login"
+								value="${user.login}" /> <input id="oldPassword" type="password"
+								placeholder="Old password" name="oldPassword" /> <input
+								id="newPassword" type="password" placeholder="New password"
+								name="newPassword" /> <input id="confirmPassword"
+								type="password" placeholder="Confirm password"
+								name="confirmPassword" />
+							<div id="passwordChangeResult"
+								style="display: none; color: green;">
+								<b>Password changed</b>
+							</div>
+							<button id="passwordBlockApply" type="submit"
+								style="width: 92px; margin-top: 2px;" class="btn btn-success">Apply</button>
+							<button id="passwordBlockCancel"
+								style="width: 92px; margin-top: 2px;" class="btn btn-danger">Cancel</button>
 						</form>
-					</div>	
-						
+					</div>
+
 				</div>
 
 				<div id="maContent" class="corAll5">
@@ -127,12 +138,12 @@
 						<div id="form-container" style="display: none">
 							<form action="userPageServlet" method="post">
 								<div class=myrow style="padding-top: 40px;">
-									<span class="span-2"><input name="firstName" value="${user.firstName}" />
-									</span>
+									<span class="span-2"><input name="firstName"
+										value="${user.firstName}" /> </span>
 								</div>
 								<div class=myrow>
-									<span class="span-2"><input name="lasttName" value="${user.lastName}" />
-									</span>
+									<span class="span-2"><input name="lasttName"
+										value="${user.lastName}" /> </span>
 								</div>
 								<div class=myrow style="padding-top: 70px;">
 									<span class="span-2"><input name="city"
@@ -148,8 +159,8 @@
 								</div>
 								<div class=myrow>
 									<span class="span-3"><input name="house"
-										value="${user.contact.address.house}" /> </span>
-									<span class="span-3"><input name="flat"
+										value="${user.contact.address.house}" /> </span> <span
+										class="span-3"><input name="flat"
 										value="${user.contact.address.house}" /> </span>
 								</div>
 								<div class=myrow>
@@ -164,9 +175,10 @@
 								</div>
 								<div class=myrow>
 									<span class="span-2"><input name="email"
-										value="${user.contact.email}" /> </span>
-									<input type="button" id="btn-back" style="margin-left: 40px; width: 120px;"
-										class="btn btn-mini btn-danger" value="Cancel"></button>
+										value="${user.contact.email}" /> </span> <input type="button"
+										id="btn-back" style="margin-left: 40px; width: 120px;"
+										class="btn btn-mini btn-danger" value="Cancel">
+									</button>
 								</div>
 							</form>
 						</div>
@@ -174,7 +186,7 @@
 
 
 				</div>
-		</div>
+			</div>
 		</div>
 
 	</div>
@@ -190,7 +202,11 @@
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
-	<script src="bootstrap/js/admin.js"></script>
-<!-- 	<script src="bootstrap/js/userPage.js"></script> -->
+	<script src="themes/assets/js/jquery.validate.js"></script>
+	<script
+		src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
+	<script src="themes/assets/js/update.validate.js"></script>
+	<script src="bootstrap/js/userPage.js"></script>
+	<script src="bootstrap/js/search.js"></script>
 </body>
 </html>

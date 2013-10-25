@@ -1,7 +1,9 @@
 package com.epam.lab.buyit.controller.web.filter;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -21,8 +23,10 @@ public class LoginFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
+		
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		
 		User user = (User) httpRequest.getSession(false).getAttribute("user");
 		if (user == null) {
 			httpRequest.setAttribute("message", "You must login first");
@@ -39,11 +43,16 @@ public class LoginFilter implements Filter {
 
 	private void createReturnLink(HttpServletRequest request) {
 		StringBuffer link = request.getRequestURL();
-		if(request.getQueryString() != null) {
-			link.append("?").append(request.getQueryString());
+		Map<String, String[]> parameters = request.getParameterMap();
+		Set<String> keys = parameters.keySet();
+		link.append("?");
+		Iterator<String> iterator = keys.iterator();
+		while(iterator.hasNext()) {
+			String key = iterator.next(); 
+			link.append(key).append("=").append(parameters.get(key)[0]);
+			if(iterator.hasNext()) link.append("&");
 		}
-		request.setAttribute("returnTo", link);
-		//	Map<String, String[]> parameters = request.getParameterMap();
 		
+		request.setAttribute("returnTo", link.toString());
 	}
 }

@@ -11,7 +11,6 @@ $(window).load(function() {
 			$(this).css("height", height * ratio);
 			height = height * ratio;
 			width = width * ratio;
-			flag = true;
 		}
 
 		if (height > maxHeight) {
@@ -20,7 +19,6 @@ $(window).load(function() {
 			$(this).css("width", width * ratio);
 			width = width * ratio;
 			height = height * ratio;
-			flag = true;
 		}
 		$(this).css('margin-top', parseInt((65 - height) / 2));
 		$(this).css('visibility', 'visible');

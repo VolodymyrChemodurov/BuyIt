@@ -60,40 +60,48 @@ public class CreateCategoryServlet extends HttpServlet {
 				request.setAttribute("message", "Category created");
 			}
 
-		}
-
-		if ((request.getParameter("selectedCategory") != null)
-				&& (!(request.getParameter("selectedCategory")
-						.equals("Select...")))) {
-			int selectedCtgr = Integer.parseInt(request
-					.getParameter("selectedCategory"));
-			if ((request.getParameter("subCategoryCreate") != null)
-					&& (request.getParameter("subCategoryCreate").length() > 0)) {
-				String selectedSub = request.getParameter("subCategoryCreate");
-				List<SubCategory> subCategoryList = creator.getAllSubItems();
-				for (SubCategory subCategory : subCategoryList) {
-					if (selectedSub.equalsIgnoreCase(subCategory.getName())) {
-						flag = true;
-						request.setAttribute("alert1", "error");
-						request.setAttribute("messageHeader1", "Error");
-						request.setAttribute("message1",
-								"This sub-category already exist");
+		} else {
+			if ((request.getParameter("selectedCategory") != null)
+					&& (!(request.getParameter("selectedCategory")
+							.equals("Select...")))) {
+				int selectedCtgr = Integer.parseInt(request
+						.getParameter("selectedCategory"));
+				if ((request.getParameter("subCategoryCreate") != null)
+						&& (request.getParameter("subCategoryCreate").length() > 0)) {
+					String selectedSub = request
+							.getParameter("subCategoryCreate");
+					List<SubCategory> subCategoryList = creator
+							.getAllSubItems();
+					for (SubCategory subCategory : subCategoryList) {
+						if (selectedSub.equalsIgnoreCase(subCategory.getName())) {
+							flag = true;
+							request.setAttribute("alert1", "error");
+							request.setAttribute("messageHeader1", "Error");
+							request.setAttribute("message1",
+									"This sub-category already exist");
+						}
+					}
+					if (flag == false) {
+						Category category = creator.getItemById(selectedCtgr);
+						SubCategory subCategory = new SubCategory();
+						subCategory.setName(selectedSub).setCategoryId(
+								category.getIdCategory());
+						creator.createSubCategory(subCategory);
+						category.setSubCategory(subCategory);
+						creator.updateItem(category);
+						request.setAttribute("alert1", "success");
+						request.setAttribute("messageHeader1", "Well Done");
+						request.setAttribute("message1", "Sub-category created");
 					}
 				}
-				if (flag == false) {
-					Category category = creator.getItemById(selectedCtgr);
-					SubCategory subCategory = new SubCategory();
-					subCategory.setName(selectedSub).setCategoryId(
-							category.getIdCategory());
-					creator.createSubCategory(subCategory);
-					category.setSubCategory(subCategory);
-					creator.updateItem(category);
-					request.setAttribute("alert1", "success");
-					request.setAttribute("messageHeader1", "Well Done");
-					request.setAttribute("message1", "Sub-category created");
-				}
+			} else {
+				request.setAttribute("alert1", "error");
+				request.setAttribute("messageHeader1", "Error");
+				request.setAttribute("message1",
+						"Before create sub-category select category");
 			}
 		}
+
 		HttpSession session = request.getSession(false);
 		session.setAttribute("categories", creator.getAllItems());
 		request.getRequestDispatcher("categoryCreator").forward(request,
