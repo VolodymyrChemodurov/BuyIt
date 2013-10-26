@@ -42,27 +42,7 @@
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
 <link href="themes/css/item-preview.css" rel="stylesheet">
-<style>
-#table-scroll {
-	height: 400px;
-	overflow: auto;
-	margin-top: 20px;
-	border: 1px solid #ddd;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
-	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
-	-webkit-transition: all .2s ease-in-out;
-	-moz-transition: all .2s ease-in-out;
-	-o-transition: all .2s ease-in-out;
-	transition: all .2s ease-in-out;
-	background: #fff;
-	position: relative;
-	border: 1px solid #eee;
-}
-</style>
+<link href="bootstrap/css/userpage.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="navbar"></jsp:include>
@@ -82,8 +62,6 @@
 								<img src="${userInfo.avatar}">
 								<input type="number" name="myrating" id="myrating" class="rating" value="${userRating}"/>
 								
-								
-								
 								<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   									<div class="modal-header">
     									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -98,10 +76,6 @@
     									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
   									</div>
 								</div>
-								
-								
-								
-								
 							</div>
 						</div>
 						<div class="span7">
@@ -123,25 +97,27 @@
 						</div>
 					</div>
 
-					<div class="row">
+					<div class="row" style="padding-top: 20px">
 						<div class="span9">
-							<div id="table-scroll">
-								<table class="table table-striped table-hover">
-									<thead>
-										<tr>
-											<th>From</th>
-											<th>Message</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${messages}" var="message">
+							<div id="table-wrapper">
+								<div id="table-scroll">
+									<table class="table table-striped table-hover">
+										<thead>
 											<tr>
-												<td style="width: 20%"><a href="user_wall?id=${message.key.idUser}" class="btn btn-link"/>${message.key.login}</td>
-												<td>${message.value.message}</td>
+												<th><span class="text">From</span></th>
+												<th><span class="text">Message</span></th>
 											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
+										</thead>
+										<tbody>
+											<c:forEach items="${messages}" var="message">
+												<tr>
+													<td style="width: 20%"><a href="user_wall?id=${message.key.idUser}" class="btn btn-link"/>${message.key.login}</td>
+													<td>${message.value.message}</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>

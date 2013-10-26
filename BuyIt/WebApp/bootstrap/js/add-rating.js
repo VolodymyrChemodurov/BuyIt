@@ -12,7 +12,7 @@ $(document).ready(function() {
 				success: function(responseText) {
 					$('#myrating').val(responseText);
 					currentRating = responseText;
-					$('#current').text('Current rating: ' + (parseInt(responseText) + 1));
+					$('#current').text('New rating: ' + (parseInt(responseText) + 1));
 					$('#add').text('You add: ' + (parseInt(value) + 1));
 					$('#myModal').modal('toggle');
 				}
