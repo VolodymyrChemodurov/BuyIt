@@ -30,12 +30,12 @@ public class RatingServlet extends HttpServlet {
 		Rating rating = ratingService.findMark(fromId, id);
 		if(rating != null) {
 			LOGGER.info("Updating mark from " + fromId);
-			rating.setRating(++value);
+			rating.setRating(value);
 			ratingService.updateItem(rating);
 		} else {
 			LOGGER.info("Creating mark from " + fromId);
 			rating = new Rating();
-			rating.setFromId(fromId).setUserId(id).setRating(++value);
+			rating.setFromId(fromId).setUserId(id).setRating(value);
 			ratingService.createItem(rating);
 		}
 		
