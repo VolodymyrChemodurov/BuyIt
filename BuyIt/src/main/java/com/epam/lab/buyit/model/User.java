@@ -5,9 +5,6 @@ import java.util.List;
 
 public class User implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int idUser;
 	private boolean role;
@@ -123,7 +120,7 @@ public class User implements Serializable{
 		this.bidList = bidList;
 		return this;
 	}
-
+	
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();

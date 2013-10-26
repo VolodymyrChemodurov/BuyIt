@@ -80,7 +80,28 @@
 						<div class="span2">
 							<div class="thumbnail" style="text-align:center">
 								<img src="${userInfo.avatar}">
-								<input type="number" name="your_awesome_parameter" id="some_id" class="rating" />
+								<input type="number" name="myrating" id="myrating" class="rating" value="${userRating}"/>
+								
+								
+								
+								<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  									<div class="modal-header">
+    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    									<h3 id="myModalLabel">Success</h3>
+  									</div>
+  									<div class="modal-body">
+    									<p>Martin thanks you for adding rating!</p>
+    									<p id="add"></p>
+    									<p id="current"></p>
+  									</div>
+  									<div class="modal-footer">
+    									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  									</div>
+								</div>
+								
+								
+								
+								
 							</div>
 						</div>
 						<div class="span7">
@@ -93,8 +114,8 @@
 									<legend>You can leave your message here</legend>
 									<input type="text" style='width: 85%' class="input-small"
 										placeholder="Message" name="message">
-									<input type="hidden" name="fromId" value="${user.idUser}">
-									<input type="hidden" name="toId" value="${userInfo.idUser}">
+									<input type="hidden" id="fromId" name="fromId" value="${user.idUser}">
+									<input type="hidden" id="id" name="toId" value="${userInfo.idUser}">
 									<button type="submit" style='width: 10%' class="btn btn-primary">Leave</button>
 								</form>
 							</row>
@@ -140,5 +161,6 @@
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
 	<script src="bootstrap/js/search.js"></script>
 	<script src="bootstrap/js/bootstrap-rating-input.min.js" type="text/javascript"></script>
+	<script src="bootstrap/js/add-rating.js"></script>
 </body>
 </html>

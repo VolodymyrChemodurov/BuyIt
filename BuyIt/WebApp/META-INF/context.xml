@@ -4,5 +4,5 @@
         type="javax.sql.DataSource" username="root" password=""
         driverClassName="com.mysql.jdbc.Driver"
         url="jdbc:mysql://localhost:3306/auction"
-        maxActive="20" maxIdle="10" />
+        maxActive="50" maxIdle="20" />
 </Context>
