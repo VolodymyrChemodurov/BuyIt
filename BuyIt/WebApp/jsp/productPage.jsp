@@ -52,6 +52,14 @@
 <link rel="apple-touch-icon-precomposed"
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
+
+<style>
+	.dis {
+		pointer-events: none; 
+		cursor: default; 
+		disabled: disabled;
+	}
+</style>
 </head>
 
 
@@ -220,7 +228,7 @@
 											</label>
 											<div class="controls">
 												<label class="control-label">
-													<span> You Bid:</span>
+													<span> Your Bid:</span>
 												</label>
 												<input type="number" name="bid" id="bidInput"
 													min="${product.auction.currentPrice+1}" d
@@ -248,7 +256,7 @@
   											</div>
   											<div class="modal-footer">
     											<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    											<button type="submit" id="placeBidButton" class="btn btn-default btn-primary pull-right">Place a Bid</button>
+    											<button type="submit" class="btn btn-default btn-primary pull-right">Place a Bid</button>
   											</div>
   										</form>
 									</div>
@@ -293,7 +301,7 @@
   												</div>
   												<div class="modal-footer">
     												<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    												<button type="submit" id="placeBidButton" class="btn btn-default btn-primary pull-right">Buy it now</button>
+    												<button type="submit" class="btn btn-default btn-primary pull-right">Buy it now</button>
   												</div>
   											</form>
 										</div>

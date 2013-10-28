@@ -5,11 +5,25 @@ $(document).ready(function() {
 								+ "  product userId:"
 								+ $('#userIdProduct').val());
 						if ($('#userId').val() == $('#userIdProduct').val()) {
-							$('#buyItButton').attr("disabled", "disabled");
-
+							/*$('#buyItButton').attr("disabled", "disabled");
+							$('#buyItButton').css("pointer-events", "none");
+							$('#buyItButton').css("cursor", "default");
+							
+							
 							$('#placeBidButton').attr("disabled", "disabled");
+							$('#placeBidButton').css("pointer-events", "none");
+							$('#placeBidButton').css("cursor", "default");*/
+							
 							$('#quantityInput').attr("disabled", "disabled");
 							$('#bidInput').attr("disabled", "disabled");
+							
+							$('#buyItButton').attr("disabled", "disabled");
+							$('#buyItButton').addClass('dis');
+							$('#buyItButton').attr("tabindex", "-1");
+							
+							$('#placeBidButton').attr("disabled", "disabled");
+							$('#placeBidButton').addClass('dis');
+							$('#placeBidButton').attr("tabindex", "-1");
 						}
 					});
 
@@ -19,8 +33,11 @@ $(document).ready(function() {
 				var bid = $('#bidInput').attr('value');
 				if (parseInt(currentPrice) >= parseInt(bid)) {
 					placeBidButton.attr("disabled", "disabled");
+					placeBidButton.addClass('dis');
+					placeBidButton.attr('tabindex', '-1');
 				} else {
 					placeBidButton.removeAttr("disabled");
+					placeBidButton.removeClass('dis');
 				}
 
 			});
@@ -31,8 +48,10 @@ $(document).ready(function() {
 				var quantity = $('#quantityInput').val();
 				if (parseInt(quantity) > parseInt(count)) {
 					$('#buyItButton').attr("disabled", "disabled");
+					$('#buyItButton').addClass('dis');
+					$('#buyItButton').attr('tabindex', '-1');
 				} else {
-
+					$('#buyItButton').removeClass('dis');
 					$('#buyItButton').removeAttr("disabled");
 				}
 
