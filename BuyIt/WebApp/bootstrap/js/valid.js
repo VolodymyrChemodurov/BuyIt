@@ -1,3 +1,5 @@
+var validationflag;
+
 function validateFormOnSubmit() {
 	var temp = validateProductName($("#productName").val());
 	$("#errorDiv").show();
@@ -28,7 +30,7 @@ function validateFormOnSubmit() {
 		 }
 	}
 
-	HTMLFormElement.prototype.submit.call($('#addProductSubmitButton')[0]);
+	HTMLFormElement.prototype.submit.call($('#form-new-product')[0]);
 	return true;
 }
 
@@ -75,6 +77,16 @@ $("#productName").change(function(){
 	}
 });
 
+$("#productName1").change(function(){
+	var temp = validateProductName($(this).val());
+	if(temp != ""){
+		$("#errorDiv").show();
+		$("#errorDiv").html(temp);
+	} else {
+		$("#errorDiv").hide();
+	}
+});
+
 $("#endTime").change(function(){
 	if($(this).val() == ""){
 		$("#errorDiv").show();
@@ -90,7 +102,7 @@ function validateStartPrice(fld) {
 	var error = "";
 	if (fld == "") {
 		error = "Start price field is empty";
-	} else if (!fld.search(/[0-9]/)) {
+	} else if (fld.search(/[0-9]/)) {
 		error = "Start price field must contain only numbers.";
 	} else if (fld>3000 ||fld<1) {
 		error = "Start price field range [1;3000]";
@@ -127,7 +139,7 @@ function validateProductName(fld) {
 	 if (fld.search(/[A-Za-zА-Яа-я0-9- _()]/)) {
 		error = "Product name field must contain only numbers.";
 	} else if (fld.length <8) {
-		error = "Product name field must be more than 8 characters";
+		error = "Product name must be more than 8 characters";
 	}
 	return error;
 }

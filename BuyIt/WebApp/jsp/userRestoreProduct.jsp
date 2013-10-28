@@ -74,7 +74,7 @@
 							<h3>Create new auction</h3>
 							<div class="myrow">
 								<span class="span-1">Product name:</span> <span class="span-2"><input
-									name="productName" value="${currentProduct.name}" /></span>
+									id="productName1"name="productName" value="${currentProduct.name}" /></span>
 							</div>
 							<div class="myrow">
 								<span class="span-1">Category:</span> <span class="span-2">
@@ -112,7 +112,7 @@
 								<div style="padding-left: 40px; padding-bottom: 20px;"
 									class="input-append date form_datetime"
 									data-format="yyyy-mm-dd hh:mm:ss">
-									<input name="endTime" size="16" type="text" value="${currentProduct.auction.endTime}" readonly style="height:20px; width:163px; border-radius:0; padding: 2px;"> <span
+									<input id="endTime" name="endTime" size="16" type="text" value="${currentProduct.auction.endTime}" readonly style="height:20px; width:163px; border-radius:0; padding: 2px;"> <span
 										class="add-on" style="height:20px; padding: 2px;"><i class="icon-remove"></i></span> <span
 										class="add-on" style="height:20px; border-radius:0; padding: 2px;"><i class="icon-calendar"></i></span>
 								</div>
@@ -184,6 +184,8 @@
 										value="${currentProduct.auction.count}" /></span>
 									</c:if>
 									
+								</div>
+								<div id="errorDiv" class="alert alert-error"style="display:none; margin-right: 49px; margin-top:8px; border-radius: 0 0 0 0;font-size: 14px; value="asdasdasd">
 								</div>
 
 							</div>
@@ -271,7 +273,7 @@
 					
 					
 					<div id="submitButtonWrapper">
-						<input style="display: none;" name="userId" value="${user.idUser}">
+						<input style="display: none;" name="productId" value="${currentProduct.idProduct}">
 						<button disabled="disabled" id="addProductSubmitButton" class="btn btn-success" type="submit">Restore</button>
 					</div>
 				</form>
@@ -301,10 +303,11 @@
 	<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
 	<script src="themes/assets/js/product.validate.js"></script>
 	<script src="bootstrap/js/userPage.js"></script>
+	<script src="bootstrap/js/valid.js"></script>
 <script type="text/javascript">
 	var currentTime = new Date() ;
 	$(".form_datetime").datetimepicker({
-        format: "yyyy-mm-dd hh:mm:ss",
+        format: "yyyy-mm-dd hh:ii:ss",
         autoclose: true,
         todayBtn: true,
         startDate: currentTime,

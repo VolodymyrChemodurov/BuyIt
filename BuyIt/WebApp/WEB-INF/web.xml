@@ -258,6 +258,14 @@
 		<servlet-name>UserCommentsServlet</servlet-name>
 		<url-pattern>/userCommentsServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChangeAvatarServlet</servlet-name>
+		<servlet-class>com.epam.lab.buyit.controller.web.servlet.ChangeAvatarServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangeAvatarServlet</servlet-name>
+		<url-pattern>/change_avatar</url-pattern>
+	</servlet-mapping>
 	
 	
 	

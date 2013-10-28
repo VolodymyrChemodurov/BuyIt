@@ -55,9 +55,15 @@
 			<div style="overflow: hidden;">
 				<div width="200" class="left-menu">
 					<div class="avatar-wrapper">
-						<img src="${user.avatar}">
+						<span class='zoom' id='avatar'> 
+						<img style='height:200px; width: 200px;'  src="${user.avatar}">
+					
+        		         <span style="position: absolute; top: 3px; right: 28px; color: #555; font: bold 13px/1 sans-serif;">
+                		 Click to zoom
+               			</span>
+						</span>
 					</div>
-					<a style="cursor:pointer;color:white; padding-left: 20px;"><i class="icon-user"></i>Change avatar</a>
+					<a onclick="showAvatarBlock()" id="avatarLink" style="cursor:pointer;color:white; padding-left: 20px;"><i class="icon-user"></i>Change avatar</a>
 					<br>
 					<a onclick="showPasswordBlock()" id="passwordLink"style="cursor:pointer; color:white; padding-left: 20px;"><i class="icon-user"></i>Change password</a>
 					<c:if test="${(not empty passwordFailed) || (not empty passwordSuccess)}">
@@ -90,6 +96,30 @@
 						<button form="changePasswordForm"id="passwordBlockApply" disabled="disabled" type="submit" style="width: 92px; margin-top:2px;" class="btn btn-success">Apply</button>
 						<button form="exitPasswordBlock"style="width: 92px; margin-top:2px;" class="btn btn-danger">Cancel</button>
 					</div>	
+						
+					<c:if test="${(not empty avatarFailed) || (not empty avatarSuccess)}">
+						<div id="changeAvatarBlock">
+					</c:if>
+					<c:if test="${(empty avatarFailed) && (empty avatarSuccess)}">
+						<div id="changeAvatarBlock" style="display:none">
+					</c:if>
+						<form id="changeAvatarForm"action="change_avatar"	enctype="multipart/form-data" method="post">
+							<span style="color:green; font-size: 14px;">Change avatar block</span>
+
+							<input style="display: none;" type="file" id="avatarUpload" name="avatarUpload"
+										accept="image/*" >
+										
+							<input type="button" id="changeAvatar" style="width: 188px; margin-left:5px; border-color:#2f96b4; margin-top:2px;" class="btn btn-info" value="Choose image"/>			
+							<div id="avatarChangeResult" style="display: none; color:green;"><b>Password changed</b></div>
+							<div id="avatarChangeError" style="display: none; color:red;"></div>
+									
+						</form>	
+						<form id="exitAvatarBlock" action="change_avatar" method="get">
+						</form>
+						<button form="changeAvatarForm"id="avatarBlockApply" type="submit" style="width: 92px; margin-top:5px;" class="btn btn-success">Upload</button>
+						<button form="exitAvatarBlock"style="width: 92px; margin-top:5px;" class="btn btn-danger">Cancel</button>
+					</div>	
+						
 						
 				</div>
 				<!-- /left-menu -->
@@ -235,8 +265,13 @@
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
 	<script src="themes/assets/js/jquery.validate.js"></script>
 	<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
-	<script src="themes/assets/js/update.validate.js"></script>
 	<script src="bootstrap/js/userPage.js"></script>
 	<script src="bootstrap/js/search.js"></script>
+	<script src='bootstrap/js/zoom/jquery.wheelzoom.js'></script>
+	<script src='bootstrap/js/zoom/jquery.zoom.js'></script>
+
+	
+
+	
 </body>
 </html>

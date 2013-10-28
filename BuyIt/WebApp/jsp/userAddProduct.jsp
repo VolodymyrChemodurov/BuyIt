@@ -67,7 +67,7 @@
 				<!-- /left-menu -->
 
 				<div id="maContent" class="corAll5">
-					<form action="userAddProductServlet" method="post">
+					<form id="form-new-product" action="userAddProductServlet" method="post">
 						<div id="addNewProduct">
 							<div class="mycontent">
 								<h3>Create new auction</h3>
@@ -173,7 +173,26 @@
 									<div id="collapseOne" class="panel-collapse collapse">
 										<div class="panel-body">
 											<div class="container" style="margin-left: 40px;">
-												asdasdasdasd asdsad</div>
+<div class="fileupload fileupload-new" data-provides="fileupload">
+  <div class="input-append">
+    <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><input type="file" /></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+  </div>
+</div>
+        
+        <div class="fileinput fileinput-new" data-provides="fileinput">
+  <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+    <img data-src="holder.js/100%x100%" alt="...">
+  </div>
+  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+  <div>
+    <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+  </div>
+</div>
+        
+
+
+											</div>
 										</div>
 									</div>
 								</div>
@@ -277,10 +296,11 @@
 	<script src="themes/assets/js/product.validate.js"></script>
 	<script src="bootstrap/js/userPage.js"></script>
 	<script src="bootstrap/js/valid.js"></script>
+	<script src="bootstrap/js/fileupload.js"></script>
 	<script type="text/javascript">
 		var currentTime = new Date();
 		$(".form_datetime").datetimepicker({
-			format : "yyyy-mm-dd hh:mm:ss",
+			format : "yyyy-mm-dd hh:ii:ss",
 			autoclose : true,
 			todayBtn : true,
 			startDate : currentTime,
