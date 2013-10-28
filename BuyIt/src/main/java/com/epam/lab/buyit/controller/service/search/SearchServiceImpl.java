@@ -15,12 +15,14 @@ import com.epam.lab.buyit.model.Product;
 
 public class SearchServiceImpl implements SearchService {
 
-	private boolean hasFldPrms = false;
-	private boolean hasTxtPrms = false;
+	
 
 	@Override
 	public void search(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		boolean hasFldPrms = false;
+		boolean hasTxtPrms = false;
 
 		String srchedFld = request.getParameter("srchedFld");
 		String srchedTxt = request.getParameter("srchedTxt");
