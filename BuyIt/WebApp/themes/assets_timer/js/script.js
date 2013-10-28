@@ -16,8 +16,8 @@ $(function() {
 		$('#buyItButton').attr("disabled", "disabled");
 
 		$('#placeBidButton').attr("disabled", "disabled");
-		$('#quantity').attr("disabled", "disabled");
-		$('#placeBidInput').attr("disabled", "disabled");
+		$('#quantityInput').attr("disabled", "disabled");
+		$('#bidInput').attr("disabled", "disabled");
 
 	} else {
 		$('#countdown').countdown(

@@ -8,15 +8,15 @@ $(document).ready(function() {
 							$('#buyItButton').attr("disabled", "disabled");
 
 							$('#placeBidButton').attr("disabled", "disabled");
-							$('#quantity').attr("disabled", "disabled");
-							$('#placeBidInput').attr("disabled", "disabled");
+							$('#quantityInput').attr("disabled", "disabled");
+							$('#bidInput').attr("disabled", "disabled");
 						}
 					});
 
-			$('#placeBidInput').change(function() {
+			$('#bidInput').change(function() {
 				var placeBidButton = $('#placeBidButton');
 				var currentPrice = document.getElementById("currentBid").value;
-				var bid = $('#placeBidInput').attr('value');
+				var bid = $('#bidInput').attr('value');
 				if (parseInt(currentPrice) >= parseInt(bid)) {
 					placeBidButton.attr("disabled", "disabled");
 				} else {
@@ -25,10 +25,10 @@ $(document).ready(function() {
 
 			});
 
-			$('#quantity').change(function() {
+			$('#quantityInput').change(function() {
 				var count = $('#count').val();
 				console.log("count: " + count);
-				var quantity = $('#quantity').val();
+				var quantity = $('#quantityInput').val();
 				if (parseInt(quantity) > parseInt(count)) {
 					$('#buyItButton').attr("disabled", "disabled");
 				} else {
@@ -38,28 +38,28 @@ $(document).ready(function() {
 
 			});
 			$('#buyItForm').submit(function(event){
-				if ($('#quantity').attr('value') == "") {
+				if ($('#quantityInput').attr('value') == "") {
 					return false;
 				}
 			});
 			$('#placeABidForm').submit(function(event){
-				if ($('#placeBidInput').attr('value') == "") {
+				if ($('#bidInput').attr('value') == "") {
 					return false;
 				}
 			});
 			
-			$('#placeBidInput').keypress(function(e) {
+			$('#bidInput').keypress(function(e) {
 				// alert("Enter");
 				if (e.which == 13) {
-					if ($('#placeBidInput').attr('value') == "") {
+					if ($('#bidInput').attr('value') == "") {
 						return false;
 					}
 				}
 			});
-			$('#quantity').keypress(function(e) {
+			$('#quantityInput').keypress(function(e) {
 			 //alert("Enter");
 				if (e.which == 13) {
-					if ($('#quantity').attr('value') == "") {
+					if ($('#quantityInput').attr('value') == "") {
 						return false;
 					}
 				}
