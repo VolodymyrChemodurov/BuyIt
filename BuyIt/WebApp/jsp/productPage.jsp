@@ -295,22 +295,21 @@
 											<li><a href="#features" data-toggle="tab">Features</a></li>
 										</ul>
 										<div id="myTabContent" class="tab-content">
-											<div class="tab-pane fade active in" id="home">
-												<h4>Product Information</h4>
+											<div class="tab-pane fade active in" id="home" style="padding-left: 30px">
+												
+												<div class="form-horizontal qtyFrm">
+													${product.description.descText}</div>
 												<hr class="soft" />
 												Auction start time:
 												<c:out value="${product.auction.startTime}"></c:out>
 												<br> Auction end time:
 												<c:out value="${product.auction.endTime}"></c:out>
 												<hr class="soft" />
-												<div class="form-horizontal qtyFrm">
-													${product.description.descText}</div>
 											</div>
 
 
-											<div class="tab-pane fade" id="history">
-												<h4>Bid History</h4>
-												<hr class="soft" />
+											<div class="tab-pane fade" id="history" style="padding-left: 30px">
+										
 												<table class="table table-bordered">
 													<tbody>
 														<tr class="techSpecRow">
@@ -335,8 +334,8 @@
 
 
 
-											<div class="tab-pane fade" id="delivery">
-												<h4>Information for Buyers</h4>
+											<div class="tab-pane fade" id="delivery" style="padding-left: 30px">
+
 
 												<hr class="soft" />
 												${product.delivery }
@@ -344,8 +343,7 @@
 												<br class="clr">
 											</div>
 
-											<div class="tab-pane fade" id="features">
-												<h4>Features</h4>
+											<div class="tab-pane fade" id="features" style="padding-left: 30px">
 
 												<hr class="soft" />
 												${product.description.features}
