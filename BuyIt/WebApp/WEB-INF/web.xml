@@ -8,6 +8,10 @@
     <error-code>404</error-code>
     <location>/error404</location>
   </error-page>
+    <error-page>
+    <error-code>500</error-code>
+    <location>/error500</location>
+  </error-page>
   <servlet>
     <servlet-name>Jersey REST Service</servlet-name>
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
@@ -279,6 +283,14 @@
   <servlet-mapping>
     <servlet-name>Error</servlet-name>
     <url-pattern>/error404</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>Error500</servlet-name>
+    <jsp-file>/jsp/error500.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Error500</servlet-name>
+    <url-pattern>/error500</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>HomePage</servlet-name>
