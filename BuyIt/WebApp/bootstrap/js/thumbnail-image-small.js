@@ -6,6 +6,10 @@ $(window).load(function() {
                 var width = $(this).width();
                 var height = $(this).height();
                 var flag = false;
+                console.log(this);
+                console.log(width);
+                console.log(height);
+                console.log(flag);
                 if (width > maxWidth) {
                         ratio = maxWidth / width;
                         $(this).css("width", maxWidth);
@@ -23,8 +27,15 @@ $(window).load(function() {
                         height = height * ratio;
                         flag = true;
                 }
-                if(!flag)
-                        $(this).css('margin-top', 260 - height - 100);
+                console.log(this);
+                console.log(width);
+                console.log(height);
+                console.log(flag);
+                if(!flag) {
+                	$(this).css('margin-top', 160 - Math.ceil(height));
+                	
+                }
                 $(this).parent().parent().css('visibility','visible');
+                flag = false;
         });
 });

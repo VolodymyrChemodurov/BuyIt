@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import com.epam.lab.buyit.controller.builder.BidBuilder;
 import com.epam.lab.buyit.controller.email.EmailMessageBuilder;
 import com.epam.lab.buyit.controller.exception.AuctionAllreadyClosedException;
+import com.epam.lab.buyit.controller.exception.ParticipationInOwnAuctionException;
 import com.epam.lab.buyit.controller.exception.WrongProductCountException;
 import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
 import com.epam.lab.buyit.controller.service.bid.BidServiceImp;
@@ -29,12 +30,14 @@ public class BuyItServeServlet extends HttpServlet {
 	private BidServiceImp bidService;
 	private ProductServiceImpl productService;
 	private UserServiceImpl userService;
+	private EmailMessageBuilder emailMessageBuilder;
 
 	public void init() {
 		auctionService = new AuctionServiceImp();
 		bidService = new BidServiceImp();
 		productService = new ProductServiceImpl();
 		userService = new UserServiceImpl();
+		emailMessageBuilder = new EmailMessageBuilder();
 	}
 
 	protected void doPost(HttpServletRequest request,
@@ -47,19 +50,17 @@ public class BuyItServeServlet extends HttpServlet {
 		serve(request, response);
 	}
 
-	private void serve(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+	private void serve(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		int idProduct = Integer.parseInt(request.getParameter("id_product"));
 		int count = Integer.parseInt(request.getParameter("quantity"));
+		
 		try {
 			if (!successServe(idProduct, count, request)) {
-				int realCount = auctionService.getByProductId(idProduct)
-						.getCount();
+				int realCount = auctionService.getByProductId(idProduct).getCount();
 				if (realCount == 0 || realCount < count) {
 					LOGGER.warn("Buy It query was failed");
-					request.setAttribute("queryFail",
-							"Sorry, someone ahead you");
+					request.setAttribute("queryFail", "Sorry, someone ahead you");
 				} else {
 					successServe(idProduct, realCount, request);
 				}
@@ -70,40 +71,45 @@ public class BuyItServeServlet extends HttpServlet {
 		} catch (WrongProductCountException e) {
 			LOGGER.warn(e);
 			request.setAttribute("wrongCountException", true);
-		} finally {
-			request.getRequestDispatcher("deal_information").forward(request,
-					response);
+		} catch (ParticipationInOwnAuctionException e) {
+			LOGGER.warn(e);
+			request.setAttribute("participateInOwnAuction", "You can't buy own product");
+		}
+		finally {
+			request.getRequestDispatcher("deal_information").forward(request, response);
 		}
 	}
 
-	private boolean successServe(int idProduct, int count,
-			HttpServletRequest request) throws AuctionAllreadyClosedException,
-			WrongProductCountException {
+	private boolean successServe(int idProduct, int count, HttpServletRequest request) 
+			throws AuctionAllreadyClosedException, WrongProductCountException, ParticipationInOwnAuctionException {
+		
 		boolean result = false;
+		
 		if (auctionService.buyItServe(idProduct, count)) {
-			EmailMessageBuilder emailMessageBuilder = new EmailMessageBuilder();
-			LOGGER.info("Successful purchase");
+			
 			Product product = productService.getItemById(idProduct);
+			
+			User user = (User) request.getSession(false).getAttribute("user");
+			if(product.getUserId() == user.getIdUser())
+				throw new ParticipationInOwnAuctionException("Try to participate in own auction");
+			
 			Auction auction = auctionService.getByProductId(idProduct);
 			User seller = userService.getItemById(product.getUserId());
 			User buyer = (User) request.getSession(false).getAttribute("user");
-			Bid bid = BidBuilder.build(auction.getIdAuction(),
-					buyer.getIdUser(), auction.getBuyItNow());
+			Bid bid = BidBuilder.build(auction.getIdAuction(), buyer.getIdUser(), auction.getBuyItNow());
 			bidService.createItem(bid);
 
-			emailMessageBuilder.sendProductSoldOnBuyItNowForm(seller, product,
-					buyer, count);
+			emailMessageBuilder.sendProductSoldOnBuyItNowForm(seller, product, buyer, count);
 			emailMessageBuilder.sendBuyItNowForm(seller, product, buyer, count);
 
 			request.setAttribute("product", product);
 			request.setAttribute("actionMessage", "You bought");
 			request.setAttribute("bidAmount", bid.getAmount());
 			request.setAttribute("count", count);
+			LOGGER.info("Successful purchase");
 			result = true;
-			return result;
-		} else {
-			return result;
 		}
+		return result;
 	}
 
 }

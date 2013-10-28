@@ -213,7 +213,7 @@
 
 									<!--                                                 ----------------------        PLACE A BID------------------------- -->
 									<c:if test="${product.auction.currentPrice != 0 }">
-										<form class="form-horizontal qtyFrm"  method="get"
+										<form id="placeABidForm" class="form-horizontal qtyFrm"  method="get"
 											action="bid_serve?id_product">
 											<input type="hidden" name="id_product"
 												value="${product.idProduct}" />
@@ -225,7 +225,7 @@
 												<div class="controls">
 													<label class="control-label"><span> You Bid:</span></label>
 													<input type="number" name="bid" id="placeBidInput"
-														min="${product.auction.currentPrice+1}"
+														min="${product.auction.currentPrice+1}" d
 														value="<c:out value="${product.auction.currentPrice+1}"></c:out>"
 														class="span1" placeholder="Your Bid" />
 													<button type="submit" id="placeBidButton"
@@ -241,7 +241,7 @@
 									<!-- ---------------------------------------------BUY IT NOW------------------------ -->
 
 									<c:if test="${product.auction.buyItNow != 0 }">
-										<form class="form-horizontal qtyFrm" action="buyItServe"
+										<form id="buyItForm" class="form-horizontal qtyFrm" action="buyItServe"
 											method="POST">
 											<div class="control-group">
 												<input type="hidden" name="id_product"
@@ -369,106 +369,22 @@
 			<script src="themes/js/jquery.js" type="text/javascript"></script>
 			<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 			<script src="themes/js/google-code-prettify/prettify.js"></script>
-
 			<script src="themes/js/bootshop.js"></script>
 			<script src="themes/js/jquery.lightbox-0.5.js"></script>
 
 			<!-- JavaScript includes -->
-			<!--                 <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script> -->
 			<script src="themes/assets_timer/countdown/jquery.countdown.js"></script>
 			<script src="themes/assets_timer/js/script.js"></script>
+			
 			<script src="bootstrap/js/search.js"></script>
+			
 			<script src="bootstrap/js/thumbnail-image-large.js"
 				type="text/javascript"></script>
 			<script src="bootstrap/js/thumbnail-image-mini.js"
 				type="text/javascript"></script>
 
-			<script type="text/javascript">
-				$(document)
-						.ready(
-								function() {
-									$(window)
-											.load(
-													function() {
-														console
-																.log("session user:"
-																		+ $(
-																				'#userId')
-																				.val()
-																		+ "  product userId:"
-																		+ $(
-																				'#userIdProduct')
-																				.val());
-														if ($('#userId').val() == $(
-																'#userIdProduct')
-																.val()) {
-															$('#buyItButton')
-																	.attr(
-																			"disabled",
-																			"disabled");
 
-															$('#placeBidButton')
-																	.attr(
-																			"disabled",
-																			"disabled");
-															$('#quantity')
-																	.attr(
-																			"disabled",
-																			"disabled");
-															$('#placeBidInput')
-																	.attr(
-																			"disabled",
-																			"disabled");
-														}
-													});
-
-									$('#placeBidInput')
-											.change(
-													function() {
-														var placeBidButton = $('#placeBidButton');
-														var currentPrice = document
-																.getElementById("currentBid").value;
-														var bid = $(
-																'#placeBidInput')
-																.attr('value');
-														if (parseInt(currentPrice) >= parseInt(bid)) {
-															placeBidButton
-																	.attr(
-																			"disabled",
-																			"disabled");
-														} else {
-															placeBidButton
-																	.removeAttr("disabled");
-														}
-
-													});
-
-									$('#quantity')
-											.change(
-													function() {
-														var count = $('#count')
-																.val();
-														console.log("count: "
-																+ count);
-														var quantity = $(
-																'#quantity')
-																.val();
-														if (parseInt(quantity) > parseInt(count)) {
-															$('#buyItButton')
-																	.attr(
-																			"disabled",
-																			"disabled");
-														} else {
-
-															$('#buyItButton')
-																	.removeAttr(
-																			"disabled");
-														}
-
-													});
-
-								});
-			</script>
+			<script src="bootstrap/js/product-page-button-checker.js" type="text/javascript"></script>
 		</div>
 		<!--                 ----------------footer--------------------------------------- -->
 		<jsp:include page="footer"></jsp:include>

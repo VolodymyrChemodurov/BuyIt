@@ -52,8 +52,8 @@ public class EmailSender implements Runnable {
 					InternetAddress.parse(toEmail));
 			message.setSubject(subject);
 
-			message.setContent(text, "text/html");
-
+			message.setContent(text, "text/html; charset=utf-8");
+			
 			Transport.send(message);
 			
 			LOGGER.info("send to "+toEmail);

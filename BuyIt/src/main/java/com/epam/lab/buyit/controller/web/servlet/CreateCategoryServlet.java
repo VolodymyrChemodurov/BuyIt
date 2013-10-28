@@ -40,74 +40,71 @@ public class CreateCategoryServlet extends HttpServlet {
 		boolean flag = false;
 		if ((request.getParameter("categoryName") != null)
 				&& (request.getParameter("categoryName").length() > 0)) {
-			flag = createNewCategory(request, flag);
+			String categoryName = request.getParameter("categoryName");
+			List<Category> categoryList = creator.getAllItems();
+			for (Category category : categoryList) {
+				if (categoryName.equalsIgnoreCase(category.getName())) {
+					flag = true;
+					request.setAttribute("alert", "error");
+					request.setAttribute("messageHeader", "Error");
+					request.setAttribute("message",
+							"This category already exist");
+				}
+			}
+			if (flag == false) {
+				Category category = new Category();
+				category.setName(request.getParameter("categoryName"));
+				creator.createItem(category);
+				request.setAttribute("alert", "success");
+				request.setAttribute("messageHeader", "Well Done");
+				request.setAttribute("message", "Category created");
+			}
 
-		}
-		if ((request.getParameter("selectedCategory") != null)
-				&& (!(request.getParameter("selectedCategory")
-						.equals("Select...")))) {
-			int selectedCtgr = Integer.parseInt(request
-					.getParameter("selectedCategory"));
-			if ((request.getParameter("subCategoryCreate") != null)
-					&& (request.getParameter("subCategoryCreate").length() > 0)) {
-				createNewSubCategory(request, flag, selectedCtgr);
+		} else {
+			if ((request.getParameter("selectedCategory") != null)
+					&& (!(request.getParameter("selectedCategory")
+							.equals("Select...")))) {
+				int selectedCtgr = Integer.parseInt(request
+						.getParameter("selectedCategory"));
+				if ((request.getParameter("subCategoryCreate") != null)
+						&& (request.getParameter("subCategoryCreate").length() > 0)) {
+					String selectedSub = request
+							.getParameter("subCategoryCreate");
+					List<SubCategory> subCategoryList = creator
+							.getAllSubItems();
+					for (SubCategory subCategory : subCategoryList) {
+						if (selectedSub.equalsIgnoreCase(subCategory.getName())) {
+							flag = true;
+							request.setAttribute("alert1", "error");
+							request.setAttribute("messageHeader1", "Error");
+							request.setAttribute("message1",
+									"This sub-category already exist");
+						}
+					}
+					if (flag == false) {
+						Category category = creator.getItemById(selectedCtgr);
+						SubCategory subCategory = new SubCategory();
+						subCategory.setName(selectedSub).setCategoryId(
+								category.getIdCategory());
+						creator.createSubCategory(subCategory);
+						category.setSubCategory(subCategory);
+						creator.updateItem(category);
+						request.setAttribute("alert1", "success");
+						request.setAttribute("messageHeader1", "Well Done");
+						request.setAttribute("message1", "Sub-category created");
+					}
+				}
+			} else {
+				request.setAttribute("alert1", "error");
+				request.setAttribute("messageHeader1", "Error");
+				request.setAttribute("message1",
+						"Before create sub-category select category");
 			}
 		}
+
 		HttpSession session = request.getSession(false);
 		session.setAttribute("categories", creator.getAllItems());
 		request.getRequestDispatcher("categoryCreator").forward(request,
 				response);
-	}
-
-	private void createNewSubCategory(HttpServletRequest request, boolean flag,
-			int selectedCtgr) {
-		String selectedSub = request.getParameter("subCategoryCreate");
-		List<SubCategory> subCategoryList = creator.getAllSubItems();
-		for (SubCategory subCategory : subCategoryList) {
-			if (selectedSub.equalsIgnoreCase(subCategory.getName())) {
-				flag = true;
-				setAttr(request, "alert1", "error", "messageHeader1", "Error",
-						"message1", "This sub-category already exist");
-			}
-		}
-		if (flag == false) {
-			Category category = creator.getItemById(selectedCtgr);
-			SubCategory subCategory = new SubCategory();
-			subCategory.setName(selectedSub).setCategoryId(
-					category.getIdCategory());
-			creator.createSubCategory(subCategory);
-			category.setSubCategory(subCategory);
-			creator.updateItem(category);
-			setAttr(request, "alert1", "success", "messageHeader1",
-					"Well Done", "message1", "Sub-category created");
-		}
-	}
-
-	private boolean createNewCategory(HttpServletRequest request, boolean flag) {
-		String categoryName = request.getParameter("categoryName");
-		List<Category> categoryList = creator.getAllItems();
-		for (Category category : categoryList) {
-			if (categoryName.equalsIgnoreCase(category.getName())) {
-				flag = true;
-				setAttr(request, "alert", "error", "messageHeader", "Error",
-						"message", "This category already exist");
-			}
-		}
-		if (flag == false) {
-			Category category = new Category();
-			category.setName(request.getParameter("categoryName"));
-			creator.createItem(category);
-			setAttr(request, "alert", "success", "messageHeader", "Well Done",
-					"message", "Category created");
-		}
-		return flag;
-	}
-
-	private void setAttr(HttpServletRequest request, String typeName,
-			String type, String msgHeadName, String msgHead, String msgName,
-			String msg) {
-		request.setAttribute(typeName, type);
-		request.setAttribute(msgHeadName, msgHead);
-		request.setAttribute(msgName, msg);
 	}
 }

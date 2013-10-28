@@ -42,27 +42,7 @@
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
 <link href="themes/css/item-preview.css" rel="stylesheet">
-<style>
-#table-scroll {
-	height: 400px;
-	overflow: auto;
-	margin-top: 20px;
-	border: 1px solid #ddd;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
-	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
-	-webkit-transition: all .2s ease-in-out;
-	-moz-transition: all .2s ease-in-out;
-	-o-transition: all .2s ease-in-out;
-	transition: all .2s ease-in-out;
-	background: #fff;
-	position: relative;
-	border: 1px solid #eee;
-}
-</style>
+<link href="bootstrap/css/userpage.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="navbar"></jsp:include>
@@ -80,7 +60,22 @@
 						<div class="span2">
 							<div class="thumbnail" style="text-align:center">
 								<img src="${userInfo.avatar}">
-								<input type="number" name="your_awesome_parameter" id="some_id" class="rating" />
+								<input type="number" name="myrating" id="myrating" class="rating" value="${userRating - 1}"/>
+								
+								<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  									<div class="modal-header">
+    									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    									<h3 id="myModalLabel">Success</h3>
+  									</div>
+  									<div class="modal-body">
+    									<p>Martin thanks you for adding rating!</p>
+    									<p id="add"></p>
+    									<p id="current"></p>
+  									</div>
+  									<div class="modal-footer">
+    									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  									</div>
+								</div>
 							</div>
 						</div>
 						<div class="span7">
@@ -93,8 +88,8 @@
 									<legend>You can leave your message here</legend>
 									<input type="text" style='width: 85%' class="input-small"
 										placeholder="Message" name="message">
-									<input type="hidden" name="fromId" value="${user.idUser}">
-									<input type="hidden" name="toId" value="${userInfo.idUser}">
+									<input type="hidden" id="fromId" name="fromId" value="${user.idUser}">
+									<input type="hidden" id="id" name="toId" value="${userInfo.idUser}">
 									<button type="submit" style='width: 10%' class="btn btn-primary">Leave</button>
 								</form>
 							</row>
@@ -102,25 +97,27 @@
 						</div>
 					</div>
 
-					<div class="row">
+					<div class="row" style="padding-top: 20px">
 						<div class="span9">
-							<div id="table-scroll">
-								<table class="table table-striped table-hover">
-									<thead>
-										<tr>
-											<th>From</th>
-											<th>Message</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${messages}" var="message">
+							<div id="table-wrapper">
+								<div id="table-scroll">
+									<table class="table table-striped table-hover">
+										<thead>
 											<tr>
-												<td style="width: 20%"><a href="user_wall?id=${message.key.idUser}" class="btn btn-link"/>${message.key.login}</td>
-												<td>${message.value.message}</td>
+												<th><span class="text">From</span></th>
+												<th><span class="text">Message</span></th>
 											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
+										</thead>
+										<tbody>
+											<c:forEach items="${messages}" var="message">
+												<tr>
+													<td style="width: 20%"><a href="user_wall?id=${message.key.idUser}" class="btn btn-link"/>${message.key.login}</td>
+													<td>${message.value.message}</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -140,5 +137,6 @@
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
 	<script src="bootstrap/js/search.js"></script>
 	<script src="bootstrap/js/bootstrap-rating-input.min.js" type="text/javascript"></script>
+	<script src="bootstrap/js/add-rating.js"></script>
 </body>
 </html>

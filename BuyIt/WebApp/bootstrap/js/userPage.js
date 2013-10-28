@@ -49,6 +49,7 @@ function deleteEndedSales(id){
 $("#auctionCheck").change(function(){
 	if ($("#auctionCheck").prop("checked")) {
 		$("#startPrice").attr('readonly', false);
+		$("#startPrice").val("1");
 		$("#count").attr('readonly', true);
 		$("#count").val("1");
 		$("#endedTime").show();
@@ -71,6 +72,7 @@ $("#buyNowCheck").change(function(){
 	if ($("#buyNowCheck").prop("checked")) {
 		$("#endedTime").show();
 		$("#buyNowPrice").attr('readonly', false);
+		$("#buyNowPrice").val("1");
 		$("#count").val("1");
 		$("#addProductSubmitButton").attr('disabled', false);
 		if(!$("#auctionCheck").prop("checked")){
@@ -148,18 +150,30 @@ $('#shoppingTabs li:eq(1) a').click(function() {
 	$('#activeShopping').show();
 	$('#purchasedShopping').hide();
 	$('#lostShopping').hide();
+	$('#buyShopping').hide();
+	
 });
 $('#shoppingTabs li:eq(2) a').click(function() {
 	$(this).tab('show');
 	$('#activeShopping').hide();
 	$('#purchasedShopping').show();
 	$('#lostShopping').hide();
+	$('#buyShopping').hide();
 });
 $('#shoppingTabs li:eq(3) a').click(function() {
 	$(this).tab('show');
 	$('#activeShopping').hide();
 	$('#purchasedShopping').hide();
 	$('#lostShopping').show();
+	$('#buyShopping').hide();
+});
+
+$('#shoppingTabs li:eq(4) a').click(function() {
+	$(this).tab('show');
+	$('#activeShopping').hide();
+	$('#purchasedShopping').hide();
+	$('#lostShopping').hide();
+	$('#buyShopping').show();
 });
 
 function editProduct(id) {
