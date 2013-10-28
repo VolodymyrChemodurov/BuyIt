@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.epam.lab.buyit.controller.creator.ProductCreator;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
+import com.epam.lab.buyit.controller.validator.ProductValidation;
 import com.epam.lab.buyit.model.Product;
 
 public class UserRestoreProductServlet extends HttpServlet {
@@ -36,9 +37,11 @@ public class UserRestoreProductServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		Map<String, String[]> inputValues = request
 				.getParameterMap();
-		Product product = new ProductCreator().create(inputValues);
-		int id = productService.createItem(product).getIdProduct();
-		response.sendRedirect("productDetails?id="+id);
+		if (ProductValidation.checkingInputValues(inputValues)){
+			Product product = new ProductCreator().create(inputValues);
+			int id = productService.createItem(product).getIdProduct();
+			response.sendRedirect("productDetails?id="+id);
+		} response.sendRedirect("userRestoreProduct?productId="+request.getParameter("productId"));
 		
 	}
 

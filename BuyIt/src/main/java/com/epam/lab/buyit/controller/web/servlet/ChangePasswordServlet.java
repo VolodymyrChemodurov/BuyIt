@@ -17,6 +17,17 @@ public class ChangePasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UserServiceImpl userService = new UserServiceImpl();
 
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		if (user.getRole() == true) {
+			response.sendRedirect("adminProfile");
+		} else {
+			response.sendRedirect("userProfile");
+		}
+	}
+	
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();

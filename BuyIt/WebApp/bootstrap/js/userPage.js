@@ -123,7 +123,13 @@ $('#oldPassword').change(function() {
 
 
 function showPasswordBlock(){
+	$('#changeAvatarBlock').hide();
 	$('#changePasswordBlock').show();
+}
+
+function showAvatarBlock(){
+	$('#changePasswordBlock').hide();
+	$('#changeAvatarBlock').show();
 }
 
 $(document).ready(function(){
@@ -182,3 +188,49 @@ function editProduct(id) {
 }
 
 
+
+$(document).ready(function() {
+	$('#avatar').wheelzoom();
+	$('#avatar').zoom({
+		on : 'grab'
+	});
+});
+
+$('#changeAvatar').click(function(){
+	$('#avatarUpload').click();
+});
+
+$(':file').change(function() {
+	
+	var file = this.files[0];
+	
+	size = file.size;
+	type = file.type;
+	error = "";
+
+	if (size > 2097152)
+		error = "Only less then 2 Mb file. ";
+
+	if (type.indexOf("image") == -1)
+		error = "File is not an image";
+
+	if (error == "") {
+	
+	} else {
+		$('#avatarChangeError').html(error);
+		$('#avatarChangeError').show();
+		$("#changeAvatarForm").each(function() {
+			this.reset();
+		});
+	}
+});	
+
+ $('#avatarBlockApply').click(function(event) {
+	      
+	   var fileVal = $('#avatarUpload').val();
+	   if (fileVal == '') {
+		   event.preventDefault();
+		   $('#avatarChangeError').html("Choose file at first!");
+		   $('#avatarChangeError').show();
+	   }
+ });
