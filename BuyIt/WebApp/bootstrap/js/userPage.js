@@ -187,6 +187,8 @@ function editProduct(id) {
 	return false;
 }
 
+
+
 $(document).ready(function() {
 	$('#avatar').wheelzoom();
 	$('#avatar').zoom({

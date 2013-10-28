@@ -264,8 +264,8 @@
 						<div id="submitButtonWrapper">
 							<input style="display: none;" name="userId"
 								value="${user.idUser}">
-							<button disabled="disabled" id="addProductSubmitButton" onclick="validateFormOnSubmit()"
-								class="btn btn-success" type="submit">Create Auction</button>
+							<button style="display:none;" id="addProductButton" class="btn btn-success" type="submit">Create Auction</button>
+							<button type="button"  disabled="disabled" id="addProductSubmitButton" onclick="validateFormOnSubmit()" class="btn btn-success" >Create Auction</button>	
 						</div>
 					</form>
 				</div>

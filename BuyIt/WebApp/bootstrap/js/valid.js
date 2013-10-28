@@ -2,36 +2,39 @@ var validationflag;
 
 function validateFormOnSubmit() {
 	var temp = validateProductName($("#productName").val());
+	var flag = true;
 	$("#errorDiv").show();
 	if (temp != ""){
 		$("#errorDiv").html(temp);
-		return false;
+		flag = false;
 	} else {
 		 temp = validateStartPrice($("#startPrice").val());
 		 if (temp != ""){
 				$("#errorDiv").html(temp);
-				return false;
+				flag = false;
 		 } else {
 			 temp = validateBuyNowPrice($("#buyNowPrice").val());
 			 if (temp != ""){
 					$("#errorDiv").html(temp);
-					return false;
+					flag = false;
 			 } else {
 				 temp = validateCount($("#count").val());
 				 if (temp != ""){
 						$("#errorDiv").html(temp);
-						return false;
+						flag = false;
 				 } else {
 					 if($("#endTime").val() == ""){
 							$("#errorDiv").html("Count field is empty");
+							flag = false;
 						}
 				 }
 			 }
 		 }
 	}
 
-	HTMLFormElement.prototype.submit.call($('#form-new-product')[0]);
-	return true;
+	if (flag){
+		$('#addProductButton').click();		
+	} 
 }
 
 $("#startPrice").change(function(){
