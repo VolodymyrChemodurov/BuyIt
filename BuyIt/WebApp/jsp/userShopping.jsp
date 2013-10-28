@@ -65,165 +65,169 @@
 				<div id="maContent" class="corAll5">
 					<div id="activeShopping">
 						<c:if test="${empty userActiveShopping}">
-							<h1 style="text-align: center;">Sorry, but now you do not take part in any auctions!</h1>
+							<h1 style="text-align: center;">Sorry, but now you do not
+								take part in any auctions!</h1>
 						</c:if>
 						<c:if test="${not empty userActiveShopping}">
 							<h1>Active auctions in which you participate</h1>
 							<div id="table-wrapper">
-							<div id="table-scroll">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th><span class="text">Product Name</span></th>
-										<th><span class="text">Start Time</span></th>
-										<th><span class="text">End Time</span></th>
-										<th><span class="text">Price</span></th>
-										<th><span class="text">My bid</span></th>
-										<th><span class="text">Buy</span></th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="product" items="${userActiveShopping}">
-										<tr>
-											<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
-											<td>${product.auction.startTime}</td>
-											<td>${product.auction.endTime}</td>
-											<td>${product.auction.currentPrice}</td>
-											<td>
-												<c:forEach var="bids" items="${bids}">
-													<c:if test="${bids.auctionId eq product.auction.idAuction}">
-														<c:out value="${bids.amount}"/>
-													</c:if>
-												</c:forEach>
-											</td>
-											<td>
-												<form>
-													<input type="hidden" value="${product.idProduct}" name="id" />
-													<button class="btn btn-primary"
-														style="width:100px;padding: 0 4px 0 4px;"
-														onclick="editProduct(${product.idProduct})">Plase a bid</button>
-												</form>
-											</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-							</div>
+								<div id="table-scroll">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th><span class="text">Product Name</span></th>
+												<th><span class="text">Start Time</span></th>
+												<th><span class="text">End Time</span></th>
+												<th><span class="text">Price</span></th>
+												<th><span class="text">My bid</span></th>
+												<th><span class="text">Buy</span></th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="product" items="${userActiveShopping}">
+												<tr>
+													<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
+													<td>${product.auction.startTime}</td>
+													<td>${product.auction.endTime}</td>
+													<td>${product.auction.currentPrice}</td>
+													<c:forEach var="bids" items="${bids}">
+														<c:if
+															test="${bids.auctionId eq product.auction.idAuction}">
+															<td><c:out value="${bids.amount}" /></td>
+															<td>
+																<form action="bid_serve">
+																	<input type="hidden" value="${product.idProduct}"
+																		name="id_product" /> <input type="hidden"
+																		value="${bids.amount + 1}" name="bid" />
+																	<button class="btn btn-primary"
+																		style="width: 100px; padding: 0 4px 0 4px;"
+																		onclick="editProduct(${product.idProduct})">Bid
+																		${bids.amount + 1}</button>
+																</form>
+															</td>
+														</c:if>
+													</c:forEach>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</c:if>
 					</div>
-					<div id="purchasedShopping"style="display: none;">
+					<div id="purchasedShopping" style="display: none;">
 						<c:if test="${empty userPurchasedShopping}">
-							<h1 style="text-align: center;">Sorry, but you didn't won any auction.</h1>
+							<h1 style="text-align: center;">Sorry, but you didn't won
+								any auction.</h1>
 							<h3 style="text-align: center;">You can improve it :)</h3>
 
 						</c:if>
 						<c:if test="${not empty userPurchasedShopping}">
 							<h1>Auctions whitch you WON</h1>
 							<div id="table-wrapper">
-							<div id="table-scroll">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th><span class="text">Product Name</span></th>
-										<th><span class="text">Start Time</span></th>
-										<th><span class="text">End Time</span></th>
-										<th><span class="text">Price</span></th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="product" items="${userPurchasedShopping}">
-										<tr>
-											<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
-											<td>${product.auction.startTime}</td>
-											<td>${product.auction.endTime}</td>
-											<td>${product.auction.currentPrice}</td>
-									</c:forEach>
-								</tbody>
-							</table>
-							</div>
+								<div id="table-scroll">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th><span class="text">Product Name</span></th>
+												<th><span class="text">Start Time</span></th>
+												<th><span class="text">End Time</span></th>
+												<th><span class="text">Price</span></th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="product" items="${userPurchasedShopping}">
+												<tr>
+													<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
+													<td>${product.auction.startTime}</td>
+													<td>${product.auction.endTime}</td>
+													<td>${product.auction.currentPrice}</td>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
 							</div>
 
 						</c:if>
-						
-						
+
+
 					</div>
-					<div id="lostShopping"style="display: none;">
+					<div id="lostShopping" style="display: none;">
 						<c:if test="${empty userLostShopping}">
-							<h1 style="text-align: center;">Sorry, but you didn't lost any auction.</h1>
+							<h1 style="text-align: center;">Sorry, but you didn't lost
+								any auction.</h1>
 						</c:if>
 						<c:if test="${not empty userLostShopping}">
 							<h1>Active auctions in whitch you participate</h1>
 							<div id="table-wrapper">
-							<div id="table-scroll">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th><span class="text">Product Name</span></th>
-										<th><span class="text">Start Time</span></th>
-										<th><span class="text">End Time</span></th>
-										<th><span class="text">Price</span></th>
-										<th><span class="text">My bid</span></th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="product" items="${userLostShopping}">
-										<tr>
-											<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
-											<td>${product.auction.startTime}</td>
-											<td>${product.auction.endTime}</td>
-											<td>${product.auction.currentPrice}</td>
-											<td>
-												<c:forEach var="bids" items="${bids}">
-													<c:if test="${bids.auctionId eq product.auction.idAuction}">
-														<c:out value="${bids.amount}"/>
-													</c:if>
-												</c:forEach>
-											</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
+								<div id="table-scroll">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th><span class="text">Product Name</span></th>
+												<th><span class="text">Start Time</span></th>
+												<th><span class="text">End Time</span></th>
+												<th><span class="text">Price</span></th>
+												<th><span class="text">My bid</span></th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="product" items="${userLostShopping}">
+												<tr>
+													<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
+													<td>${product.auction.startTime}</td>
+													<td>${product.auction.endTime}</td>
+													<td>${product.auction.currentPrice}</td>
+													<td><c:forEach var="bids" items="${bids}">
+															<c:if
+																test="${bids.auctionId eq product.auction.idAuction}">
+																<c:out value="${bids.amount}" />
+															</c:if>
+														</c:forEach></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
 							</div>
-							</div>
-						</c:if>						
+						</c:if>
 					</div>
-					<div id="buyShopping"style="display: none;">
+					<div id="buyShopping" style="display: none;">
 						<c:if test="${empty userBuyShopping}">
-							<h1 style="text-align: center;">Sorry, but you do not by anything, yet.</h1>
+							<h1 style="text-align: center;">Sorry, but you do not by
+								anything, yet.</h1>
 							<h3 style="text-align: center;">You can improve it :)</h3>
 
 						</c:if>
 						<c:if test="${not empty userBuyShopping}">
-							<h1>Products whitch  you bought</h1>
+							<h1>Products whitch you bought</h1>
 							<div id="table-wrapper">
-							<div id="table-scroll">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th><span class="text">Product Name</span></th>
-										<th><span class="text">Start Time</span></th>
-										<th><span class="text">End Time</span></th>
-										<th><span class="text">Price</span></th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="product" items="${userBuyShopping}">
-										<tr>
-											<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
-											<td>${product.auction.startTime}</td>
-											<td>${product.auction.endTime}</td>
-											<td>${product.auction.buyItNow}</td>
-
-									</c:forEach>
-								</tbody>
-							</table>
-							</div>
+								<div id="table-scroll">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th><span class="text">Product Name</span></th>
+												<th><span class="text">Start Time</span></th>
+												<th><span class="text">End Time</span></th>
+												<th><span class="text">Price</span></th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="product" items="${userBuyShopping}">
+												<tr>
+													<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
+													<td>${product.auction.startTime}</td>
+													<td>${product.auction.endTime}</td>
+													<td>${product.auction.buyItNow}</td>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
 							</div>
 
 						</c:if>
-						
-						
+
+
 					</div>
 
 				</div>
