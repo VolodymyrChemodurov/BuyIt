@@ -223,12 +223,12 @@
 									<c:if test="${product.auction.currentPrice != 0 }">
 									<div class="form-horizontal qtyFrm">
 										<div class="control-group">
-											<label class="control-label">
+											<label class="control-label style="width: 230px"">
 												<span>Current Price: <c:out value="${product.auction.currentPrice}"></c:out>$</span>
 											</label>
 											<div class="controls">
 												<label class="control-label">
-													<span> Your Bid:</span>
+													<span  style="padding-left: 50px"> Your Bid:</span>
 												</label>
 												<input type="number" name="bid" id="bidInput"
 													min="${product.auction.currentPrice+1}" d
@@ -248,6 +248,7 @@
     										<h3 id="myModalLabel">Bid confirmation</h3>
   										</div>
   										<form id="placeABidForm"  method="get" action="bid_serve?id_product">
+  											<input type="hidden" id="currentPrice" value="${product.auction.currentPrice}">
   											<input type="hidden" name="id_product" value="${product.idProduct}" />
   											<input type="hidden" name="bid" id="placeBidInput"/>
   											<div class="modal-body">
@@ -256,7 +257,7 @@
   											</div>
   											<div class="modal-footer">
     											<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    											<button type="submit" class="btn btn-default btn-primary pull-right">Place a Bid</button>
+    											<button type="submit" id="placeBidButton" class="btn btn-default btn-primary pull-right">Place a Bid</button>
   											</div>
   										</form>
 									</div>
@@ -266,12 +267,12 @@
 									<c:if test="${product.auction.buyItNow != 0 }">
 										<div class="form-horizontal qtyFrm">
 											<div class="control-group">
-												<label class="control-label">
-													<span> Buy it By: <c:out value="${product.auction.buyItNow}"></c:out> $</span>
+												<label class="control-label" style="width: 230px">
+													<span> Buy it Now: <c:out value="${product.auction.buyItNow}"></c:out> $</span>
 												</label>
 												<div class="controls">
 													<label class="control-label" text-align="right">
-														<span>Quantity:</span>
+														<span style="padding-left: 50px">Quantity:</span>
 													</label> 
 													<input type="number" min="1" id="quantityInput" max="${product.auction.count}" name="quantity" class="span1" value="1" />
 													<a id="buyItButton" href="#buyConfirmation" role="button" data-toggle="modal"
@@ -301,7 +302,7 @@
   												</div>
   												<div class="modal-footer">
     												<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    												<button type="submit" class="btn btn-default btn-primary pull-right">Buy it now</button>
+    												<button type="submit" id="placeBidButton" class="btn btn-default btn-primary pull-right">Buy it now</button>
   												</div>
   											</form>
 										</div>
@@ -341,7 +342,7 @@
 										</ul>
 										<div id="myTabContent" class="tab-content">
 											<div class="tab-pane fade active in" id="home" style="padding-left: 30px">
-												
+												<hr class="soft" />
 												<div class="form-horizontal qtyFrm">
 													${product.description.descText}</div>
 												<hr class="soft" />

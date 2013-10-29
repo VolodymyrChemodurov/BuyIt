@@ -1,7 +1,11 @@
 $(document).ready(function() {
 	$('#bidConfirmation').on('show', function () {
 		var input =  $('#bidInput').val();
-		$('#placeBidInput').val(input);
-		$('.message').text('Your bid: ' + input + '$');
+		if(input > $('#currentPrice').val()){
+			$('#placeBidInput').val(input);
+			$('.message').text('Your bid: ' + input + '$');
+		} else {
+			$('.#bidConfirmation').toggle('hide');
+		}
 	});
 });
