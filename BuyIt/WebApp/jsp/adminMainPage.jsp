@@ -113,10 +113,10 @@
 										<td>
 											<form method="post" action="adminPageServlet">
 												<input type="hidden" value="${user.idUser}" name="idUsr" />
-												<input class="btn btn-success" style="padding: 0 4px 0 4px;"
+												<input class="btn btn-success" style="width:60px; padding: 0 4px 0 4px;"
 													id="${user.ban}" type="submit" name="button" value="bann" />
 												<input type="hidden" value="${user.idUser}" name="idUsr" />
-												<input class="btn btn-danger" style="padding: 0 4px 0 4px;"
+												<input class="btn btn-danger" style="width:60px; padding: 0 4px 0 4px;"
 													id="u${user.ban}" type="submit" name="button"
 													value="unbann" />
 											</form>
