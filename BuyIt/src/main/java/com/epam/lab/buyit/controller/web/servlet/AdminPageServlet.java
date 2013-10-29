@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.epam.lab.buyit.controller.service.admin.AdminService;
 import com.epam.lab.buyit.controller.service.admin.AdminServiceImpl;
 import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
 import com.epam.lab.buyit.model.User;
 
 public class AdminPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private AdminService adminService = null;
+	private AdminServiceImpl adminService = null;
 	private UserServiceImpl userService = null;
 
 	public AdminPageServlet() {

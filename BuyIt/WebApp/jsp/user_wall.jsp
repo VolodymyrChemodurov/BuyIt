@@ -60,7 +60,7 @@
 						<div class="span2">
 							<div class="thumbnail" style="text-align:center">
 								<img src="${userInfo.avatar}">
-								<input type="number" name="myrating" id="myrating" class="rating" value="${userRating}"/>
+								<input type="number" name="myrating" id="myrating" class="rating" value="${userRating - 1}"/>
 								
 								<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   									<div class="modal-header">

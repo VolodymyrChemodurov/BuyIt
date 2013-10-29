@@ -20,11 +20,8 @@ import com.epam.lab.buyit.model.User;
 public class UserCommentsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		ProductServiceImpl productService = new ProductServiceImpl();
 		UserServiceImpl userService = new UserServiceImpl();
 		User user = (User) request.getSession().getAttribute("user");
@@ -42,9 +39,11 @@ public class UserCommentsServlet extends HttpServlet {
 			}
 		}
 
-		request.getSession().setAttribute("users", userService.getAllItemsWeek());
+		request.getSession().setAttribute("users",
+				userService.getAllItemsWeek());
 		request.getSession().setAttribute("userComments", commentsList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("userComments");
+		RequestDispatcher dispatcher = request
+				.getRequestDispatcher("userComments");
 		dispatcher.forward(request, response);
 
 	}

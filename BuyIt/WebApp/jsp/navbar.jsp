@@ -12,7 +12,7 @@
 					src="themes/images/logo.png" alt="Bootsshop"></a>
 				<form class="form-inline navbar-search" method="post"
 					action="searchServlet">
-					<input id="srchFld" class="srchTxt" type="text" name="srchedFld">
+					<input id="srchFld" style="padding-left:10px;" class="srchTxt" type="text" name="srchedFld">
 					<select class="srchTxt" name="srchedTxt">
 						<option>Select...</option>
 						<c:forEach var="category" items="${categories}">

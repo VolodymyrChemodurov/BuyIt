@@ -139,7 +139,7 @@ div.bookmarksArea #vMenu li a {
 	color: #fff;
 	cursor: default;
 	background-color: #3A3F44;
-	border-bottom-color: transparent border:  solid #ddd;
+	border-bottom-color: transparent border:   solid #ddd;
 	border-width: 1px 1px 0 1px;
 	background-position: 0 -1px;
 }
@@ -202,6 +202,7 @@ div.bookmarksArea #vMenu li a {
 	background-color: #3A3F44;
 }
 
+.left-menu #changeAvatarBlock,
 .left-menu #changePasswordBlock {
 	margin-top: 10px;
 	height: 190px;
@@ -290,4 +291,27 @@ div.avatar-wrapper img {
 	height: 20px;
 	width: 35%;
 	font-size: 14px;
+}
+
+.zoom {
+	display: inline-block;
+	position: relative;
+}
+
+.zoom:after {
+	content: '';
+	display: block;
+	width: 33px;
+	height: 33px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.zoom img {
+	display: block;
+}
+
+.zoom img::selection {
+	background-color: transparent;
 }

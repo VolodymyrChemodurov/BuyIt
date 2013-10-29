@@ -7,38 +7,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.epam.lab.buyit.controller.service.search.SearchService;
 import com.epam.lab.buyit.controller.service.search.SearchServiceImpl;
 
-/**
- * Servlet implementation class SearchServlet
- */
-// @WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private SearchService serviceImpl = null;
+	private SearchServiceImpl searchService = null;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	@Override
 	public void init() throws ServletException {
 		super.init();
-		serviceImpl = new SearchServiceImpl();
+		searchService = new SearchServiceImpl();
 	}
 
-	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
@@ -46,7 +30,7 @@ public class SearchServlet extends HttpServlet {
 
 	protected void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		serviceImpl.search(request, response);
+		searchService.search(request, response);
 	}
 
 }

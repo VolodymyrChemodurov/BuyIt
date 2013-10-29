@@ -1,35 +1,40 @@
+var validationflag;
+
 function validateFormOnSubmit() {
 	var temp = validateProductName($("#productName").val());
+	var flag = true;
 	$("#errorDiv").show();
 	if (temp != ""){
 		$("#errorDiv").html(temp);
-		return false;
+		flag = false;
 	} else {
 		 temp = validateStartPrice($("#startPrice").val());
 		 if (temp != ""){
 				$("#errorDiv").html(temp);
-				return false;
+				flag = false;
 		 } else {
 			 temp = validateBuyNowPrice($("#buyNowPrice").val());
 			 if (temp != ""){
 					$("#errorDiv").html(temp);
-					return false;
+					flag = false;
 			 } else {
 				 temp = validateCount($("#count").val());
 				 if (temp != ""){
 						$("#errorDiv").html(temp);
-						return false;
+						flag = false;
 				 } else {
 					 if($("#endTime").val() == ""){
 							$("#errorDiv").html("Count field is empty");
+							flag = false;
 						}
 				 }
 			 }
 		 }
 	}
 
-	HTMLFormElement.prototype.submit.call($('#addProductSubmitButton')[0]);
-	return true;
+	if (flag){
+		$('#addProductButton').click();		
+	} 
 }
 
 $("#startPrice").change(function(){
@@ -75,6 +80,16 @@ $("#productName").change(function(){
 	}
 });
 
+$("#productName1").change(function(){
+	var temp = validateProductName($(this).val());
+	if(temp != ""){
+		$("#errorDiv").show();
+		$("#errorDiv").html(temp);
+	} else {
+		$("#errorDiv").hide();
+	}
+});
+
 $("#endTime").change(function(){
 	if($(this).val() == ""){
 		$("#errorDiv").show();
@@ -90,7 +105,7 @@ function validateStartPrice(fld) {
 	var error = "";
 	if (fld == "") {
 		error = "Start price field is empty";
-	} else if (!fld.search(/[0-9]/)) {
+	} else if (fld.search(/[0-9]/)) {
 		error = "Start price field must contain only numbers.";
 	} else if (fld>3000 ||fld<1) {
 		error = "Start price field range [1;3000]";
@@ -127,7 +142,7 @@ function validateProductName(fld) {
 	 if (fld.search(/[A-Za-zА-Яа-я0-9- _()]/)) {
 		error = "Product name field must contain only numbers.";
 	} else if (fld.length <8) {
-		error = "Product name field must be more than 8 characters";
+		error = "Product name must be more than 8 characters";
 	}
 	return error;
 }

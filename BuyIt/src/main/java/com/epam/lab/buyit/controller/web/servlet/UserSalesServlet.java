@@ -14,22 +14,19 @@ import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
 import com.epam.lab.buyit.model.Product;
 import com.epam.lab.buyit.model.User;
 
-
 public class UserSalesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		ProductServiceImpl productService = new ProductServiceImpl();
 		User user = (User) request.getSession().getAttribute("user");
-		List<Product> productList = productService.getItemsByUserId(user.getIdUser());
+		List<Product> productList = productService.getItemsByUserId(user
+				.getIdUser());
 		List<Product> activeList = new ArrayList<Product>();
 		List<Product> endedList = new ArrayList<Product>();
-		for(Product current : productList){
-			if (current.getAuction().getStatus().equals("closed")){
+		for (Product current : productList) {
+			if (current.getAuction().getStatus().equals("closed")) {
 				endedList.add(current);
 			} else {
 				activeList.add(current);
@@ -40,7 +37,7 @@ public class UserSalesServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher("userSales");
 		dispatcher.forward(request, response);
-	
+
 	}
 
 }

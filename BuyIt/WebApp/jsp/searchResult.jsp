@@ -35,29 +35,12 @@
 
 <link type="text/css" rel="stylesheet"
 	href="themes/css/pagination/jPages.css">
+	
 
-<script type="text/javascript"
-	src="themes/js/pagination/jquery-1.8.2.min.js"></script>
-<script type="text/javascript"
-	src="themes/js/pagination/highlight.pack.js"></script>
-<script src="themes/js/pagination/jPages.js"></script>
-<script src="themes/js/pagination/js.js"></script>
-<script type="text/javascript" src="themes/js/pagination/tabifier.js"></script>
 
 <style type="text/css" id="enject"></style>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("div.holder").jPages({
-			containerID : "itemContainer",
-			perPage : 9,
-			startPage : 1,
-			startRange : 1,
-			midRange : 5,
-			endRange : 1
-		});
-	});
-</script>
+
 </head>
 
 <body>
@@ -76,25 +59,35 @@
 
 					<hr class="soft" />
 
-					<div id="myTab" class="pull-right">
+					<!-- <div id="myTab" class="pull-right">
 						<a href="#listView" data-toggle="tab"><span
 							class="btn btn-large"><i class="icon-list"></i></span></a> <a
 							href="#blockView" data-toggle="tab"><span
 							class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
-					</div>
+					</div> -->
 
-					<br class="clr" /> <br class="clr" />
+					<br class="clr" /> 
 
 					<div class="tab-content">
-						<div class="tab-pane" id="listView">
+					
+<%-- 						<div class="tab-pane" id="listView">
 							<c:forEach items="${srchedPrdct}" var="product">
 								<div class="row">
 									<div class="span2">
 										<!-- Image of product -->
-										<a href="productDetails?id=${product.idProduct}"> <img
-											style="height: 150px"
-											src="<c:out value="${product.description.itemPhotos[0].path }"></c:out>" />
-										</a>
+										<c:choose>
+						                	<c:when test="${fn:length(product.description.itemPhotos) eq 0}">
+						                		<a href="productDetails?id=${product.idProduct}">
+						                			<img class="my-image" style="height: 150px" src="<c:out value="themes/images/mocks/noAvailablePhoto.jpg"></c:out>">
+						                		</a>
+						                	</c:when>
+						                	<c:otherwise>
+						                		<a href="productDetails?id=${product.idProduct}"> 
+						                			<img style="height: 150px"
+													src="<c:out value="${product.description.itemPhotos[0].path }"></c:out>"/>
+												</a>
+						                	</c:otherwise>
+						                </c:choose>
 										<!-- Image of product -->
 									</div>
 									<div class="span4">
@@ -115,8 +108,19 @@
 									</div>
 									<div class="span3 alignR">
 										<form class="form-horizontal qtyFrm">
-											<h3>$ ${product.auction.currentPrice}</h3>
-											<!-- get price of the product from DB -->
+											
+											<c:choose>
+			                                	<c:when test="${product.auction.buyItNow  <= 0}">
+			                                    	<h3>$ ${product.auction.currentPrice}</h3>
+			                                    </c:when>
+			                                    <c:when test="${product.auction.currentPrice <= 0}">
+			                                        <h3>$ ${product.auction.buyItNow}</h3>
+			                                    </c:when>
+			                                    <c:otherwise>
+			                                        <h3>$ ${product.auction.buyItNow}</h3>
+			                                    </c:otherwise>
+			                                </c:choose>
+												
 											<br />
 										</form>
 									</div>
@@ -124,7 +128,7 @@
 								<br class="clr" />
 							</c:forEach>
 							<hr class="soft" />
-						</div>
+						</div> --%>
 
 						<div class="tab-pane active" id="blockView">
 							<ul class="thumbnails" id="itemContainer">
@@ -133,10 +137,20 @@
 									<li class="span3 box">
 										<div class="thumbnail">
 											<!-- Image of product -->
-											<a href="productDetails?id=${product.idProduct}"> <img
-												style="height: 150px"
-												src="<c:out value="${product.description.itemPhotos[0].path }"></c:out>" />
-											</a>
+							                <c:choose>
+							                	<c:when test="${fn:length(product.description.itemPhotos) eq 0}">
+							                		<a href="productDetails?id=${product.idProduct}">
+							                			<img class="my-image" style="height: 150px" src="<c:out value="themes/images/mocks/noAvailablePhoto.jpg"></c:out>">
+							                		</a>
+							                	</c:when>
+							                	<c:otherwise>
+							                		<a href="productDetails?id=${product.idProduct}"> 
+							                			<img style="height: 150px"
+														src="<c:out value="${product.description.itemPhotos[0].path }"></c:out>"/>
+													</a>
+							                	</c:otherwise>
+							                </c:choose>
+											
 											<!-- Image of product -->
 											<div class="caption">
 												<h5>
@@ -152,7 +166,18 @@
 												<p>For details. Click here</p>
 												<h4 style="text-align: center">
 													<a class="btn btn-primary" href="#">$
-														${product.auction.currentPrice}</a>
+														<c:choose>
+						                                	<c:when test="${product.auction.buyItNow  <= 0}">
+						                                    	${product.auction.currentPrice}
+						                                    </c:when>
+						                                    <c:when test="${product.auction.currentPrice <= 0}">
+						                                        ${product.auction.buyItNow}
+						                                    </c:when>
+						                                    <c:otherwise>
+						                                        ${product.auction.buyItNow}
+						                                    </c:otherwise>
+						                                </c:choose>
+						                            </a>
 												</h4>
 												<!-- get price of the product from DB -->
 											</div>
@@ -181,5 +206,26 @@
 	<script src="themes/js/bootshop.js"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
 	<script src="bootstrap/js/search.js"></script>
+	
+	<script type="text/javascript" src="themes/js/pagination/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="themes/js/pagination/highlight.pack.js"></script>
+	<script src="themes/js/pagination/jPages.js"></script>
+	<script src="themes/js/pagination/js.js"></script>
+	<script type="text/javascript" src="themes/js/pagination/tabifier.js"></script>
+	
+	<script type="text/javascript">
+ 	$(document).ready(function() {
+ 		$("div.holder").jPages({
+ 			containerID : "itemContainer",
+ 			perPage : 9,
+ 			startPage : 1,
+ 			startRange : 1,
+ 			midRange : 5,
+ 			endRange : 1
+ 		});
+ 	});
+	</script>
+		
+	
 </body>
 </html>

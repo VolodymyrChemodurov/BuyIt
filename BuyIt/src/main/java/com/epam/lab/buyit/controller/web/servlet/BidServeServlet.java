@@ -64,7 +64,7 @@ public class BidServeServlet extends HttpServlet {
 					request.setAttribute("queryFail", "Sorry, someone have just exceeded your bid");
 				}
 			} else {
-				LOGGER.warn("Try to place bid on own producr");
+				LOGGER.warn("Try to place bid on own product");
 				request.setAttribute("participateInOwnAuction", "You can't participate in own auction");
 			}
 		} catch (BidAmountException e) {

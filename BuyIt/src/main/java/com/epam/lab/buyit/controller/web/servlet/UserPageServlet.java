@@ -10,22 +10,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
 import com.epam.lab.buyit.controller.setters.UserSetter;
+import com.epam.lab.buyit.controller.validator.UserValidation;
 import com.epam.lab.buyit.model.User;
 
-/**
- * Servlet implementation class UserPageServlet
- */
 public class UserPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		UserServiceImpl userService = new UserServiceImpl();
 		Map<String, String[]> inputValues = request.getParameterMap();
 		User user = (User) request.getSession().getAttribute("user");
-		setUserInfo (user, inputValues);
-		request.getSession().setAttribute("user", userService.updateItem(user));
-		response.sendRedirect("userProfile");
+		if (UserValidation.checkingInputValues(inputValues)) {
+			setUserInfo(user, inputValues);
+			if (user.getRole()) {
+				redirect(request, response, userService, user, "user",
+						"adminProfile");
+			} else {
+				redirect(request, response, userService, user, "user",
+						"userProfile");
+			}
+		}
 
 	}
 
@@ -37,6 +42,14 @@ public class UserPageServlet extends HttpServlet {
 			setter.setField(user, value);
 		}
 
+	}
+
+	private void redirect(HttpServletRequest request,
+			HttpServletResponse response, UserServiceImpl userService,
+			User user, String attrName, String jsp) throws IOException {
+		request.getSession().setAttribute(attrName,
+				userService.updateItem(user));
+		response.sendRedirect(jsp);
 	}
 
 }

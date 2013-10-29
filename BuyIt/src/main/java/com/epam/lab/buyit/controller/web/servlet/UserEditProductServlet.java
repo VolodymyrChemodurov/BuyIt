@@ -14,12 +14,9 @@ import com.epam.lab.buyit.model.Product;
 
 public class UserEditProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		ProductServiceImpl productService = new ProductServiceImpl();
 		int id = Integer.parseInt(request.getParameter("productId"));
 		Product product = productService.getItemById(id);
@@ -28,21 +25,18 @@ public class UserEditProductServlet extends HttpServlet {
 				response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		ProductServiceImpl productService = new ProductServiceImpl();
 		request.setCharacterEncoding("utf-8");
-		Map<String, String[]> inputValues = request
-				.getParameterMap();
+		Map<String, String[]> inputValues = request.getParameterMap();
 		int id = Integer.parseInt(request.getParameter("productId"));
 		Product product = productService.getItemById(id);
 		product = ProductSetter.setDescriptionFields(product, inputValues);
 		productService.updateByProductId(product);
-		response.sendRedirect("productDetails?id="+product.getIdProduct());
-//		System.out.println(inputValues.keySet());
-		
+		response.sendRedirect("productDetails?id=" + product.getIdProduct());
+		// System.out.println(inputValues.keySet());
+
 	}
 
 }

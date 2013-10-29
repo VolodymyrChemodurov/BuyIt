@@ -209,6 +209,13 @@ public class ProductServiceImpl implements ProductService {
 
 		return products;
 	}
-	
+
+	@Override
+	public List<Product> getSelectionBySubCategoryId(int id, int offset,
+			int numberOfRecords) {
+		return productDAO.getSelectionBySubCategoryId(id, offset,
+				numberOfRecords);
+
+	}
 
 }

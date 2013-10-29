@@ -18,21 +18,25 @@ public class ServeAuctionJob implements Job {
 
 	private static final Logger LOGGER = Logger
 			.getLogger(ServeAuctionJob.class);
+	private AuctionServiceImp auctionService;
+	private ProductServiceImpl productService;
+	private UserServiceImpl userService;
+	private BidServiceImp bidService;
+	private EmailMessageBuilder emailMessageBuilder;
+
+	public ServeAuctionJob() {
+		auctionService = new AuctionServiceImp();
+		productService = new ProductServiceImpl();
+		userService = new UserServiceImpl();
+		bidService = new BidServiceImp();
+		emailMessageBuilder = new EmailMessageBuilder();
+	}
 
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
-
-		AuctionServiceImp auctionService = new AuctionServiceImp();
-		ProductServiceImpl productService = new ProductServiceImpl();
-		UserServiceImpl userService = new UserServiceImpl();
-		BidServiceImp bidService = new BidServiceImp();
-		EmailMessageBuilder emailMessageBuilder = new EmailMessageBuilder();
-
 		int auctionId = (int) arg0.getTrigger().getJobDataMap()
 				.get("auctionId");
-
 		LOGGER.info("Serving auction with id = " + auctionId);
-
 		Auction auction = auctionService.getItemById(auctionId);
 		if (auction.getStatus().equalsIgnoreCase("inProgress")) {
 			auctionService.closeAuction(auctionId);
@@ -41,7 +45,6 @@ public class ServeAuctionJob implements Job {
 			User seller = userService.getItemById(product.getUserId());
 			User buyer = userService.getItemById(bidService
 					.getWinUserIdByAuctionId(auctionId));
-
 			if (buyer != null) {
 				emailMessageBuilder.sendWinLotForm(buyer, product, seller);
 				emailMessageBuilder.sendProductSoldOnAuctionForm(seller,

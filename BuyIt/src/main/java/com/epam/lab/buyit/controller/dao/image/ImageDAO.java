@@ -16,8 +16,8 @@ import com.epam.lab.buyit.model.Image;
 
 public class ImageDAO implements ImageDAOInterface {
 
-	private final static String GET_BY_ID = "SELECT * FROM images WHERE id_image = ?";
-	private final static String GET_BY_DESCRIPTION_ID = "SELECT * FROM images WHERE description_id = ?";
+	private final static String GET_BY_ID = "SELECT * FROM images WHERE id_image = ? AND deleted=false";
+	private final static String GET_BY_DESCRIPTION_ID = "SELECT * FROM images WHERE description_id = ? AND deleted=false";
 	private static final Logger LOGGER = Logger.getLogger(ImageDAO.class);
 	private ImageTransformer transformer;
 
@@ -100,7 +100,7 @@ public class ImageDAO implements ImageDAOInterface {
 			statement = connection.prepareStatement(GET_BY_DESCRIPTION_ID);
 			statement.setInt(1, id);
 			result = statement.executeQuery();
-			while(result.next()) {
+			while (result.next()) {
 				images.add(transformer.fromRSToObject(result));
 			}
 			return images;

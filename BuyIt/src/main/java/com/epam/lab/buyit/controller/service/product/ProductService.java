@@ -12,8 +12,11 @@ public interface ProductService extends GenericService<Product> {
 	int getCountBySubCategoryId(int id);
 
 	List<Product> getLatestProducts(int number);
-	
+
 	List<Product> getBySubCategoryId(int subCategoryId);
-	
-	List<Product> getNotClosedBySubCategoryId(int subCategoryId,int number);
+
+	List<Product> getNotClosedBySubCategoryId(int subCategoryId, int number);
+
+	List<Product> getSelectionBySubCategoryId(int id, int offset,
+			int numberOfRecords);
 }

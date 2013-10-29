@@ -12,15 +12,16 @@ import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
 public class CheckLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserServiceImpl service;
-	
+
 	public void init() {
 		service = new UserServiceImpl();
 	}
-		
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
 		String responseText = login;
-		if(service.checkLogin(login)) {
+		if (service.checkLogin(login)) {
 			responseText = "This login allready exists";
 		}
 		response.setContentType("text/plain");

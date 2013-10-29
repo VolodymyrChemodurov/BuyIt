@@ -84,24 +84,18 @@ public class BuyItServeServlet extends HttpServlet {
 			throws AuctionAllreadyClosedException, WrongProductCountException, ParticipationInOwnAuctionException {
 		
 		boolean result = false;
-		
 		if (auctionService.buyItServe(idProduct, count)) {
-			
 			Product product = productService.getItemById(idProduct);
-			
 			User user = (User) request.getSession(false).getAttribute("user");
 			if(product.getUserId() == user.getIdUser())
 				throw new ParticipationInOwnAuctionException("Try to participate in own auction");
-			
 			Auction auction = auctionService.getByProductId(idProduct);
 			User seller = userService.getItemById(product.getUserId());
 			User buyer = (User) request.getSession(false).getAttribute("user");
 			Bid bid = BidBuilder.build(auction.getIdAuction(), buyer.getIdUser(), auction.getBuyItNow());
 			bidService.createItem(bid);
-
 			emailMessageBuilder.sendProductSoldOnBuyItNowForm(seller, product, buyer, count);
 			emailMessageBuilder.sendBuyItNowForm(seller, product, buyer, count);
-
 			request.setAttribute("product", product);
 			request.setAttribute("actionMessage", "You bought");
 			request.setAttribute("bidAmount", bid.getAmount());
@@ -111,5 +105,4 @@ public class BuyItServeServlet extends HttpServlet {
 		}
 		return result;
 	}
-
 }

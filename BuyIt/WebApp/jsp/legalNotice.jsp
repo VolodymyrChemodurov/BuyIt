@@ -33,34 +33,41 @@
 <link rel="apple-touch-icon-precomposed"
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
+
 </head>
 <body>
 	<jsp:include page="navbar"></jsp:include>
 	<!-- Header End====================================================================== -->
-	<div class="container">
-	<h3>Legal notice</h3>
-	At common law, notice is the fundamental principle in service of
-	process. In this case, the service of process puts the defendant "on
-	notice" of the allegations contained within a criminal defendant to be
-	notified of the charges and their grounds. If a court bases personal
-	jurisdiction over an out-of-state or foreign defendant on a long-arm
-	statute, the court must carefully select a means of notifying the
-	defendant to comply with the notice requirement of due process.
-	Sometimes this is done by serving agents of the defendant located
-	within the state. Because out-of-state defendants can't always be
-	located easily, some state or local laws may allow for selication. An
-	example of this would be printing a notice of the lawsuit in a
-	newspaper published where the defendant is believed to reside. Because
-	the failure of a defendant to appear in court results in a default
-	judgment against him, such measures must be sufficiently calculated to
-	give actual notice to the defendant to satisfy due process. In the core
-	case setting forth constitutional notice requirements, the U.S. Supreme
-	Court held that notice must be "reasonably calculated, under all the
-	circumstances, to apprise interested parties of the pendency of the
-	action and afford them an opportunity to present their objections."
-	Moreover, defendants must be notified by the "best practical means"
-	available.
-
+	<div class="container" >
+		
+		<div class="span11" style ="background-image:url(themes/images/421138.jpg); background-size:100%">
+			<div class="span4"></div>
+			<div class="span5">
+				<em><font color="grey">
+						<h3>Star Wars Poem...</h3>
+					<p>"A long time ago and far, far away..."</p>
+					<p>Those famous words still linger today</p>
+					<p>From the icy wastes of Hoth afar</p>
+					<p>To the Mos Eisley cantina bar</p>
+					<p>Droids of every shape and size</p>
+					<p>Imperial warriors and Rebel spies</p>
+					<p>Hunters and pirates at every turn</p>
+					<p>Dagobah's swamps of moss and fern</p>
+					<p>A young man born of dark and light</p>
+					<p>Seeks the power of a Jedi Knight</p>
+					<p>An evil man armored in black</p>
+					<p>Names like Vader, Solo, Dack</p>
+					<p>Skywalker, Antilles, Yoda, Fett</p>
+					<p>Jabba the Hutt and his rancor pet</p>
+					<p>Aliens, weapons, and planets galore</p>
+					<p>Massive starships and so much more</p>
+					<p>We start the tale, we give it a name</p>
+					<p>The world will never be the same</p>
+					
+					</font>
+				</em>
+			</div>
+		</div>
 	</div><jsp:include page="footer"></jsp:include>
 	<!-- Placed at the end of the document so the pages load faster ============================================= -->
 	<script src="themes/js/jquery.js" type="text/javascript"></script>

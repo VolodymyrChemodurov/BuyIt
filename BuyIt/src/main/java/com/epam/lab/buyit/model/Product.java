@@ -10,7 +10,6 @@ public class Product implements Serializable {
 	private int subCategoryId;
 	private int userId;
 	private String delivery;
-	private boolean deleted;
 	private Description description;
 	private Auction auction;
 
@@ -61,15 +60,6 @@ public class Product implements Serializable {
 
 	public Product setDelivery(String delivery) {
 		this.delivery = delivery;
-		return this;
-	}
-
-	public boolean getDeleted() {
-		return deleted;
-	}
-
-	public Product setDeleted(boolean deleted) {
-		this.deleted = deleted;
 		return this;
 	}
 

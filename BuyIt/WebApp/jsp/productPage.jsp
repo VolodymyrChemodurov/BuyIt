@@ -369,15 +369,15 @@
 			<script src="themes/js/jquery.js" type="text/javascript"></script>
 			<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 			<script src="themes/js/google-code-prettify/prettify.js"></script>
-
 			<script src="themes/js/bootshop.js"></script>
 			<script src="themes/js/jquery.lightbox-0.5.js"></script>
 
 			<!-- JavaScript includes -->
-			<!--                 <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script> -->
 			<script src="themes/assets_timer/countdown/jquery.countdown.js"></script>
 			<script src="themes/assets_timer/js/script.js"></script>
+			
 			<script src="bootstrap/js/search.js"></script>
+			
 			<script src="bootstrap/js/thumbnail-image-large.js"
 				type="text/javascript"></script>
 			<script src="bootstrap/js/thumbnail-image-mini.js"

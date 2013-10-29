@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <html lang="en">
@@ -34,36 +34,29 @@
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
 
-<style>
-	thead { display:block; margin:0px; cell-spacing:0px; left:0px; }
-	tbody { display:block; overflow:auto; height:200px; }
-	th { height:50px; width:60px; }
-	td { height:50px; width:80px; margin:0px; cell-spacing:0px;}
-</style>
-
 <script src="themes/js/jquery.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-
-
-$( document ).ready(function() {
-	$("input").each(function(){
-		if(this.id == "banned"){
-			this.disabled = true; 
-			this.type = "hidden";
-			};
-		if(this.id == "uunbanned"){
-			this.disabled = true; 
-			this.type = "hidden";
-			};
-			});
+	$(document).ready(function() {
+		$("input").each(function() {
+			if (this.id == "banned") {
+				this.disabled = true;
+				this.type = "hidden";
+			}
+			;
+			if (this.id == "uunbanned") {
+				this.disabled = true;
+				this.type = "hidden";
+			}
+			;
 		});
+	});
 </script>
 </head>
 
 <body data-spy="scroll" data-target=".navbar">
 	<jsp:include page="navbar"></jsp:include>
-	
+
 	<div class="container">
 		<div id="maWrapper" class="corAll5">
 			<ul id="vMenu">
@@ -73,129 +66,81 @@ $( document ).ready(function() {
 				<li><a href="adminProfile">Profile</a></li>
 			</ul>
 			<!-- / #vMenu -->
-<!-- 			<div style="overflow: hidden;"> -->
-<!-- 				<div width="200" class="left-menu"> -->
-<!-- 					<div class="avatar-wrapper"> -->
-<%-- 						<img src="${user.avatar}"> --%>
-<!-- 					</div> -->
-<!-- 				</div> -->
-				
-				<div width="200" class="left-menu">
-					<div class="avatar-wrapper">
-						<img src="${user.avatar}">
-					</div>
-				</div>
-				
-				<!-- /left-menu -->
-				
-				<div id="maContent" class="corAll5">
-					<div class="table table-striped" id="navbar">
-					<!-- class="mycontent" -->
-					<h2>General information about users</h2>
-						<br class="clr"/>
-						<table cellpadding="1">
-						<thead>
-							<tr class="success">
-								<th colspan="4"><h3>General information</h3></th>
-								<th colspan="3"><h3>Adress</h3></th>
-								<th colspan="6"><h3>Contacts</h3></th>
-							</tr>
-							<tr class="success">
-								<th>
-									First Name 
-								</th>
-								<th>
-									Last Name 
-								</th>
-								<th>
-									Status 
-								</th>
-								<th>
-									City 
-								</th>
-								<th>
-									Region 
-								</th>
-								<th>
-									Street 
-								</th>
-								<th>
-									House / Flat 
-								</th>
-								<th>
-									Zip Code 
-								</th>
-								<th>
-									Phone 
-								</th>
-								<th>
-									Email 
-								</th>
-								<th>
-								</th>
-								<th>
-								</th>
-								
-							</tr>
-							</thead>
+			<!-- 			<div style="overflow: hidden;"> -->
+			<!-- 				<div width="200" class="left-menu"> -->
+			<!-- 					<div class="avatar-wrapper"> -->
+			<%-- 						<img src="${user.avatar}"> --%>
+			<!-- 					</div> -->
+			<!-- 				</div> -->
 
-							<tbody>
-							<c:forEach items="${onlyUsers}" var="user">
-							
+			<div width="200" class="left-menu">
+				<div class="avatar-wrapper">
+					<img src="${user.avatar}">
+				</div>
+			</div>
+
+			<!-- /left-menu -->
+
+			<div id="maContent" class="corAll5">
+
+				<h2>General information about users</h2>
+				<div id="table-wrapper">
+					<div id="table-scroll">
+						<table class="table table-striped">
+							<thead>
 								<tr>
-									<td>
-										<c:out value="${user.firstName}"></c:out>
-									</td>
-									<td>
-										<c:out	value="${user.lastName}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.ban}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.contact.address.city}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.contact.address.region}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.contact.address.street}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.contact.address.house}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.contact.address.zipCode}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.contact.phone}"></c:out> 
-									</td>
-									<td>
-										<c:out	value="${user.contact.email}"></c:out> 
-									</td>
-									<td>
-										 <form method="post" action="adminPageServlet">
-												<input type="hidden" value="${user.idUser}" name="idUsr"/>
-									            <input class="btn btn-success" style="padding: 0 4px 0 4px;" id="${user.ban}" type="submit" name="button" value="bann"/>
-									            <input type="hidden" value="${user.idUser}" name="idUsr"/>
-								            	<input class="btn btn-danger" style="padding: 0 4px 0 4px;" id="u${user.ban}" type="submit" name="button" value="unbann"/>
-								         </form>
-									</td>
+									<th><span class="text">First Name</span></th>
+									<th><span class="text">Last Name</span></th>
+									<th><span class="text">Status</span></th>
+									<th><span class="text">City</span></th>
+									<th><span class="text">Phone</span></th>
+									<th><span class="text">Email</span></th>
+									<th></th>
+
 								</tr>
-							
-							</c:forEach>
+							</thead>
+							<tbody>
+								<c:forEach items="${onlyUsers}" var="user">
+
+									<tr>
+										<td><c:out value="${user.firstName}"></c:out></td>
+										<td><c:out value="${user.lastName}"></c:out></td>
+										<td><c:out value="${user.ban}"></c:out></td>
+										<td><c:out value="${user.contact.address.city}"></c:out>
+										</td>
+										<td><c:out value="${user.contact.phone}"></c:out></td>
+										<td><c:out value="${user.contact.email}"></c:out></td>
+										<td>
+											<form method="post" action="adminPageServlet">
+												<input type="hidden" value="${user.idUser}" name="idUsr" />
+												<input class="btn btn-success" style="padding: 0 4px 0 4px;"
+													id="${user.ban}" type="submit" name="button" value="bann" />
+												<input type="hidden" value="${user.idUser}" name="idUsr" />
+												<input class="btn btn-danger" style="padding: 0 4px 0 4px;"
+													id="u${user.ban}" type="submit" name="button"
+													value="unbann" />
+											</form>
+										</td>
+									</tr>
+
+								</c:forEach>
+
 							</tbody>
 						</table>
 					</div>
 				</div>
 
-<!-- 				/maContent -->
+
+
 			</div>
+
+			<!-- 				/maContent -->
 		</div>
+	</div>
 
 
 	<div style="height: 330px;"></div>
-	
+
 
 
 	<jsp:include page="footer"></jsp:include>
