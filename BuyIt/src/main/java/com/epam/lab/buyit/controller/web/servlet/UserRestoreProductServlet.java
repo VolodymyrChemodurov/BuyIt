@@ -1,6 +1,7 @@
 package com.epam.lab.buyit.controller.web.servlet;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.lab.buyit.controller.creator.ProductCreator;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
 import com.epam.lab.buyit.controller.validator.ProductValidation;
+import com.epam.lab.buyit.model.Image;
 import com.epam.lab.buyit.model.Product;
 
 public class UserRestoreProductServlet extends HttpServlet {
@@ -37,9 +39,12 @@ public class UserRestoreProductServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		Map<String, String[]> inputValues = request
 				.getParameterMap();
+		int idTemp = Integer.parseInt(request.getParameter("productId"));
+		List<Image> list =  productService.getItemById(idTemp).getDescription().getItemPhotos();
 		if (ProductValidation.checkingInputValues(inputValues)){
 			Product product = new ProductCreator().create(inputValues);
 			int id = productService.createItem(product).getIdProduct();
+			product.getDescription().setItemPhotos(list);
 			response.sendRedirect("productDetails?id="+id);
 		} else{
 			response.sendRedirect("userRestoreProduct?productId="+request.getParameter("productId"));
