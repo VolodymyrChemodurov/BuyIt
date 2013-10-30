@@ -1,20 +1,12 @@
 $(document).ready(
 		function() {
 			
-			$.validator.addMethod("loginRegex", function(value, element) {
-		        return this.optional(element) || /^[a-z0-9_-]{4,15}$/i.test(value);
-		    }, "Username must contain only letters, numbers, or dashes.");
-			
 			$.validator.addMethod("firstNameRegex", function(value, element) {
-		        return this.optional(element) || /^[A-Z][a-zA-Z ]+$/i.test(value);
+		        return this.optional(element) || /^[A-Za-z ]{2,15}$/i.test(value);
 		    }, "\*\*\*");
 			
 			$.validator.addMethod("lastNameRegex", function(value, element) {
-		        return this.optional(element) || /^[A-Z][a-zA-Z ]+$/i.test(value);
-		    }, "\*\*\*");
-			
-			$.validator.addMethod("passwordRegex", function(value, element) {
-		        return this.optional(element) || /^[\w_-]{6,15}$/i.test(value);
+		        return this.optional(element) || /^[a-zA-Z -]{2,15}$/i.test(value);
 		    }, "\*\*\*");
 			
 			$.validator.addMethod("phoneRegex", function(value, element) {
@@ -22,19 +14,19 @@ $(document).ready(
 		    }, "\*\*\*");
 			
 			$.validator.addMethod("cityRegex", function(value, element) {
-		        return this.optional(element) || /^[A-Za-z]+$/i.test(value);
+		        return this.optional(element) || /^[A-Za-z -]{3,15}$/i.test(value);
 		    }, "\*\*\*");
 			
 			$.validator.addMethod("streetRegex", function(value, element) {
-		        return this.optional(element) || /^[A-Za-z]+$/i.test(value);
+		        return this.optional(element) || /^[A-Za-z -]{3,15}$/i.test(value);
 		    }, "\*\*\*");
 			
 			$.validator.addMethod("houseRegex", function(value, element) {
-		        return this.optional(element) || /^[\d]{1,3}[a-z]?$/i.test(value);
+		        return this.optional(element) || /^[1-9][\d]{0,2}[a-z]?$/i.test(value);
 		    }, "\*\*\*");
 			
 			$.validator.addMethod("flatRegex", function(value, element) {
-		        return this.optional(element) || /^[\d]{1,3}[a-z]?$/i.test(value);
+		        return this.optional(element) || /^[1-9][\d]{0,2}[a-z]?$/i.test(value);
 		    }, "\*\*\*");
 			
 			$.validator.addMethod("zipCodeRegex", function(value, element) {
@@ -59,35 +51,27 @@ $(document).ready(
 								required : true,
 								firstNameRegex: true
 							},
-							login : {
-								loginRegex: true,
-								required : true
-							},
-							password : {
-								required : true,
-								passwordRegex: true,
-							},
-							confirmPassword : {
-								required : true,
-								minlength : 6,
-								equalTo : "#password2"
-							},
 							phone: {
+								required : true,
 								phoneRegex: true
 							},
 							city: {
+								required : true,
 								cityRegex: true
 							},
 							street: {
+								required : true,
 								streetRegex: true
 							},
 							house: {
+								required : true,
 								houseRegex: true
 							},
 							flat: {
 								flatRegex: true
 							},
 							zipCode: {
+								required : true,
 								zipCodeRegex: true
 							}
 						},

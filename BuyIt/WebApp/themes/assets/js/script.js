@@ -6,11 +6,11 @@ $(document).ready(
 		    }, "Username must contain only letters, numbers, or dashes.");
 			
 			$.validator.addMethod("firstNameRegex", function(value, element) {
-		        return this.optional(element) || /^[A-Z][a-zA-Z ]{2,15}$/i.test(value);
+		        return this.optional(element) || /^[a-zA-Z ]{2,15}$/i.test(value);
 		    }, "More then 2 characters");
 			
 			$.validator.addMethod("lastNameRegex", function(value, element) {
-		        return this.optional(element) || /^[A-Z][a-zA-Z ]{3,15}$/i.test(value);
+		        return this.optional(element) || /^[a-zA-Z -]{2,15}$/i.test(value);
 		    }, "More then 3 characters");
 			
 			$.validator.addMethod("passwordRegex", function(value, element) {
@@ -22,19 +22,19 @@ $(document).ready(
 		    }, "Yours phone number (10 digits)");
 			
 			$.validator.addMethod("cityRegex", function(value, element) {
-		        return this.optional(element) || /^[A-Za-z]+$/i.test(value);
+		        return this.optional(element) || /^[A-Za-z -]{3,15}$/i.test(value);
 		    }, "Please enter valid city name");
 			
 			$.validator.addMethod("streetRegex", function(value, element) {
-		        return this.optional(element) || /^[A-Za-z]+$/i.test(value);
+		        return this.optional(element) || /^[A-Za-z -]{3,15}$/i.test(value);
 		    }, "Please enter valid street name");
 			
 			$.validator.addMethod("houseRegex", function(value, element) {
-		        return this.optional(element) || /^[\d]{1,3}[a-z]?$/i.test(value);
+		        return this.optional(element) || /^[1-9][\d]{0,2}[a-z]?$/i.test(value);
 		    }, "Please enter valid house number");
 			
 			$.validator.addMethod("flatRegex", function(value, element) {
-		        return this.optional(element) || /^[\d]{1,3}[a-z]?$/i.test(value);
+		        return this.optional(element) || /^[1-9][\d]{0,2}[a-z]?$/i.test(value);
 		    }, "Pleas enter valid flat number");
 			
 			$.validator.addMethod("zipCodeRegex", function(value, element) {

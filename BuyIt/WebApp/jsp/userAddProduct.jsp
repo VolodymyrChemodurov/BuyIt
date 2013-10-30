@@ -73,7 +73,7 @@
 								<h3>Create new auction</h3>
 								<div class="myrow">
 									<span class="span-1">Product name:</span> <span class="span-2"><input
-										id="productName" name="productName" value="" /></span>
+										id="productName" name="productName" value="" maxlength="24"/></span>
 								</div>
 								<div class="myrow">
 									<span class="span-1">Category:</span> <span class="span-2">
@@ -173,27 +173,22 @@
 									<div id="collapseOne" class="panel-collapse collapse">
 										<div class="panel-body">
 											<div class="container" style="margin-left: 40px;">
-<div class="fileupload fileupload-new" data-provides="fileupload">
-  <div class="input-append">
-    <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><input type="file" /></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-  </div>
-</div>
-        
-        <div class="fileinput fileinput-new" data-provides="fileinput">
-  <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-    <img data-src="holder.js/100%x100%" alt="...">
-  </div>
-  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-  <div>
-    <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
-    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-  </div>
-</div>
-        
+												<input size="60"
+													style="width: 300px; margin-left: 5px; border-color: #2f96b4; margin-top: 2px;"
+													class="btn btn-info" type="file" id="imageUpload"
+													name="imageUpload" accept="image/*" multiple> <input
+													type="button" id="changeImage"
+													style="width: 188px; margin-left: 5px; border-color: #2f96b4; margin-top: 2px;"
+													class="btn btn-info" value="Choose image" />
+												<table style="width: 800px; margin-top:20px;" id="tablelist" class="table">
+													<tbody id="filelist">
 
+													</tbody>
+												</table>
 
 											</div>
 										</div>
+
 									</div>
 								</div>
 								<div style="background-color: #eeeeee; padding-top: 3px;"
@@ -263,7 +258,7 @@
 
 						<div id="submitButtonWrapper">
 							<input style="display: none;" name="userId"
-								value="${user.idUser}">
+								value="${user.idUser}"/>
 							<button style="display:none;" id="addProductButton" class="btn btn-success" type="submit">Create Auction</button>
 							<button type="button"  disabled="disabled" id="addProductSubmitButton" onclick="validateFormOnSubmit()" class="btn btn-success" >Create Auction</button>	
 						</div>
@@ -296,7 +291,6 @@
 	<script src="themes/assets/js/product.validate.js"></script>
 	<script src="bootstrap/js/userPage.js"></script>
 	<script src="bootstrap/js/valid.js"></script>
-	<script src="bootstrap/js/fileupload.js"></script>
 	<script type="text/javascript">
 		var currentTime = new Date();
 		$(".form_datetime").datetimepicker({

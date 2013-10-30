@@ -14,6 +14,7 @@ $("#category").change(function() {
 		if ($(this).text() != "") {
 			$("#subCategory").prop('disabled', false);
 			$("#subCategory").empty();
+			$("#subCategory").append('<option value=""></option>');
 			$.ajax( {
 				type: 'POST',
 				url: 'subcategory',
@@ -21,12 +22,13 @@ $("#category").change(function() {
 				success: function(data) {
 					$.each(data, function(index, value) {
 						a=value;
-					  $("#subCategory").append('<option value="'+value.categoryId+'">'+value.name+'</option>');
+					  $("#subCategory").append('<option value="'+value.idSubCategory+'">'+value.name+'</option>');
 					});
 				}
 			});
 			
 		} else {
+			$("#subCategory").empty();
 			$("#subCategory").append('<option value=""></option>');
 			$("#subCategory").prop('disabled', true);
 		}
@@ -53,10 +55,13 @@ $("#auctionCheck").change(function(){
 		$("#count").attr('readonly', true);
 		$("#count").val("1");
 		$("#endedTime").show();
-		$("#addProductSubmitButton").attr('disabled', false);
+		if ($("#subCategory").val() != ""){
+			$("#addProductSubmitButton").attr('disabled', false);
+		}
 	} else {
 		$("#startPrice").attr('readonly', true);
 		$("#startPrice").val("");
+		$("#errorDiv").hide();
 		if($("#buyNowCheck").prop("checked")){
 			$("#count").attr('readonly', false);
 		} else{
@@ -74,14 +79,17 @@ $("#buyNowCheck").change(function(){
 		$("#buyNowPrice").attr('readonly', false);
 		$("#buyNowPrice").val("1");
 		$("#count").val("1");
-		$("#addProductSubmitButton").attr('disabled', false);
 		if(!$("#auctionCheck").prop("checked")){
 			$("#count").attr('readonly', false);
+		}
+		if ($("#subCategory").val() != ""){
+			$("#addProductSubmitButton").attr('disabled', false);
 		}
 	} else {
 		$("#buyNowPrice").attr('readonly', true);
 		$("#buyNowPrice").val("");
 		$("#count").attr('readonly', true);
+		$("#errorDiv").hide();
 		if(!$("#auctionCheck").prop("checked")){
 			$("#count").val("");
 			$("#addProductSubmitButton").attr('disabled', true);
@@ -90,6 +98,18 @@ $("#buyNowCheck").change(function(){
 	}
 });
 
+$("#subCategory").change(function(){
+	$("#subCategory option:selected").each(function() {
+	if ($(this).val() != ""){
+		if($("#auctionCheck").prop("checked") || $("#buyNowCheck").prop("checked")){
+			$("#addProductSubmitButton").attr('disabled', false);
+		}
+	} else {
+		$("#addProductSubmitButton").attr('disabled', true);
+	}
+	});
+	
+});
 
 
 $('#oldPassword').change(function() {
@@ -190,7 +210,6 @@ function editProduct(id) {
 
 
 $(document).ready(function() {
-	$('#avatar').wheelzoom();
 	$('#avatar').zoom({
 		on : 'grab'
 	});
@@ -200,8 +219,53 @@ $('#changeAvatar').click(function(){
 	$('#avatarUpload').click();
 });
 
-$(':file').change(function() {
+$('#changeImage').click(function(){
+	$('#imageUpload').click();
+});
+
+$('#imageUpload').change(function() {
+	 $("#filelist").empty();
+	for (var i = 0; i < this.files.length; i++)
+    {
+		
+		var file = this.files[i];
+		
+		size = file.size;
+		type = file.type;
+		error = "";
+		
+		if (size > 2097152)
+			error = "Only less then 2 Mb file. ";
+		
+		if (type.indexOf("image") == -1)
+			error = "File is not an image";
+		
+		if (error == "") {
+			$("#filelist").append('<tr><td width="55%">'+file.name+'</td><td> <button class="btn btn-primary" style="width: 100px; padding: 0 4px 0 4px;" onclick="deleteImage('+i+')">Delete</button></td><td width="25%"></td></tr>');	
+		} else {
+			$("#filelist").append('<tr><td width="60%">'+file.name+'</td><td> <button class="btn btn-primary" style="width: 100px; padding: 0 4px 0 4px;" onclick="deleteImage('+i+')">Delete</button></td><td width="40%">'+error+'</td></tr>');	
+		}
+		
+    }
+});	
+
+function deleteImage(id){
+//	$('#imageUpload');
+//	elm.replaceWith( elm = control.clone( true ) );
+	var s = $('#imageUpload');
+	var a = $(s);
+	for (var i = 0; i < $('#imageUpload').files.length; i++)
+    {
+		if(i >= id){
+			$('#imageUpload').files[i] = $('#imageUpload').files[i+1];
+		}
+    }
+	$('#imageUpload').files.length--;
+	$('#imageUpload').change();
 	
+}
+
+$('#avatarUpload').change(function() {
 	var file = this.files[0];
 	
 	size = file.size;

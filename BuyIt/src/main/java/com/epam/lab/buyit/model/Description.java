@@ -55,8 +55,9 @@ public class Description implements Serializable {
 		return this;
 	}
 
-	public void setItemPhoto(Image image) {
+	public Description setItemPhoto(Image image) {
 		itemPhotos.add(image);
+		return this;
 	}
 
 	public Image getItemPhoto(int number) {
