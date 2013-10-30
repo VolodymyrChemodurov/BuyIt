@@ -225,6 +225,7 @@ $('#changeImage').click(function(){
 
 $('#imageUpload').change(function() {
 	 $("#filelist").empty();
+	 var flag = false;
 	for (var i = 0; i < this.files.length; i++)
     {
 		
@@ -241,26 +242,45 @@ $('#imageUpload').change(function() {
 			error = "File is not an image";
 		
 		if (error == "") {
-			$("#filelist").append('<tr><td width="55%">'+file.name+'</td><td> <button class="btn btn-primary" style="width: 100px; padding: 0 4px 0 4px;" onclick="deleteImage('+i+')">Delete</button></td><td width="25%"></td></tr>');	
+			$("#filelist").append('<tr><td width="55%">'+file.name+'</td><td> <button type="button" class="btn btn-primary" style="width: 100px; padding: 0 4px 0 4px;" onclick="deleteImage('+i+')">Delete</button></td><td width="25%"></td></tr>');	
 		} else {
-			$("#filelist").append('<tr><td width="60%">'+file.name+'</td><td> <button class="btn btn-primary" style="width: 100px; padding: 0 4px 0 4px;" onclick="deleteImage('+i+')">Delete</button></td><td width="40%">'+error+'</td></tr>');	
+			flag = true;
+			$("#filelist").append('<tr><td width="60%">'+file.name+'</td><td> <button type="button" class="btn btn-primary" style="width: 100px; padding: 0 4px 0 4px;" onclick="deleteImage('+i+')">Delete</button></td><td width="40%" style="color:red;">'+error+'</td></tr>');	
 		}
 		
     }
-});	
+	if(flag){
+		$("#errorImage").show();
+		$("#errorImage").html("Please choose correct images");
+	} else {
+		$("#errorImage").hide();
+		$("#errorImage").empty();
+	}
+});
+
+$('#clearImage').click(function(){
+	 $("#filelist").empty();
+	 $("#errorImage").hide();
+	 $("#errorImage").empty();
+	 var control = $('#imageUpload');
+	 control.replaceWith( control = control.clone( true ) );
+});
+
 
 function deleteImage(id){
 //	$('#imageUpload');
 //	elm.replaceWith( elm = control.clone( true ) );
-	var s = $('#imageUpload');
-	var a = $(s);
-	for (var i = 0; i < $('#imageUpload').files.length; i++)
+	var temp = $('#imageUpload').prop("files");
+	for (var i = 0; i < temp.length; i++)
     {
-		if(i >= id){
-			$('#imageUpload').files[i] = $('#imageUpload').files[i+1];
+		if(id == temp.length-1){
+			temp.length = temp.length-1;
+		}else if(i >= id){
+			$('#imageUpload').files[i] =temp[i+1];
+			temp.length = temp.length-1;
 		}
     }
-	$('#imageUpload').files.length--;
+	
 	$('#imageUpload').change();
 	
 }

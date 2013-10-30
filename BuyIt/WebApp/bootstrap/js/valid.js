@@ -26,6 +26,11 @@ function validateFormOnSubmit() {
 					if ($("#endTime").val() == "") {
 						$("#errorDiv").html("Time field is empty");
 						flag = false;
+					} else {
+						if ($("#errorImage").text() != "") {
+							$("#errorDiv").html("Choose correct images");
+							flag = false;
+						}
 					}
 				}
 			}

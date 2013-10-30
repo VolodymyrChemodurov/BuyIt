@@ -172,15 +172,22 @@
 									</div>
 									<div id="collapseOne" class="panel-collapse collapse">
 										<div class="panel-body">
-											<div class="container" style="margin-left: 40px;">
+											<div class="container" style="margin-left: 40px; width: 100%">
 												<input size="60"
-													style="width: 300px; margin-left: 5px; border-color: #2f96b4; margin-top: 2px;"
-													class="btn btn-info" type="file" id="imageUpload"
-													name="imageUpload" accept="image/*" multiple> <input
+													style="display:none;" type="file" id="imageUpload"
+													name="imageUpload" accept="image/*" multiple> <button
 													type="button" id="changeImage"
-													style="width: 188px; margin-left: 5px; border-color: #2f96b4; margin-top: 2px;"
-													class="btn btn-info" value="Choose image" />
-												<table style="width: 800px; margin-top:20px;" id="tablelist" class="table">
+													style="width: 150px; margin-left: 5px; border-color: #2f96b4; margin-top: 2px;"
+													class="btn btn-info">Choose image</button>
+													<button
+													type="button" id="clearImage"
+													style="width: 100px; margin-left: 5px; border-color: #2f96b4; margin-top: 2px;"
+													class="btn btn-danger">Clear</button>
+													
+												<div id="errorImage" class="alert alert-error"style="display:none; margin-right: 49px; margin-top:8px; border-radius: 0 0 0 0;font-size: 14px; value="asdasdasd">
+												</div>
+												
+												<table style="width: 95%; margin-top:20px;" id="tablelist" class="table">
 													<tbody id="filelist">
 
 													</tbody>
