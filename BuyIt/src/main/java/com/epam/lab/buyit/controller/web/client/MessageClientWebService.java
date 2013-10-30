@@ -22,10 +22,8 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 public class MessageClientWebService {
-
 	private static final Logger LOGGER = Logger.getLogger(MessageClientWebService.class);
 	private static URI baseUri;
-	private String path = "http://192.168.12.220:8080/memorium/buyIt/";
 	
 	static {
 		baseUri = UriBuilder.fromUri("http://192.168.12.220:8080/memorium/buyIt/").build();
@@ -45,7 +43,7 @@ public class MessageClientWebService {
 					.path(String.valueOf(id)).accept("application/json")
 					.get(ClientResponse.class);
 			JSONObject jsonObject = resp.getEntity(JSONObject.class);
-			LOGGER.info(jsonObject);
+			LOGGER.info("Recive message data: " + jsonObject);
 			JSONArray messages = jsonObject.getJSONArray("messages");
 
 			for (int i = 0; i < messages.length(); i++) {
@@ -57,47 +55,34 @@ public class MessageClientWebService {
 			LOGGER.error(e);
 		}
 
-		// MOCK
-		// for(int i = 0; i < 20; i++) {
-		// Message message = new Message();
-		// message.setToUserId(id);
-		// message.setFromUserId(i+1).setMessage("Test messsage " + i);
-		// messagesList.add(message);
-		// }
-
 		return messagesList;
 	}
 
-	public boolean createMessage(Message message) throws UnsupportedEncodingException {
+	public boolean createMessage(Message message) {
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
-		//WebResource service = client.resource(baseUri);
+		WebResource service = client.resource(baseUri);
 
-		JSONObject object = new JSONObject();
-		boolean result = false;
-		//String path = baseUri.toString();
-		
+		boolean result = false;		
 		try {
+			JSONObject object = new JSONObject();
 			object.put("message", message.getMessage());
 			object.put("senderMessageId", message.getFromUserId());
 			object.put("reciverMessageId", message.getToUserId());
-			String jsonNew = URLEncoder.encode(object.toString(), "UTF-8");
-			path = "http://192.168.12.220:8080/memorium/buyIt/" + "message/new?message=" + jsonNew;
-			WebResource service = client.resource(path);
 			
-			LOGGER.info("Sending to " + path); 
+			String encodedJson = URLEncoder.encode(object.toString(), "UTF-8");
+			String path = baseUri.toString() + "message/new?message=" + encodedJson;
 			
+			LOGGER.info("Sending to " + path);
 			
-			ClientResponse resp = service
-//					.type("application/json")
-					//.post(ClientResponse.class, object);
-					.get(ClientResponse.class);
-			String jsonObject = resp.getEntity(String.class);
-			//result = jsonObject.getBoolean("result");
-			LOGGER.info("Result " + jsonObject);
+			ClientResponse resp = service.get(ClientResponse.class);
+			String serviceResponse = resp.getEntity(String.class);
+			result = Boolean.parseBoolean(serviceResponse);
 			
 		} catch (JSONException e) {
 			LOGGER.error(e);
+		} catch (UnsupportedEncodingException e) {
+			LOGGER.info(e);
 		}
 		return result;
 	}
