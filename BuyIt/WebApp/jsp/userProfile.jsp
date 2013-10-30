@@ -146,15 +146,19 @@
 									value="${user.contact.address.city}"></c:out></span>
 						</div>
 						<div class="myrow">
-							<span class="span-1">Region:</span> <span class="span-2"><c:out
+							<span class="span-1">Region:</span> 
+							<c:if test="${not empty user.contact.address.region}">
+							<span class="span-2"><c:out
 									value="${user.contact.address.region}"></c:out> obl</span>
+							</c:if>
+							
 						</div>
 						<div class="myrow">
-							<span class="span-1">Street</span> <span class="span-2"><c:out
+							<span class="span-1">Street:</span> <span class="span-2"><c:out
 									value="${user.contact.address.street}"></c:out></span>
 						</div>
 						<div class="myrow">
-							<span class="span-1">House / Flat</span>
+							<span class="span-1">House / Flat:</span>
 							<c:if test="${user.contact.address.flat eq ''}">
 								<span class="span-2"><c:out
 										value="${user.contact.address.house}"></c:out></span>
@@ -167,7 +171,7 @@
 
 
 						<div class="myrow">
-							<span class="span-1">Zip Code</span> <span class="span-2"><c:out
+							<span class="span-1">Zip Code:</span> <span class="span-2"><c:out
 									value="${user.contact.address.zipCode}"></c:out></span>
 						</div>
 						<h3>Contacts</h3>
@@ -190,15 +194,21 @@
 							<form id="userUpdateContainer" action="userPageServlet" method="post">
 								<div class="myrow" style="padding-top: 40px;">
 									<span class="span-2"><input id="firstName" type="text" name="firstName"
-										value="${user.firstName}" /> </span>
+										value="${user.firstName}" class="tip"
+										data-toggle="tooltip" data-placement="right"
+										title="More than 2 characters" maxlength="15"  /> </span>
 								</div>
 								<div class="myrow">
 									<span class="span-2"><input type="text" name="lastName"
-										value="${user.lastName}" /> </span>
+										value="${user.lastName}" class="tip"
+										data-toggle="tooltip" data-placement="right"
+										title="More than 2 characters" maxlength="15" /> </span>
 								</div>
 								<div class="myrow" style="padding-top: 70px;">
-									<span class="span-2"><input name="city"
-										value="${user.contact.address.city}" />
+									<span class="span-2"><input type="text" name="city"
+										value="${user.contact.address.city}" class="tip"
+										data-toggle="tooltip" data-placement="right"
+										title="More than 3 characters. Only letters and dashes" maxlength="15"  />
 									</span>
 								</div>
 								<div class="myrow">
@@ -215,28 +225,40 @@
 								</div>
 								<div class="myrow">
 									<span class="span-2"><input type="text" name="street"
-										value="${user.contact.address.street}" /> </span>
+										value="${user.contact.address.street}" class="tip"
+										data-toggle="tooltip" data-placement="right"
+										title="More than 3 characters. Only letters and dashes" maxlength="15" /> </span>
 								</div>
 								<div class="myrow">
 									<span class="span-2"style="width:120px;"><input type="text" name="house"
-										style="width: 85px;" value="${user.contact.address.house}" />
+										style="width: 85px;" value="${user.contact.address.house}" class="tip"
+										data-toggle="tooltip" data-placement="right"
+										title="Example: 1 ; 1a ; 259a ; 600" maxlength="4"  />
 									</span> <span class="span-2" style="margin-left:0;"><input type="text" name="flat"
-										style="width: 86px;" value="${user.contact.address.flat}" />
+										style="width: 86px;" value="${user.contact.address.flat}" class="tip"
+										data-toggle="tooltip" data-placement="right"
+										title="Example: 1 ; 1a ; 259a ; 600" maxlength="4"  />
 									</span>
 								</div>
 								<div class="myrow">
 									<span class="span-2"><input type="text" name="zipCode"
-										value="${user.contact.address.zipCode}" /> </span>
+										value="${user.contact.address.zipCode}" class="tip"
+										data-toggle="tooltip" data-placement="right"
+										title="Only 5 numbers" maxlength="5" /> </span>
 								</div>
 								<div class="myrow" style="padding-top: 40px;">
 									<span class="span-2"><input type="text" name="phone"
-										value="${user.contact.phone}" /> </span>
+										value="${user.contact.phone}" class="tip"
+										data-toggle="tooltip" data-placement="right"
+										title="Only 10 numbers" maxlength="10" /> </span>
 									<button type="submit" style="float:right; margin-right: 8px; width: 120px;"
 										class="btn btn-mini btn-success">Apply changes</button>
 								</div>
 								<div class="myrow">
 									<span class="span-2"><input type="text" name="email"
-										value="${user.contact.email}" /> </span> <button
+										value="${user.contact.email}" class="tip"
+										data-toggle="tooltip" data-placement="right"
+										title="Enter your email" maxlength="24" /> </span> <button type="button"
 										id="btn-back" style="float: right; margin-right: 8px; width: 120px;"
 										class="btn btn-mini btn-danger" >Cancel	</button>
 								</div>
@@ -262,6 +284,7 @@
 	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="themes/js/google-code-prettify/prettify.js"></script>
 	<script src="themes/js/bootshop.js"></script>
+	<script src="bootstrap/js/tip.js" type="text/javascript"></script>
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
 	<script src="themes/assets/js/jquery.validate.js"></script>
 	<script src="themes/assets/js/update.validate.js"></script>

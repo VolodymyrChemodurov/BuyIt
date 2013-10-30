@@ -74,7 +74,7 @@
 							<h3>Create new auction</h3>
 							<div class="myrow">
 								<span class="span-1">Product name:</span> <span class="span-2"><input
-									id="productName1"name="productName" value="${currentProduct.name}" /></span>
+									id="productName"name="productName" value="${currentProduct.name}" /></span>
 							</div>
 							<div class="myrow">
 								<span class="span-1">Category:</span> <span class="span-2">
@@ -107,16 +107,21 @@
 							</div>
 							
 
-							<div id="endedTime" class="myrow" style="display: none; padding-top:20px;">
-								<span class="span-1">End time</span>
-								<div style="padding-left: 40px; padding-bottom: 20px;"
-									class="input-append date form_datetime"
-									data-format="yyyy-mm-dd hh:mm:ss">
-									<input id="endTime" name="endTime" size="16" type="text" value="${currentProduct.auction.endTime}" readonly style="height:20px; width:163px; border-radius:0; padding: 2px;"> <span
-										class="add-on" style="height:20px; padding: 2px;"><i class="icon-remove"></i></span> <span
-										class="add-on" style="height:20px; border-radius:0; padding: 2px;"><i class="icon-calendar"></i></span>
+								<div id="endedTime" class="myrow"
+									style="padding-top: 20px;">
+									<span class="span-1">End time</span>
+									<div style="padding-left: 40px; padding-bottom: 20px;"
+										class="input-append date form_datetime"
+										data-format="yyyy-mm-dd hh:mm:ss">
+										<input id="endTime" name="endTime" size="16" type="text"
+											value="" readonly
+											style="height: 20px; width: 163px; border-radius: 0; padding: 2px;">
+										<span class="add-on" style="height: 20px; padding: 2px;"><i
+											class="icon-remove"></i></span> <span class="add-on"
+											style="height: 20px; border-radius: 0; padding: 2px;"><i
+											class="icon-calendar"></i></span>
+									</div>
 								</div>
-							</div>
 
 
 						</div>
@@ -273,8 +278,9 @@
 					
 					
 					<div id="submitButtonWrapper">
-						<input style="display: none;" name="productId" value="${currentProduct.idProduct}">
-						<button disabled="disabled" id="addProductSubmitButton" class="btn btn-success" type="submit">Restore</button>
+						<input style="display: none;" name="userId"	value="${user.idUser}"/>
+						<button style="display:none;" id="addProductButton" class="btn btn-success" type="submit">Create Auction</button>
+						<button type="button"  id="addProductSubmitButton" onclick="validateFormOnSubmit()" class="btn btn-success" >Restore</button>	
 					</div>
 				</form>
 				</div>

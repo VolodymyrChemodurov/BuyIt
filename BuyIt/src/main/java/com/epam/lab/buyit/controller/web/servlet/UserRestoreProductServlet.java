@@ -41,7 +41,9 @@ public class UserRestoreProductServlet extends HttpServlet {
 			Product product = new ProductCreator().create(inputValues);
 			int id = productService.createItem(product).getIdProduct();
 			response.sendRedirect("productDetails?id="+id);
-		} response.sendRedirect("userRestoreProduct?productId="+request.getParameter("productId"));
+		} else{
+			response.sendRedirect("userRestoreProduct?productId="+request.getParameter("productId"));
+		}
 		
 	}
 

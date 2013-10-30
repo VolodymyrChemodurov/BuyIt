@@ -60,5 +60,23 @@ public class UserValidation {
 		}
 		return result;
 	}
+	
+	public static boolean checkingUpdateInputValues(Map<String, String[]> inputMap) {
+		boolean result = true;
+		for (String current : inputMap.keySet()) {
+			Validator validator = Validator.getValidator(current);
+			if (validator != null) {
+				if (!validator.getField().equals("flat")){
+					validator.setRequired(true);
+				}
+				result = validator.validate(inputMap.get(current)[0]);
+				LOGGER.info(current + " validation " + (result ? "successful" : "fail"));
+			}
+			if (!result) {
+				break;
+			}
+		}
+		return result;
+	}
 
 }

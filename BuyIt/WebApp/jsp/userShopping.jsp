@@ -141,7 +141,7 @@
 													<td><a href="productDetails?id=${product.idProduct}">${product.name}</a></td>
 													<td>${product.auction.startTime}</td>
 													<td>${product.auction.endTime}</td>
-													<td>${product.auction.currentPrice}</td>
+													<td>${product.auction.currentPrice}</td></tr>
 											</c:forEach>
 										</tbody>
 									</table>
