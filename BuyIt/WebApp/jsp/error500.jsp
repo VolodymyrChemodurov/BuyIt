@@ -27,7 +27,7 @@ body {
 <body>
 	<div class="hero-unit center">
 		<a href="homePage"> <img alt="500" src="themes/images/500.jpg"
-			width="100%" height="100%">
+			height="100%" width="100%" >
 		</a>
 
 	</div>

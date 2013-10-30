@@ -556,6 +556,24 @@
     <servlet-name>UserRestoreProduct</servlet-name>
     <url-pattern>/userRestoreProductJsp</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>TermsAndConditions</servlet-name>
+    <jsp-file>/jsp/termsAndConditions.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TermsAndConditions</servlet-name>
+    <url-pattern>/termsAndConditions</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>FAQ</servlet-name>
+    <jsp-file>/jsp/faq.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FAQ</servlet-name>
+    <url-pattern>/faq</url-pattern>
+  </servlet-mapping>
+  
+  
   <filter>
     <filter-name>sideMenuFilter</filter-name>
     <filter-class>com.epam.lab.buyit.controller.web.filter.SideMenuFilter</filter-class>

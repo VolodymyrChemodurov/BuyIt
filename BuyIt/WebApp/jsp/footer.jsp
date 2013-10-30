@@ -7,8 +7,8 @@
 			<div class="span3">
 				<h5>INFORMATION</h5>
 				<a href="contact">CONTACT US</a> <a href="registration">REGISTRATION</a>
-				<a href="legalNotice">LEGAL NOTICE</a> <a href="tac.html">TERMS
-					AND CONDITIONS</a> <a href="faq.html">FAQ</a>
+				<a href="legalNotice">LEGAL NOTICE</a> <a href="termsAndConditions">TERMS
+					AND CONDITIONS</a> <a href="faq">FAQ</a>
 			</div>
 			<div id="socialMedia" class="span3 pull-right">
 				<h5>SOCIAL MEDIA</h5>
