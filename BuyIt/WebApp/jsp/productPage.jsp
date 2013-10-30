@@ -223,7 +223,7 @@
 									<c:if test="${product.auction.currentPrice != 0 }">
 									<div class="form-horizontal qtyFrm">
 										<div class="control-group">
-											<label class="control-label style="width: 230px"">
+											<label class="control-label" style="width: 230px">
 												<span>Current Price: <c:out value="${product.auction.currentPrice}"></c:out>$</span>
 											</label>
 											<div class="controls">
