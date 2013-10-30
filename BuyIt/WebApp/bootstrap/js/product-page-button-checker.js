@@ -68,7 +68,6 @@ $(document).ready(function() {
 			});
 			
 			$('#bidInput').keypress(function(e) {
-				// alert("Enter");
 				if (e.which == 13) {
 					if ($('#bidInput').attr('value') == "") {
 						return false;
@@ -76,13 +75,11 @@ $(document).ready(function() {
 				}
 			});
 			$('#quantityInput').keypress(function(e) {
-			 //alert("Enter");
 				if (e.which == 13) {
 					if ($('#quantityInput').attr('value') == "") {
 						return false;
 					}
 				}
 			});
-			
 
 		});

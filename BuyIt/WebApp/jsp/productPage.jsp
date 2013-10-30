@@ -219,11 +219,11 @@
 									</dir>
 									<hr class="soft" />
 
-									<!--                                                 ----------------------        PLACE A BID------------------------- -->
+<!--                                                 ----------------------        PLACE A BID------------------------- -->
 									<c:if test="${product.auction.currentPrice != 0 }">
 									<div class="form-horizontal qtyFrm">
 										<div class="control-group">
-											<label class="control-label style="width: 230px"">
+											<label class="control-label" style="width: 230px">
 												<span>Current Price: <c:out value="${product.auction.currentPrice}"></c:out>$</span>
 											</label>
 											<div class="controls">
@@ -342,14 +342,13 @@
 										</ul>
 										<div id="myTabContent" class="tab-content">
 											<div class="tab-pane fade active in" id="home" style="padding-left: 30px">
-												<hr class="soft" />
 												<div class="form-horizontal qtyFrm">
 													${product.description.descText}</div>
 												<hr class="soft" />
 												Auction start time:
-												<c:out value="${product.auction.startTime}"></c:out>
+												<span class="time">${product.auction.startTime}</span>
 												<br> Auction end time:
-												<c:out value="${product.auction.endTime}"></c:out>
+												<span class="time">${product.auction.endTime}</span>
 												<hr class="soft" />
 											</div>
 
@@ -367,7 +366,7 @@
 															<tr class="techSpecRow">
 																<td class="techSpecTD1">${userItem.login}</td>
 																<c:forEach var="bid" items="${userItem.bidList}">
-																	<td class="techSpecTD1">${bid.time}</td>
+																	<td class="techSpecTD1"><span class="time">${bid.time}</span></td>
 																	<td class="techSpecTD1">${bid.amount}</td>
 																</c:forEach>
 															</tr>
@@ -431,6 +430,7 @@
 			<script src="bootstrap/js/product-page-button-checker.js" type="text/javascript"></script>
 			<script src="bootstrap/js/bid-confirmation.js" type="text/javascript"></script>
 			<script src="bootstrap/js/buy-confirmation.js" type="text/javascript"></script>
+			<script src="bootstrap/js/time-formatter.js" type="text/javascript"></script>
 		</div>
 		<!--                 ----------------footer--------------------------------------- -->
 		<jsp:include page="footer"></jsp:include>
