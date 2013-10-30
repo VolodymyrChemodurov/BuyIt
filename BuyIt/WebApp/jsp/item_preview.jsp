@@ -70,11 +70,11 @@
                                         <table class="table table-striped">
                                                 <tr>
                                                         <th>Start time:</th>
-                                                        <td>${product.auction.startTime}</td>
+                                                        <td><span class="time">${product.auction.startTime}</span></td>
                                                 </tr>
                                                 <tr>
                                                         <th>End time:</th>
-                                                        <td>${product.auction.endTime}</td>
+                                                        <td><span class="time">${product.auction.endTime}</span></td>
                                                 </tr>
                                                 <c:if test="${product.auction.buyItNow > 0}">
                                                 <tr>

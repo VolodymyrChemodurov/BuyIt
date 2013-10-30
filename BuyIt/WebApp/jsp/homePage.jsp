@@ -113,6 +113,6 @@
 	<script src="themes/js/jquery.lightbox-0.5.js"></script>
 	<script src="bootstrap/js/search.js"></script>
 	<script src="bootstrap/js/thumbnail-image-small.js"></script>
-
+	<script src="bootstrap/js/time-formatter.js"></script>
 </body>
 </html>

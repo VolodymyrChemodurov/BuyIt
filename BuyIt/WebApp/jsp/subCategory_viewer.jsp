@@ -120,5 +120,6 @@
 		<script src="bootstrap/js/tooltip.js" type="text/javascript"></script>
 		<script src="bootstrap/js/thumbnail-image-small.js" type="text/javascript"></script>
 		<script src="bootstrap/js/search.js"></script>
+		<script src="bootstrap/js/time-formatter.js"></script>
 </body>
 </html>
