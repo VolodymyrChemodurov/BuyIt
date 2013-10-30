@@ -1,5 +1,6 @@
 package com.epam.lab.buyit.controller.validator;
 
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -19,15 +20,20 @@ public class UserValidation {
 
 	public static boolean checkingInput(JSONObject json) {
 		boolean result = true;
-		for (Validator currentElement : Validator.values()) {
-			String name = currentElement.getField();
-			try {
-				result = currentElement.validate(json.getString(name));
-			} catch (JSONException e) {
-				LOGGER.error(e);
-			}
-			if (!result) {
-				break;
+		Iterator<?> iterator = json.keys();
+		while(iterator.hasNext()) {
+			String key = (String)iterator.next();
+			Validator validator = Validator.getValidator(key);
+			if (validator != null) {
+				try {
+					result = validator.validate(json.getString(key));
+					LOGGER.info(key + " validation " + (result ? "successful" : "fail"));
+					if(!result) {
+						break;
+					}
+				} catch (JSONException e) {
+					LOGGER.error(e);
+				}
 			}
 		}
 		return result;
@@ -45,6 +51,24 @@ public class UserValidation {
 		for (String current : inputMap.keySet()) {
 			Validator validator = Validator.getValidator(current);
 			if (validator != null) {
+				result = validator.validate(inputMap.get(current)[0]);
+				LOGGER.info(current + " validation " + (result ? "successful" : "fail"));
+			}
+			if (!result) {
+				break;
+			}
+		}
+		return result;
+	}
+	
+	public static boolean checkingUpdateInputValues(Map<String, String[]> inputMap) {
+		boolean result = true;
+		for (String current : inputMap.keySet()) {
+			Validator validator = Validator.getValidator(current);
+			if (validator != null) {
+				if (!validator.getField().equals("flat")){
+					validator.setRequired(true);
+				}
 				result = validator.validate(inputMap.get(current)[0]);
 				LOGGER.info(current + " validation " + (result ? "successful" : "fail"));
 			}

@@ -21,15 +21,16 @@ public class UserPageServlet extends HttpServlet {
 		UserServiceImpl userService = new UserServiceImpl();
 		Map<String, String[]> inputValues = request.getParameterMap();
 		User user = (User) request.getSession().getAttribute("user");
-		if (UserValidation.checkingInputValues(inputValues)) {
+
+		if (UserValidation.checkingUpdateInputValues(inputValues)) {
 			setUserInfo(user, inputValues);
-			if (user.getRole()) {
-				redirect(request, response, userService, user, "user",
-						"adminProfile");
-			} else {
-				redirect(request, response, userService, user, "user",
-						"userProfile");
-			}
+			request.getSession().setAttribute("user",
+					userService.updateItem(user));
+		}
+		if (user.getRole()) {
+			response.sendRedirect("adminProfile");
+		} else {
+			response.sendRedirect("userProfile");
 		}
 
 	}
@@ -42,14 +43,6 @@ public class UserPageServlet extends HttpServlet {
 			setter.setField(user, value);
 		}
 
-	}
-
-	private void redirect(HttpServletRequest request,
-			HttpServletResponse response, UserServiceImpl userService,
-			User user, String attrName, String jsp) throws IOException {
-		request.getSession().setAttribute(attrName,
-				userService.updateItem(user));
-		response.sendRedirect(jsp);
 	}
 
 }

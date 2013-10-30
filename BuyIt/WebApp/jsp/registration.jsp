@@ -81,7 +81,7 @@
 								<label class="control-label" for="alogin">Login </label>
 								<div class="controls">
 									<input type="text" id="alogin" name="login" placeholder="Login"
-										class="tip" data-toggle="tooltip" data-placement="right"
+										class="tip" data-toggle="tooltip" data-placement="right" maxlength="15"
 										title="More then 4 characters Only number, small letters and dashes">
 									<div id="logindiv"></div>
 								</div>
@@ -91,14 +91,14 @@
 								</label>
 								<div class="controls">
 									<input type="text" id="firstName" name="firstName"
-										placeholder="First Name" class="tip" data-toggle="tooltip"
+										placeholder="First Name" class="tip" data-toggle="tooltip" maxlength="15"
 										data-placement="right" title="More than 2 characters">
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="lastName">Last name </label>
 								<div class="controls">
-									<input type="text" id="lastName" name="lastName"
+									<input type="text" id="lastName" name="lastName" maxlength="15"
 										placeholder="Last Name" class="tip" data-toggle="tooltip"
 										data-placement="right" title="More than 3 characters">
 								</div>
@@ -107,13 +107,13 @@
 							<div class="control-group">
 								<label class="control-label" for="email">Email </label>
 								<div class="controls">
-									<input type="text" id="email" name="email" placeholder="Email">
+									<input type="text" id="email" name="email" maxlength="25" placeholder="Email">
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="phone">Phone </label>
 								<div class="controls">
-									<input type="text" id="phone" name="phone" placeholder="Phone"
+									<input type="text" id="phone" name="phone" maxlength="10" placeholder="Phone"
 										class="tip" data-toggle="tooltip" data-placement="right"
 										title="Yours phone number (10 digits)">
 								</div>
@@ -121,7 +121,7 @@
 							<div class="control-group">
 								<label class="control-label" for="password">Password </label>
 								<div class="controls">
-									<input type="password" id="password2" name="password"
+									<input type="password" id="password2" name="password" maxlength="15"
 										placeholder="Password" class="tip" data-toggle="tooltip"
 										data-placement="right"
 										title="More then 6 characters. Only numbers, small letters and dashes">
@@ -132,7 +132,7 @@
 								<label class="control-label" for="confirmPassword">Confirm
 									Password </label>
 								<div class="controls">
-									<input type="password" id="confirmPassword2"
+									<input type="password" id="confirmPassword2" maxlength="15"
 										name="confirmPassword" placeholder="Confirm Password"
 										class="tip" data-toggle="tooltip" data-placement="right"
 										title="Confirm your password">
@@ -156,7 +156,7 @@
 							<div class="control-group">
 								<label class="control-label" for="city">City</label>
 								<div class="controls">
-									<input onclick="newTooltip();" type="text" id="city"
+									<input type="text" id="city" maxlength="15"
 										name="city" placeholder="City" class="tip"
 										data-toggle="tooltip" data-placement="right"
 										title="Please enter your city">
@@ -166,7 +166,7 @@
 							<div class="control-group">
 								<label class="control-label" for="street">Street</label>
 								<div class="controls">
-									<input type="text" id="street" name="street"
+									<input type="text" id="street" name="street" maxlength="15"
 										placeholder="Street" class="tip" data-toggle="tooltip"
 										data-placement="right" title="Please enter your street">
 								</div>
@@ -175,7 +175,7 @@
 							<div class="control-group">
 								<label class="control-label" for="house">House №</label>
 								<div class="controls">
-									<input type="text" id="house" name="house"
+									<input type="text" id="house" name="house" maxlength="4"
 										placeholder="House number">
 								</div>
 							</div>
@@ -183,7 +183,7 @@
 							<div class="control-group">
 								<label class="control-label" for="flat">Flat №</label>
 								<div class="controls">
-									<input type="text" id="flat" name="flat"
+									<input type="text" id="flat" name="flat" maxlength="4"
 										placeholder="Flat number">
 								</div>
 							</div>
@@ -192,7 +192,7 @@
 							<div class="control-group">
 								<label class="control-label" for="zipCode">Zip Code</label>
 								<div class="controls">
-									<input type="text" id="zipCode" name="zipCode"
+									<input type="text" id="zipCode" name="zipCode" maxlength="5"
 										placeholder="Zip Code" class="tip" data-toggle="tooltip"
 										data-placement="right" title="Enter zip code (5 digits)">
 								</div>

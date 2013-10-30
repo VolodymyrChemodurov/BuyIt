@@ -38,7 +38,5 @@ public class UserRestoreProductServlet extends HttpServlet {
 		}
 		response.sendRedirect("userRestoreProduct?productId="
 				+ request.getParameter("productId"));
-
 	}
-
 }

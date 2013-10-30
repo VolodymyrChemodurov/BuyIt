@@ -46,7 +46,7 @@ $(document).ready(function() {
 				var count = $('#count').val();
 				console.log("count: " + count);
 				var quantity = $('#quantityInput').val();
-				if (parseInt(quantity) > parseInt(count)) {
+				if ((parseInt(quantity) > parseInt(count))|(parseInt(quantity) < 1)){
 					$('#buyItButton').attr("disabled", "disabled");
 					$('#buyItButton').addClass('dis');
 					$('#buyItButton').attr('tabindex', '-1');

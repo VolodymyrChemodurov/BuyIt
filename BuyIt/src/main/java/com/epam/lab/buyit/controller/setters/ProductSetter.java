@@ -117,16 +117,19 @@ public enum ProductSetter {
 
 		String token = imageClientWebService.createToken(99999999);
 		List<FileItem> images = imageClientWebService.getFileItems(request);
-		List<String> urls = imageClientWebService.createImages(images, token);
-		List<Image> listImage = new ArrayList<Image>();
-		Image image = null;
-		for (String current : urls) {
-			image = new Image();
-			image.setDescriptionId(descriptionId);
-			image.setPath(current);
-			listImage.add(image);
+		if (!images.isEmpty()) {
+			List<String> urls = imageClientWebService.createImages(images,
+					token);
+			List<Image> listImage = new ArrayList<Image>();
+			Image image = null;
+			for (String current : urls) {
+				image = new Image();
+				image.setDescriptionId(descriptionId);
+				image.setPath(current);
+				listImage.add(image);
+			}
+			product.getDescription().setItemPhotos(listImage);
 		}
-		product.getDescription().setItemPhotos(listImage);
 		return product;
 	}
 

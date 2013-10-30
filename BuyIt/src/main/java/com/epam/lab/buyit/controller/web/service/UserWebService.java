@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -127,8 +126,11 @@ public class UserWebService {
 		if (authentication(login, password)) {
 			User user = userService.getUser(userLogin, userPassword);
 			if (user != null) {
+				LOGGER.info("Success login");
 				UserSerializationAdapter adapter = new UserSerializationAdapter();
 				return JSONBuilder.buildJSONObject(user, adapter);
+			} else {
+				LOGGER.info("Fail to login");
 			}
 		}
 		return new JSONObject();
@@ -137,41 +139,39 @@ public class UserWebService {
 	@POST
 	@Path("/registration")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public JSONObject registerUser(JSONObject json,
-			@QueryParam("login") String login,
-			@QueryParam("password") String password) {
+	public JSONObject registerUser(String parameters) {
 
-		LOGGER.info("try to register user");
-		if (authentication(login, password)) {
-			User user = new UserCreator().create(json);
-			System.out.println(json);
+		LOGGER.info("Trying to register user");
+		LOGGER.info(parameters);
+		
+		try {
+			JSONObject json = new JSONObject(parameters);
 			if (UserValidation.checkingInput(json)) {
+				User user = new UserCreator().create(json);
 				if (!userService.checkLogin(user.getLogin())) {
 					user = userService.createItem(user);
 					UserSerializationAdapter adapter = new UserSerializationAdapter();
 					return JSONBuilder.buildJSONObject(user, adapter);
 				}
 			}
+		} catch (JSONException e) {
+			LOGGER.error(e);
 		}
+		
 		return new JSONObject();
 	}
 
 	@GET
 	@Path("/check")
 	@Produces(MediaType.APPLICATION_JSON)
-	public JSONObject checkLogin(@QueryParam("userLogin") String userLogin,
+	public String checkLogin(@QueryParam("userLogin") String userLogin,
 			@QueryParam("login") String login,
 			@QueryParam("password") String password) {
-
-		JSONObject result = new JSONObject();
+		
+		String result = "true";
 		if (authentication(login, password)) {
 			boolean checkResult = userService.checkLogin(userLogin);
-			try {
-				result.put("result", checkResult ? "true" : "false");
-			} catch (JSONException e) {
-				LOGGER.error(e);
-			}
+			result = checkResult ? "false" : "true";
 		}
 		return result;
 	}

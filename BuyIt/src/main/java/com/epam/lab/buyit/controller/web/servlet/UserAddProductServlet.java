@@ -25,6 +25,7 @@ public class UserAddProductServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+
 		ProductServiceImpl productService = new ProductServiceImpl();
 		request.setCharacterEncoding("utf-8");
 		Map<String, String[]> inputValues = request.getParameterMap();
@@ -32,9 +33,10 @@ public class UserAddProductServlet extends HttpServlet {
 			Product product = new ProductCreator().create(inputValues);
 			product = ProductSetter.uploadingImages(product, request);
 			int id = productService.createItem(product).getIdProduct();
-			response.sendRedirect("productDetails?id=" + id);
-		}
-		response.sendRedirect("userAddProduct");
 
+			response.sendRedirect("productDetails?id=" + id);
+		} else {
+			response.sendRedirect("userAddProduct");
+		}
 	}
 }
