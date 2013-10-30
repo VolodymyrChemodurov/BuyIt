@@ -46,8 +46,8 @@ public class ImageClientWebService {
 	}
 
 	static {
-		baseUri = UriBuilder.fromUri(
-				"http://192.168.12.66:8080/dreamhost/host/").build();
+		baseUri = UriBuilder.fromUri("http://localhost:8080/dreamhost/host/")
+				.build();
 		Properties prop = new Properties();
 		LOGGER.info("Loading web-client properties...");
 		try {
@@ -102,7 +102,6 @@ public class ImageClientWebService {
 		}
 		return token;
 	}
-
 
 	private FormDataMultiPart setParams(List<FileItem> items)
 			throws IOException {

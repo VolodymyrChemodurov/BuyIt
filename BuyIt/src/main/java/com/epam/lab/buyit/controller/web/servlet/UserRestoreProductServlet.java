@@ -1,5 +1,9 @@
 package com.epam.lab.buyit.controller.web.servlet;
 
+import static com.epam.lab.buyit.controller.utils.ParseRequest.getFileItems;
+import static com.epam.lab.buyit.controller.utils.ParseRequest.getParametersMap;
+import static com.epam.lab.buyit.controller.utils.ParseRequest.parseRequest;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -9,20 +13,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
+
 import com.epam.lab.buyit.controller.creator.ProductCreator;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
+import com.epam.lab.buyit.controller.setters.ProductSetter;
 import com.epam.lab.buyit.controller.validator.ProductValidation;
 import com.epam.lab.buyit.model.Image;
 import com.epam.lab.buyit.model.Product;
 
 public class UserRestoreProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		ProductServiceImpl productService = new ProductServiceImpl();
 		int id = Integer.parseInt(request.getParameter("productId"));
 		Product product = productService.getItemById(id);
@@ -31,25 +35,27 @@ public class UserRestoreProductServlet extends HttpServlet {
 				response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		ProductServiceImpl productService = new ProductServiceImpl();
 		request.setCharacterEncoding("utf-8");
-		Map<String, String[]> inputValues = request
-				.getParameterMap();
-		int idTemp = Integer.parseInt(request.getParameter("productId"));
-		List<Image> list =  productService.getItemById(idTemp).getDescription().getItemPhotos();
-		if (ProductValidation.checkingInputValues(inputValues)){
+		List<FileItem> items = parseRequest(request);
+		Map<String, String[]> inputValues = getParametersMap(items);
+		int idTemp = Integer.parseInt(inputValues.get("productId")[0]);
+		List<Image> list = productService.getItemById(idTemp).getDescription()
+				.getItemPhotos();
+		if (ProductValidation.checkingInputValues(inputValues)) {
 			Product product = new ProductCreator().create(inputValues);
+			List<FileItem> fileItems = getFileItems(items);
+			product = ProductSetter.uploadingImages(product, fileItems);
+			for (Image temp : list) {
+				product.getDescription().setItemPhoto(temp);
+			}
 			int id = productService.createItem(product).getIdProduct();
-			product.getDescription().setItemPhotos(list);
-			response.sendRedirect("productDetails?id="+id);
-		} else{
-			response.sendRedirect("userRestoreProduct?productId="+request.getParameter("productId"));
+			response.sendRedirect("productDetails?id=" + id);
+		} else {
+			response.sendRedirect("userRestoreProduct?productId="
+					+ inputValues.get("productId")[0]);
 		}
-		
 	}
-
 }
