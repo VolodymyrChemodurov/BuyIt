@@ -18,20 +18,20 @@ import com.epam.lab.buyit.model.Product;
 
 public class ProductDAO implements ProductDAOInterface {
 	private static final Logger LOGGER = Logger.getLogger(ProductDAO.class);
-	private final static String GET_PRD_BY_NAME = "SELECT * FROM products WHERE deleted=false AND name LIKE ? ORDER BY name";
-	private final static String GET_PRD_BY_CATEGORY = "SELECT * FROM products WHERE deleted=false AND sub_category_id IN (SELECT id_sub_category FROM sub_categories WHERE category_id = (SELECT id_category FROM categories WHERE categories.name = ?)) ORDER BY products.name";
-	private final static String GET_PRD_BY_NAME_CATEGORY = "SELECT * FROM products WHERE deleted=false AND sub_category_id IN (SELECT id_sub_category FROM sub_categories WHERE category_id = (SELECT id_category FROM categories WHERE categories.name = ?)) AND products.name LIKE ? ORDER BY products.name";
+	private final static String GET_PRD_BY_NAME = "SELECT * FROM products WHERE deleted=false AND name LIKE ? AND id_product IN (SELECT product_id FROM auctions WHERE status NOT LIKE 'closed')  ORDER BY products.name";
+	private final static String GET_PRD_BY_CATEGORY = "SELECT * FROM products WHERE deleted=false AND sub_category_id IN (SELECT id_sub_category FROM sub_categories WHERE category_id = (SELECT id_category FROM categories WHERE categories.name = ?)) AND id_product IN (SELECT product_id FROM auctions WHERE status NOT LIKE 'closed')  ORDER BY products.name";
+	private final static String GET_PRD_BY_NAME_CATEGORY = "SELECT * FROM products WHERE deleted=false AND sub_category_id IN (SELECT id_sub_category FROM sub_categories WHERE category_id = (SELECT id_category FROM categories WHERE categories.name = ?)) AND products.name LIKE ? AND id_product IN (SELECT product_id FROM auctions WHERE status NOT LIKE 'closed')  ORDER BY products.name";
 	private final static String GET_BY_USER_ID = "SELECT * FROM products WHERE deleted=false AND user_id = ?";
 	private final static String GET_WON_BY_USER_ID = "SELECT * FROM products WHERE deleted=false AND id_product IN (SELECT product_id	FROM (auctions A JOIN (SELECT * FROM bids WHERE user_id = ?) B  ON B.auction_id=A.id_auction) WHERE (amount = current_price)AND(status='closed'))";
 	private final static String GET_ACTIVE_BY_USER_ID = "SELECT * FROM products WHERE id_product IN (SELECT product_id	FROM (auctions A JOIN (SELECT * FROM bids WHERE user_id = ?) B  ON B.auction_id=A.id_auction) WHERE (amount <> buy_it_now)AND(status='inProgress'))";
 	private final static String GET_LOST_BY_USER_ID = "SELECT * FROM products WHERE deleted=false AND id_product IN (SELECT product_id FROM (auctions A JOIN (SELECT * FROM bids WHERE user_id = ?) B  ON B.auction_id=A.id_auction) WHERE (amount < current_price)AND(status='closed'))";
-	private final static String GET_BUY_BY_USER_ID = "SELECT * FROM products WHERE deleted=false AND id_product IN (SELECT product_id FROM (auctions A JOIN (SELECT * FROM bids WHERE user_id = ?) B  ON B.auction_id=A.id_auction) WHERE (amount = buy_it_now))";
+	private final static String GET_BUY_BY_USER_ID = "SELECT * FROM products WHERE deleted=false AND id_product IN (SELECT product_id FROM (auctions A JOIN (SELECT * FROM bids WHERE user_id = ?) B  ON B.auction_id=A.id_auction) WHERE (amount = buy_it_now)AND(status='closed'))";
 	private final static String GET_BY_ID = "SELECT * FROM products WHERE deleted=false AND id_product = ?";
 	private final static String GET_ALL_PRODUCTS = "SELECT * FROM products WHERE deleted=false";
 	private final static String GET_BY_SUBCATEGORY_ID = "SELECT * FROM products WHERE deleted=false AND sub_category_id = ?";
 	private final static String GET_SELECTION = "SELECT SQL_CALC_FOUND_ROWS * FROM products JOIN auctions ON products.id_product = auctions.product_id WHERE sub_category_id = ? AND status = 'inProgress' AND end_time > ?"
 			+ "LIMIT ?, ?";
-	private final static String GET_ROWS_COUNT_BY_SYBCATEGORY_ID = "SELECT COUNT(id_product) FROM products JOIN auctions ON product_id=id_product WHERE deleted=false AND sub_category_id = ? AND status = 'inProgress'";
+	private final static String GET_ROWS_COUNT_BY_SYBCATEGORY_ID = "SELECT COUNT(id_product) FROM products WHERE deleted=false AND sub_category_id = ?";
 	private final static String GET_NOT_CLOSED = "SELECT * FROM products JOIN auctions ON id_product = product_id WHERE status ='inProgress' AND sub_category_id=? AND end_time > ? LIMIT ?";
 	private final static String DELETE_BY_ID = "UPDATE products SET deleted=true WHERE id_product = ?";
 	private ProductTransformer transformer;

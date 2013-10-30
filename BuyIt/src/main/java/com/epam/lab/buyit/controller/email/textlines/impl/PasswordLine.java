@@ -13,7 +13,7 @@ public class PasswordLine implements TextLineItem{
 
 	@Override
 	public String getId() {
-		return "password";
+		return "passwordLine";
 	}
 
 	@Override

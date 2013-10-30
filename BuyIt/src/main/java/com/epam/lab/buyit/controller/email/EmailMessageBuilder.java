@@ -156,14 +156,6 @@ public class EmailMessageBuilder {
 
 	}
 
-	public void sendTest(String toEmail) {
-		String text = getHtmlText(null, test);
-		System.out.println(text);
-		EmailSender sender = new EmailSender();
-		sender.sendEmail("Test", text, toEmail);
-
-	}
-
 	private static String getPath(String relativePath) {
 		String oldPath = EmailMessageBuilder.class.getProtectionDomain()
 				.getCodeSource().getLocation().getPath();
