@@ -99,6 +99,8 @@
 
 					<div class="row" style="padding-top: 20px">
 						<div class="span9">
+						<c:choose>
+							<c:when test="${empty messageServiceError}">
 							<div id="table-wrapper">
 								<div id="table-scroll">
 									<table class="table table-striped table-hover">
@@ -119,6 +121,14 @@
 									</table>
 								</div>
 							</div>
+							</c:when>
+							<c:otherwise>
+								<div class="alert alert-block">
+									<h4>Sorry</h4>
+									Message service not available at the moment.
+								</div>
+							</c:otherwise>
+						</c:choose>
 						</div>
 					</div>
 
