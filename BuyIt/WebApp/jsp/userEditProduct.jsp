@@ -168,7 +168,7 @@
 										readonly="readonly" style="width: 100px;" name="count"
 										value="${currentProduct.auction.count}" /></span>
 								</div>
-
+								<div id="errorDiv" class="alert alert-error"style="display:none; margin-right: 49px; margin-top:8px; border-radius: 0 0 0 0;font-size: 14px; value=""></div>
 
 
 							</div>
@@ -185,13 +185,38 @@
 									</h4>
 								</div>
 								<div id="collapseOne" class="panel-collapse collapse">
-									<div class="panel-body">
-										<div class="container" style="margin-left: 40px;">
-											
+										<div class="panel-body">
+											<div class="container" style="margin-left: 40px; width: 100%">
+												<c:if test="${not empty currentProduct.description.itemPhotos}">
+													<h4> Your product alredy has some images. You can add new...</h4>
+												</c:if>
+												<c:if test="${empty currentProduct.description.itemPhotos}">
+													<h4> Your product hasn't any images. You can add new...</h4>
+												</c:if>
+												
+												<input size="60"
+													style="display:none;" type="file" id="imageUpload"
+													name="imageUpload" accept="image/*" multiple> <button
+													type="button" id="changeImage"
+													style="width: 150px; margin-left: 5px; border-color: #2f96b4; margin-top: 2px;"
+													class="btn btn-info">Choose image</button>
+													<button
+													type="button" id="clearImage"
+													style="width: 100px; margin-left: 5px; border-color: #2f96b4; margin-top: 2px;"
+													class="btn btn-danger">Clear</button>
+													
+												<div id="errorImage" class="alert alert-error"style="display:none; margin-right: 49px; margin-top:8px; border-radius: 0 0 0 0;font-size: 14px; value=""></div>
+												
+												<table style="width: 95%; margin-top:20px;" id="tablelist" class="table">
+													<tbody id="filelist">
 
+													</tbody>
+												</table>
+
+											</div>
 										</div>
+
 									</div>
-								</div>
 							</div>
 							<div style="background-color: #eeeeee;  padding-top: 3px;"
 								class="panel panel-default">
@@ -255,7 +280,8 @@
 					
 					<div id="submitButtonWrapper">
 						<input style="display: none;" name="productId" value="${currentProduct.idProduct}">
-						<button id="editProductSubmitButton" class="btn btn-success" type="submit">Update Auction</button>
+						<button id="editProductSubmitButton" type="submit" style="display:none;"></button>
+						<button id="editProductButton" class="btn btn-success" type="button" >Update Auction</button>
 					</div>
 				</form>
 				</div>
@@ -280,6 +306,8 @@
 	<script src="bootstrap/js/wysihtml5-0.3.0.js"></script>
 	<script src="bootstrap/js/bootstrap-wysihtml5.js"></script>
 	<script src="bootstrap/js/userPage.js"></script>
+	<script src="bootstrap/js/valid.js"></script>
+	
 
 	<script>
 		$('.textarea').wysihtml5();

@@ -71,7 +71,7 @@
 					<form action="userRestoreProduct" method="post">
 					<div id="addNewProduct">
 						<div class="mycontent">
-							<h3>Create new auction</h3>
+							<h3>Restore auction</h3>
 							<div class="myrow">
 								<span class="span-1">Product name:</span> <span class="span-2"><input
 									id="productName"name="productName" value="${currentProduct.name}" /></span>
@@ -190,8 +190,7 @@
 									</c:if>
 									
 								</div>
-								<div id="errorDiv" class="alert alert-error"style="display:none; margin-right: 49px; margin-top:8px; border-radius: 0 0 0 0;font-size: 14px; value="asdasdasd">
-								</div>
+								<div id="errorDiv" class="alert alert-error"style="display:none; margin-right: 49px; margin-top:8px; border-radius: 0 0 0 0;font-size: 14px; value=""></div>
 
 							</div>
 						</div>
@@ -207,13 +206,37 @@
 									</h4>
 								</div>
 								<div id="collapseOne" class="panel-collapse collapse">
-									<div class="panel-body">
-										<div class="container" style="margin-left: 40px;">
-											
+										<div class="panel-body">
+											<div class="container" style="margin-left: 40px; width: 100%">
+												<c:if test="${not empty currentProduct.description.itemPhotos}">
+													<h4> Your product alredy has some images. You can add new...</h4>
+												</c:if>
+												<c:if test="${empty currentProduct.description.itemPhotos}">
+													<h4> Your product hasn't any images. You can add new...</h4>
+												</c:if>
+												<input size="60"
+													style="display:none;" type="file" id="imageUpload"
+													name="imageUpload" accept="image/*" multiple> <button
+													type="button" id="changeImage"
+													style="width: 150px; margin-left: 5px; border-color: #2f96b4; margin-top: 2px;"
+													class="btn btn-info">Choose image</button>
+													<button
+													type="button" id="clearImage"
+													style="width: 100px; margin-left: 5px; border-color: #2f96b4; margin-top: 2px;"
+													class="btn btn-danger">Clear</button>
+													
+												<div id="errorImage" class="alert alert-error"style="display:none; margin-right: 49px; margin-top:8px; border-radius: 0 0 0 0;font-size: 14px; value=""></div>
+												
+												<table style="width: 95%; margin-top:20px;" id="tablelist" class="table">
+													<tbody id="filelist">
 
+													</tbody>
+												</table>
+
+											</div>
 										</div>
+
 									</div>
-								</div>
 							</div>
 							<div style="background-color: #eeeeee;padding-top: 3px;"
 								class="panel panel-default">
@@ -279,6 +302,7 @@
 					
 					<div id="submitButtonWrapper">
 						<input style="display: none;" name="userId"	value="${user.idUser}"/>
+						<input style="display: none;" name="productId" value="${currentProduct.idProduct}"/>
 						<button style="display:none;" id="addProductButton" class="btn btn-success" type="submit">Create Auction</button>
 						<button type="button"  id="addProductSubmitButton" onclick="validateFormOnSubmit()" class="btn btn-success" >Restore</button>	
 					</div>

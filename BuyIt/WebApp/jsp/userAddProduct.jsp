@@ -152,8 +152,7 @@
 											readonly="readonly" style="text-align:center;width: 100px;" name="count"
 											value="" /></span>
 									</div>
-									<div id="errorDiv" class="alert alert-error"style="display:none; margin-right: 49px; margin-top:8px; border-radius: 0 0 0 0;font-size: 14px; value="asdasdasd">
-									</div>
+									<div id="errorDiv" class="alert alert-error"style="display:none; margin-right: 49px; margin-top:8px; border-radius: 0 0 0 0;font-size: 14px; value="d"></div>
 
 								</div>
 							</div>
@@ -184,8 +183,7 @@
 													style="width: 100px; margin-left: 5px; border-color: #2f96b4; margin-top: 2px;"
 													class="btn btn-danger">Clear</button>
 													
-												<div id="errorImage" class="alert alert-error"style="display:none; margin-right: 49px; margin-top:8px; border-radius: 0 0 0 0;font-size: 14px; value="asdasdasd">
-												</div>
+												<div id="errorImage" class="alert alert-error"style="display:none; margin-right: 49px; margin-top:8px; border-radius: 0 0 0 0;font-size: 14px; value=""></div>
 												
 												<table style="width: 95%; margin-top:20px;" id="tablelist" class="table">
 													<tbody id="filelist">
