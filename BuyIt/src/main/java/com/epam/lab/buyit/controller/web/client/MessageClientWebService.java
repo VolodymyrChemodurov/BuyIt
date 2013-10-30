@@ -1,6 +1,8 @@
 package com.epam.lab.buyit.controller.web.client;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +25,13 @@ public class MessageClientWebService {
 
 	private static final Logger LOGGER = Logger.getLogger(MessageClientWebService.class);
 	private static URI baseUri;
-
+	private String path = "http://192.168.12.220:8080/memorium/buyIt/";
+	
 	static {
-		baseUri = UriBuilder.fromUri("http://localhost:8080/RESTfulWebService/rest/message/test").build();
+		baseUri = UriBuilder.fromUri("http://192.168.12.220:8080/memorium/buyIt/").build();
 	}
 
 	public List<Message> getMessagesByUserId(int id) {
-
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
 		WebResource service = client.resource(baseUri);
@@ -39,46 +41,61 @@ public class MessageClientWebService {
 
 		try {
 			object.put("user_id", id);
-			ClientResponse resp = service.accept("application/json").get(ClientResponse.class);
+			ClientResponse resp = service.path("messages/")
+					.path(String.valueOf(id)).accept("application/json")
+					.get(ClientResponse.class);
 			JSONObject jsonObject = resp.getEntity(JSONObject.class);
+			LOGGER.info(jsonObject);
 			JSONArray messages = jsonObject.getJSONArray("messages");
 
 			for (int i = 0; i < messages.length(); i++) {
-				Message currentMessage = creator.create(messages.getJSONObject(i));
-				messagesList.add(currentMessage);
+				Message currentMessage = creator.create(messages.getJSONArray(i));
+				messagesList.add(currentMessage.setToUserId(id));
 			}
 
 		} catch (JSONException e) {
 			LOGGER.error(e);
 		}
 
-		//MOCK
-//		for(int i = 0; i < 20; i++) {
-//			Message message = new Message();
-//			message.setToUserId(id);
-//			message.setFromUserId(i+1).setMessage("Test messsage " + i);
-//			messagesList.add(message);
-//		}
-		
+		// MOCK
+		// for(int i = 0; i < 20; i++) {
+		// Message message = new Message();
+		// message.setToUserId(id);
+		// message.setFromUserId(i+1).setMessage("Test messsage " + i);
+		// messagesList.add(message);
+		// }
+
 		return messagesList;
 	}
 
-	public boolean createMessage(Message message) {
+	public boolean createMessage(Message message) throws UnsupportedEncodingException {
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
-		WebResource service = client.resource(baseUri);
+		//WebResource service = client.resource(baseUri);
 
 		JSONObject object = new JSONObject();
 		boolean result = false;
+		//String path = baseUri.toString();
+		
 		try {
 			object.put("message", message.getMessage());
-			object.put("from_user_id", message.getFromUserId());
-			object.put("to_user_id", message.getToUserId());
-			ClientResponse resp = service.accept("application/json")
-					.type("application/json")
-					.post(ClientResponse.class, object);
-			JSONObject jsonObject = resp.getEntity(JSONObject.class);
-			result = jsonObject.getBoolean("result");
+			object.put("senderMessageId", message.getFromUserId());
+			object.put("reciverMessageId", message.getToUserId());
+			String jsonNew = URLEncoder.encode(object.toString(), "UTF-8");
+			path = "http://192.168.12.220:8080/memorium/buyIt/" + "message/new?message=" + jsonNew;
+			WebResource service = client.resource(path);
+			
+			LOGGER.info("Sending to " + path); 
+			
+			
+			ClientResponse resp = service
+//					.type("application/json")
+					//.post(ClientResponse.class, object);
+					.get(ClientResponse.class);
+			String jsonObject = resp.getEntity(String.class);
+			//result = jsonObject.getBoolean("result");
+			LOGGER.info("Result " + jsonObject);
+			
 		} catch (JSONException e) {
 			LOGGER.error(e);
 		}

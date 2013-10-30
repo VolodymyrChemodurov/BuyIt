@@ -26,7 +26,6 @@ public class LeaveMessageServlet extends HttpServlet {
 		int toId = Integer.parseInt(request.getParameter("toId"));
 		String messageText = request.getParameter("message");
 		
-		
 		Message message = new Message();
 		message.setFromUserId(fromId).setToUserId(toId).setMessage(messageText);
 		boolean result = messageService.createMessage(message);

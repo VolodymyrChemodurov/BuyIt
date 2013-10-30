@@ -139,14 +139,19 @@ public class UserWebService {
 	@POST
 	@Path("/registration")
 	@Produces(MediaType.APPLICATION_JSON)
-	public JSONObject registerUser(String parameters) {
+	public JSONObject registerUser(@QueryParam("newUser") String parameters,
+			@QueryParam("loign") String login,
+			@QueryParam("password") String password) {
 
 		LOGGER.info("Trying to register user");
 		LOGGER.info(parameters);
+		LOGGER.info("login " + login);
+		LOGGER.info("password " + password);
 		
 		try {
 			JSONObject json = new JSONObject(parameters);
 			if (UserValidation.checkingInput(json)) {
+				LOGGER.info("Validation complete");
 				User user = new UserCreator().create(json);
 				if (!userService.checkLogin(user.getLogin())) {
 					user = userService.createItem(user);
@@ -168,6 +173,7 @@ public class UserWebService {
 			@QueryParam("login") String login,
 			@QueryParam("password") String password) {
 		
+		LOGGER.info("Cheking free login");
 		String result = "true";
 		if (authentication(login, password)) {
 			boolean checkResult = userService.checkLogin(userLogin);
