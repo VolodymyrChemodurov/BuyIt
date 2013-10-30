@@ -171,7 +171,7 @@
 												<div class="item active">
 													<c:forEach var="image" begin="1" end="3"
 														items="${product.description.itemPhotos }">
-														<a href="${image.path}"> <img src="${image.path}"
+														<a href="${image.path}"> <img src="${image.path}" class="my-image-mini"
 															alt="" /></a>
 													</c:forEach>
 												</div>
@@ -423,7 +423,7 @@
 			
 			<script src="bootstrap/js/thumbnail-image-large.js"
 				type="text/javascript"></script>
-			<script src="bootstrap/js/thumbnail-image-mini.js"
+		<script src="bootstrap/js/thumbnail-image-mini.js"
 				type="text/javascript"></script>
 
 

@@ -1,8 +1,15 @@
 package com.epam.lab.buyit.controller.setters;
 
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.fileupload.FileItem;
+
+import com.epam.lab.buyit.controller.web.client.ImageClientWebService;
+import com.epam.lab.buyit.model.Image;
 import com.epam.lab.buyit.model.Product;
 
 public enum ProductSetter {
@@ -29,7 +36,7 @@ public enum ProductSetter {
 	},
 	END_TIME("endTime") {
 		public void setField(Product product, String value) {
-			product.getAuction().setEndTime(Timestamp.valueOf(value));
+			product.getAuction().setEndTime(Timestamp.valueOf(value + ":00"));
 		}
 	},
 	COUNT("count") {
@@ -39,7 +46,7 @@ public enum ProductSetter {
 	},
 	BUY_IT_NOW_PRICE("buyNowPrice") {
 		public void setField(Product product, String value) {
-			if (value != null && !value.isEmpty()){
+			if (value != null && !value.isEmpty()) {
 				product.getAuction().setBuyItNow(Double.parseDouble(value));
 			} else {
 				product.getAuction().setBuyItNow(0);
@@ -48,7 +55,7 @@ public enum ProductSetter {
 	},
 	START_PRICE("startPrice") {
 		public void setField(Product product, String value) {
-			if (value != null && !value.isEmpty()){
+			if (value != null && !value.isEmpty()) {
 				product.getAuction().setStartPrice(Double.parseDouble(value));
 			} else {
 				product.getAuction().setStartPrice(0);
@@ -88,13 +95,37 @@ public enum ProductSetter {
 		}
 		return result;
 	}
-	
-	public static Product setDescriptionFields(Product product, Map<String, String[]> inputValues) {
+
+	public static Product setDescriptionFields(Product product,
+			Map<String, String[]> inputValues) {
 		for (String current : inputValues.keySet()) {
 			ProductSetter setter = ProductSetter.getSetter(current);
-			if (setter != null){
+			if (setter != null) {
 				setter.setField(product, inputValues.get(current)[0]);
 			}
+		}
+		return product;
+	}
+
+	public static Product uploadingImages(Product product, List<FileItem> images)
+			throws IOException {
+		ImageClientWebService imageClientWebService = new ImageClientWebService();
+
+		int descriptionId = product.getDescription().getIdDescription();
+
+		String token = imageClientWebService.createToken(999);
+		if (!images.isEmpty()) {
+			List<String> urls = imageClientWebService.createImages(images,
+					token);
+			List<Image> listImage = new ArrayList<Image>();
+			Image image = null;
+			for (String current : urls) {
+				image = new Image();
+				image.setDescriptionId(descriptionId);
+				image.setPath(current);
+				listImage.add(image);
+			}
+			product.getDescription().setItemPhotos(listImage);
 		}
 		return product;
 	}
