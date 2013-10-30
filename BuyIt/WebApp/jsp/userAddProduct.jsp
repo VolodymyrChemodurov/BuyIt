@@ -67,7 +67,7 @@
 				<!-- /left-menu -->
 
 				<div id="maContent" class="corAll5">
-					<form id="form-new-product" action="userAddProductServlet" method="post">
+					<form id="form-new-product" action="userAddProductServlet" method="post" enctype="multipart/form-data">
 						<div id="addNewProduct">
 							<div class="mycontent">
 								<h3>Create new auction</h3>
@@ -301,7 +301,7 @@
 	<script type="text/javascript">
 		var currentTime = new Date();
 		$(".form_datetime").datetimepicker({
-			format : "yyyy-mm-dd hh:ii:ss",
+			format : "yyyy-mm-dd hh:ii",
 			autoclose : true,
 			todayBtn : true,
 			startDate : currentTime,
