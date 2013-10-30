@@ -31,7 +31,7 @@ public class ProductDAO implements ProductDAOInterface {
 	private final static String GET_BY_SUBCATEGORY_ID = "SELECT * FROM products WHERE deleted=false AND sub_category_id = ?";
 	private final static String GET_SELECTION = "SELECT SQL_CALC_FOUND_ROWS * FROM products JOIN auctions ON products.id_product = auctions.product_id WHERE sub_category_id = ? AND status = 'inProgress' AND end_time > ?"
 			+ "LIMIT ?, ?";
-	private final static String GET_ROWS_COUNT_BY_SYBCATEGORY_ID = "SELECT COUNT(id_product) FROM products WHERE deleted=false AND sub_category_id = ?";
+	private final static String GET_ROWS_COUNT_BY_SYBCATEGORY_ID = "SELECT COUNT(id_product) FROM products JOIN auctions ON product_id=id_product WHERE deleted=false AND sub_category_id = ? AND status = 'inProgress'";
 	private final static String GET_NOT_CLOSED = "SELECT * FROM products JOIN auctions ON id_product = product_id WHERE status ='inProgress' AND sub_category_id=? AND end_time > ? LIMIT ?";
 	private final static String DELETE_BY_ID = "UPDATE products SET deleted=true WHERE id_product = ?";
 	private ProductTransformer transformer;
