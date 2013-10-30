@@ -28,6 +28,7 @@ public class RegistrationServlet extends HttpServlet {
 					&& (request.getParameter("adminRole").equalsIgnoreCase("1"))) {
 				User user = new UserCreator().create(inputRegistrationValues);
 				user.setRole(true);
+				user.setAvatar("bootstrap/img/avatars/admin-icon.png");
 				userService.createItem(user);
 				request.setAttribute("message",
 						"Congratulations! Registration was successful");

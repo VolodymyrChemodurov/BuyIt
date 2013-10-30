@@ -3,14 +3,20 @@ package com.epam.lab.buyit.controller.web.client;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
 import org.apache.log4j.Logger;
 import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.RequestContext;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -65,7 +71,7 @@ public class ImageClientWebService {
 			throws IOException {
 
 		JSONObject object = new JSONObject();
-		List<String> result = null;
+		List<String> result = new ArrayList<String>();
 		try {
 			FormDataMultiPart form = setParams(images);
 			ClientResponse resp = service.path("files").path("upload")
@@ -100,6 +106,20 @@ public class ImageClientWebService {
 			e.printStackTrace();
 		}
 		return token;
+	}
+
+	public List<FileItem> getFileItems(HttpServletRequest request) {
+		List<FileItem> items = null;
+		ServletFileUpload upload = null;
+		if (ServletFileUpload.isMultipartContent(request)) {
+			try {
+				upload = new ServletFileUpload(new DiskFileItemFactory());
+				items = upload.parseRequest((RequestContext) request);
+			} catch (FileUploadException e) {
+				e.printStackTrace();
+			}
+		}
+		return items;
 	}
 
 	private FormDataMultiPart setParams(List<FileItem> items)

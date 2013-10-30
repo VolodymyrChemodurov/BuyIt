@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.epam.lab.buyit.controller.creator.ProductCreator;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
+import com.epam.lab.buyit.controller.setters.ProductSetter;
 import com.epam.lab.buyit.controller.validator.ProductValidation;
 import com.epam.lab.buyit.model.Product;
 
 public class UserAddProductServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request,
@@ -28,11 +30,11 @@ public class UserAddProductServlet extends HttpServlet {
 		Map<String, String[]> inputValues = request.getParameterMap();
 		if (ProductValidation.checkingInputValues(inputValues)) {
 			Product product = new ProductCreator().create(inputValues);
+			product = ProductSetter.uploadingImages(product, request);
 			int id = productService.createItem(product).getIdProduct();
 			response.sendRedirect("productDetails?id=" + id);
 		}
 		response.sendRedirect("userAddProduct");
 
 	}
-
 }

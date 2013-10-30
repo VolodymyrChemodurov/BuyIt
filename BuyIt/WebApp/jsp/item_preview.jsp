@@ -34,14 +34,21 @@
                         <span class="pull-right">
                                 <c:choose>
                                         <c:when test="${product.auction.buyItNow > 0}">
-                                                <a class="btn btn-info" href="buyItServe?id_product=${product.idProduct}&quantity=1""> 
+                                                <a class="btn btn-info"  
+                                                <c:if test="${user.idUser eq product.userId}">
+                                                		style="pointer-events: none; cursor: default; disabled: disabled" disabled tabindex=-1
+                                                </c:if>  
+                                                href="buyItServe?id_product=${product.idProduct}&quantity=1""> 
                                                         <c:out value="Buy ${product.auction.buyItNow}$"></c:out>
                                                 </a>
                                         </c:when>
                                         <c:when test="${product.auction.buyItNow eq 0 and product.auction.currentPrice > 0}">
                                                 <a class="btn btn-info" 
-                                                        href="bid_serve?id_product=${product.idProduct}&bid=${product.auction.currentPrice + 1}">
-                                                        <c:out value="Bid ${product.auction.currentPrice + 1}$"></c:out>
+                                                <c:if test="${user.idUser eq product.userId}">
+                                                	style="pointer-events: none; cursor: default; disabled: disabled" disabled tabindex=-1
+                                                </c:if>
+                                                href="bid_serve?id_product=${product.idProduct}&bid=${product.auction.currentPrice + 1}">
+                                                	<c:out value="Bid ${product.auction.currentPrice + 1}$"></c:out>
                                                 </a>
                                         </c:when>
                                 </c:choose>
@@ -95,13 +102,21 @@
                                         </table>
                                 
                                         <c:if test="${product.auction.buyItNow > 0}">
-                                                <a class="btn btn-info" href="buyItServe?id_product=${product.idProduct}&quantity=1""> 
-                                                        <c:out value="Buy ${product.auction.buyItNow}$"></c:out>
+                                                <a class="btn btn-info" 
+                                                	<c:if test="${user.idUser eq product.userId}">
+                                                		style="pointer-events: none; cursor: default; disabled: disabled" disabled tabindex=-1
+                                                	</c:if> 
+                                                	href="buyItServe?id_product=${product.idProduct}&quantity=1""> 
+                                                    <c:out value="Buy ${product.auction.buyItNow}$"></c:out>
                                                 </a>
                                         </c:if>
                                         <c:if test="${product.auction.currentPrice > 0}">
-                                                <a class="btn btn-info" href="bid_serve?id_product=${product.idProduct}&bid=${product.auction.currentPrice + 1}">
-                                                <c:out value="Bid ${product.auction.currentPrice + 1}$"></c:out>
+                                                <a class="btn btn-info" 
+                                                	<c:if test="${user.idUser eq product.userId}">
+                                                		style="pointer-events: none; cursor: default; disabled: disabled" disabled tabindex=-1
+                                                	</c:if> 
+                                                	href="bid_serve?id_product=${product.idProduct}&bid=${product.auction.currentPrice + 1}">
+                                               	 	<c:out value="Bid ${product.auction.currentPrice + 1}$"></c:out>
                                                 </a>
                                         </c:if>
                                 

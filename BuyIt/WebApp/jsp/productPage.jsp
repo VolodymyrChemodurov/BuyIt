@@ -52,6 +52,14 @@
 <link rel="apple-touch-icon-precomposed"
 	href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 <style type="text/css" id="enject"></style>
+
+<style>
+	.dis {
+		pointer-events: none; 
+		cursor: default; 
+		disabled: disabled;
+	}
+</style>
 </head>
 
 
@@ -213,55 +221,92 @@
 
 									<!--                                                 ----------------------        PLACE A BID------------------------- -->
 									<c:if test="${product.auction.currentPrice != 0 }">
-										<form id="placeABidForm" class="form-horizontal qtyFrm"  method="get"
-											action="bid_serve?id_product">
-											<input type="hidden" name="id_product"
-												value="${product.idProduct}" />
-
-											<div class="control-group">
-												<label class="control-label"><span>Current
-														Price: <c:out value="${product.auction.currentPrice}"></c:out>$
-												</span></label>
-												<div class="controls">
-													<label class="control-label"><span> You Bid:</span></label>
-													<input type="number" name="bid" id="placeBidInput"
-														min="${product.auction.currentPrice+1}" d
-														value="<c:out value="${product.auction.currentPrice+1}"></c:out>"
-														class="span1" placeholder="Your Bid" />
-													<button type="submit" id="placeBidButton"
-														class="btn btn-default btn-primary pull-right">
-														Place a Bid</button>
-												</div>
+									<div class="form-horizontal qtyFrm">
+										<div class="control-group">
+											<label class="control-label">
+												<span>Current Price: <c:out value="${product.auction.currentPrice}"></c:out>$</span>
+											</label>
+											<div class="controls">
+												<label class="control-label">
+													<span> Your Bid:</span>
+												</label>
+												<input type="number" name="bid" id="bidInput"
+													min="${product.auction.currentPrice+1}" d
+													value="<c:out value="${product.auction.currentPrice+1}"></c:out>"
+													class="span1" placeholder="Your Bid" />
+												<a id="placeBidButton" href="#bidConfirmation" role="button" data-toggle="modal"
+													class="btn btn-default btn-primary pull-right">Place a Bid
+												</a>
 											</div>
-										</form>
-										<hr class="soft" />
+										</div>
+									</div>
+									<hr class="soft" />
+									
+									<div id="bidConfirmation" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  										<div class="modal-header">
+    										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    										<h3 id="myModalLabel">Bid confirmation</h3>
+  										</div>
+  										<form id="placeABidForm"  method="get" action="bid_serve?id_product">
+  											<input type="hidden" name="id_product" value="${product.idProduct}" />
+  											<input type="hidden" name="bid" id="placeBidInput"/>
+  											<div class="modal-body">
+    											<p>Are you sure that you want to participate in this auction?</p>
+    											<p class="message"></p>
+  											</div>
+  											<div class="modal-footer">
+    											<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    											<button type="submit" class="btn btn-default btn-primary pull-right">Place a Bid</button>
+  											</div>
+  										</form>
+									</div>
 									</c:if>
-
-
 									<!-- ---------------------------------------------BUY IT NOW------------------------ -->
 
 									<c:if test="${product.auction.buyItNow != 0 }">
-										<form id="buyItForm" class="form-horizontal qtyFrm" action="buyItServe"
-											method="POST">
+										<div class="form-horizontal qtyFrm">
 											<div class="control-group">
-												<input type="hidden" name="id_product"
-													value="${product.idProduct}" /> <label
-													class="control-label"><span> Buy it By: <c:out
-															value="${product.auction.buyItNow}"></c:out> $
-												</span></label>
+												<label class="control-label">
+													<span> Buy it By: <c:out value="${product.auction.buyItNow}"></c:out> $</span>
+												</label>
 												<div class="controls">
-													<input type="hidden" name="count" id="count"
-														value="${product.auction.count}" /> <label
-														class="control-label" text-align="right"><span>
-															Quantity:</span></label> <input type="number" min="1" id="quantity" max="${product.auction.count}"
-														name="quantity" class="span1" value="1" />
-													<button type="submit" id="buyItButton"
-														class="btn btn-default btn-primary pull-right">Buy
-														it now</button>
+													<label class="control-label" text-align="right">
+														<span>Quantity:</span>
+													</label> 
+													<input type="number" min="1" id="quantityInput" max="${product.auction.count}" name="quantity" class="span1" value="1" />
+													<a id="buyItButton" href="#buyConfirmation" role="button" data-toggle="modal"
+														class="btn btn-default btn-primary pull-right">Buy it now
+													</a>
 												</div>
 											</div>
-										</form>
+										</div>
 										<hr class="soft" />
+										
+										
+										
+										<div id="buyConfirmation" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  											<div class="modal-header">
+    											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    											<h3 id="myModalLabel">Bid confirmation</h3>
+  											</div>
+  											<form id="buyItForm" class="form-horizontal qtyFrm" action="buyItServe" method="POST">
+  												<input type="hidden" name="id_product" value="${product.idProduct}" />
+  												<input type="hidden" name="count" id="count" value="${product.auction.count}" />
+  												<input type="hidden" name="quantity" id="quantity"/>
+  												<input type="hidden" name="price" id="price" value="${product.auction.buyItNow}"/>
+  												<div class="modal-body">
+    												<p>Are you sure that you want to participate in this auction?</p>
+    												<p class="message"></p>
+    												<p class="message2"></p>
+  												</div>
+  												<div class="modal-footer">
+    												<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    												<button type="submit" class="btn btn-default btn-primary pull-right">Buy it now</button>
+  												</div>
+  											</form>
+										</div>
+										
+										
 									</c:if>
 
 									<h4>
@@ -295,22 +340,21 @@
 											<li><a href="#features" data-toggle="tab">Features</a></li>
 										</ul>
 										<div id="myTabContent" class="tab-content">
-											<div class="tab-pane fade active in" id="home">
-												<h4>Product Information</h4>
+											<div class="tab-pane fade active in" id="home" style="padding-left: 30px">
+												
+												<div class="form-horizontal qtyFrm">
+													${product.description.descText}</div>
 												<hr class="soft" />
 												Auction start time:
 												<c:out value="${product.auction.startTime}"></c:out>
 												<br> Auction end time:
 												<c:out value="${product.auction.endTime}"></c:out>
 												<hr class="soft" />
-												<div class="form-horizontal qtyFrm">
-													${product.description.descText}</div>
 											</div>
 
 
-											<div class="tab-pane fade" id="history">
-												<h4>Bid History</h4>
-												<hr class="soft" />
+											<div class="tab-pane fade" id="history" style="padding-left: 30px">
+										
 												<table class="table table-bordered">
 													<tbody>
 														<tr class="techSpecRow">
@@ -335,8 +379,8 @@
 
 
 
-											<div class="tab-pane fade" id="delivery">
-												<h4>Information for Buyers</h4>
+											<div class="tab-pane fade" id="delivery" style="padding-left: 30px">
+
 
 												<hr class="soft" />
 												${product.delivery }
@@ -344,8 +388,7 @@
 												<br class="clr">
 											</div>
 
-											<div class="tab-pane fade" id="features">
-												<h4>Features</h4>
+											<div class="tab-pane fade" id="features" style="padding-left: 30px">
 
 												<hr class="soft" />
 												${product.description.features}
@@ -385,6 +428,8 @@
 
 
 			<script src="bootstrap/js/product-page-button-checker.js" type="text/javascript"></script>
+			<script src="bootstrap/js/bid-confirmation.js" type="text/javascript"></script>
+			<script src="bootstrap/js/buy-confirmation.js" type="text/javascript"></script>
 		</div>
 		<!--                 ----------------footer--------------------------------------- -->
 		<jsp:include page="footer"></jsp:include>
