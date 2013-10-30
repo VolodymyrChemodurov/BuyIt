@@ -235,7 +235,7 @@
 
 	</div>
 
-	<div style="height: 330px;"></div>
+	<div style="height: 30px;"></div>
 
 
 
