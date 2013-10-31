@@ -278,7 +278,7 @@
   
   <servlet>
     <servlet-name>Error</servlet-name>
-    <jsp-file>/jsp/error404.jsp</jsp-file>
+    <jsp-file>/jsp/error/error404.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Error</servlet-name>
@@ -286,7 +286,7 @@
   </servlet-mapping>
     <servlet>
     <servlet-name>Error500</servlet-name>
-    <jsp-file>/jsp/error500.jsp</jsp-file>
+    <jsp-file>/jsp/error/error500.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Error500</servlet-name>
@@ -294,7 +294,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>HomePage</servlet-name>
-    <jsp-file>/jsp/homePage.jsp</jsp-file>
+    <jsp-file>/jsp/general/homePage.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>HomePage</servlet-name>
@@ -302,7 +302,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>NavbarLogin</servlet-name>
-    <jsp-file>/jsp/navbarLogin.jsp</jsp-file>
+    <jsp-file>/jsp/utils/navbarLogin.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>NavbarLogin</servlet-name>
@@ -310,7 +310,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Navbar</servlet-name>
-    <jsp-file>/jsp/navbar.jsp</jsp-file>
+    <jsp-file>/jsp/utils/navbar.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Navbar</servlet-name>
@@ -318,7 +318,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>NavbarLogout</servlet-name>
-    <jsp-file>/jsp/navbarLogout.jsp</jsp-file>
+    <jsp-file>/jsp/utils/navbarLogout.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>NavbarLogout</servlet-name>
@@ -326,7 +326,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>SidebarMenu</servlet-name>
-    <jsp-file>/jsp/sidebarMenu.jsp</jsp-file>
+    <jsp-file>/jsp/utils/sidebarMenu.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>SidebarMenu</servlet-name>
@@ -334,7 +334,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Registration</servlet-name>
-    <jsp-file>/jsp/registration.jsp</jsp-file>
+    <jsp-file>/jsp/general/registration.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Registration</servlet-name>
@@ -342,7 +342,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Searching</servlet-name>
-    <jsp-file>/jsp/searchResult.jsp</jsp-file>
+    <jsp-file>/jsp/general/searchResult.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Searching</servlet-name>
@@ -350,7 +350,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>subCategoryViewer</servlet-name>
-    <jsp-file>/jsp/subCategory_viewer.jsp</jsp-file>
+    <jsp-file>/jsp/general/subCategory_viewer.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>subCategoryViewer</servlet-name>
@@ -358,7 +358,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>ItemPreview</servlet-name>
-    <jsp-file>/jsp/item_preview.jsp</jsp-file>
+    <jsp-file>/jsp/utils/item_preview.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>ItemPreview</servlet-name>
@@ -366,7 +366,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>footerJSP</servlet-name>
-    <jsp-file>/jsp/footer.jsp</jsp-file>
+    <jsp-file>/jsp/utils/footer.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>footerJSP</servlet-name>
@@ -374,7 +374,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>ForgetPassword</servlet-name>
-    <jsp-file>/jsp/forgetPassword.jsp</jsp-file>
+    <jsp-file>/jsp/general/forgetPassword.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>ForgetPassword</servlet-name>
@@ -382,7 +382,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UserProfile</servlet-name>
-    <jsp-file>/jsp/userProfile.jsp</jsp-file>
+    <jsp-file>/jsp/user/userProfile.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserProfile</servlet-name>
@@ -390,7 +390,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Contact</servlet-name>
-    <jsp-file>/jsp/contact.jsp</jsp-file>
+    <jsp-file>/jsp/general/contact.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Contact</servlet-name>
@@ -398,7 +398,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>LegalNotice</servlet-name>
-    <jsp-file>/jsp/legalNotice.jsp</jsp-file>
+    <jsp-file>/jsp/general/legalNotice.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>LegalNotice</servlet-name>
@@ -406,7 +406,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>messagePage</servlet-name>
-    <jsp-file>/jsp/message_page.jsp</jsp-file>
+    <jsp-file>/jsp/general/message_page.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>messagePage</servlet-name>
@@ -414,7 +414,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>dealInformationPage</servlet-name>
-    <jsp-file>/jsp/buy_it_information_page.jsp</jsp-file>
+    <jsp-file>/jsp/auction/buy_it_information_page.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>dealInformationPage</servlet-name>
@@ -422,7 +422,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>bidInformationPage</servlet-name>
-    <jsp-file>/jsp/bid_information_page.jsp</jsp-file>
+    <jsp-file>/jsp/auction/bid_information_page.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>bidInformationPage</servlet-name>
@@ -430,7 +430,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>ProductPage</servlet-name>
-    <jsp-file>/jsp/productPage.jsp</jsp-file>
+    <jsp-file>/jsp/auction/productPage.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>ProductPage</servlet-name>
@@ -438,7 +438,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AdminMainPage</servlet-name>
-    <jsp-file>/jsp/adminMainPage.jsp</jsp-file>
+    <jsp-file>/jsp/admin/adminMainPage.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminMainPage</servlet-name>
@@ -446,7 +446,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AdminProfile</servlet-name>
-    <jsp-file>/jsp/adminProfile.jsp</jsp-file>
+    <jsp-file>/jsp/admin/adminProfile.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminProfile</servlet-name>
@@ -454,7 +454,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AdminRegistration</servlet-name>
-    <jsp-file>/jsp/adminRegistration.jsp</jsp-file>
+    <jsp-file>/jsp/admin/adminRegistration.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminRegistration</servlet-name>
@@ -462,7 +462,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>CategoryCreator</servlet-name>
-    <jsp-file>/jsp/categoryCreator.jsp</jsp-file>
+    <jsp-file>/jsp/admin/categoryCreator.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>CategoryCreator</servlet-name>
@@ -470,7 +470,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>categoryViewer</servlet-name>
-    <jsp-file>/jsp/сategoryViewerPage.jsp</jsp-file>
+    <jsp-file>/jsp/general/сategoryViewerPage.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>categoryViewer</servlet-name>
@@ -478,7 +478,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>loginForm</servlet-name>
-    <jsp-file>/jsp/login_form.jsp</jsp-file>
+    <jsp-file>/jsp/general/login_form.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>loginForm</servlet-name>
@@ -486,7 +486,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>userWall</servlet-name>
-    <jsp-file>/jsp/user_wall.jsp</jsp-file>
+    <jsp-file>/jsp/user/user_wall.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>userWall</servlet-name>
@@ -494,7 +494,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UserSales</servlet-name>
-    <jsp-file>/jsp/userSales.jsp</jsp-file>
+    <jsp-file>/jsp/user/userSales.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserSales</servlet-name>
@@ -502,7 +502,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UserShopping</servlet-name>
-    <jsp-file>/jsp/userShopping.jsp</jsp-file>
+    <jsp-file>/jsp/user/userShopping.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserShopping</servlet-name>
@@ -510,7 +510,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>ActiveSalesContent</servlet-name>
-    <jsp-file>/jsp/activeSalesContent.jsp</jsp-file>
+    <jsp-file>/jsp/user/activeSalesContent.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>ActiveSalesContent</servlet-name>
@@ -518,7 +518,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>EndedSalesContent</servlet-name>
-    <jsp-file>/jsp/endedSalesContent.jsp</jsp-file>
+    <jsp-file>/jsp/user/endedSalesContent.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>EndedSalesContent</servlet-name>
@@ -526,7 +526,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UserAddProduct</servlet-name>
-    <jsp-file>/jsp/userAddProduct.jsp</jsp-file>
+    <jsp-file>/jsp/user/userAddProduct.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserAddProduct</servlet-name>
@@ -534,7 +534,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UserEditProduct</servlet-name>
-    <jsp-file>/jsp/userEditProduct.jsp</jsp-file>
+    <jsp-file>/jsp/user/userEditProduct.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserEditProduct</servlet-name>
@@ -542,7 +542,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UserComments</servlet-name>
-    <jsp-file>/jsp/userComments.jsp</jsp-file>
+    <jsp-file>/jsp/user/userComments.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserComments</servlet-name>
@@ -550,7 +550,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UserRestoreProduct</servlet-name>
-    <jsp-file>/jsp/userRestoreProduct.jsp</jsp-file>
+    <jsp-file>/jsp/user/userRestoreProduct.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserRestoreProduct</servlet-name>
@@ -558,7 +558,7 @@
   </servlet-mapping>
    <servlet>
     <servlet-name>TermsAndConditions</servlet-name>
-    <jsp-file>/jsp/termsAndConditions.jsp</jsp-file>
+    <jsp-file>/jsp/general/termsAndConditions.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>TermsAndConditions</servlet-name>
@@ -566,7 +566,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>FAQ</servlet-name>
-    <jsp-file>/jsp/faq.jsp</jsp-file>
+    <jsp-file>/jsp/general/faq.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>FAQ</servlet-name>

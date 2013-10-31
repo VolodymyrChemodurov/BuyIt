@@ -320,6 +320,7 @@ function deleteImage(id) {
 $('#avatarUpload').change(function() {
 	var file = this.files[0];
 
+	
 	size = file.size;
 	type = file.type;
 	error = "";
@@ -331,10 +332,13 @@ $('#avatarUpload').change(function() {
 		error = "File is not an image";
 
 	if (error == "") {
-
+		$('#avatarChangeError').html(file.name);
+		$('#avatarChangeError').show();
+		$('#avatarChangeError').css("color","green");
 	} else {
 		$('#avatarChangeError').html(error);
 		$('#avatarChangeError').show();
+		$('#avatarChangeError').css("color","red");
 		$("#changeAvatarForm").each(function() {
 			this.reset();
 		});
@@ -361,3 +365,4 @@ $('#editProductButton').click(function() {
 	}
 
 });
+
