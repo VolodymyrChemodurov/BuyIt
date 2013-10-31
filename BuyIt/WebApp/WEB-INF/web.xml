@@ -173,7 +173,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UserDeleteItemServlet</servlet-name>
-    <servlet-class>com.epam.lab.buyit.controller.web.servlet.user.UserDeleteItemServlet</servlet-class>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.user.product.UserDeleteItemServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserDeleteItemServlet</servlet-name>
@@ -221,7 +221,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UserAddProductServlet</servlet-name>
-    <servlet-class>com.epam.lab.buyit.controller.web.servlet.user.UserAddProductServlet</servlet-class>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.user.product.UserAddProductServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserAddProductServlet</servlet-name>
@@ -229,7 +229,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UserEditProductServlet</servlet-name>
-    <servlet-class>com.epam.lab.buyit.controller.web.servlet.user.UserEditProductServlet</servlet-class>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.user.product.UserEditProductServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserEditProductServlet</servlet-name>
@@ -245,7 +245,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UserRestoreProductServlet</servlet-name>
-    <servlet-class>com.epam.lab.buyit.controller.web.servlet.user.UserRestoreProductServlet</servlet-class>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.user.product.UserRestoreProductServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserRestoreProductServlet</servlet-name>
@@ -253,7 +253,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UserCommentsServlet</servlet-name>
-    <servlet-class>com.epam.lab.buyit.controller.web.servlet.user.UserCommentsServlet</servlet-class>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.user.message.UserCommentsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserCommentsServlet</servlet-name>

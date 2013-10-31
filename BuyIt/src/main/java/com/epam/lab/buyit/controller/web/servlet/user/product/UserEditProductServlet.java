@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.controller.web.servlet.user;
+package com.epam.lab.buyit.controller.web.servlet.user.product;
 
 import static com.epam.lab.buyit.controller.utils.ParseRequest.getFileItems;
 import static com.epam.lab.buyit.controller.utils.ParseRequest.getParametersMap;
@@ -15,10 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 
-import com.epam.lab.buyit.controller.creator.ProductCreator;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
 import com.epam.lab.buyit.controller.setters.ProductSetter;
-import com.epam.lab.buyit.controller.validator.ProductValidation;
 import com.epam.lab.buyit.model.Image;
 import com.epam.lab.buyit.model.Product;
 

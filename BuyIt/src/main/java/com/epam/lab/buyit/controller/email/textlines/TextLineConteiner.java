@@ -1,13 +1,9 @@
 package com.epam.lab.buyit.controller.email.textlines;
 
-import org.apache.log4j.Logger;
-
 import com.epam.lab.buyit.model.Product;
 import com.epam.lab.buyit.model.User;
 
 public class TextLineConteiner {
-	private static final Logger LOGGER = Logger
-			.getLogger(TextLineConteiner.class);
 
 	private String password = null;
 

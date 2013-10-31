@@ -1,11 +1,9 @@
 package com.epam.lab.buyit.controller.email;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
@@ -39,8 +37,6 @@ public class EmailMessageBuilder {
 	private final static String productSoldOnBuyItNowHtml = getPath("/html/productSoldOnBuyItNow.html");
 	private final static String noBodyBuyProductHtml = getPath("/html/noBodyByYouProductForm.html");
 	private final static String buyItNowHtml = getPath("/html/buyItNowForm.html");
-
-	private String test = getPath("/html/test.html");
 
 	private static ArrayList<TextLineItem> lineList = new ArrayList<TextLineItem>();
 

@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.controller.web.servlet.user;
+package com.epam.lab.buyit.controller.web.servlet.user.message;
 
 import java.io.IOException;
 import java.util.ArrayList;
