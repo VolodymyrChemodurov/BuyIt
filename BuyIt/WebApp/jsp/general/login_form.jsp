@@ -42,7 +42,7 @@
 					<form class="form-horizontal loginFrm" method="post"
 						action="loginServlet">
 						<div class="control-group">
-							<label><font color="red">${message}</font></label>
+							<label><font color="${messageColor}">${message}</font></label>
 						</div>
 						<div class="control-group">
 							<input type="text" id="login" name="login" placeholder="Login">

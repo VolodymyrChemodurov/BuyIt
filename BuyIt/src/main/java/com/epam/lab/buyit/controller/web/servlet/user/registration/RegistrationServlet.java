@@ -31,6 +31,7 @@ public class RegistrationServlet extends HttpServlet {
 				userService.createItem(user);
 				request.setAttribute("message",
 						"Congratulations! Registration was successful");
+				request.setAttribute("messageColor", "green");
 				request.getRequestDispatcher("adminRegistration").forward(
 						request, response);
 			} else {
@@ -38,6 +39,7 @@ public class RegistrationServlet extends HttpServlet {
 				userService.createItem(user);
 				request.setAttribute("message",
 						"Congratulations! Registration was successful");
+				request.setAttribute("messageColor", "green");
 				emailMessageBuilder.sendSuccessRegistrationForm(user);
 				request.getRequestDispatcher("login_form").forward(request,
 						response);
