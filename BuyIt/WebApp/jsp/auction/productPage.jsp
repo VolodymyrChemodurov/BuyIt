@@ -342,7 +342,7 @@
 										</ul>
 										<div id="myTabContent" class="tab-content">
 											<div class="tab-pane fade active in" id="home"
-												style="padding-left: 30px">
+												style="padding-left: 30px; padding-right: 30px">
 												<div class="form-horizontal qtyFrm">
 													${product.description.descText}</div>
 												<hr class="soft" />
@@ -353,7 +353,7 @@
 
 
 											<div class="tab-pane fade" id="history"
-												style="padding-left: 30px">
+												style="padding-left: 30px;  padding-right: 30px">
 
 												<table class="table table-bordered">
 													<tbody>
@@ -380,7 +380,7 @@
 
 
 											<div class="tab-pane fade" id="delivery"
-												style="padding-left: 30px">
+												style="padding-left: 30px;  padding-right: 30px">
 
 
 												<hr class="soft" />
@@ -390,7 +390,7 @@
 											</div>
 
 											<div class="tab-pane fade" id="features"
-												style="padding-left: 30px">
+												style="padding-left: 30px;  padding-right: 30px">
 
 												<hr class="soft" />
 												${product.description.features}
