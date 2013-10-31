@@ -22,9 +22,11 @@ public class ChangeAvatarServlet extends HttpServlet {
 			.getLogger(ChangeAvatarServlet.class);
 	private static final long serialVersionUID = 1L;
 	private UserServiceImpl userService;
+	private ImageClientWebService imageClientWebService;
 
 	public void init() {
 		userService = new UserServiceImpl();
+		imageClientWebService = new ImageClientWebService();
 	}
 
 	protected void doGet(HttpServletRequest request,
@@ -34,14 +36,11 @@ public class ChangeAvatarServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		ImageClientWebService imageClientWebService = new ImageClientWebService();
-
 		User user = (User) request.getSession().getAttribute("user");
 		LOGGER.info("start update avatar");
 		String token = imageClientWebService.createToken(999);
 		List<FileItem> images = parseRequest(request);
 		List<String> urls = imageClientWebService.createImages(images, token);
-
 		if (urls.size() == 1) {
 			user.setAvatar(urls.get(0));
 			userService.updateItem(user);

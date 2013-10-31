@@ -1,6 +1,7 @@
 package com.epam.lab.buyit.controller.web.servlet;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -50,17 +51,20 @@ public class BuyItServeServlet extends HttpServlet {
 		serve(request, response);
 	}
 
-	private void serve(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void serve(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 
 		int idProduct = Integer.parseInt(request.getParameter("id_product"));
 		int count = Integer.parseInt(request.getParameter("quantity"));
-		
+
 		try {
 			if (!successServe(idProduct, count, request)) {
-				int realCount = auctionService.getByProductId(idProduct).getCount();
+				int realCount = auctionService.getByProductId(idProduct)
+						.getCount();
 				if (realCount == 0 || realCount < count) {
 					LOGGER.warn("Buy It query was failed");
-					request.setAttribute("queryFail", "Sorry, someone ahead you");
+					request.setAttribute("queryFail",
+							"Sorry, someone ahead you");
 				} else {
 					successServe(idProduct, realCount, request);
 				}
@@ -73,43 +77,48 @@ public class BuyItServeServlet extends HttpServlet {
 			request.setAttribute("wrongCountException", true);
 		} catch (ParticipationInOwnAuctionException e) {
 			LOGGER.warn(e);
-			request.setAttribute("participateInOwnAuction", "You can't buy own product");
-		}
-		finally {
-			request.getRequestDispatcher("deal_information").forward(request, response);
+			request.setAttribute("participateInOwnAuction",
+					"You can't buy own product");
+		} finally {
+			request.getRequestDispatcher("deal_information").forward(request,
+					response);
 		}
 	}
 
-	private boolean successServe(int idProduct, int count, HttpServletRequest request) 
-			throws AuctionAllreadyClosedException, WrongProductCountException, ParticipationInOwnAuctionException {
-		
+	private boolean successServe(int idProduct, int count,
+			HttpServletRequest request) throws AuctionAllreadyClosedException,
+			WrongProductCountException, ParticipationInOwnAuctionException {
 		boolean result = false;
-		
 		if (auctionService.buyItServe(idProduct, count)) {
-			
 			Product product = productService.getItemById(idProduct);
-			
 			User user = (User) request.getSession(false).getAttribute("user");
-			if(product.getUserId() == user.getIdUser())
-				throw new ParticipationInOwnAuctionException("Try to participate in own auction");
-			
+			if (product.getUserId() == user.getIdUser())
+				throw new ParticipationInOwnAuctionException(
+						"Try to participate in own auction");
 			Auction auction = auctionService.getByProductId(idProduct);
 			User seller = userService.getItemById(product.getUserId());
 			User buyer = (User) request.getSession(false).getAttribute("user");
-			Bid bid = BidBuilder.build(auction.getIdAuction(), buyer.getIdUser(), auction.getBuyItNow());
-			bidService.createItem(bid);
-
-			emailMessageBuilder.sendProductSoldOnBuyItNowForm(seller, product, buyer, count);
+			Bid newBid = BidBuilder.build(auction.getIdAuction(),
+					buyer.getIdUser(), auction.getBuyItNow());
+			Bid bid = bidService.getUserBid(buyer.getIdUser(),
+					auction.getIdAuction());
+			if (bid == null) {
+				bidService.createItem(newBid);
+			} else {
+				bid.setAmount(auction.getBuyItNow());
+				bid.setTime(new Timestamp(System.currentTimeMillis()));
+				bidService.updateItem(bid);
+			}
+			emailMessageBuilder.sendProductSoldOnBuyItNowForm(seller, product,
+					buyer, count);
 			emailMessageBuilder.sendBuyItNowForm(seller, product, buyer, count);
-
 			request.setAttribute("product", product);
 			request.setAttribute("actionMessage", "You bought");
-			request.setAttribute("bidAmount", bid.getAmount());
+			request.setAttribute("bidAmount", newBid.getAmount());
 			request.setAttribute("count", count);
 			LOGGER.info("Successful purchase");
 			result = true;
 		}
 		return result;
 	}
-
 }

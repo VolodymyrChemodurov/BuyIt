@@ -15,7 +15,11 @@ import com.epam.lab.buyit.model.User;
 
 public class ChangePasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	UserServiceImpl userService = new UserServiceImpl();
+	private UserServiceImpl userService;
+
+	public void init() {
+		userService = new UserServiceImpl();
+	}
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -27,7 +31,7 @@ public class ChangePasswordServlet extends HttpServlet {
 			response.sendRedirect("userProfile");
 		}
 	}
-	
+
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();

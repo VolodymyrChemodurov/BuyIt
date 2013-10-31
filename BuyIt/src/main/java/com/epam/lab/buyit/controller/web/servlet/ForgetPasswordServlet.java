@@ -18,16 +18,19 @@ public class ForgetPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger
 			.getLogger(ForgetPasswordServlet.class);
+	private UserServiceImpl userService;
+	private EmailMessageBuilder emailMessageBuilder;
+
+	public void init() {
+		userService = new UserServiceImpl();
+		emailMessageBuilder = new EmailMessageBuilder();
+	}
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
-
-		UserServiceImpl userService = new UserServiceImpl();
 		User user = userService.getUserByLogin(login);
-
 		if (user != null) {
-			EmailMessageBuilder emailMessageBuilder = new EmailMessageBuilder();
 			String newPassword = Integer.toString(new Random(System
 					.currentTimeMillis()).nextInt(999999 - 100000) + 100000);
 			if (userService.changePasswordByUserId(user.getIdUser(),

@@ -16,13 +16,18 @@ import com.epam.lab.buyit.model.User;
 
 public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private UserServiceImpl userService;
+	private EmailMessageBuilder emailMessageBuilder;
+
+	public void init() {
+		userService = new UserServiceImpl();
+		emailMessageBuilder = new EmailMessageBuilder();
+	}
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String[]> inputRegistrationValues = request
 				.getParameterMap();
-		UserServiceImpl userService = new UserServiceImpl();
-		EmailMessageBuilder emailMessageBuilder = new EmailMessageBuilder();
 		if (UserValidation.checkingInput(inputRegistrationValues)) {
 			if ((request.getParameter("adminRole") != null)
 					&& (request.getParameter("adminRole").equalsIgnoreCase("1"))) {

@@ -1,7 +1,6 @@
 package com.epam.lab.buyit.controller.web.servlet;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,7 +15,6 @@ import com.epam.lab.buyit.controller.utils.comparator.BidHistoryComparator;
 import com.epam.lab.buyit.model.Category;
 import com.epam.lab.buyit.model.Product;
 import com.epam.lab.buyit.model.User;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 public class ProductDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

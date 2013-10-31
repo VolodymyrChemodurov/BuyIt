@@ -24,10 +24,14 @@ import com.epam.lab.buyit.model.Product;
 
 public class UserRestoreProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private ProductServiceImpl productService;
+
+	public void init() {
+		productService = new ProductServiceImpl();
+	}
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		ProductServiceImpl productService = new ProductServiceImpl();
 		int id = Integer.parseInt(request.getParameter("productId"));
 		Product product = productService.getItemById(id);
 		request.setAttribute("currentProduct", product);
@@ -37,7 +41,6 @@ public class UserRestoreProductServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		ProductServiceImpl productService = new ProductServiceImpl();
 		request.setCharacterEncoding("utf-8");
 		List<FileItem> items = parseRequest(request);
 		Map<String, String[]> inputValues = getParametersMap(items);

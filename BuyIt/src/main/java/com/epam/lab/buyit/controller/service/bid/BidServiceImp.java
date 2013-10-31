@@ -81,9 +81,4 @@ public class BidServiceImp implements BidService {
 	public Bid getUserBid(int userId, int auctionId) {
 		return bidDAO.getUserBid(userId, auctionId);
 	}
-
-	@Override
-	public boolean updateBid(double amount, int userId, int auctionId) {
-		return bidDAO.updateBid(amount, userId, auctionId);
-	}
 }

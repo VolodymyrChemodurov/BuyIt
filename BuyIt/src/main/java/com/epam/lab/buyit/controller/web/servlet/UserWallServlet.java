@@ -23,25 +23,29 @@ public class UserWallServlet extends HttpServlet {
 	private UserService userService;
 	private RatingService ratingService;
 	private MessageClientWebService messageService;
-	
+
 	public void init() {
 		userService = new UserServiceImpl();
 		ratingService = new RatingServiceImpl();
 		messageService = new MessageClientWebService();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		Map<User, Message> comments = new LinkedHashMap<User, Message>();
 		int userId = Integer.parseInt(request.getParameter("id"));
 		List<Message> messages = messageService.getMessagesByUserId(userId);
-		for(Message currentMessage: messages) {
-			comments.put(userService.getItemById(currentMessage.getFromUserId()), currentMessage);
+		for (Message currentMessage : messages) {
+			comments.put(
+					userService.getItemById(currentMessage.getFromUserId()),
+					currentMessage);
 		}
-		
+
 		request.setAttribute("userRating", ratingService.getUserRating(userId));
 		request.setAttribute("userInfo", userService.getItemById(userId));
 		request.setAttribute("messages", comments);
-		request.getRequestDispatcher("user_wall.jsp").forward(request, response);
+		request.getRequestDispatcher("user_wall.jsp")
+				.forward(request, response);
 	}
-	
+
 }

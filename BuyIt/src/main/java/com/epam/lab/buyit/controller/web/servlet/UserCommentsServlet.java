@@ -10,23 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
 import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
-import com.epam.lab.buyit.controller.web.client.MessageClientWebService;
 import com.epam.lab.buyit.model.Message;
-import com.epam.lab.buyit.model.Product;
 import com.epam.lab.buyit.model.User;
 
 public class UserCommentsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	UserServiceImpl userService;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProductServiceImpl productService = new ProductServiceImpl();
-		UserServiceImpl userService = new UserServiceImpl();
+	public void init() {
+		userService = new UserServiceImpl();
+	}
+
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		User user = (User) request.getSession().getAttribute("user");
 		// List<Message> commentsList = new
 		// MessageClientWebService().getMessagesByUserId(user.getIdUser());
@@ -42,9 +39,11 @@ public class UserCommentsServlet extends HttpServlet {
 			}
 		}
 
-		request.getSession().setAttribute("users", userService.getAllItemsWeek());
+		request.getSession().setAttribute("users",
+				userService.getAllItemsWeek());
 		request.getSession().setAttribute("userComments", commentsList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("userComments");
+		RequestDispatcher dispatcher = request
+				.getRequestDispatcher("userComments");
 		dispatcher.forward(request, response);
 
 	}
