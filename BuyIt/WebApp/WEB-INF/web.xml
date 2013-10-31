@@ -299,7 +299,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>HomePage</servlet-name>
-    <url-pattern>/homePage</url-pattern>
+    <url-pattern>/index</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>NavbarLogin</servlet-name>

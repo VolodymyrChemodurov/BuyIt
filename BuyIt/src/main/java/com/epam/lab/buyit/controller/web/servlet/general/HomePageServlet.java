@@ -35,7 +35,7 @@ public class HomePageServlet extends HttpServlet {
 		session.setAttribute("latestProducts",
 				productService.getLatestProducts(8));
 		session.setAttribute("region", RegionCreator.getRegionList());
-		response.sendRedirect("homePage");
+		response.sendRedirect("index");
 
 	}
 
