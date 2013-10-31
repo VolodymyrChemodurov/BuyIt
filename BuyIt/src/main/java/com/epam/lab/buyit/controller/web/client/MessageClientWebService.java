@@ -6,14 +6,13 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.core.UriBuilder;
-
 import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.epam.lab.buyit.controller.creator.MessageCreator;
+import com.epam.lab.buyit.controller.utils.WebServicesPropertiesGetter;
 import com.epam.lab.buyit.model.Message;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -26,7 +25,7 @@ public class MessageClientWebService {
 	private static URI baseUri;
 	
 	static {
-		baseUri = UriBuilder.fromUri("http://192.168.12.220:8080/memorium/buyIt/").build();
+			baseUri = WebServicesPropertiesGetter.getForumBaseURI();
 	}
 
 	public List<Message> getMessagesByUserId(int id) {

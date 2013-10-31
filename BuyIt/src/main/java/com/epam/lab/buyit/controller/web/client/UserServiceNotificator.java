@@ -2,14 +2,13 @@ package com.epam.lab.buyit.controller.web.client;
 
 import java.net.URI;
 
-import javax.ws.rs.core.UriBuilder;
-
 import org.codehaus.jettison.json.JSONObject;
 
 import com.epam.lab.buyit.controller.jsonbuilder.JSONBuilder;
 import com.epam.lab.buyit.controller.jsonbuilder.adapters.UserSerializationAdapter;
 import com.epam.lab.buyit.controller.service.user.UserService;
 import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
+import com.epam.lab.buyit.controller.utils.WebServicesPropertiesGetter;
 import com.epam.lab.buyit.model.User;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -21,7 +20,7 @@ public class UserServiceNotificator {
 	private UserService userService;
 	
 	static {
-		baseUri = UriBuilder.fromUri("http://192.168.12.220:8080/memorium/buyIt/").build();
+		baseUri = WebServicesPropertiesGetter.getForumBaseURI();
 	}
 	
 	public UserServiceNotificator() {

@@ -1,9 +1,7 @@
 package com.epam.lab.buyit.controller.web.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -23,29 +21,19 @@ import com.epam.lab.buyit.controller.jsonbuilder.JSONBuilder;
 import com.epam.lab.buyit.controller.jsonbuilder.adapters.UserListSerializationAdapter;
 import com.epam.lab.buyit.controller.jsonbuilder.adapters.UserSerializationAdapter;
 import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
+import com.epam.lab.buyit.controller.utils.WebServicesPropertiesGetter;
 import com.epam.lab.buyit.controller.validator.UserValidation;
 import com.epam.lab.buyit.model.User;
 
 @Path("/user")
 public class UserWebService {
 	private static final Logger LOGGER = Logger.getLogger(UserWebService.class);
-	private static String LOGIN, PASSWORD;
-	private static final String propFilePath = "web-services.properties";
+	private static final String LOGIN, PASSWORD;
 	private UserServiceImpl userService;
 
 	static {
-		Properties prop = new Properties();
-		LOGGER.info("Loading web-services properties...");
-		try {
-			prop.load(UserWebService.class.getClassLoader()
-					.getResourceAsStream(propFilePath));
-			LOGIN = prop.getProperty("user.login");
-			PASSWORD = prop.getProperty("user.password");
-			LOGGER.info("Web-services properties loading complete.");
-		} catch (IOException e) {
-			LOGGER.error(e);
-			LOGIN = PASSWORD = "";
-		}
+		LOGIN = WebServicesPropertiesGetter.getForumClientLogin();
+		PASSWORD = WebServicesPropertiesGetter.getForumClientPassword();
 	}
 
 	public UserWebService() {
