@@ -30,7 +30,7 @@ public class LoginFilter implements Filter {
 		User user = (User) httpRequest.getSession(false).getAttribute("user");
 		if (user == null) {
 			httpRequest.setAttribute("message", "You must login first");
-			request.setAttribute("messageColor", "green");
+			request.setAttribute("messageColor", "red");
 			createReturnLink(httpRequest);
 			httpRequest.getRequestDispatcher("login_form").forward(httpRequest, httpResponse);
 		} else {

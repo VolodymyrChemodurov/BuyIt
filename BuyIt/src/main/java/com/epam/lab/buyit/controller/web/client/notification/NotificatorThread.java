@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.controller.web.client;
+package com.epam.lab.buyit.controller.web.client.notification;
 
 import java.net.URI;
 
@@ -7,33 +7,34 @@ import org.codehaus.jettison.json.JSONObject;
 import com.epam.lab.buyit.controller.jsonbuilder.JSONBuilder;
 import com.epam.lab.buyit.controller.jsonbuilder.adapters.UserSerializationAdapter;
 import com.epam.lab.buyit.controller.service.user.UserService;
-import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
 import com.epam.lab.buyit.controller.utils.WebServicesPropertiesGetter;
 import com.epam.lab.buyit.model.User;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
-public class UserServiceNotificator {
-	private static URI baseUri;
+class NotificatorThread extends Thread {
+	private static final URI BASE_URI;
+	private static final Client CLIENT;
 	private UserService userService;
+	private int id;
 	
 	static {
-		baseUri = WebServicesPropertiesGetter.getForumBaseURI();
+		BASE_URI = WebServicesPropertiesGetter.getForumBaseURI();
+		CLIENT = Client.create(new DefaultClientConfig());
 	}
 	
-	public UserServiceNotificator() {
-		userService = new UserServiceImpl();
+	public NotificatorThread(int userId) {
+		this.id = userId;
 	}
 	
-	public void inform(int id) {
-		ClientConfig config = new DefaultClientConfig();
-		Client client = Client.create(config);
-		WebResource service = client.resource(baseUri);
+	@Override
+	public void run() {
+		WebResource service = CLIENT.resource(BASE_URI);
 		
 		User user = userService.getItemById(id);
 		JSONObject json = JSONBuilder.buildJSONObject(user, new UserSerializationAdapter());
 		service.path("/update").queryParam("user", json.toString()).post();
 	}
+
 }
