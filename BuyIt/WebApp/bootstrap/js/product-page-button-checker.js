@@ -31,7 +31,8 @@ $(document).ready(function() {
 				var placeBidButton = $('#placeBidButton');
 				var currentPrice = document.getElementById("currentBid").value;
 				var bid = $('#bidInput').attr('value');
-				if ((parseInt(currentPrice) >= parseInt(bid))|(($.isNumeric(currentPrice)))) {
+
+				if ((parseInt(currentPrice) >= parseInt(bid))|(!($.isNumeric(bid)))) {
 					placeBidButton.attr("disabled", "disabled");
 					placeBidButton.addClass('dis');
 					placeBidButton.attr('tabindex', '-1');
@@ -39,14 +40,13 @@ $(document).ready(function() {
 					placeBidButton.removeAttr("disabled");
 					placeBidButton.removeClass('dis');
 				}
-
 			});
 
 			$('#quantityInput').change(function() {
 				var count = $('#count').val();
 				console.log("count: " + count);
 				var quantity = $('#quantityInput').val();
-				if ((parseInt(quantity) > parseInt(count))|(parseInt(quantity) < 1)|(($.isNumeric(count)))){
+				if ((parseInt(quantity) > parseInt(count))|(parseInt(quantity) < 1)|(!($.isNumeric(quantity)))){
 					$('#buyItButton').attr("disabled", "disabled");
 					$('#buyItButton').addClass('dis');
 					$('#buyItButton').attr('tabindex', '-1');
