@@ -38,7 +38,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("input").each(function() {
+		$("button").each(function() {
 			if (this.id == "banned") {
 				this.disabled = true;
 				this.type = "hidden";
@@ -113,12 +113,17 @@
 										<td>
 											<form method="post" action="adminPageServlet">
 												<input type="hidden" value="${user.idUser}" name="idUsr" />
-												<input class="btn btn-success" style="padding: 0 4px 0 4px;"
-													id="${user.ban}" type="submit" name="button" value="bann" />
+<!-- 												<input class="btn btn-success" style="width:60px; padding: 0 4px 0 4px;" -->
+<%-- 													id="${user.ban}" type="submit" name="button" value="bann" /> --%>
+												<button class="btn btn-success" style="width:60px; padding: 0 4px 0 4px;"
+													id="${user.ban}" type="submit" name="button" value="bann" >bann</button>
 												<input type="hidden" value="${user.idUser}" name="idUsr" />
-												<input class="btn btn-danger" style="padding: 0 4px 0 4px;"
+<!-- 												<input class="btn btn-danger" style="width:60px; padding: 0 4px 0 4px;" -->
+<%-- 													id="u${user.ban}" type="submit" name="button" --%>
+<!-- 													value="unbann" /> -->
+												<button class="btn btn-danger" style="width:60px; padding: 0 4px 0 4px;"
 													id="u${user.ban}" type="submit" name="button"
-													value="unbann" />
+													value="unbann">unbann</button>
 											</form>
 										</td>
 									</tr>
@@ -139,7 +144,7 @@
 	</div>
 
 
-	<div style="height: 330px;"></div>
+	<div style="height: 30px;"></div>
 
 
 

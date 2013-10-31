@@ -3,13 +3,9 @@ package com.epam.lab.buyit.controller.creator;
 import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-
-import com.epam.lab.buyit.controller.setters.MessageSetter;
 import com.epam.lab.buyit.model.Message;
 
 public class MessageCreator {
-
 	private final static Logger LOGGER = Logger.getLogger(MessageCreator.class);
 
 	public Message create(JSONArray json) {

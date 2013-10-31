@@ -36,7 +36,7 @@ $(window).load(function() {
 		console.log(height);
 		
 		if (!flag) {
-			$(this).css('margin-top', 160 - Math.ceil(height));
+			$(this).css('margin-top', 160 - Math.floor(height));
 		}
 		$(this).parent().parent().css('visibility', 'visible');
 		flag = false;

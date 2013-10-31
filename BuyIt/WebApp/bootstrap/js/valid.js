@@ -124,7 +124,7 @@ function validateBuyNowPrice(fld) {
 	var error = "";
 	if ($("#buyNowCheck").prop("checked")) {
 		if ($("#auctionCheck").prop("checked")){
-			if ($("#startPrice").val() >= fld){
+			if ($("#startPrice").val() <= fld){
 				error = "Buy Now Price must be bigger than Start Price.";
 			}
 		}

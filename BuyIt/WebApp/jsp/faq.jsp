@@ -46,59 +46,58 @@
 				<div class="accordion-heading">
 					<h4>
 						<a class="accordion-toggle collapsed" data-toggle="collapse"
-							data-parent="#accordion2" href="#collapseOne"> What is Star
-							Wars? </a>
+							data-parent="#accordion2" href="#collapseOne"> What should I
+							sell? </a>
 					</h4>
 				</div>
 				<div id="collapseOne" class="accordion-body collapse">
-					<div class="accordion-inner">Star Wars is an American epic
-						space opera franchise centered on a film series created by George
-						Lucas. The film series has spawned an extensive media franchise
-						called the Expanded Universe including books, television series,
-						computer and video games, and comic books. These supplements to
-						the two film trilogies have resulted in significant development of
-						the series' fictional universe. These media kept the franchise
-						active in the interim between the film trilogies. The franchise
-						depicts a galaxy described as far, far away in the distant past,
-						and it commonly portrays Jedi as a representation of good, in
-						conflict with the Sith, their evil counterpart. Their weapon of
-						choice, the lightsaber, is commonly recognized in popular culture.
-						The fictional universe also contains many themes, especially
-						influences of philosophy and religion.</div>
+					<div class="accordion-inner">It's true that you can sell (or
+						buy) almost anything on BuyIt, and we're willing to bet that most
+						houses have literally dozens of items lying around unused. If
+						you're stuck for ideas, visit our BuyIt House and see what you
+						think will sell.</div>
 				</div>
 			</div>
 			<div class="accordion-group">
 				<div class="accordion-heading">
 					<h4>
 						<a class="accordion-toggle" data-toggle="collapse"
-							data-parent="#accordion2" href="#collapseTwo"> Who is Dart
-							Vader? </a>
+							data-parent="#accordion2" href="#collapseTwo"> How long will
+							it take to sell? </a>
 					</h4>
 				</div>
 				<div id="collapseTwo" class="accordion-body collapse">
-					<div class="accordion-inner">Darth Vader, (born Anakin
-						Skywalker), is the central character of the Star Wars
-						saga,[1][2][3] appearing as one of the main antagonists of the
-						original trilogy and as one of the main protagonists of the
-						prequel trilogy. The character was created by George Lucas and
-						numerous actors have portrayed him. His appearances span all six
-						Star Wars films, and he is an important character in the expanded
-						universe of television series, video games, novels, literature and
-						comic books.</div>
+					<div class="accordion-inner">How long it takes to sell very
+						much depends on how long you set your auction for - one, three,
+						five, seven or ten days. Some items and categories attract bidders
+						straight away - to be honest, it's the age-old rule of supply and
+						demand. However, what you can do is make sure your item stands out
+						from the crowds - have a great descriptive title that will work
+						well in search results, make sure you take a good, clear picture
+						and consider using the gallery feature - this means a photograph
+						will appear next to your listing in search results, making it even
+						more eye-catching. Write a comprehensive item description, and
+						above all be honest - make sure you describe the condition
+						accurately.</div>
 				</div>
 			</div>
 			<div class="accordion-group">
 				<div class="accordion-heading">
 					<h4>
 						<a class="accordion-toggle collapsed" data-toggle="collapse"
-							data-parent="#accordion2" href="#collapseThree"> Who is
-							Chewbacca? </a>
+							data-parent="#accordion2" href="#collapseThree"> How much
+							will I get? </a>
 					</h4>
 				</div>
 				<div id="collapseThree" class="accordion-body collapse">
-					<div class="accordion-inner">Chewbacca, also known as Chewie,
-						is a fictional character in the Star Wars franchise, portrayed by
-						Peter Mayhew</div>
+					<div class="accordion-inner">The million dollar question!
+						Again, how much you get for an item depends on the quality, age,
+						and condition of the item, as well as to some extent, supply and
+						demand - the desirability of the item, plus how many other similar
+						items are available in the marketplace at the same time. You can
+						search our completed listings to get an idea of how much similar
+						items have been fetching in recent auctions. This is also a good
+						idea when you are thinking of setting your starting price.</div>
 				</div>
 			</div>
 
@@ -106,17 +105,21 @@
 				<div class="accordion-heading">
 					<h4>
 						<a class="accordion-toggle collapsed" data-toggle="collapse"
-							data-parent="#accordion2" href="#collapseFour"> Who is Yoda?
-						</a>
+							data-parent="#accordion2" href="#collapseFour"> What starting
+							price should I set? </a>
 					</h4>
 				</div>
 				<div id="collapseFour" class="accordion-body collapse">
-					<div class="accordion-inner">Yoda is a character in the Star
-						Wars universe, first appearing in the 1980 film Star Wars Episode
-						V: The Empire Strikes Back. In the original films, he trains Luke
-						Skywalker to fight against the evil Galactic Empire. In the
-						prequel films, he serves as the Grand Master of the Jedi Order and
-						as a high-ranking general in the Clone Wars</div>
+					<div class="accordion-inner">This is obviously up to you, but
+						experience has shown that items with lower starting prices tend to
+						attract more bids. This is because buyers find the auction more
+						attractive as they are tempted by the possibility of a bargain.
+						1.0$ is a common starting price, even for higher priced items, and
+						what you will usually find is that the market sets a fair price.
+						However, in order to avoid disappointment you obviously need to be
+						sure that you are willing to part with the item if it does not
+						reach your desired price and if it is of very high value, you
+						could consider setting a reserve.</div>
 				</div>
 			</div>
 
@@ -124,17 +127,19 @@
 				<div class="accordion-heading">
 					<h4>
 						<a class="accordion-toggle collapsed" data-toggle="collapse"
-							data-parent="#accordion2" href="#collapseFive"> Why is Star
-							Wars so popular? </a>
+							data-parent="#accordion2" href="#collapseFive"> What is a
+							reserve? </a>
 					</h4>
 				</div>
 				<div id="collapseFive" class="accordion-body collapse">
-					<div class="accordion-inner">It is very popular because when
-						it was first made it was something original, something brand new
-						and nobody had ever seen it before. Also it contains everything
-						that makes a good film. It has a good Circle of Equilibrium and
-						Contains all the Vladimir Propp Stock characters. the movie is
-						also a sci-fi futuristic movie that fit the times</div>
+					<div class="accordion-inner">Reserves, as in the normal
+						auction world, set a price under which the item will not sell.
+						Buyers do not know how much the reserve is, but they will know
+						that you have set one, and bear in mind that in many lower price
+						and non-collectable categories, this can put buyers off. Reserves
+						are probably best used in high-value, collectable categories, as
+						they are in the normal auction world. Please note that there are
+						fees associated with setting a reserve.</div>
 				</div>
 			</div>
 
@@ -142,12 +147,22 @@
 				<div class="accordion-heading">
 					<h4>
 						<a class="accordion-toggle collapsed" data-toggle="collapse"
-							data-parent="#accordion2" href="#collapseSix">
-							Why LIGHTSABER? </a>
+							data-parent="#accordion2" href="#collapseSix"> How do I know
+							my buyer will pay? </a>
 					</h4>
 				</div>
 				<div id="collapseSix" class="accordion-body collapse">
-					<div class="accordion-inner">The lightsaber is the weapon of a Jedi, an elegant weapon of a more civilized age. In comparison, blasters are crude, inaccurate and loud affairs. To carry a lightsaber is an example of incredible skill and confidence, dexterity and attunement to the Force. In the hands of a Jedi, a lightsaber is almost unstoppable. It can be used to cut through blast doors or enemies alike. Using the Force, a Jedi can predict and deflect incoming blaster bolts, and reflect them back at the firer.</div>
+					<div class="accordion-inner">Hundreds of millions of people
+						buy and sell on eBay every day, and the vast majority of them are
+						honest, just like you! You can check out a buyer's reputation,
+						just as you can a seller's - remember to read the comments as well
+						as looking at the % score. In addition, you can set your
+						preferences to exclude certain types of buyers - those with
+						negative scores, for example, or less than 10 feedback. We advise
+						you to think very carefully before you do this, however, as it
+						does limit the number of buyers who will bid on your items. Also,
+						everyone has to start somewhere, just as you did, and inexperience
+						isn't an indication that a buyer won't pay.</div>
 				</div>
 			</div>
 		</div>

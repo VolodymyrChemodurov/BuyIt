@@ -18,8 +18,7 @@ import com.epam.lab.buyit.controller.web.client.ImageClientWebService;
 import com.epam.lab.buyit.model.User;
 
 public class ChangeAvatarServlet extends HttpServlet {
-	private static final Logger LOGGER = Logger
-			.getLogger(ChangeAvatarServlet.class);
+	private static final Logger LOGGER = Logger.getLogger(ChangeAvatarServlet.class);
 	private static final long serialVersionUID = 1L;
 	private UserServiceImpl userService;
 	private ImageClientWebService imageClientWebService;
@@ -31,7 +30,12 @@ public class ChangeAvatarServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("userProfile");
+		User user = (User) request.getSession().getAttribute("user");
+		if (user.getRole() == true) {
+			response.sendRedirect("adminProfile");
+		} else {
+			response.sendRedirect("userProfile");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request,
@@ -46,6 +50,10 @@ public class ChangeAvatarServlet extends HttpServlet {
 			userService.updateItem(user);
 			LOGGER.info("update successful");
 		}
-		response.sendRedirect("userProfile");
+		if (user.getRole() == true) {
+			response.sendRedirect("adminProfile");
+		} else {
+			response.sendRedirect("userProfile");
+		}
 	}
 }
