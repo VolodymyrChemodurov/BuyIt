@@ -71,11 +71,13 @@ public class MessageClientWebService {
 			object.put("reciverMessageId", message.getToUserId());
 			
 			String encodedJson = URLEncoder.encode(object.toString(), "UTF-8");
-			String path = baseUri.toString() + "message/new?message=" + encodedJson;
+			//String path = baseUri.toString() + "message/new?message=" + encodedJson;
 			
-			LOGGER.info("Sending to " + path);
+			//LOGGER.info("Sending to " + path);
 			
-			ClientResponse resp = service.get(ClientResponse.class);
+			ClientResponse resp = service.path("message").path("new")
+					.queryParam("message", encodedJson)
+					.post(ClientResponse.class);
 			String serviceResponse = resp.getEntity(String.class);
 			result = Boolean.parseBoolean(serviceResponse);
 			
