@@ -31,7 +31,7 @@ $(document).ready(function() {
 				var placeBidButton = $('#placeBidButton');
 				var currentPrice = document.getElementById("currentBid").value;
 				var bid = $('#bidInput').attr('value');
-				if ((parseInt(currentPrice) >= parseInt(bid))|(($.isNumeric(bid)))) {
+				if ((parseInt(currentPrice) >= parseInt(bid))|(($.isNumeric(currentPrice)))) {
 					placeBidButton.attr("disabled", "disabled");
 					placeBidButton.addClass('dis');
 					placeBidButton.attr('tabindex', '-1');
