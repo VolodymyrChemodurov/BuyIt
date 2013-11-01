@@ -62,7 +62,8 @@ public class CreateCategoryServlet extends HttpServlet {
 	private void createNewSubCategory(HttpServletRequest request, boolean flag,
 			int selectedCtgr) {
 		String selectedSub = request.getParameter("subCategoryCreate");
-		List<SubCategory> subCategoryList = creator.getAllSubItems();
+		Category category = creator.getItemById(selectedCtgr);
+		List<SubCategory> subCategoryList = creator.getAllSubItems(category.getIdCategory());
 		for (SubCategory subCategory : subCategoryList) {
 			if (selectedSub.equalsIgnoreCase(subCategory.getName())) {
 				flag = true;
@@ -71,7 +72,6 @@ public class CreateCategoryServlet extends HttpServlet {
 			}
 		}
 		if (flag == false) {
-			Category category = creator.getItemById(selectedCtgr);
 			SubCategory subCategory = new SubCategory();
 			subCategory.setName(selectedSub).setCategoryId(
 					category.getIdCategory());
