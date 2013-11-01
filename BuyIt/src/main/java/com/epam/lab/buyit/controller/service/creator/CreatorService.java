@@ -10,6 +10,6 @@ public interface CreatorService extends GenericService<Category> {
 
 	SubCategory createSubCategory(SubCategory item);
 
-	List<SubCategory> getAllSubItems();
+	List<SubCategory> getAllSubItems(int id_product);
 
 }

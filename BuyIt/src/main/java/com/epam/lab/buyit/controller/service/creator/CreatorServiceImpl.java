@@ -43,8 +43,8 @@ public class CreatorServiceImpl implements CreatorService {
 	}
 
 	@Override
-	public List<SubCategory> getAllSubItems() {
-		return subCategoryService.getAllItems();
+	public List<SubCategory> getAllSubItems(int id_category) {
+		return subCategoryService.getAllItemsByCategoryId(id_category);
 	}
 
 }
