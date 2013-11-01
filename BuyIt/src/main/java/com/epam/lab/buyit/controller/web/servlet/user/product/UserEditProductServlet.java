@@ -37,37 +37,25 @@ public class UserEditProductServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		ProductServiceImpl productService = new ProductServiceImpl();
 		request.setCharacterEncoding("utf-8");
-		
+
 		List<FileItem> items = parseRequest(request);
 		Map<String, String[]> inputValues = getParametersMap(items);
 		int idTemp = Integer.parseInt(inputValues.get("productId")[0]);
 		List<Image> list = productService.getItemById(idTemp).getDescription()
 				.getItemPhotos();
-		
+
 		Product product = productService.getItemById(idTemp);
 		List<FileItem> fileItems = getFileItems(items);
-		product = ProductSetter.uploadingImages(product, fileItems);
+		String temp1 = fileItems.get(0).getName();
+		if (!fileItems.get(0).getName().isEmpty()) {
+			product = ProductSetter.uploadingImages(product, fileItems);
+		}
 		product = ProductSetter.setDescriptionFields(product, inputValues);
 		for (Image temp : list) {
 			product.getDescription().setItemPhoto(temp);
 		}
 		productService.updateByProductId(product);
 		response.sendRedirect("productDetails?id=" + product.getIdProduct());
-//		// System.out.println(inputValues.keySet());
-//		
-//
-//		if (ProductValidation.checkingInputValues(inputValues)) {
-//			Product product = new ProductCreator().create(inputValues);
-//			
-//			for (Image temp : list) {
-//				product.getDescription().setItemPhoto(temp);
-//			}
-//			int id = productService.createItem(product).getIdProduct();
-//			response.sendRedirect("productDetails?id=" + id);
-//		} else {
-//			response.sendRedirect("userRestoreProduct?productId="
-//					+ inputValues.get("productId")[0]);
-//		}
 	}
 
 }
