@@ -72,7 +72,6 @@ public class CreateCategoryServlet extends HttpServlet {
 			}
 		}
 		if (flag == false) {
-//			Category category = creator.getItemById(selectedCtgr);
 			SubCategory subCategory = new SubCategory();
 			subCategory.setName(selectedSub).setCategoryId(
 					category.getIdCategory());
