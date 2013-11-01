@@ -37,6 +37,8 @@
 	cursor: default;
 	disabled: disabled;
 }
+
+
 </style>
 </head>
 
@@ -83,8 +85,8 @@
 									<div id="gallery" class="span3" style="text-align: center">
 										<a
 											href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
-											title="<c:out value="${product.name }" />"> <img
-											class="my-image"
+											title="<c:out value="${product.name }" />"> <img 
+											class="my-image" style="visibility: hidden;"
 											src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
 											alt="<c:out value="${product.name }" />">
 
@@ -99,7 +101,7 @@
 											href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
 											title="<c:out value="${product.name }" />"><div
 												style="height: 250px; text-align: center">
-												<img class="my-image"
+												<img class="my-image" style="visibility: hidden;"
 													src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
 													alt="<c:out value="${product.name }" />">
 											</div> </a>
@@ -114,7 +116,7 @@
 
 														<a href="${image.path}">
 															<div style="display: inline; width: 81px">
-																<img class="my-image-mini" src="${image.path}" alt=""
+																<img class="my-image-mini" style="visibility: hidden;" src="${image.path}" alt=""
 																	style="visibility: hidden" />
 															</div>
 														</a>
@@ -136,7 +138,7 @@
 										<a
 											href="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
 											title="<c:out value="${product.name }" />"> <img
-											class="my-image"
+											class="my-image" style="visibility: hidden;"
 											src="<c:out value="${product.description.itemPhotos[0].path}"></c:out>"
 											alt="<c:out value="${product.name }" />">
 
@@ -149,7 +151,7 @@
 												<div class="item active">
 													<c:forEach var="image" begin="1" end="3"
 														items="${product.description.itemPhotos }">
-														<a href="${image.path}"> <img class="my-image-mini"
+														<a href="${image.path}"> <img class="my-image-mini" style="visibility: hidden;"
 															src="${image.path}" alt="" /></a>
 													</c:forEach>
 												</div>
@@ -157,7 +159,7 @@
 												<div class="item">
 													<c:forEach var="image" begin="4"
 														items="${product.description.itemPhotos }">
-														<a href="${image.path}"> <img style="width: 29%"
+														<a href="${image.path}"> <img style="width: 29%" style="visibility: hidden;"
 															src="${image.path}" alt="" /></a>
 													</c:forEach>
 
