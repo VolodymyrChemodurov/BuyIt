@@ -13,9 +13,6 @@ import com.epam.lab.buyit.controller.setters.UserSetter;
 import com.epam.lab.buyit.controller.validator.UserValidation;
 import com.epam.lab.buyit.model.User;
 
-/**
- * Servlet implementation class UserPageServlet
- */
 public class UserPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

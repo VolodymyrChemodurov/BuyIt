@@ -7,37 +7,27 @@ $(window).load(function() {
 		
 		var width = $(this).width();
 		var height = $(this).height();
-		var flag = false;
-		
-		console.log(this);
-		console.log(width);
-		console.log(height);
 		
 		if (width > maxWidth) {
 			ratio = maxWidth / width;
-			$(this).css("width", maxWidth);
-			$(this).css("height", height * ratio);
-			
 			height = height * ratio;
-			width = width * ratio;
-			flag = true;
+			width = maxWidth;
+			
+			$(this).css("width", width);
+			$(this).css("height", height);
+			
 		}
 
 		if (height > maxHeight) {
 			ratio = maxHeight / height;
-			$(this).css("height", maxHeight);
-			$(this).css("width", width * ratio);
+			height = maxHeight;
 			width = width * ratio;
-			height = height * ratio;
-			flag = true;
+			
+			$(this).css("height", height);
+			$(this).css("width", width);
 		}
-		console.log(this);
-		console.log(width);
-		console.log(height);
-		
-		if (!flag) {
-			$(this).css('margin-top', 160 - Math.floor(height));
-		}
+
+		$(this).css('margin-top', maxHeight - height);
 		$(this).parent().parent().css('visibility', 'visible');
 		flag = false;
 	});

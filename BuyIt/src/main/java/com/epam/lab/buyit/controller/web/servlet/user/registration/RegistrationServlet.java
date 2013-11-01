@@ -16,31 +16,23 @@ import com.epam.lab.buyit.model.User;
 
 public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private UserServiceImpl userService;
+	private EmailMessageBuilder emailMessageBuilder;
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String[]> inputRegistrationValues = request
 				.getParameterMap();
-		UserServiceImpl userService = new UserServiceImpl();
-		EmailMessageBuilder emailMessageBuilder = new EmailMessageBuilder();
+		userService = new UserServiceImpl();
+		
 		if (UserValidation.checkingInput(inputRegistrationValues)) {
 			if ((request.getParameter("adminRole") != null)
 					&& (request.getParameter("adminRole").equalsIgnoreCase("1"))) {
-				User user = new UserCreator().create(inputRegistrationValues);
-				user.setRole(true);
-				userService.createItem(user);
-				request.setAttribute("message",
-						"Congratulations! Registration was successful");
-				request.setAttribute("messageColor", "green");
+				createUser(inputRegistrationValues, request, true);
 				request.getRequestDispatcher("adminRegistration").forward(
 						request, response);
 			} else {
-				User user = new UserCreator().create(inputRegistrationValues);
-				userService.createItem(user);
-				request.setAttribute("message",
-						"Congratulations! Registration was successful");
-				request.setAttribute("messageColor", "green");
-				emailMessageBuilder.sendSuccessRegistrationForm(user);
+				createUser(inputRegistrationValues, request, false);
 				request.getRequestDispatcher("login_form").forward(request,
 						response);
 			}
@@ -50,7 +42,17 @@ public class RegistrationServlet extends HttpServlet {
 			request.getRequestDispatcher("message_page").forward(request,
 					response);
 		}
-
 	}
 
+	private void createUser(Map<String, String[]> inputRegistrationValues, HttpServletRequest request, boolean role ){
+		User user = new UserCreator().create(inputRegistrationValues);
+		user.setRole(role);
+		userService.createItem(user);
+		request.setAttribute("message",
+				"Congratulations! Registration was successful");
+		request.setAttribute("messageColor", "green");
+		emailMessageBuilder = new EmailMessageBuilder();
+		emailMessageBuilder.sendSuccessRegistrationForm(user);
+	}
+	
 }
