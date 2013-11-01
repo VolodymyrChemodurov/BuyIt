@@ -56,7 +56,7 @@
 						<c:if test="${empty userComments}">
 							<h1 style="text-align: center;">Sorry, but enybody didn't leave comment for you!</h1>
 						</c:if>
-						<c:if test="${not empty userActiveShopping}">
+						<c:if test="${not empty userComments}">
 							<h1>Massages leave for you</h1>
 							<div id="table-wrapper">
 							<div id="table-scroll">
