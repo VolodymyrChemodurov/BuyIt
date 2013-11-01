@@ -87,45 +87,10 @@
 			// Call the function that prepares image exibition
 			_set_image_to_view();
 		}
-		/**
-		 * Create the jQuery lightBox plugin interface
-		 *
-		 * The HTML markup will be like that:
-			<div id="jquery-overlay"></div>
-			<div id="jquery-lightbox">
-				<div id="lightbox-container-image-box">
-					<div id="lightbox-container-image">
-						<img src="../fotos/XX.jpg" id="lightbox-image">
-						<div id="lightbox-nav">
-							<a href="#" id="lightbox-nav-btnPrev"></a>
-							<a href="#" id="lightbox-nav-btnNext"></a>
-						</div>
-						<div id="lightbox-loading">
-							<a href="#" id="lightbox-loading-link">
-								<img src="themes/images/lightbox/lightbox-ico-loading.gif">
-							</a>
-						</div>
-					</div>
-				</div>
-				<div id="lightbox-container-image-data-box">
-					<div id="lightbox-container-image-data">
-						<div id="lightbox-image-details">
-							<span id="lightbox-image-details-caption"></span>
-							<span id="lightbox-image-details-currentNumber"></span>
-						</div>
-						<div id="lightbox-secNav">
-							<a href="#" id="lightbox-secNav-btnClose">
-								<img src="themes/images/lightbox/lightbox-btn-close.gif">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		 *
-		 */
+
 		function _set_interface() {
 			// Apply the HTML markup into body tag
-			$('body').append('<div id="jquery-overlay"></div><div id="jquery-lightbox"><div id="lightbox-container-image-box"><div id="lightbox-container-image"><img id="lightbox-image"><div style="" id="lightbox-nav"><a href="#" id="lightbox-nav-btnPrev"></a><a href="#" id="lightbox-nav-btnNext"></a></div><div id="lightbox-loading"><a href="#" id="lightbox-loading-link"><img src="' + settings.imageLoading + '"></a></div></div></div><div id="lightbox-container-image-data-box"><div id="lightbox-container-image-data"><div id="lightbox-image-details"><span id="lightbox-image-details-caption"></span><span id="lightbox-image-details-currentNumber"></span></div><div id="lightbox-secNav"><a href="#" id="lightbox-secNav-btnClose"><img src="' + settings.imageBtnClose + '"></a></div></div></div></div>');	
+			$('body').append('<div id="jquery-overlay"></div><div id="jquery-lightbox"><div id="lightbox-container-image-box" style><div id="lightbox-container-image"><img id="lightbox-image"><div style="" id="lightbox-nav"><a href="#" id="lightbox-nav-btnPrev"></a><a href="#" id="lightbox-nav-btnNext"></a></div><div id="lightbox-loading"><a href="#" id="lightbox-loading-link"><img src="' + settings.imageLoading + '"></a></div></div></div><div id="lightbox-container-image-data-box"><div id="lightbox-container-image-data"><div id="lightbox-image-details"><span id="lightbox-image-details-caption"></span><span id="lightbox-image-details-currentNumber"></span></div><div id="lightbox-secNav"><a href="#" id="lightbox-secNav-btnClose"><img src="' + settings.imageBtnClose + '"></a></div></div></div></div>');	
 			// Get page sizes
 			var arrPageSizes = ___getPageSize();
 			// Style overlay and show it
@@ -204,8 +169,20 @@
 			var intCurrentWidth = $('#lightbox-container-image-box').width();
 			var intCurrentHeight = $('#lightbox-container-image-box').height();
 			// Get the width and height of the selected image plus the padding
-			var intWidth = (intImageWidth + (settings.containerBorderSize * 2)); // Plus the image큦 width and the left and right padding value
-			var intHeight = (intImageHeight + (settings.containerBorderSize * 2)); // Plus the image큦 height and the left and right padding value
+			var index =1;
+			if((intImageWidth>800)|(intImageHeight>800)){
+				if(intImageWidth>intImageHeight){
+					index = 800/intImageWidth;
+				}else {
+					index = 800/intImageHeight;
+				}
+				
+			}
+			intImageWidth = intImageWidth*index;
+			intImageHeight = intImageHeight*index;
+
+				var intWidth = (intImageWidth + (settings.containerBorderSize * 2)); // Plus the image큦 width and the left and right padding value
+				var intHeight = (intImageHeight + (settings.containerBorderSize * 2)); // Plus the image큦 height and the left and right padding value
 			// Diferences
 			var intDiffW = intCurrentWidth - intWidth;
 			var intDiffH = intCurrentHeight - intHeight;
