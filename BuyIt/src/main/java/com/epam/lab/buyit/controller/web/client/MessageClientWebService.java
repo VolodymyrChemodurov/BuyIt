@@ -21,14 +21,16 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 public class MessageClientWebService {
-	private static final Logger LOGGER = Logger.getLogger(MessageClientWebService.class);
+	private static final Logger LOGGER = Logger
+			.getLogger(MessageClientWebService.class);
 	private static URI baseUri;
-	
+
 	static {
-			baseUri = WebServicesPropertiesGetter.getForumBaseURI();
+		baseUri = WebServicesPropertiesGetter.getForumBaseURI();
 	}
 
 	public List<Message> getMessagesByUserId(int id) {
+		LOGGER.info("starting geting user");
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
 		WebResource service = client.resource(baseUri);
@@ -41,12 +43,14 @@ public class MessageClientWebService {
 			ClientResponse resp = service.path("messages/")
 					.path(String.valueOf(id)).accept("application/json")
 					.get(ClientResponse.class);
+			LOGGER.info(service.getURI());
 			JSONObject jsonObject = resp.getEntity(JSONObject.class);
 			LOGGER.info("Recive message data: " + jsonObject);
 			JSONArray messages = jsonObject.getJSONArray("messages");
 
 			for (int i = 0; i < messages.length(); i++) {
-				Message currentMessage = creator.create(messages.getJSONArray(i));
+				Message currentMessage = creator.create(messages
+						.getJSONArray(i));
 				messagesList.add(currentMessage.setToUserId(id));
 			}
 
@@ -62,24 +66,21 @@ public class MessageClientWebService {
 		Client client = Client.create(config);
 		WebResource service = client.resource(baseUri);
 
-		boolean result = false;		
+		boolean result = false;
 		try {
 			JSONObject object = new JSONObject();
 			object.put("message", message.getMessage());
 			object.put("senderMessageId", message.getFromUserId());
 			object.put("reciverMessageId", message.getToUserId());
-			
+
 			String encodedJson = URLEncoder.encode(object.toString(), "UTF-8");
-			//String path = baseUri.toString() + "message/new?message=" + encodedJson;
-			
-			//LOGGER.info("Sending to " + path);
-			
+
 			ClientResponse resp = service.path("message").path("new")
 					.queryParam("message", encodedJson)
 					.post(ClientResponse.class);
 			String serviceResponse = resp.getEntity(String.class);
-			result = Boolean.parseBoolean(serviceResponse);
-			
+			result = serviceResponse.equals("ok")? true:false;
+
 		} catch (JSONException e) {
 			LOGGER.error(e);
 		} catch (UnsupportedEncodingException e) {

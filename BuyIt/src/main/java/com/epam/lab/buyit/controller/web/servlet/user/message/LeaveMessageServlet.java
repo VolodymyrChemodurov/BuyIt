@@ -37,8 +37,9 @@ public class LeaveMessageServlet extends HttpServlet {
 				request.setAttribute("messageHeader", "Warning");
 				request.setAttribute("alert", "block");
 				request.getRequestDispatcher("message_page").forward(request, response);
+			} else {
+				response.sendRedirect("user_wall?id=" + request.getParameter("toId"));
 			}
-			response.sendRedirect("user_wall?id=" + request.getParameter("toId"));
 		} catch (ClientHandlerException e) {
 			LOGGER.error(e);
 			request.setAttribute("message", "Sorry, message service is not available.");

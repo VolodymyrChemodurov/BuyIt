@@ -212,7 +212,7 @@
 												</c:if>
 
 												<input size="60" style="display: none;" type="file"
-													id="imageUpload" name="imageUpload" accept="image/*"
+													id="imageUpload" name="imageUpload" accept="image/*" value=""
 													multiple>
 												<button type="button" id="changeImage"
 													style="width: 150px; margin-left: 5px; border-color: #2f96b4; margin-top: 2px;"

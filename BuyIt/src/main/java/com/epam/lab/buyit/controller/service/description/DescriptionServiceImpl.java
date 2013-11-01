@@ -45,7 +45,11 @@ public class DescriptionServiceImpl implements DescriptionService {
 		List<Image> imageList = item.getItemPhotos();
 		for (Image image : imageList) {
 			image.setDescriptionId(item.getIdDescription());
-			imageService.updateItem(image);
+			if (image.getIdImage() == 0) {
+				imageService.createItem(image);
+			} else {
+				imageService.updateItem(image);
+			}
 		}
 		return item;
 	}
