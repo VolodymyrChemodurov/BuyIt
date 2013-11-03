@@ -95,18 +95,35 @@
 												</h5>
 												<p>For details. Click here</p>
 												<h4 style="text-align: center">
-													<a class="btn btn-primary" href="#">$ <c:choose>
-															<c:when test="${product.auction.buyItNow  <= 0}">
-						                                    	${product.auction.currentPrice}
-						                                    </c:when>
-															<c:when test="${product.auction.currentPrice <= 0}">
-						                                        ${product.auction.buyItNow}
-						                                    </c:when>
-															<c:otherwise>
-						                                        ${product.auction.buyItNow}
-						                                    </c:otherwise>
-														</c:choose>
-													</a>
+													<c:choose>
+														<c:when test="${product.auction.buyItNow  <= 0}">
+															<a class="btn btn-info" 
+																<c:if test="${user.idUser eq product.userId}">
+                                                					style="pointer-events: none; cursor: default; disabled: disabled" disabled tabindex=-1
+                                                				</c:if> 
+																href="bid_serve?id_product=${product.idProduct}&bid=${product.auction.currentPrice + 1}"> 
+						                                    	Bid ${product.auction.currentPrice}$
+						                                    </a>
+						                                </c:when>
+														<c:when test="${product.auction.currentPrice <= 0}">
+															<a class="btn btn-info"
+																<c:if test="${user.idUser eq product.userId}">
+                                                					style="pointer-events: none; cursor: default; disabled: disabled" disabled tabindex=-1
+                                                				</c:if> 
+																href="buyItServe?id_product=${product.idProduct}&quantity=1"">
+						                                        Buy ${product.auction.buyItNow}$
+						                                    </a>
+						                                </c:when>
+														<c:otherwise>
+															<a class="btn btn-info"
+																<c:if test="${user.idUser eq product.userId}">
+                                                					style="pointer-events: none; cursor: default; disabled: disabled" disabled tabindex=-1
+                                                				</c:if> 
+																href="buyItServe?id_product=${product.idProduct}&quantity=1"">
+						                                       	Buy ${product.auction.buyItNow}$
+						                                    </a>
+						                                </c:otherwise>
+													</c:choose>
 												</h4>
 												<!-- get price of the product from DB -->
 											</div>

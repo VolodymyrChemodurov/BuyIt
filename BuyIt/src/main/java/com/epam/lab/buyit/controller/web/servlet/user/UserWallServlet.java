@@ -39,7 +39,8 @@ public class UserWallServlet extends HttpServlet {
 		int userId = Integer.parseInt(request.getParameter("id"));
 		try {
 			List<Message> messages = messageService.getMessagesByUserId(userId);
-			for(Message currentMessage: messages) {
+			for(int i = messages.size() - 1; i >= 0 ; i--) {
+				Message currentMessage = messages.get(i);
 				comments.put(userService.getItemById(currentMessage.getFromUserId()), currentMessage);
 			}
 		} catch (ClientHandlerException e) {
