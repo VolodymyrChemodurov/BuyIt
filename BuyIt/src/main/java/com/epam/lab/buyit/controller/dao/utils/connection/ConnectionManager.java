@@ -1,7 +1,6 @@
 package com.epam.lab.buyit.controller.dao.utils.connection;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import javax.naming.InitialContext;
@@ -32,9 +31,9 @@ public class ConnectionManager {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			// connection = dataSource.getConnection();
-			connection = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/auction", "root", "416916");
+			connection = dataSource.getConnection();
+//			connection = DriverManager.getConnection(
+//					"jdbc:mysql://localhost:3306/auction", "root", "416916");
 
 		} catch (SQLException e) {
 			LOGGER.error(e);

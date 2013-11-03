@@ -59,5 +59,10 @@ public class RatingServiceImpl implements RatingService {
 		return ratingDAO.findMark(fromId, toId);
 	}
 
+	@Override
+	public int getUserMarksCount(int id) {
+		return ratingDAO.getUserMarksCount(id);
+	}
+
 
 }

@@ -10,9 +10,11 @@ $(document).ready(function() {
 				url: 'rating',
 				data: {'rating': value, 'id': id, 'fromId': fromId},
 				success: function(responseText) {
-					$('#myrating').val(parseInt(responseText) - 1);
-					currentRating = responseText;
-					$('#current').text('New rating: ' + parseInt(responseText));
+					var resp = responseText.split(':');
+					$('#marksCount').text(resp[1]);
+					$('#myrating').val(parseInt(resp[0]) - 1);
+					currentRating = resp[0];
+					$('#current').text('New rating: ' + parseInt(resp[0]));
 					$('#add').text('You add: ' + parseInt(value));
 					$('#myModal').modal('toggle');
 				}

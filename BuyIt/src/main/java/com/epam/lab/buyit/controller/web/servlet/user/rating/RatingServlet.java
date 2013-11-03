@@ -41,10 +41,12 @@ public class RatingServlet extends HttpServlet {
 		
 		
 		int userRating = ratingService.getUserRating(id);
-		LOGGER.info("Sending updated rating " + userRating);
+		int marksCount = ratingService.getUserMarksCount(id);
+		StringBuilder string = new StringBuilder().append(userRating).append(':').append(marksCount);
+		LOGGER.info("Sending updated rating " + string);
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(String.valueOf(userRating));
+		response.getWriter().write(String.valueOf(string));
 	}
 
 }

@@ -19,6 +19,7 @@ public class RatingDAO implements RatingDAOInterface{
 	private static final String GET_BY_ID = "SELECT * FROM ratings WHERE id = ?";
 	private static final String GET_ALL_BY_USER_ID = "SELECT * FROM ratings WHERE user_id = ?";
 	private static final String FIND_MARK = "SELECT * FROM ratings WHERE from_id = ? AND user_id = ?";
+	private static final String GET_MARKS_COUNT = "SELECT COUNT(id) FROM ratings WHERE user_id = ?";
 	private RatingTransformer transformer;
 
 	public RatingDAO() {
@@ -134,6 +135,28 @@ public class RatingDAO implements RatingDAOInterface{
 			DAOUtils.close(result, statement, connection);
 		}
 		return rating;
+	}
+
+	@Override
+	public int getUserMarksCount(int id) {
+		int count = 0;
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(GET_MARKS_COUNT);
+			statement.setInt(1, id);
+			result = statement.executeQuery();
+			if (result.next()) {
+				count = result.getInt(1);
+				return count;
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
+		return count;
 	}
 
 

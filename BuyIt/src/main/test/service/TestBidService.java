@@ -15,7 +15,6 @@ import com.epam.lab.buyit.model.Bid;
 public class TestBidService {
 	private static BidServiceImp bidService = null;
 	private static Bid bid = null;
-	private static Bid newBid = null;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {

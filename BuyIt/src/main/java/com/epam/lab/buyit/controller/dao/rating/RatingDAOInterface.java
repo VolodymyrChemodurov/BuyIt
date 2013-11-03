@@ -10,4 +10,6 @@ public interface RatingDAOInterface extends GenericDAO<Rating> {
 	List<Rating> getUserRatings(int userId);
 	
 	Rating findMark(int fromId, int toId);
+	
+	int getUserMarksCount(int id);
 }

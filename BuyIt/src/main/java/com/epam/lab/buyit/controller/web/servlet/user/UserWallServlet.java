@@ -48,6 +48,7 @@ public class UserWallServlet extends HttpServlet {
 			request.setAttribute("messageServiceError", true);
 		} finally {
 			request.setAttribute("userRating", ratingService.getUserRating(userId));
+			request.setAttribute("marksCount", ratingService.getUserMarksCount(userId));
 			request.setAttribute("userInfo", userService.getItemById(userId));
 			request.setAttribute("messages", comments);
 			request.getRequestDispatcher("user_wall.jsp").forward(request, response);

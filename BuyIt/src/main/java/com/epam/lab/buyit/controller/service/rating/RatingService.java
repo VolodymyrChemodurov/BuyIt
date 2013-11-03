@@ -12,4 +12,6 @@ public interface RatingService extends GenericService<Rating> {
 	int getUserRating(int userId);
 	
 	Rating findMark(int fromId, int toId);
+	
+	int getUserMarksCount(int id);
 }

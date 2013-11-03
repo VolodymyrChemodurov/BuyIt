@@ -44,14 +44,14 @@
 							<div class="thumbnail" style="text-align:center">
 								<img src="${userInfo.avatar}">
 								<input type="number" name="myrating" id="myrating" class="rating" value="${userRating - 1}"/>
-								
+								Marks count:<span id="marksCount"> ${marksCount}</span>
 								<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   									<div class="modal-header">
     									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     									<h3 id="myModalLabel">Success</h3>
   									</div>
   									<div class="modal-body">
-    									<p>Martin thanks you for adding rating!</p>
+    									<p>${userInfo.login} thanks you for adding rating!</p>
     									<p id="add"></p>
     									<p id="current"></p>
   									</div>
