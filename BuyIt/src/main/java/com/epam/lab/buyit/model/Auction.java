@@ -95,8 +95,9 @@ public class Auction implements Serializable {
 		return productId;
 	}
 
-	public void setProductId(int productId) {
+	public Auction setProductId(int productId) {
 		this.productId = productId;
+		return this;
 	}
 
 	@Override

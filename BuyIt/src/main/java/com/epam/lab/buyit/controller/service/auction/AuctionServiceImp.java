@@ -35,8 +35,8 @@ public class AuctionServiceImp implements AuctionService {
 
 	@Override
 	public Auction updateItem(Auction item) {
-		// TODO Auto-generated method stub
-		return null;
+		auctionDAO.updateElement(item);
+		return item;
 	}
 
 	@Override
