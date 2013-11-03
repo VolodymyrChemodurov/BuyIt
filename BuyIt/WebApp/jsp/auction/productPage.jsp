@@ -313,8 +313,19 @@
 									</c:if>
 
 									<h4>
+										<c:choose>
+										<c:when test="${product.auction.count == 0}">
+										No Items in Stock
+										</c:when>
+										<c:when test="${product.auction.count == 1}">
 										<c:out value="${product.auction.count}"></c:out>
-										Items in Stock
+										 Item in Stock
+										</c:when>
+										<c:when test="${product.auction.count > 1}">
+										<c:out value="${product.auction.count}"></c:out>
+										 Items in Stock
+										</c:when>
+										</c:choose>
 									</h4>
 
 									<hr class="soft clr" />
