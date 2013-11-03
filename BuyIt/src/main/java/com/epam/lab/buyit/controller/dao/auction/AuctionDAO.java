@@ -24,6 +24,7 @@ public class AuctionDAO implements AuctionDAOInterface {
 	private final static String CLOSE = "UPDATE auctions SET status='closed' WHERE id_auction = ?";
 	private final static String BUY_IT_SERVE = "UPDATE auctions SET count=?, status=? WHERE id_auction=? AND count=? AND status=?";
 	private final static String BID_SERVE = "UPDATE auctions SET current_price = ? WHERE id_auction = ? AND status = ? AND current_price = ?";
+	private final static String DELETE_BY_ID = "DELETE FROM auctions WHERE id_auction = ?";
 	private AuctionTransformer transformer;
 
 	public AuctionDAO() {
@@ -82,8 +83,18 @@ public class AuctionDAO implements AuctionDAOInterface {
 
 	@Override
 	public void deleteElementById(int id) {
-		throw new UnsupportedOperationException();
-
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = connection.prepareStatement(DELETE_BY_ID);
+			statement.setInt(1, id);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(result, statement, connection);
+		}
 	}
 
 	@Override
@@ -162,7 +173,6 @@ public class AuctionDAO implements AuctionDAOInterface {
 			statement = connection.prepareStatement(CLOSE);
 			statement.setInt(1, id);
 			statement.executeUpdate();
-
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		} finally {
@@ -193,7 +203,8 @@ public class AuctionDAO implements AuctionDAOInterface {
 	}
 
 	@Override
-	public int bidServe(int auctionId, double newCurrentPrice, double oldCurrentPrice, String status) {
+	public int bidServe(int auctionId, double newCurrentPrice,
+			double oldCurrentPrice, String status) {
 		int affectedRows = 0;
 		Connection connection = ConnectionManager.getConnection();
 		PreparedStatement statement = null;
