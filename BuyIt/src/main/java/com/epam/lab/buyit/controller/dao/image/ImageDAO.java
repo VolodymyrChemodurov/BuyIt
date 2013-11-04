@@ -18,6 +18,7 @@ public class ImageDAO implements ImageDAOInterface {
 
 	private final static String GET_BY_ID = "SELECT * FROM images WHERE id_image = ?";
 	private final static String GET_BY_DESCRIPTION_ID = "SELECT * FROM images WHERE description_id = ?";
+	private final static String DELETE = "DELETE FROM images WHERE id_image = ?";
 	private static final Logger LOGGER = Logger.getLogger(ImageDAO.class);
 	private ImageTransformer transformer;
 
@@ -87,7 +88,19 @@ public class ImageDAO implements ImageDAOInterface {
 
 	@Override
 	public void deleteElementById(int id) {
-		throw new UnsupportedOperationException();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(DELETE);
+			statement.setInt(1, id);
+			if (statement != null) {
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
 	}
 
 	@Override

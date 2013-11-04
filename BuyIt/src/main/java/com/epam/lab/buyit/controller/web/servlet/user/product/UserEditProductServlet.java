@@ -46,7 +46,6 @@ public class UserEditProductServlet extends HttpServlet {
 
 		Product product = productService.getItemById(idTemp);
 		List<FileItem> fileItems = getFileItems(items);
-		String temp1 = fileItems.get(0).getName();
 		if (!fileItems.get(0).getName().isEmpty()) {
 			product = ProductSetter.uploadingImages(product, fileItems);
 		}

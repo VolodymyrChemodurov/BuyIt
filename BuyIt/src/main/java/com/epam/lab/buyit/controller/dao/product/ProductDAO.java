@@ -34,6 +34,7 @@ public class ProductDAO implements ProductDAOInterface {
 	private final static String GET_ROWS_COUNT_BY_SYBCATEGORY_ID = "SELECT COUNT(id_product) FROM products WHERE deleted=false AND sub_category_id = ?";
 	private final static String GET_NOT_CLOSED = "SELECT * FROM products JOIN auctions ON id_product = product_id WHERE status ='inProgress' AND sub_category_id=? AND end_time > ? LIMIT ?";
 	private final static String DELETE_BY_ID = "UPDATE products SET deleted=true WHERE id_product = ?";
+	private final static String REAL_DELETE_BY_ID = "DELETE FROM products WHERE id_product = ?";
 	private ProductTransformer transformer;
 
 	public ProductDAO() {
@@ -187,6 +188,22 @@ public class ProductDAO implements ProductDAOInterface {
 		}
 	}
 
+	public void realDeleteElementById(int id) {
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(REAL_DELETE_BY_ID);
+			statement.setInt(1, id);
+			if (statement != null) {
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
+	}
+	
 	@Override
 	public List<Product> getAllProducts() {
 		List<Product> products = new ArrayList<Product>();

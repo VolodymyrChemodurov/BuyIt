@@ -18,6 +18,7 @@ public class CategoryDAO implements CategoryDAOInterface {
 
 	private final static String GET_BY_ID = "SELECT * FROM categories WHERE id_category = ?";
 	private final static String GET_ALL_CATEGORIES = "SELECT * FROM categories";
+	private final static String DELETE = "DELETE FROM categories WHERE id_category = ?";
 	private static final Logger LOGGER = Logger.getLogger(CategoryDAO.class);
 	private CategoryTransformer transformer;
 
@@ -86,8 +87,19 @@ public class CategoryDAO implements CategoryDAOInterface {
 
 	@Override
 	public void deleteElementById(int id) {
-		// TODO Auto-generated method stub
-
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(DELETE);
+			statement.setInt(1, id);
+			if (statement != null) {
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
 	}
 
 	@Override

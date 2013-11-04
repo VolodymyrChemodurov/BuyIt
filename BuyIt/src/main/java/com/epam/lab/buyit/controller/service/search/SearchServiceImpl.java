@@ -115,7 +115,7 @@ public class SearchServiceImpl implements SearchService {
 			HttpServletResponse response, String errorMsg)
 			throws ServletException, IOException {
 		request.setAttribute("ErrorMSG", errorMsg);
-		RequestDispatcher view = request.getRequestDispatcher("/homePage");
+		RequestDispatcher view = request.getRequestDispatcher("/index");
 		view.forward(request, response);
 	}
 

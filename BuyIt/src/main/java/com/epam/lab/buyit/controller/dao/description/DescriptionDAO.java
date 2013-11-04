@@ -17,6 +17,7 @@ import com.epam.lab.buyit.model.Description;
 public class DescriptionDAO implements DescriptionDAOInterface {
 	private static final Logger LOGGER = Logger.getLogger(DescriptionDAO.class);
 	private final static String GET_BY_PRODUCT_ID = "SELECT * FROM descriptions WHERE products_id = ?";
+	private final static String DELETE = "DELETE FROM descriptions WHERE id_description = ?";
 	private final static String GET_ALL_DESCRIPTIONS = "SELECT * FROM descriptions";
 	private DescriptionTransformer transformer;
 
@@ -84,11 +85,6 @@ public class DescriptionDAO implements DescriptionDAOInterface {
 	}
 
 	@Override
-	public void deleteElementById(int id) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public List<Description> getAllDescriptions() {
 		List<Description> descriptions = new ArrayList<Description>();
 		Connection connection = ConnectionManager.getConnection();
@@ -98,8 +94,7 @@ public class DescriptionDAO implements DescriptionDAOInterface {
 			statement = connection.prepareStatement(GET_ALL_DESCRIPTIONS);
 			result = statement.executeQuery();
 			while (result.next()) {
-				Description currentDescription = transformer
-						.fromRSToObject(result);
+				Description currentDescription = transformer.fromRSToObject(result);
 				descriptions.add(currentDescription);
 			}
 		} catch (SQLException e) {
@@ -130,6 +125,23 @@ public class DescriptionDAO implements DescriptionDAOInterface {
 			DAOUtils.close(result, statement, connection);
 		}
 		return description;
+	}
+
+	@Override
+	public void deleteElementById(int id) {
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(DELETE);
+			statement.setInt(1, id);
+			if (statement != null) {
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
 	}
 
 }

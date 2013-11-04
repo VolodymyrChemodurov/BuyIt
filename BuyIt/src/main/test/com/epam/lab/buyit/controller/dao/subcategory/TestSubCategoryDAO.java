@@ -1,4 +1,4 @@
-package dao;
+package com.epam.lab.buyit.controller.dao.subcategory;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.test.controller.dao.user;
+package com.epam.lab.buyit.controller.dao.user;
 
 import java.util.List;
 

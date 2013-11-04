@@ -1,4 +1,4 @@
-package service;
+package com.epam.lab.buyit.controller.service.bid;
 
 import static org.junit.Assert.*;
 

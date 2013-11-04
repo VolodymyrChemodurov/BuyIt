@@ -1,4 +1,4 @@
-package service;
+package com.epam.lab.buyit.controller.service.rating;
 
 import static org.junit.Assert.*;
 
@@ -19,10 +19,5 @@ public class TestRatingService {
 	public void testGetUserRating() {
 		int rating =  ratingService.getUserRating(1);
 		assertNotNull(rating);
-	}
-	@Test
-	public void testGetUserRatingWithNotExistUser() {
-		int rating =  ratingService.getUserRating(-1);
-		
 	}
 }

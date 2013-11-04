@@ -21,6 +21,7 @@ public class UserDAO implements UserDAOInterface {
 	private final static String GET_USER_BY_LOGIN = "SELECT * FROM users WHERE login = ?";
 	private final static String GET_USER = "SELECT * FROM users WHERE login = ? AND password = ?";
 	private final static String CHANGE_PASSWORD = "UPDATE users SET password=? WHERE id_user=?";
+	private final static String DELETE = "DELETE FROM users WHERE id_user = ?";
 	private UserTransformer transformer = new UserTransformer();
 
 	@Override
@@ -84,7 +85,19 @@ public class UserDAO implements UserDAOInterface {
 
 	@Override
 	public void deleteElementById(int id) {
-		throw new UnsupportedOperationException();
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(DELETE);
+			statement.setInt(1, id);
+			if (statement != null) {
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		} finally {
+			DAOUtils.close(statement, connection);
+		}
 	}
 
 	@Override

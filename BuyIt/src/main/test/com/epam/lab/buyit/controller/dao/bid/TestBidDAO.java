@@ -1,4 +1,4 @@
-package dao;
+package com.epam.lab.buyit.controller.dao.bid;
 
 import static org.junit.Assert.*;
 

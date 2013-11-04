@@ -1,4 +1,4 @@
-package dao;
+package com.epam.lab.buyit.controller.dao.rating;
 
 import static org.junit.Assert.*;
 

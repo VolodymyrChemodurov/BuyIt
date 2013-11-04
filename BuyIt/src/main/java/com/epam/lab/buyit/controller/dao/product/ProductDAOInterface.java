@@ -16,5 +16,7 @@ public interface ProductDAOInterface extends GenericDAO<Product> {
 	int getCountBySubCategoryId(int id);
 	
 	List<Product> getNotClosedListBySubCategoryId(int subCategoryId,int number);
+	
+	public void realDeleteElementById(int id);
 
 }
