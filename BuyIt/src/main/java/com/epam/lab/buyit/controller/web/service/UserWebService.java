@@ -16,13 +16,13 @@ import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-import com.epam.lab.buyit.controller.creator.UserCreator;
-import com.epam.lab.buyit.controller.jsonbuilder.JSONBuilder;
-import com.epam.lab.buyit.controller.jsonbuilder.adapters.UserListSerializationAdapter;
-import com.epam.lab.buyit.controller.jsonbuilder.adapters.UserSerializationAdapter;
 import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
-import com.epam.lab.buyit.controller.utils.WebServicesPropertiesGetter;
-import com.epam.lab.buyit.controller.validator.UserValidation;
+import com.epam.lab.buyit.controller.utils.WebServicesPropertiesBundle;
+import com.epam.lab.buyit.controller.utils.builder.jsonbuilder.JSONBuilder;
+import com.epam.lab.buyit.controller.utils.builder.jsonbuilder.adapters.UserListSerializationAdapter;
+import com.epam.lab.buyit.controller.utils.builder.jsonbuilder.adapters.UserSerializationAdapter;
+import com.epam.lab.buyit.controller.utils.creator.UserCreator;
+import com.epam.lab.buyit.controller.utils.validator.UserValidation;
 import com.epam.lab.buyit.model.User;
 
 @Path("/user")
@@ -32,8 +32,8 @@ public class UserWebService {
 	private UserServiceImpl userService;
 
 	static {
-		LOGIN = WebServicesPropertiesGetter.getForumClientLogin();
-		PASSWORD = WebServicesPropertiesGetter.getForumClientPassword();
+		LOGIN = WebServicesPropertiesBundle.getForumClientLogin();
+		PASSWORD = WebServicesPropertiesBundle.getForumClientPassword();
 	}
 
 	public UserWebService() {

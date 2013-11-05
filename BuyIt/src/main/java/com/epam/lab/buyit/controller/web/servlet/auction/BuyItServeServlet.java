@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.epam.lab.buyit.controller.builder.BidBuilder;
 import com.epam.lab.buyit.controller.email.EmailMessageBuilder;
 import com.epam.lab.buyit.controller.exception.AuctionAllreadyClosedException;
 import com.epam.lab.buyit.controller.exception.ParticipationInOwnAuctionException;
@@ -18,6 +17,7 @@ import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
 import com.epam.lab.buyit.controller.service.bid.BidServiceImp;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
 import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
+import com.epam.lab.buyit.controller.utils.builder.BidBuilder;
 import com.epam.lab.buyit.model.Auction;
 import com.epam.lab.buyit.model.Bid;
 import com.epam.lab.buyit.model.Product;

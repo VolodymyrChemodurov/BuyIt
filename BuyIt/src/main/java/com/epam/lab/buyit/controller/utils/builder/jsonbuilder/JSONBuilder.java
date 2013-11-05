@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.controller.jsonbuilder;
+package com.epam.lab.buyit.controller.utils.builder.jsonbuilder;
 
 import java.util.ArrayList;
 import java.util.List;

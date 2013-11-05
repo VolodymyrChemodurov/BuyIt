@@ -4,10 +4,10 @@ import java.net.URI;
 
 import org.codehaus.jettison.json.JSONObject;
 
-import com.epam.lab.buyit.controller.jsonbuilder.JSONBuilder;
-import com.epam.lab.buyit.controller.jsonbuilder.adapters.UserSerializationAdapter;
 import com.epam.lab.buyit.controller.service.user.UserService;
-import com.epam.lab.buyit.controller.utils.WebServicesPropertiesGetter;
+import com.epam.lab.buyit.controller.utils.WebServicesPropertiesBundle;
+import com.epam.lab.buyit.controller.utils.builder.jsonbuilder.JSONBuilder;
+import com.epam.lab.buyit.controller.utils.builder.jsonbuilder.adapters.UserSerializationAdapter;
 import com.epam.lab.buyit.model.User;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -20,7 +20,7 @@ class NotificatorThread extends Thread {
 	private int id;
 	
 	static {
-		BASE_URI = WebServicesPropertiesGetter.getForumBaseURI();
+		BASE_URI = WebServicesPropertiesBundle.getForumBaseURI();
 		CLIENT = Client.create(new DefaultClientConfig());
 	}
 	

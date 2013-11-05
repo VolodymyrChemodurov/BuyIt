@@ -1,10 +1,10 @@
-package com.epam.lab.buyit.controller.validator;
+package com.epam.lab.buyit.controller.utils.validator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.epam.lab.buyit.controller.setters.ProductSetter;
-import com.epam.lab.buyit.controller.setters.UserSetter;
+import com.epam.lab.buyit.controller.utils.setters.ProductSetter;
+import com.epam.lab.buyit.controller.utils.setters.UserSetter;
 
 public enum Validator {
 	FIRST_NAME(UserSetter.FIRST_NAME.getField(), "^[a-zA-Z ]{2,15}$", true),

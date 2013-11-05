@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.controller.jsonbuilder.adapters;
+package com.epam.lab.buyit.controller.utils.builder.jsonbuilder.adapters;
 
 import java.lang.reflect.Type;
 

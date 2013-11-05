@@ -11,8 +11,8 @@ import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-import com.epam.lab.buyit.controller.creator.MessageCreator;
-import com.epam.lab.buyit.controller.utils.WebServicesPropertiesGetter;
+import com.epam.lab.buyit.controller.utils.WebServicesPropertiesBundle;
+import com.epam.lab.buyit.controller.utils.creator.MessageCreator;
 import com.epam.lab.buyit.model.Message;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -26,7 +26,7 @@ public class MessageClientWebService {
 	private static URI baseUri;
 
 	static {
-		baseUri = WebServicesPropertiesGetter.getForumBaseURI();
+		baseUri = WebServicesPropertiesBundle.getForumBaseURI();
 	}
 
 	public List<Message> getMessagesByUserId(int id) {

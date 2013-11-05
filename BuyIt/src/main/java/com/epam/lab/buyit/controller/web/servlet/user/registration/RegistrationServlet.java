@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.epam.lab.buyit.controller.creator.UserCreator;
 import com.epam.lab.buyit.controller.email.EmailMessageBuilder;
 import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
-import com.epam.lab.buyit.controller.validator.UserValidation;
+import com.epam.lab.buyit.controller.utils.creator.UserCreator;
+import com.epam.lab.buyit.controller.utils.validator.UserValidation;
 import com.epam.lab.buyit.model.User;
 
 public class RegistrationServlet extends HttpServlet {

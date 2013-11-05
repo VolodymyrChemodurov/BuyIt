@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.controller.validator;
+package com.epam.lab.buyit.controller.utils.validator;
 
 import java.util.Iterator;
 import java.util.Map;

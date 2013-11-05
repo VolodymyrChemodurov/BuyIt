@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 
-import com.epam.lab.buyit.controller.creator.ProductCreator;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
-import com.epam.lab.buyit.controller.setters.ProductSetter;
-import com.epam.lab.buyit.controller.validator.ProductValidation;
+import com.epam.lab.buyit.controller.utils.creator.ProductCreator;
+import com.epam.lab.buyit.controller.utils.setters.ProductSetter;
+import com.epam.lab.buyit.controller.utils.validator.ProductValidation;
 import com.epam.lab.buyit.model.Product;
 
 public class UserAddProductServlet extends HttpServlet {

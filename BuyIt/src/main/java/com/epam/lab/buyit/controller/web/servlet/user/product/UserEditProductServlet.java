@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
-import com.epam.lab.buyit.controller.setters.ProductSetter;
+import com.epam.lab.buyit.controller.utils.setters.ProductSetter;
 import com.epam.lab.buyit.model.Image;
 import com.epam.lab.buyit.model.Product;
 

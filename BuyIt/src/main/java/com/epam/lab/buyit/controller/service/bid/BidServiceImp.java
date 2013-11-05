@@ -3,12 +3,12 @@ package com.epam.lab.buyit.controller.service.bid;
 import java.sql.Timestamp;
 import java.util.List;
 
-import com.epam.lab.buyit.controller.builder.BidBuilder;
 import com.epam.lab.buyit.controller.dao.bid.BidDAO;
 import com.epam.lab.buyit.controller.exception.AuctionAllreadyClosedException;
 import com.epam.lab.buyit.controller.exception.BidAmountException;
 import com.epam.lab.buyit.controller.service.auction.AuctionService;
 import com.epam.lab.buyit.controller.service.auction.AuctionServiceImp;
+import com.epam.lab.buyit.controller.utils.builder.BidBuilder;
 import com.epam.lab.buyit.model.Bid;
 
 public class BidServiceImp implements BidService {

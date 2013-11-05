@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
-import com.epam.lab.buyit.controller.setters.UserSetter;
-import com.epam.lab.buyit.controller.validator.UserValidation;
+import com.epam.lab.buyit.controller.utils.setters.UserSetter;
+import com.epam.lab.buyit.controller.utils.validator.UserValidation;
 import com.epam.lab.buyit.model.User;
 
 public class UserPageServlet extends HttpServlet {

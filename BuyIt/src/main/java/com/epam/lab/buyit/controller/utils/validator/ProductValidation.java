@@ -1,10 +1,10 @@
-package com.epam.lab.buyit.controller.validator;
+package com.epam.lab.buyit.controller.utils.validator;
 
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.epam.lab.buyit.controller.setters.ProductSetter;
+import com.epam.lab.buyit.controller.utils.setters.ProductSetter;
 
 public class ProductValidation {
 	private static final Logger LOGGER = Logger.getLogger(ProductValidation.class);

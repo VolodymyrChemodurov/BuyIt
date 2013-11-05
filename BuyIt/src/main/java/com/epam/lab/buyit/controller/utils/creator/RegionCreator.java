@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.controller.utils;
+package com.epam.lab.buyit.controller.utils.creator;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

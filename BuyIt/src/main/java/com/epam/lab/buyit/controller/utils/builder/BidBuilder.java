@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.controller.builder;
+package com.epam.lab.buyit.controller.utils.builder;
 
 import java.sql.Timestamp;
 

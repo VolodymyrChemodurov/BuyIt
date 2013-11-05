@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 import com.epam.lab.buyit.controller.web.client.MessageClientWebService;
 
-public class WebServicesPropertiesGetter {
+public class WebServicesPropertiesBundle {
 	private static final Logger LOGGER = Logger.getLogger(MessageClientWebService.class);
 	private static final String propFilePath = "web-services.properties";
 	private static URI forumServiceURI;
@@ -21,7 +21,7 @@ public class WebServicesPropertiesGetter {
 			Properties prop = new Properties();
 			try {
 				LOGGER.info("Loading web-services properties...");
-				prop.load(WebServicesPropertiesGetter.class.getClassLoader().getResourceAsStream(propFilePath));
+				prop.load(WebServicesPropertiesBundle.class.getClassLoader().getResourceAsStream(propFilePath));
 				String url = prop.getProperty("forum.service.url");
 				forumClientLogin = prop.getProperty("user.login");
 				forumClientPassword = prop.getProperty("user.password");

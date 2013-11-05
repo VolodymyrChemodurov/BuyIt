@@ -1,10 +1,10 @@
-package com.epam.lab.buyit.controller.creator;
+package com.epam.lab.buyit.controller.utils.creator;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
 
-import com.epam.lab.buyit.controller.setters.ProductSetter;
+import com.epam.lab.buyit.controller.utils.setters.ProductSetter;
 import com.epam.lab.buyit.model.Product;
 
 public class ProductCreator {

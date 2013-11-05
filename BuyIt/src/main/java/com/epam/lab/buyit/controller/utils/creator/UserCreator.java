@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.controller.creator;
+package com.epam.lab.buyit.controller.utils.creator;
 
 import java.util.Map;
 
@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-import com.epam.lab.buyit.controller.setters.UserSetter;
+import com.epam.lab.buyit.controller.utils.setters.UserSetter;
 import com.epam.lab.buyit.model.User;
 
 public class UserCreator {

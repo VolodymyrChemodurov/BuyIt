@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.epam.lab.buyit.controller.security.MD5Encryptor;
 import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
-import com.epam.lab.buyit.controller.validator.UserValidation;
+import com.epam.lab.buyit.controller.utils.validator.UserValidation;
 import com.epam.lab.buyit.model.User;
 
 public class ChangePasswordServlet extends HttpServlet {

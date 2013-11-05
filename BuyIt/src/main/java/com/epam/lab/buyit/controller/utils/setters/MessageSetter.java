@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.controller.setters;
+package com.epam.lab.buyit.controller.utils.setters;
 
 import com.epam.lab.buyit.model.Message;
 

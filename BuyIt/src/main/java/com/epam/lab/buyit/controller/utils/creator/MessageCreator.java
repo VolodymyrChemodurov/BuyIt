@@ -1,4 +1,4 @@
-package com.epam.lab.buyit.controller.creator;
+package com.epam.lab.buyit.controller.utils.creator;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
