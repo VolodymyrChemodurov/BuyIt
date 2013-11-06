@@ -45,7 +45,7 @@ public class AuctionScheduler {
 	
 	public void stop() throws SchedulerException {
 		LOGGER.info("Stopping AuctionScheduler...");
-		scheduler.shutdown();
+		scheduler.shutdown(true);
 		LOGGER.info("AuctionScheduler is stopped.");
 	}
 }

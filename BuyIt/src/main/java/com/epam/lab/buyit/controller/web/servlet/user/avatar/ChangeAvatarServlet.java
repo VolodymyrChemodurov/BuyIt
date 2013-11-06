@@ -1,6 +1,6 @@
 package com.epam.lab.buyit.controller.web.servlet.user.avatar;
 
-import static com.epam.lab.buyit.controller.utils.ParseRequest.parseRequest;
+import static com.epam.lab.buyit.controller.utils.ParseUploadRequest.parseRequest;
 
 import java.io.IOException;
 import java.util.List;

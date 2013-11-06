@@ -12,7 +12,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-public class ParseRequest {
+public class ParseUploadRequest {
 
 	public static Map<String, String[]> getParametersMap(List<FileItem> items) {
 		Map<String, String[]> inputMap = new HashMap<String, String[]>();

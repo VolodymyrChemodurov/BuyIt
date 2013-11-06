@@ -1,8 +1,8 @@
 package com.epam.lab.buyit.controller.web.servlet.user.product;
 
-import static com.epam.lab.buyit.controller.utils.ParseRequest.getFileItems;
-import static com.epam.lab.buyit.controller.utils.ParseRequest.getParametersMap;
-import static com.epam.lab.buyit.controller.utils.ParseRequest.parseRequest;
+import static com.epam.lab.buyit.controller.utils.ParseUploadRequest.getFileItems;
+import static com.epam.lab.buyit.controller.utils.ParseUploadRequest.getParametersMap;
+import static com.epam.lab.buyit.controller.utils.ParseUploadRequest.parseRequest;
 
 import java.io.IOException;
 import java.util.List;
