@@ -65,7 +65,7 @@
 
 				<div class="span9">
 					<ul class="breadcrumb">
-						<li class="active"><a href="homePageServlet">Home</a></li>
+						<li class="active"><a href="index">Home</a></li>
 					</ul>
 
 					<h3>Soon Ending Auctions</h3>

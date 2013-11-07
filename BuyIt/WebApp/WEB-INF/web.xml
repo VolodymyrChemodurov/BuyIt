@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xmlns:web_1="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>BuyIt</display-name>
   <welcome-file-list>
-    <welcome-file>homePageServlet</welcome-file>
+    <welcome-file>index</welcome-file>
   </welcome-file-list>
   <error-page>
     <error-code>404</error-code>
@@ -44,7 +44,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>HomePageServlet</servlet-name>
-    <url-pattern>/homePageServlet</url-pattern>
+    <url-pattern>/index</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>CategoryServlet</servlet-name>
@@ -299,7 +299,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>HomePage</servlet-name>
-    <url-pattern>/index</url-pattern>
+    <url-pattern>/index.jsp</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>NavbarLogin</servlet-name>

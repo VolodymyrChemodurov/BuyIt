@@ -8,6 +8,7 @@ import com.epam.lab.buyit.controller.dao.contact.ContactDAO;
 import com.epam.lab.buyit.controller.dao.user.UserDAO;
 import com.epam.lab.buyit.controller.security.MD5Encryptor;
 import com.epam.lab.buyit.controller.service.bid.BidServiceImp;
+import com.epam.lab.buyit.controller.web.client.notification.UserServiceNotificator;
 import com.epam.lab.buyit.model.Address;
 import com.epam.lab.buyit.model.Bid;
 import com.epam.lab.buyit.model.Contact;
@@ -91,7 +92,10 @@ public class UserServiceImpl implements UserService {
 
 		Address address = contact.getAddress();
 		addressDAO.updateElement(address);
-
+		
+		UserServiceNotificator notificator = new UserServiceNotificator();
+		notificator.inform(item.getIdUser());
+		
 		return item;
 	}
 

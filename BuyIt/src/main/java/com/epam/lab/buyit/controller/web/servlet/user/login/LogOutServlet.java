@@ -22,7 +22,7 @@ public class LogOutServlet extends HttpServlet {
 			LOGGER.info(((User)session.getAttribute("user")).getLogin() + " logout");
 			session.removeAttribute("user");
 		}
-		response.sendRedirect("homePageServlet");
+		response.sendRedirect("index");
 	}
 
 }

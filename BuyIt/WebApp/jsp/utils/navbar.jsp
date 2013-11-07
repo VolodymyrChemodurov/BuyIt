@@ -8,7 +8,7 @@
 				class="icon-bar"></span> <span class="icon-bar"></span>
 			</a>
 			<div class="navbar-inner">
-				<a class="brand" href="homePageServlet"><img
+				<a class="brand" href="index"><img
 					src="themes/images/logo.png" alt="Bootsshop"></a>
 				<form class="form-inline navbar-search" method="post"
 					action="searchServlet">

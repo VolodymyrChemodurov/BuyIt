@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 		String returnTo = request.getParameter("returnTo");
 		if(returnTo != null)
 			response.sendRedirect(returnTo);
-		else response.sendRedirect("homePageServlet");
+		else response.sendRedirect("index");
 	}
 	
 	private void failLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

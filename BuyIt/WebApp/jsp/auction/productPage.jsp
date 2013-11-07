@@ -55,7 +55,7 @@
 						<jsp:include page="sidebarMenu"></jsp:include>
 						<div class="span9">
 							<ul class="breadcrumb">
-								<li><a href="homePageServlet">Home</a> <span
+								<li><a href="index">Home</a> <span
 									class="divider">/</span></li>
 								<li><a href="categoryViewer?id=${category.idCategory}">${category.name}</a>
 									<span class="divider">/</span></li>

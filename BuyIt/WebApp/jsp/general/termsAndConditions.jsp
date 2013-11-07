@@ -34,8 +34,8 @@
 		<div class="span11">
 			<div class="span3"></div>
 			<div class="span5">
-				<h1 style="text-align: center;">BuyIt Terms and Conditions
-					("Agreement")</h1>
+				<h3 style="text-align: center;">BuyIt Terms and Conditions
+					("Agreement")</h3>
 				<p>This Agreement was last modified on October 29, 2013.</p>
 
 				<p>Please read these Terms and Conditions ("Agreement", "Terms

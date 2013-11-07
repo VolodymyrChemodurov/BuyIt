@@ -26,7 +26,7 @@ body {
 	<title>Error 500</title>
 <body>
 	<div class="hero-unit center">
-		<a href="homePageServlet"> <img alt="500" src="themes/images/500.jpg"
+		<a href="index"> <img alt="500" src="themes/images/500.jpg"
 			height="100%" width="100%">
 		</a>
 

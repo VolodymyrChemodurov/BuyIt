@@ -38,7 +38,7 @@
 				<!-- Sidebar end=============================================== -->
 				<div class="span9">
 					<ul class="breadcrumb">
-						<li><a href="homePageServlet">Home</a> <span class="divider">/</span></li>
+						<li><a href="index">Home</a> <span class="divider">/</span></li>
 						<li class="active">Registration</li>
 					</ul>
 					<h3>Registration</h3>

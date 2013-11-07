@@ -26,7 +26,7 @@ body {
 	<title>Error 404</title>
 <body>
 	<div class="hero-unit center">
-		<a href="homePageServlet"> <img alt="404" src="themes/images/404.jpg"
+		<a href="index"> <img alt="404" src="themes/images/404.jpg"
 			width="90%" height="100%">
 		</a>
 	</div>

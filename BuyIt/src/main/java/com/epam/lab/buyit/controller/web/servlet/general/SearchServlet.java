@@ -10,18 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.lab.buyit.controller.service.search.SearchService;
 import com.epam.lab.buyit.controller.service.search.SearchServiceImpl;
 
-/**
- * Servlet implementation class SearchServlet
- */
-// @WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SearchService serviceImpl = null;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	@Override
 	public void init() throws ServletException {
 		super.init();
@@ -34,10 +26,6 @@ public class SearchServlet extends HttpServlet {
 		processRequest(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
