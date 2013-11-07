@@ -8,7 +8,7 @@
     <error-code>404</error-code>
     <location>/error404</location>
   </error-page>
-    <error-page>
+  <error-page>
     <error-code>500</error-code>
     <location>/error500</location>
   </error-page>
@@ -29,7 +29,6 @@
     <servlet-name>Jersey REST Service</servlet-name>
     <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>SearchServlet</servlet-name>
     <servlet-class>com.epam.lab.buyit.controller.web.servlet.general.SearchServlet</servlet-class>
@@ -260,23 +259,21 @@
     <url-pattern>/userCommentsServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>ratingServlet</servlet-name>
+    <servlet-name>ratingServlet</servlet-name>
     <servlet-class>com.epam.lab.buyit.controller.web.servlet.user.rating.RatingServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ratingServlet</servlet-name>
     <url-pattern>/rating</url-pattern>
   </servlet-mapping>
-  	<servlet>
-		<servlet-name>ChangeAvatarServlet</servlet-name>
-		<servlet-class>com.epam.lab.buyit.controller.web.servlet.user.avatar.ChangeAvatarServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ChangeAvatarServlet</servlet-name>
-		<url-pattern>/change_avatar</url-pattern>
-	</servlet-mapping>
-  
-  
+  <servlet>
+    <servlet-name>ChangeAvatarServlet</servlet-name>
+    <servlet-class>com.epam.lab.buyit.controller.web.servlet.user.avatar.ChangeAvatarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeAvatarServlet</servlet-name>
+    <url-pattern>/change_avatar</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>Error</servlet-name>
     <jsp-file>/jsp/error/error404.jsp</jsp-file>
@@ -285,7 +282,7 @@
     <servlet-name>Error</servlet-name>
     <url-pattern>/error404</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>Error500</servlet-name>
     <jsp-file>/jsp/error/error500.jsp</jsp-file>
   </servlet>
@@ -557,7 +554,7 @@
     <servlet-name>UserRestoreProduct</servlet-name>
     <url-pattern>/userRestoreProductJsp</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>TermsAndConditions</servlet-name>
     <jsp-file>/jsp/general/termsAndConditions.jsp</jsp-file>
   </servlet>
@@ -573,8 +570,6 @@
     <servlet-name>FAQ</servlet-name>
     <url-pattern>/faq</url-pattern>
   </servlet-mapping>
-  
-  
   <filter>
     <filter-name>sideMenuFilter</filter-name>
     <filter-class>com.epam.lab.buyit.controller.web.filter.SideMenuFilter</filter-class>
@@ -698,6 +693,17 @@
     <filter-name>participateInOwnAuctionFilter</filter-name>
     <url-pattern>/deal_information</url-pattern>
     <url-pattern>/bid_information</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+  
+  <filter>
+    <filter-name>leaveMessageFilter</filter-name>
+    <filter-class>com.epam.lab.buyit.controller.web.filter.LeaveMessageFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>leaveMessageFilter</filter-name>
+    <url-pattern>/leave_message</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
