@@ -5,6 +5,7 @@ import java.net.URI;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.epam.lab.buyit.controller.service.user.UserService;
+import com.epam.lab.buyit.controller.service.user.UserServiceImpl;
 import com.epam.lab.buyit.controller.utils.WebServicesPropertiesBundle;
 import com.epam.lab.buyit.controller.utils.builder.jsonbuilder.JSONBuilder;
 import com.epam.lab.buyit.controller.utils.builder.jsonbuilder.adapters.UserSerializationAdapter;
@@ -26,6 +27,7 @@ class NotificatorThread extends Thread {
 	
 	public NotificatorThread(int userId) {
 		this.id = userId;
+		userService = new UserServiceImpl();
 	}
 	
 	@Override
