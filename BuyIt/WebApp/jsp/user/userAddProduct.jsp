@@ -97,10 +97,10 @@
 										data-format="yyyy-mm-dd hh:mm:ss">
 										<input id="endTime" name="endTime" size="16" type="text"
 											value="" readonly
-											style="height: 20px; width: 163px; border-radius: 0; padding: 2px;">
+											style="height: 20px; width: 163px; border-radius: 4px 0 0 4px; padding: 2px;">
 										<span class="add-on" style="height: 20px; padding: 2px;"><i
 											class="icon-remove"></i></span> <span class="add-on"
-											style="height: 20px; border-radius: 0; padding: 2px;"><i
+											style="height: 20px; border-radius: 0 4px 4px 0; padding: 2px;"><i
 											class="icon-calendar"></i></span>
 									</div>
 								</div>
@@ -113,13 +113,13 @@
 								<div id="form-container" style="padding-top: 40px">
 									<div class="myrow-sales">
 										<span
-											style="margin-left: 0px; margin-right: 5px; width: 20px;"
+											style="margin-left: 0px; padding-top: 3px; margin-right: 5px; width: 20px;"
 											class="span-3"> <input style="height: 14px;"
 											id="auctionCheck" name="auctionCheck" type="checkbox">
 										</span> <span class="span-2"
-											style="margin-left: 0px; margin-right: 5px; width: 110px;"><b>Auction</b></span>
+											style="margin-left: 0px; margin-right: 5px; padding-top: 4px; width: 110px;"><b>Auction</b></span>
 										<span class="span-2"
-											style="margin-left: 0px; margin-right: 5px; width: 100px;">Start
+											style="margin-left: 0px; margin-right: 5px; padding-top: 4px; width: 100px;">Start
 											price</span> <span class="span-2"><input maxlength="7"
 											type="text" id="startPrice" readonly="readonly"
 											style="text-align: center; width: 100px;" name="startPrice"
@@ -128,13 +128,13 @@
 									</div>
 									<div class="myrow-sales">
 										<span
-											style="margin-left: 0px; margin-right: 5px; width: 20px;"
+											style="margin-left: 0px; padding-top: 3px; margin-right: 5px; width: 20px;"
 											class="span-3"> <input style="height: 14px;"
 											id="buyNowCheck" name="buyNowCheck" type="checkbox">
 										</span> <span class="span-2"
-											style="margin-left: 0px; margin-right: 5px; width: 110px;"><b>Buy
+											style="margin-left: 0px; margin-right: 5px; padding-top: 4px; width: 110px;"><b>Buy
 												it now</b></span> <span class="span-2"
-											style="margin-left: 0px; margin-right: 5px; width: 100px;">Price</span>
+											style="margin-left: 0px; padding-top: 4px; margin-right: 5px; width: 100px;">Price</span>
 										<span class="span-2"><input maxlength="7" type="text"
 											id="buyNowPrice" readonly="readonly"
 											style="text-align: center; width: 100px;" name="buyNowPrice"
@@ -142,7 +142,7 @@
 									</div>
 									<div class="myrow-sales">
 										<span class="span-2"
-											style="padding-left: 140px; margin-left: 0px; margin-right: 5px; width: 100px;">Count</span>
+											style="padding-left: 140px; padding-top: 4px; margin-left: 0px; margin-right: 5px; width: 100px;">Count</span>
 										<span class="span-2"><input maxlength="7" type="text"
 											id="count" readonly="readonly"
 											style="text-align: center; width: 100px;" name="count"

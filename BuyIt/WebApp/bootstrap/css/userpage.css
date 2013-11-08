@@ -48,7 +48,7 @@ div.bookmarksArea #maWrapper {
 }
 
 #maContent #form-container select,#maContent .mycontent select {
-	width: 211px;
+	width: 214px;
 	border-color: #9C9C9C;
 	height: 26px;
 	line-height: 20px;
@@ -56,7 +56,7 @@ div.bookmarksArea #maWrapper {
 	font-size: 14px;
 	color: #000;
 	padding: 0px;
-	border-radius: 0;
+	border-radius: 4px;
 }
 
 #maContent  h1 {
@@ -83,10 +83,12 @@ div.bookmarksArea #maWrapper {
 	font-size: 14pt;
 }
 
-#maContent .my-right-content #form-container .myrow span.span-1,#maContent .mycontent .myrow span.span-1
+#maContent .my-right-content #form-container .myrow span.span-1,
+#maContent .mycontent .myrow span.span-1
 	{
 	margin-left: 30px;
 	width: 200px;
+	padding-top: 4px
 }
 
 #maContent .mycontent .myrow span.span-2 {
@@ -200,6 +202,7 @@ div.bookmarksArea #vMenu li a {
 	margin-top: 2px;
 	position: relative;
 	background-color: #3A3F44;
+	border-radius: 4px;
 }
 
 .left-menu #changeAvatarBlock,
@@ -238,10 +241,10 @@ div.avatar-wrapper img {
 	border-color: #9C9C9C;
 	border-style: solid;
 	border-width: 1px 1px 1px 1px;
-	border-radius: 0 0 0 0;
+	border-radius: 4px;
 	padding-bottom: 1px;
 	padding-top: 1px;
-	padding-left: 4px;
+	padding-left: 6px;
 	padding-right: 0px;
 	margin-bottom: 0px;
 	font-size: 14px;

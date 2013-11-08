@@ -47,7 +47,7 @@
 							action="registrationServlet">
 							<h4>Your personal information</h4>
 							<div class="control-group">
-								<label class="control-label" for="alogin">Login </label>
+								<label class="control-label" for="alogin">Login <b style="color:red">*</b></label>
 								<div class="controls">
 									<input type="text" id="alogin" name="login" placeholder="Login"
 										class="tip" data-toggle="tooltip" data-placement="right" maxlength="15"
@@ -56,7 +56,7 @@
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="firstName">First name
+								<label class="control-label" for="firstName">First name <b style="color:red">*</b>
 								</label>
 								<div class="controls">
 									<input type="text" id="firstName" name="firstName"
@@ -65,7 +65,7 @@
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="lastName">Last name </label>
+								<label class="control-label" for="lastName">Last name <b style="color:red">*</b></label>
 								<div class="controls">
 									<input type="text" id="lastName" name="lastName" maxlength="15"
 										placeholder="Last Name" class="tip" data-toggle="tooltip"
@@ -74,21 +74,21 @@
 							</div>
 
 							<div class="control-group">
-								<label class="control-label" for="email">Email </label>
+								<label class="control-label" for="email">Email <b style="color:red">*</b></label>
 								<div class="controls">
 									<input type="text" id="email" name="email" maxlength="25" placeholder="Email">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="phone">Phone </label>
+								<label class="control-label" for="phone">Phone <b style="visibility: collapse;">*</b></label>
 								<div class="controls">
-									<input type="text" id="phone" name="phone" maxlength="10" placeholder="Phone"
+									<input type="text" id="phone" name="phone" maxlength="10" value="" placeholder="Phone"
 										class="tip" data-toggle="tooltip" data-placement="right"
 										title="Yours phone number (10 digits)">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="password">Password </label>
+								<label class="control-label" for="password">Password <b style="color:red">*</b></label>
 								<div class="controls">
 									<input type="password" id="password2" name="password" maxlength="15"
 										placeholder="Password" class="tip" data-toggle="tooltip"
@@ -99,7 +99,7 @@
 
 							<div class="control-group">
 								<label class="control-label" for="confirmPassword">Confirm
-									Password </label>
+									Password <b style="color:red">*</b></label>
 								<div class="controls">
 									<input type="password" id="confirmPassword2" maxlength="15"
 										name="confirmPassword" placeholder="Confirm Password"
@@ -111,7 +111,7 @@
 							<h4>Your address</h4>
 
 							<div class="control-group">
-								<label class="control-label" for="region">State</label>
+								<label class="control-label" for="region">State <b style="visibility: collapse;">*</b></label>
 								<div class="controls">
 									<select id="region" name="region">
 										<option value="">-</option>
@@ -123,7 +123,7 @@
 							</div>
 
 							<div class="control-group">
-								<label class="control-label" for="city">City</label>
+								<label class="control-label" for="city">City <b style="visibility: collapse;">*</b></label>
 								<div class="controls">
 									<input type="text" id="city" maxlength="15"
 										name="city" placeholder="City" class="tip"
@@ -133,7 +133,7 @@
 							</div>
 
 							<div class="control-group">
-								<label class="control-label" for="street">Street</label>
+								<label class="control-label" for="street">Street <b style="visibility: collapse;">*</b></label>
 								<div class="controls">
 									<input type="text" id="street" name="street" maxlength="15"
 										placeholder="Street" class="tip" data-toggle="tooltip"
@@ -142,7 +142,7 @@
 							</div>
 
 							<div class="control-group">
-								<label class="control-label" for="house">House №</label>
+								<label class="control-label" for="house">House № <b style="visibility: collapse;">*</b></label>
 								<div class="controls">
 									<input type="text" id="house" name="house" maxlength="4"
 										placeholder="House number">
@@ -150,7 +150,7 @@
 							</div>
 							
 							<div class="control-group">
-								<label class="control-label" for="flat">Flat №</label>
+								<label class="control-label" for="flat">Flat № <b style="visibility: collapse;">*</b></label>
 								<div class="controls">
 									<input type="text" id="flat" name="flat" maxlength="4"
 										placeholder="Flat number">
@@ -159,7 +159,7 @@
 							
 
 							<div class="control-group">
-								<label class="control-label" for="zipCode">Zip Code</label>
+								<label class="control-label" for="zipCode">Zip Code <b style="visibility: collapse;">*</b></label>
 								<div class="controls">
 									<input type="text" id="zipCode" name="zipCode" maxlength="5"
 										placeholder="Zip Code" class="tip" data-toggle="tooltip"
