@@ -85,11 +85,11 @@
 											<div class="caption">
 												<h5>
 													<c:choose>
-														<c:when test="${fn:length(product.name) < 30}">
+														<c:when test="${fn:length(product.name) < 25}">
 															<c:out value="${product.name}"></c:out>
 														</c:when>
-														<c:when test="${fn:length(product.name) >= 30}">
-															<c:out value="${fn:substring(product.name, 0, 26)}..."></c:out>
+														<c:when test="${fn:length(product.name) >= 25}">
+															<c:out value="${fn:substring(product.name, 0, 22)}..."></c:out>
 														</c:when>
 													</c:choose>
 												</h5>

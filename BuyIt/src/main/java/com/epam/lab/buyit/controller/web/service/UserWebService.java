@@ -127,14 +127,10 @@ public class UserWebService {
 	@POST
 	@Path("/registration")
 	@Produces(MediaType.APPLICATION_JSON)
-	public JSONObject registerUser(@QueryParam("newUser") String parameters,
-			@QueryParam("loign") String login,
-			@QueryParam("password") String password) {
+	public JSONObject registerUser(@QueryParam("newUser") String parameters) {
 
 		LOGGER.info("Trying to register user");
 		LOGGER.info(parameters);
-		LOGGER.info("login " + login);
-		LOGGER.info("password " + password);
 		
 		try {
 			JSONObject json = new JSONObject(parameters);
