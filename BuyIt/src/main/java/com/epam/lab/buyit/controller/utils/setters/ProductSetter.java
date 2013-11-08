@@ -114,7 +114,7 @@ public enum ProductSetter {
 		int descriptionId = product.getDescription().getIdDescription();
 
 		String token = imageClientWebService.createToken(999);
-		if (!images.isEmpty()) {
+		if (!images.get(0).getName().isEmpty()) {
 			List<String> urls = imageClientWebService.createImages(images,
 					token);
 			List<Image> listImage = new ArrayList<Image>();
