@@ -38,10 +38,10 @@
 	<br>
 	<h4 style="text-align: center">Our Partners</h4>
 	<div class="thumbnail">
-		<a href="#"><img src="themes/images/mocks/filehosting.gif"></a>
+		<a href="http://localhost:8080/dreamhost/"><img src="themes/images/mocks/filehosting.gif"></a>
 	</div>
 	<br>
 	<div class="thumbnail">
-		<a href="#"><img src="themes/images/mocks/forum.jpg"></a>
+		<a href="http://localhost:8080/memorium/"><img src="themes/images/mocks/forum.jpg"></a>
 	</div>
 </div>
