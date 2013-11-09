@@ -79,14 +79,15 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 			int numberOfRecords) {
 
 		SubCategory subCategory = subCategoryDAO.getElementById(subCategoryId);
-		List<Product> products = productDAO.getSelectionBySubCategoryId(
-				subCategoryId, offset, numberOfRecords);
-		for (Product product : products) {
-			product.setAuction(auctionDAO.getByProductId(product.getIdProduct()));
-			product.setDescription(descriptionService.getByProductId(product
-					.getIdProduct()));
+		if(subCategory != null) {
+			List<Product> products = productDAO.getSelectionBySubCategoryId(
+					subCategoryId, offset, numberOfRecords);
+			for (Product product : products) {
+				product.setAuction(auctionDAO.getByProductId(product.getIdProduct()));
+				product.setDescription(descriptionService.getByProductId(product.getIdProduct()));
+			}
+			subCategory.setProducts(products);
 		}
-		subCategory.setProducts(products);
 		return subCategory;
 	}
 

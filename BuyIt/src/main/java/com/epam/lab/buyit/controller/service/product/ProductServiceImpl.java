@@ -29,12 +29,13 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product getItemById(int id) {
 		Product currentProduct = productDAO.getElementById(id);
-		int productId = currentProduct.getIdProduct();
-		Auction auction = auctionService.getByProductId(productId);
-		Description description = descriptionService.getByProductId(productId);
-
-		currentProduct.setDescription(description);
-		currentProduct.setAuction(auction);
+		if(currentProduct != null) {
+			int productId = currentProduct.getIdProduct();
+			Auction auction = auctionService.getByProductId(productId);
+			currentProduct.setAuction(auction);
+			Description description = descriptionService.getByProductId(productId);
+			currentProduct.setDescription(description);
+		}
 		return currentProduct;
 	}
 

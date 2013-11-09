@@ -37,31 +37,38 @@ public class CategoryServlet extends HttpServlet {
 		serve(request, response);
 	}
 
-	private void serve(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		
-		int subCategory_id = 0;
-		if (request.getParameter("id") != null)
-			subCategory_id = Integer.parseInt(request.getParameter("id"));
-		
+	private void serve(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		int subCategory_id = Integer.parseInt(request.getParameter("id"));
 		int page = 1;
-		if(request.getParameter("page") != null) 
+		if (request.getParameter("page") != null)
 			page = Integer.parseInt(request.getParameter("page"));
-		
+
 		SubCategory subCategory = subCategoryService.getWithProductSelection(
-				subCategory_id, (page-1) * ITEMS_ON_PAGE, ITEMS_ON_PAGE);
-		
-		int numberOfRecords = productService.getCountBySubCategoryId(subCategory_id);
-		int numberOfPages = (int) Math.ceil(numberOfRecords * 1.0 / ITEMS_ON_PAGE);
-		
-		request.setAttribute("categoryId", subCategory.getCategoryId());
-		
-		Category category = categoryService.getBySubCategoryId(subCategory.getIdSubCategory());
-		
-		request.setAttribute("categoryName", category.getName());
-		request.setAttribute("subCategory", subCategory);
-		request.setAttribute("noOfPages", numberOfPages);
-		request.setAttribute("page", page);
-		request.getRequestDispatcher("category").forward(request, response);
+				subCategory_id, (page - 1) * ITEMS_ON_PAGE, ITEMS_ON_PAGE);
+
+		if (subCategory != null) {
+			int numberOfRecords = productService.getCountBySubCategoryId(subCategory_id);
+			int numberOfPages = (int) Math.ceil(numberOfRecords * 1.0 / ITEMS_ON_PAGE);
+
+			request.setAttribute("categoryId", subCategory.getCategoryId());
+
+			Category category = categoryService.getBySubCategoryId(subCategory.getIdSubCategory());
+
+			request.setAttribute("categoryName", category.getName());
+			request.setAttribute("subCategory", subCategory);
+			request.setAttribute("noOfPages", numberOfPages);
+			request.setAttribute("page", page);
+			request.getRequestDispatcher("category").forward(request, response);
+		} else {
+			sendToMessagePage(request, response);
+		}
+	}
+
+	private void sendToMessagePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("message", "Sorry, this subcategory does not exist");
+		request.setAttribute("messageHeader", "Warning");
+		request.setAttribute("alert", "block");
+		request.getRequestDispatcher("message_page").forward(request, response);
 	}
 }

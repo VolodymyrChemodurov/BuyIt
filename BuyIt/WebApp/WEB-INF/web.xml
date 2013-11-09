@@ -696,7 +696,6 @@
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
-  
   <filter>
     <filter-name>leaveMessageFilter</filter-name>
     <filter-class>com.epam.lab.buyit.controller.web.filter.LeaveMessageFilter</filter-class>
@@ -707,4 +706,18 @@
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
+  
+  <filter>
+    <filter-name>idFilter</filter-name>
+    <filter-class>com.epam.lab.buyit.controller.web.filter.IdFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>idFilter</filter-name>
+    <url-pattern>/productDetails</url-pattern>
+    <url-pattern>/select_category</url-pattern>
+    <url-pattern>/categoryViewer</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+
 </web-app>

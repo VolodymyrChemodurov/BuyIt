@@ -23,11 +23,20 @@ public class CategoryViewerServlet extends HttpServlet {
 		
 		Category category = categoryService.getNotClosedById(category_id, 4);
 		
-		request.setAttribute("category", category);
-		request.setAttribute("categoryId", category.getIdCategory());
-		request.getRequestDispatcher("categoryViewerPage").forward(request, response);
+		if(category != null) {
+			request.setAttribute("category", category);
+			request.setAttribute("categoryId", category.getIdCategory());
+			request.getRequestDispatcher("categoryViewerPage").forward(request, response);
+		} else {
+			sendToMessagePage(request, response);
+		}
 	}
 
-
+	private void sendToMessagePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("message", "Sorry, this category does not exist");
+		request.setAttribute("messageHeader", "Warning");
+		request.setAttribute("alert", "block");
+		request.getRequestDispatcher("message_page").forward(request, response);
+	}
 
 }
