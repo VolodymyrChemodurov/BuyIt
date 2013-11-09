@@ -1,26 +1,24 @@
 $(window).load(function() {
 	$('.my-image-mini').each(function() {
-		var maxWidth = 81;
-		var maxHeight = 65;
+		//var maxWidth = $('#gallery').width()*0.3;
+		var maxHeight = 70;
 		var ratio = 0;
+		//console.log('hello');
+		console.log($('#gallery').width());
 		var width = $(this).width();
 		var height = $(this).height();
 		if (width > height) {
-			ratio = maxWidth / width;
-			$(this).css("width", maxWidth);
-			$(this).css("height", height * ratio);
-			height = height * ratio;
-			width = width * ratio;
+			ratio = height / width;
+			$(this).css("width", '28%');
+			$(this).css("height", (100 * ratio)+'%');
 		}
 
-		if (height > maxHeight) {
-			ratio = maxHeight / height;
-			$(this).css("height", maxHeight);
-			$(this).css("width", width * ratio);
-			width = width * ratio;
-			height = height * ratio;
+		else{
+			ratio = width / height;
+			$(this).css("width", (28*ratio) +'%');
+			$(this).css("height", '100%');
 		}
-		$(this).css('margin-top', parseInt((65 - height) / 2));
+		//$(this).css('margin-top', parseInt((70 - height) / 2));
 		$(this).css('visibility', 'visible');
 	});
 });

@@ -26,13 +26,15 @@ $(document).ready(function() {
 							$('#placeBidButton').attr("tabindex", "-1");
 						}
 					});
+			
 
-			$('#bidInput').change(function() {
+			$('#bidInput').keyup(function() {
 				var placeBidButton = $('#placeBidButton');
 				var currentPrice = document.getElementById("currentBid").value;
-				var bid = $('#bidInput').attr('value');
-
-				if ((parseInt(currentPrice) >= parseInt(bid))|(!($.isNumeric(bid)))) {
+				var bid = $(this).val();
+				console.log(bid);
+				
+				if ((parseInt(currentPrice) >= parseInt(bid))||(!($.isNumeric(bid)))||(bid.length > 6)) {
 					placeBidButton.attr("disabled", "disabled");
 					placeBidButton.addClass('dis');
 					placeBidButton.attr('tabindex', '-1');
@@ -42,7 +44,7 @@ $(document).ready(function() {
 				}
 			});
 
-			$('#quantityInput').change(function() {
+			$('#quantityInput').keyup(function() {
 				var count = $('#count').val();
 				console.log("count: " + count);
 				var quantity = $('#quantityInput').val();
@@ -66,7 +68,7 @@ $(document).ready(function() {
 					return false;
 				}
 			});
-			
+//  Lock ENTER	
 			$('#bidInput').keypress(function(e) {
 				if (e.which == 13) {
 					if ($('#bidInput').attr('value') == "") {
