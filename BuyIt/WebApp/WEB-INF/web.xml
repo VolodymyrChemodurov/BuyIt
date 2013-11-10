@@ -706,7 +706,6 @@
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
-  
   <filter>
     <filter-name>idFilter</filter-name>
     <filter-class>com.epam.lab.buyit.controller.web.filter.IdFilter</filter-class>
@@ -719,5 +718,15 @@
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
-
+  
+   <filter>
+    <filter-name>XSSFilter</filter-name>
+    <filter-class>com.epam.lab.buyit.controller.web.filter.XSSFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>XSSFilter</filter-name>
+    <url-pattern>/leave_message</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
 </web-app>
