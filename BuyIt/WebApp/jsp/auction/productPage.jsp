@@ -203,16 +203,16 @@
 									<c:if test="${product.auction.currentPrice != 0 }">
 										<div class="form-horizontal qtyFrm">
 											<div class="control-group">
-												<label class="control-label" style="width: 230px"> <span>Current
+												<label class="control-label" style="width: 40%"> <span>Current
 														Price: <c:out value="${product.auction.currentPrice}"></c:out>$
 												</span>
 												</label>
 												<div class="controls">
-													<label class="control-label"> <span
-														style="padding-left: 50px"> Your Bid:</span>
-													</label> <input type="number" maxlength="5" name="bid" id="bidInput"
-														min="${product.auction.currentPrice+1}" d
-														value="<c:out value="${product.auction.currentPrice+1}"></c:out>"
+													<label class="control-label" style="width: 27%"> <span
+														> Your Bid:</span>
+													</label> <input type="number" name="bid" id="bidInput"
+														min="${product.auction.currentPrice+1}" max="999999"
+														value="${product.auction.currentPrice+1}"
 														class="span1" placeholder="Your Bid" /> <a
 														id="placeBidButton" href="#bidConfirmation" role="button"
 														data-toggle="modal"
@@ -257,14 +257,14 @@
 									<c:if test="${product.auction.buyItNow != 0 }">
 										<div class="form-horizontal qtyFrm">
 											<div class="control-group">
-												<label class="control-label" style="width: 230px"> <span>
+												<label class="control-label" style="width: 40%"> <span>
 														Buy it Now: <c:out value="${product.auction.buyItNow}"></c:out>
 														$
 												</span>
 												</label>
 												<div class="controls">
-													<label class="control-label" text-align="right"> <span
-														style="padding-left: 50px">Quantity:</span>
+													<label class="control-label" style="width: 27%" text-align="right">
+														<span>Quantity:</span>
 													</label> <input type="number" maxlength="4" min="1" id="quantityInput"
 														max="${product.auction.count}" name="quantity"
 														class="span1" value="1" /> <a id="buyItButton"
