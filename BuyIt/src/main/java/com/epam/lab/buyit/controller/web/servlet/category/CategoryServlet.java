@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.epam.lab.buyit.controller.service.category.CategoryService;
 import com.epam.lab.buyit.controller.service.category.CategoryServiceImpl;
 import com.epam.lab.buyit.controller.service.product.ProductServiceImpl;
@@ -15,6 +17,7 @@ import com.epam.lab.buyit.model.Category;
 import com.epam.lab.buyit.model.SubCategory;
 
 public class CategoryServlet extends HttpServlet {
+	private static final Logger LOGGER = Logger.getLogger(CategoryServlet.class);
 	private static final long serialVersionUID = 1L;
 	private static final int ITEMS_ON_PAGE = 8;
 	private CategoryService categoryService;
@@ -39,16 +42,26 @@ public class CategoryServlet extends HttpServlet {
 
 	private void serve(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int subCategory_id = Integer.parseInt(request.getParameter("id"));
+		int subCategoryId = Integer.parseInt(request.getParameter("id"));
 		int page = 1;
-		if (request.getParameter("page") != null)
-			page = Integer.parseInt(request.getParameter("page"));
+		if (request.getParameter("page") != null) {
+			try {
+				page = Integer.parseInt(request.getParameter("page"));
+			} catch (NumberFormatException e) {
+				LOGGER.error(e);
+				page = 1;
+			}
+			if(page <= 0) page = 1;
+		}
 
-		SubCategory subCategory = subCategoryService.getWithProductSelection(
-				subCategory_id, (page - 1) * ITEMS_ON_PAGE, ITEMS_ON_PAGE);
+		SubCategory subCategory = getProductSelection(subCategoryId, page);
 
 		if (subCategory != null) {
-			int numberOfRecords = productService.getCountBySubCategoryId(subCategory_id);
+			if(subCategory.getProducts().size() == 0) {
+				subCategory = getProductSelection(subCategoryId, 1);
+				page = 1;
+			}
+			int numberOfRecords = productService.getCountBySubCategoryId(subCategoryId);
 			int numberOfPages = (int) Math.ceil(numberOfRecords * 1.0 / ITEMS_ON_PAGE);
 
 			request.setAttribute("categoryId", subCategory.getCategoryId());
@@ -65,6 +78,12 @@ public class CategoryServlet extends HttpServlet {
 		}
 	}
 
+	private SubCategory getProductSelection(int subCategoryId, int page) {
+		SubCategory subCategory = subCategoryService.getWithProductSelection(
+				subCategoryId, (page - 1) * ITEMS_ON_PAGE, ITEMS_ON_PAGE);
+		return subCategory;
+	}
+	
 	private void sendToMessagePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("message", "Sorry, this subcategory does not exist");
 		request.setAttribute("messageHeader", "Warning");

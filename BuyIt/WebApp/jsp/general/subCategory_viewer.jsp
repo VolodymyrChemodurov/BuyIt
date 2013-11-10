@@ -59,8 +59,9 @@
 						<div class="pagination">
 							<ul>
 								<c:if test="${page != 1}">
-									<li><a
-										href="select_category?page=${page - 1}&id=${subCategory.idSubCategory}">&lsaquo;</a></li>
+									<li>
+										<a href="select_category?page=${page - 1}&id=${subCategory.idSubCategory}">&lsaquo;</a>
+									</li>
 								</c:if>
 
 								<c:forEach begin="1" end="${noOfPages}" var="i">
@@ -69,15 +70,17 @@
 											<li class="active"><a href="#">${i}</a></li>
 										</c:when>
 										<c:otherwise>
-											<li><a
-												href="select_category?page=${i}&id=${subCategory.idSubCategory}">${i}</a></li>
+											<li>
+												<a href="select_category?page=${i}&id=${subCategory.idSubCategory}">${i}</a>
+											</li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 
 								<c:if test="${page lt noOfPages}">
-									<li><a
-										href="select_category?page=${page + 1}&id=${subCategory.idSubCategory}">&rsaquo;</a></li>
+									<li>
+										<a href="select_category?page=${page + 1}&id=${subCategory.idSubCategory}">&rsaquo;</a>
+									</li>
 								</c:if>
 							</ul>
 						</div>
