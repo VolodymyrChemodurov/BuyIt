@@ -24,8 +24,7 @@ class NotificatorThread extends Thread {
 	@Override
 	public void run() {
 		WebResource service = CLIENT.resource(BASE_URI);
-		
-		service.path("/").path("/").post(id);
+		service.path("/cache").path("/remove").path(String.valueOf(id)).post();
 	}
 
 }
