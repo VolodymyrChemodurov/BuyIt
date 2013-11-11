@@ -71,7 +71,7 @@ public class UserWebService {
 
 		List<User> usersBundle = new ArrayList<User>();
 		JSONObject jsonObject = new JSONObject(usersArray);
-		JSONArray jsonArray = jsonObject.getJSONArray("usersArray");
+		JSONArray jsonArray = jsonObject.getJSONArray("idList");
 		if (authentication(login, password)) {
 			for (int i = 0; i < jsonArray.length(); i++) {
 				int id = jsonArray.getInt(i);

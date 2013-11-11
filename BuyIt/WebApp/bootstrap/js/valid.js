@@ -111,11 +111,12 @@ function validateStartPrice(fld) {
 	if ($("#auctionCheck").prop("checked")) {
 		if (fld == "") {
 			error = "Start price field is empty";
-		} else if (fld.search(/[0-9]/)) {
+		} else if (fld.search(/[\d]+$/)) {
 			error = "Start price field must contain only numbers.";
 		} else if (fld > 3000 || fld < 1) {
 			error = "Start price field range [1;3000]";
 		}
+		var a = fld.search(/[^0-9]+$/);
 	}
 	return error;
 }
@@ -123,17 +124,17 @@ function validateStartPrice(fld) {
 function validateBuyNowPrice(fld) {
 	var error = "";
 	if ($("#buyNowCheck").prop("checked")) {
+		if (fld == "") {
+			error = "Price field is empty";
+		} else if (fld.search(/[\d]+$/)) {
+			error = "Price field must contain only numbers.";
+		} else if (fld > 9999 || fld < 1) {
+			error = "Start field price range [1;9999]";
+		}
 		if ($("#auctionCheck").prop("checked")){
 			if (parseInt($("#startPrice").val()) >= parseInt(fld)){
 				error = "Buy Now Price must be bigger than Start Price.";
 			}
-		}
-		if (fld == "") {
-			error = "Price field is empty";
-		} else if (fld.search(/[0-9]/)) {
-			error = "Price field must contain only numbers.";
-		} else if (fld > 9999 || fld < 1) {
-			error = "Start field price range [1;9999]";
 		}
 	}
 	return error;
@@ -143,7 +144,7 @@ function validateCount(fld) {
 	var error = "";
 	if (fld == "") {
 		error = "Count field is empty";
-	} else if (fld.search(/[0-9]/)) {
+	} else if (fld.search(/[\d]+$/)) {
 		error = "Count field must contain only numbers.";
 	} else if (fld > 10 || fld < 1) {
 		error = "Count field range [1;10]";
