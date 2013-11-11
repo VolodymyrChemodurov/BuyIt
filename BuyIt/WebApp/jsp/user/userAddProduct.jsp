@@ -298,18 +298,22 @@
 	<script src="bootstrap/js/userPage.js"></script>
 	<script src="bootstrap/js/valid.js"></script>
 	<script type="text/javascript">
-		var currentTime = new Date();
-		$(".form_datetime").datetimepicker({
-			format : "yyyy-mm-dd hh:ii",
-			autoclose : true,
-			todayBtn : true,
-			startDate : currentTime,
-			minDate : 0,
-			maxDate : "+10d",
-			firstDay : "1",
-			minuteStep : 10
-		});
-	</script>
+  		var currentTime = new Date();
+  		currentTime.setHours(currentTime.getHours()+6);
+  		var endTime = new Date();
+  		endTime.setDate(endTime.getDate()+30);
+  		$(".form_datetime").datetimepicker({
+   			format : "yyyy-mm-dd hh:ii",
+   			autoclose : true,
+   			todayBtn : true,
+   			startDate : currentTime,
+   			endDate : endTime,
+  			minDate : 0,
+   			maxDate : "+10d",
+   			firstDay : "1",
+   			minuteStep : 10
+  		});
+ 	</script>
 
 	<script>
 		$('.textarea').wysihtml5();

@@ -40,7 +40,7 @@ public class AuctionScheduler {
 		FindSoonEndingAuctionsJobCreator soonEndingAuctionsJobCreator = new FindSoonEndingAuctionsJobCreator();
 
 		scheduler.scheduleJob(soonEndingAuctionsJobCreator.create(),
-				periodicalTriggerCreator.create(360));
+				periodicalTriggerCreator.create(180));
 	}
 	
 	public void stop() throws SchedulerException {
