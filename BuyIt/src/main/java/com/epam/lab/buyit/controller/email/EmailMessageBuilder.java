@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import com.epam.lab.buyit.controller.email.textlines.TextLineConteiner;
 import com.epam.lab.buyit.controller.email.textlines.TextLineItem;
+import com.epam.lab.buyit.controller.email.textlines.impl.AuctionEndTime;
 import com.epam.lab.buyit.controller.email.textlines.impl.AuctionPriceLine;
 import com.epam.lab.buyit.controller.email.textlines.impl.BuyItNowPrice;
 import com.epam.lab.buyit.controller.email.textlines.impl.BuyerGreatingLine;
@@ -55,6 +56,7 @@ public class EmailMessageBuilder {
 
 		lineList.add(new BuyItNowPrice());
 		lineList.add(new AuctionPriceLine());
+		lineList.add(new AuctionEndTime());
 		lineList.add(new CountLine());
 	}
 

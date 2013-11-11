@@ -80,6 +80,9 @@ public class TextLineConteiner {
 	public String getCount() {
 		return "" + count;
 	}
+	public String getAuctionEndTime(){
+		return "" +  product.getAuction().getEndTime();
+	}
 
 	public TextLineConteiner setBuyer(User buyer) {
 
