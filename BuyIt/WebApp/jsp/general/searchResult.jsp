@@ -176,7 +176,7 @@
                                                 					style="pointer-events: none; cursor: default; disabled: disabled" disabled tabindex=-1
                                                 				</c:if> 
 																id="buyItButton" href="#buyConfirmation${product.idProduct}" role="button" data-toggle="modal"> 
-                                                        			Buy ${product.auction.buyItNow}$"
+                                                        			Buy ${product.auction.buyItNow}$
 						                                    </a>
 						                                    
 						                                    

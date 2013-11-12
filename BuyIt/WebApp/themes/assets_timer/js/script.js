@@ -13,11 +13,16 @@ $(function() {
 		note.attr("style", "color:red");
 		note.html(message);
 
-		$('#buyItButton').attr("disabled", "disabled");
-
-		$('#placeBidButton').attr("disabled", "disabled");
 		$('#quantityInput').attr("disabled", "disabled");
 		$('#bidInput').attr("disabled", "disabled");
+		
+		$('#buyItButton').attr("disabled", "disabled");
+		$('#buyItButton').addClass('dis');
+		$('#buyItButton').attr("tabindex", "-1");
+		
+		$('#placeBidButton').attr("disabled", "disabled");
+		$('#placeBidButton').addClass('dis');
+		$('#placeBidButton').attr("tabindex", "-1");
 
 	} else {
 		$('#countdown').countdown(
