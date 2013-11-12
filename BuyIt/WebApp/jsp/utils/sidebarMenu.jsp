@@ -36,12 +36,12 @@
 	</ul>
 
 	<br>
-	<h4 style="text-align: center">Our Partners</h4>
+	<h5 style="text-align: center">Our Partners</h5>
 	<div class="thumbnail">
-		<a href="http://localhost:8080/dreamhost/"><img src="themes/images/mocks/filehosting.gif"></a>
+		<a href="http://localhost:8080/dreamhost/"><img src="themes/images/mocks/filehosting.png"></a>
 	</div>
 	<br>
 	<div class="thumbnail">
-		<a href="http://localhost:8080/memorium/"><img src="themes/images/mocks/forum.jpg"></a>
+		<a href="http://localhost:8080/memorium/"><img src="themes/images/mocks/memorium.png"></a>
 	</div>
 </div>

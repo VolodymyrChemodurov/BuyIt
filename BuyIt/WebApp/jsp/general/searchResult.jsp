@@ -101,27 +101,110 @@
 																<c:if test="${user.idUser eq product.userId}">
                                                 					style="pointer-events: none; cursor: default; disabled: disabled" disabled tabindex=-1
                                                 				</c:if> 
-																href="bid_serve?id_product=${product.idProduct}&bid=${product.auction.currentPrice + 1}"> 
-						                                    	Bid ${product.auction.currentPrice}$
+																id="placeBidButton${product.idProduct}" href="#bidConfirmation${product.idProduct}" 
+                                                					role="button" data-toggle="modal">
+                                                					Bid ${product.auction.currentPrice + 1}$
 						                                    </a>
+						                                    
+						                                    
+						                                    <div id="bidConfirmation${product.idProduct}" class="modal hide fade"
+																tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+																<div class="modal-header">
+																	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+																	<h3 id="myModalLabel">Bid confirmation</h3>
+																</div>
+																<form id="placeABidForm" method="get" action="bid_serve?id_product">
+																	<input type="hidden" id="currentPrice"
+																		value="${product.auction.currentPrice}">
+																	<input type="hidden" name="id_product"
+																		value="${product.idProduct}" /> 
+																	<input type="hidden" name="bid" id="placeBidInput" 
+																		value="${product.auction.currentPrice + 1}"/>
+																	<div class="modal-body">
+																		<p>Are you sure that you want to participate in this auction?</p>
+																		<p class="message">Your bid: ${product.auction.currentPrice + 1}$</p>
+																	</div>
+																	<div class="modal-footer">
+																		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+																		<button type="submit" id="placeBidButton"
+																			class="btn btn-default btn-primary pull-right">Place a Bid</button>
+																	</div>
+																</form>
+															</div>
+						                                    
+						                                    
 						                                </c:when>
 														<c:when test="${product.auction.currentPrice <= 0}">
 															<a class="btn btn-info"
 																<c:if test="${user.idUser eq product.userId}">
                                                 					style="pointer-events: none; cursor: default; disabled: disabled" disabled tabindex=-1
                                                 				</c:if> 
-																href="buyItServe?id_product=${product.idProduct}&quantity=1"">
-						                                        Buy ${product.auction.buyItNow}$
+																id="buyItButton" href="#buyConfirmation${product.idProduct}" role="button" data-toggle="modal"> 
+                                                       				Buy ${product.auction.buyItNow}$
 						                                    </a>
+						                                    
+						                                    
+						                                    <div id="buyConfirmation${product.idProduct}" class="modal hide fade"
+																tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+																<div class="modal-header">
+																	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+																	<h3 id="myModalLabel">Bid confirmation</h3>
+																</div>
+																<form id="buyItForm" class="form-horizontal qtyFrm" action="buyItServe" method="POST">
+																	<input type="hidden" name="id_product" value="${product.idProduct}" /> 
+																	<input type="hidden" name="count" id="count" value="${product.auction.count}" />
+																	<input type="hidden" name="quantity" id="quantity" value="1"/> <input
+																		type="hidden" name="price" id="price"
+																		value="${product.auction.buyItNow}" />
+																	<div class="modal-body">
+																		<p>Are you sure that you want to participate in this auction?</p>
+																		<p class="message">To pay: ${product.auction.buyItNow}</p>
+																	</div>
+																	<div class="modal-footer">
+																		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+																		<button type="submit" id="placeBidButton"
+																			class="btn btn-default btn-primary pull-right">Buy it now</button>
+																	</div>
+																</form>
+															</div>
+						                                    
+						                                    
 						                                </c:when>
 														<c:otherwise>
 															<a class="btn btn-info"
 																<c:if test="${user.idUser eq product.userId}">
                                                 					style="pointer-events: none; cursor: default; disabled: disabled" disabled tabindex=-1
                                                 				</c:if> 
-																href="buyItServe?id_product=${product.idProduct}&quantity=1"">
-						                                       	Buy ${product.auction.buyItNow}$
+																id="buyItButton" href="#buyConfirmation${product.idProduct}" role="button" data-toggle="modal"> 
+                                                        			Buy ${product.auction.buyItNow}$"
 						                                    </a>
+						                                    
+						                                    
+						                                    <div id="buyConfirmation${product.idProduct}" class="modal hide fade"
+																tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+																<div class="modal-header">
+																	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+																	<h3 id="myModalLabel">Bid confirmation</h3>
+																</div>
+																<form id="buyItForm" class="form-horizontal qtyFrm" action="buyItServe" method="POST">
+																	<input type="hidden" name="id_product" value="${product.idProduct}" /> 
+																	<input type="hidden" name="count" id="count" value="${product.auction.count}" />
+																	<input type="hidden" name="quantity" id="quantity" value="1"/> <input
+																		type="hidden" name="price" id="price"
+																		value="${product.auction.buyItNow}" />
+																	<div class="modal-body">
+																		<p>Are you sure that you want to participate in this auction?</p>
+																		<p class="message">To pay: ${product.auction.buyItNow}</p>
+																	</div>
+																	<div class="modal-footer">
+																		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+																		<button type="submit" id="placeBidButton"
+																			class="btn btn-default btn-primary pull-right">Buy it now</button>
+																	</div>
+																</form>
+															</div>
+						                                    
+						                                    
 						                                </c:otherwise>
 													</c:choose>
 												</h4>
