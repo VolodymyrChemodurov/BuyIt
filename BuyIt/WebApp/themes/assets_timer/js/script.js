@@ -6,8 +6,8 @@ $(function() {
 	var newTime = time.replace(' ', 'T') + 'Z';
 
 	ts = new Date(newTime), newYear = true;
+	ts.setTime(ts.getTime() - 7200000);
 	if (((new Date()) > ts) || (status == 'closed')) {
-		newYear = false;
 		message = "Closed";
 
 		note.attr("style", "color:red");
